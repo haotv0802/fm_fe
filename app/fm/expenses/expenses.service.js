@@ -12,12 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var constant_1 = require("../../common/constant");
 var HTTP_service_1 = require("../../common/HTTP.service");
-var UsersService = (function () {
-    function UsersService(_httpService, _constants) {
+var ExpensesService = (function () {
+    function ExpensesService(_httpService, _constants) {
         this._httpService = _httpService;
         this._constants = _constants;
     }
-    UsersService.prototype.getUsers = function () {
+    ExpensesService.prototype.getUsers = function () {
         // let headers = new Headers();
         //
         // headers.append("Accept-Language", "en");
@@ -28,15 +28,15 @@ var UsersService = (function () {
         //   .map((res) => { return <User[]> res.json(); })
         //   .catch(this.handleError)
         // ;
-        return this._httpService.get(this._constants.ADMIN_USERS_SERVICE_URL)
+        return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
             .map(function (res) { return res.json(); });
     };
-    return UsersService;
+    return ExpensesService;
 }());
-UsersService = __decorate([
+ExpensesService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [HTTP_service_1.HTTPService,
         constant_1.Constants])
-], UsersService);
-exports.UsersService = UsersService;
-//# sourceMappingURL=users.service.js.map
+], ExpensesService);
+exports.ExpensesService = ExpensesService;
+//# sourceMappingURL=expenses.service.js.map

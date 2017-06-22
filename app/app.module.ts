@@ -14,7 +14,7 @@ import {ToasterModule} from "angular2-toaster";
 import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
 import {MessagesService} from "./common/messages/messages.service";
-import {AdminModule} from "./fm/admin.module";
+import {FmModule} from "./fm/fm.module";
 
 @NgModule({
   imports: [
@@ -27,7 +27,7 @@ import {AdminModule} from "./fm/admin.module";
     ]),
     LoginModule,
     ProductModule,
-    AdminModule,
+    FmModule,
     HTCommonModule,
     ToasterModule,
     ModalModule.forRoot(),

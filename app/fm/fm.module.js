@@ -7,22 +7,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var users_module_1 = require("./users/users.module");
-var domain_service_1 = require("./common/domain.service");
-var AdminModule = (function () {
-    function AdminModule() {
+var expenses_module_1 = require("./expenses/expenses.module");
+var FmModule = (function () {
+    function FmModule() {
     }
-    return AdminModule;
+    return FmModule;
 }());
-AdminModule = __decorate([
+FmModule = __decorate([
     core_1.NgModule({
         imports: [
-            users_module_1.UsersModule
+            expenses_module_1.ExpensesModule
         ],
         declarations: [],
         exports: [],
-        providers: [domain_service_1.DomainService]
+        providers: []
     })
-], AdminModule);
-exports.AdminModule = AdminModule;
-//# sourceMappingURL=admin.module.js.map
+], FmModule);
+exports.FmModule = FmModule;
+//# sourceMappingURL=fm.module.js.map

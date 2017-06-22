@@ -24,29 +24,8 @@ export class Constants {
   public readonly HTTP_STATUS_UNAUTHORIZED: number = 401;
 
   ////      Services URLs for Admin
-  //  Users (for Admin)
-  public readonly ADMIN_USERS_SERVICE_URL: string = this.HOST + '/admin/users';
-  public readonly ADMIN_USERS_ROLES_UPDATE_SERVICE_URL: string = this.HOST + '/admin/users/usersRolesUpdate';
-
-  //  Roles (for Admin)
-  public readonly ADMIN_ROLES_SERVICE_URL: string = this.HOST + '/admin/roles';
-  public readonly ADMIN_ROLES_KEYVALUE_SERVICE_URL: string = this.HOST + '/admin/roles/keyValuePair';
-
-  //  Rooms
-  public readonly ADMIN_ROOMS_ROOM_TYPES_SERVICE_URL: string = this.HOST + '/admin/rooms/roomTypes';
-  public readonly ADMIN_ROOMS_ROOM_TYPE_UPDATE_SERVICE_URL: string = this.HOST + '/admin/rooms/roomTypes/update';
-
-  //  Images (for Admin)
-  public readonly ADMIN_IMAGES_SERVICE_URL: string = this.HOST + '/admin/images';
-  public readonly ADMIN_IMAGE_UPDATE_SERVICE_URL: string = this.HOST + `/admin/images/updateImageInfo`;
-  //  Individuals (for Admin)
-  public readonly ADMIN_INDIVIDUALS_SERVICE_URL: string = this.HOST + '/admin/individuals';
-  public readonly ADMIN_INDIVIDUALS_WITH_PAGING_SERVICE_URL: string = this.HOST + '/admin/individuals/paging';
-  public readonly ADMIN_INDIVIDUALS_COUNT_SERVICE_URL: string = this.HOST + '/admin/individuals/count';
-  public readonly ADMIN_INDIVIDUALS_USERNAME_CHECK_SERVICE_URL: string = this.HOST + '/admin/individuals/isUserNameExisting';
-
-  // Services URLs for Staff
-  // Services URLs for Customer
+  //  Expenses
+  public readonly EXPENSES_SERVICE_URL: string = this.HOST + '/expenses';
 
   // Constants
   public readonly X_AUTH_TOKEN_HEADER: string = "X-AUTH-TOKEN";

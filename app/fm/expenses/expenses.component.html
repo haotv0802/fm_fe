@@ -1,0 +1,30 @@
+<loader-modal [opening]="loaderOpen" (loaderClicked)='onLoaderClicked($event)'></loader-modal>
+<div class='panel panel-primary' *ngIf="!loaderOpen">
+    <div class='panel-heading' style='font-size:large'>
+        {{pageTitle}}
+    </div>
+    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
+        <table class="table table-bordered table-hover" style="width: 1024px;">
+            <thead style="color: #337AB7">
+                <th class="col-sm-2">Amount</th>
+                <th class="col-sm-2">Date</th>
+                <th class="col-sm-2">Place</th>
+                <th class="col-sm-2">Payment Method</th>
+                <th class="col-sm-2">For Person</th>
+            </thead>
+            <tr *ngFor="let expense of expenses">
+                <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
+                <td>{{expense.date | date: 'dd-MM-yyyy'}}</td>
+                <td>{{expense.place}}</td>
+                <td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>
+                <td>{{expense.forPerson}}</td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <!--<ng2-smart-table [settings]="settings" [source]="users"></ng2-smart-table>-->
+    <modal (modalOutput)="getData($event)">
+    </modal>
+</div>

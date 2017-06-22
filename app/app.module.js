@@ -22,7 +22,7 @@ var angular2_toaster_1 = require("angular2-toaster");
 var angular2_modal_1 = require("angular2-modal");
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var messages_service_1 = require("./common/messages/messages.service");
-var admin_module_1 = require("./fm/admin.module");
+var fm_module_1 = require("./fm/fm.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +39,7 @@ AppModule = __decorate([
             ]),
             login_module_1.LoginModule,
             product_module_1.ProductModule,
-            admin_module_1.AdminModule,
+            fm_module_1.FmModule,
             htCommon_module_1.HTCommonModule,
             angular2_toaster_1.ToasterModule,
             angular2_modal_1.ModalModule.forRoot(),

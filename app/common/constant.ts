@@ -14,8 +14,8 @@ export class Constants {
 
   // Messages services
   public readonly COMMON_MESSAGES_SERVICE_URL = this.HOST + "/messages";
-  public readonly ADMIN_MESSAGES_SERVICE_URL = this.HOST + "/admin/messages";
-  public readonly CUSTOMER_MESSAGES_SERVICE_URL = this.HOST + "/customer/messages";
+  // public readonly ADMIN_MESSAGES_SERVICE_URL = this.HOST + "/admin/messages";
+  // public readonly CUSTOMER_MESSAGES_SERVICE_URL = this.HOST + "/customer/messages";
 
   // HTTP Status
   public readonly HTTP_STATUS_OK: number = 200;

@@ -30,8 +30,8 @@ var LoginComponent = (function () {
         this.messages = this._messagesService.getCommonMessagesByName("login");
         // this.loadMessages();
         this.loginForm = this.fb.group({
-            username: ['admin', [forms_1.Validators.required]],
-            password: ['admin', [forms_1.Validators.required]],
+            username: ['haho', [forms_1.Validators.required]],
+            password: ['hoanhhao', [forms_1.Validators.required]],
             language: [this._constants.LANGUAGE, [forms_1.Validators.required]]
         });
     };
@@ -73,12 +73,11 @@ var LoginComponent = (function () {
             _this._authToken = headers.get(_this._constants.X_AUTH_TOKEN_HEADER);
             sessionStorage.setItem(_this._constants.AUTH_TOKEN, _this._authToken);
             if (_this._authToken) {
-                if (authority == _this._constants.AUTHORITY_ADMIN) {
-                    _this._messagesService.getAdminMessages();
-                }
-                else if (authority == _this._constants.AUTHORITY_CUSTOMER) {
-                    _this._messagesService.getCustomerMessages();
-                }
+                // if (authority == this._constants.AUTHORITY_ADMIN) {
+                //   this._messagesService.getAdminMessages();
+                // } else if (authority == this._constants.AUTHORITY_CUSTOMER) {
+                //   this._messagesService.getCustomerMessages();
+                // }
                 _this._router.navigate(['welcome']);
             }
         }, function (error) {

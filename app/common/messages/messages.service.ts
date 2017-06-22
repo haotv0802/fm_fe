@@ -47,62 +47,38 @@ export class MessagesService {
     // return result;
   }
 
-  getAdminMessages(): void {
-    this._httpService.get(this._constants.ADMIN_MESSAGES_SERVICE_URL)
-      .map(
-        (res) => {
-          // console.log(res.json());
-          return res.json();
-        }
-      )
-      // .do(
-      //   (data) => {
-      //     console.log("do print json");
-      //     console.log(JSON.stringify(data));
-      //   }
-      // )
-      // .subscribe(
-      //   (res) => {
-      //     this.keyValuePairs = res;
-      //   },
-      //   (error: Error) => {
-      //     console.log(error);
-      //   }
-      // )
-      .subscribe(
-        (res) => {
-          this.messages = res;
-        },
-        (error: Error) => {
-          console.log(error);
-        }
-      );
-    ;
-  }
-
-  getCustomerMessages(): void {
-    this._httpService.get(this._constants.CUSTOMER_MESSAGES_SERVICE_URL)
-      .map(
-        (res) => {
-          return res.json();
-        }
-      )
-      // .do(
-      //   (data) => {
-      //     console.log("do print json");
-      //     console.log(JSON.stringify(data));
-      //   }
-      // )
-      .subscribe(
-        (res) => {
-          this.messages = res;
-        },
-        (error: Error) => {
-          console.log(error);
-        }
-      );
-    ;
-  }
+  // getAdminMessages(): void {
+  //   this._httpService.get(this._constants.ADMIN_MESSAGES_SERVICE_URL)
+  //     .map(
+  //       (res) => {
+  //         // console.log(res.json());
+  //         return res.json();
+  //       }
+  //     )
+  //     // .do(
+  //     //   (data) => {
+  //     //     console.log("do print json");
+  //     //     console.log(JSON.stringify(data));
+  //     //   }
+  //     // )
+  //     // .subscribe(
+  //     //   (res) => {
+  //     //     this.keyValuePairs = res;
+  //     //   },
+  //     //   (error: Error) => {
+  //     //     console.log(error);
+  //     //   }
+  //     // )
+  //     .subscribe(
+  //       (res) => {
+  //         this.messages = res;
+  //       },
+  //       (error: Error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   ;
+  // }
 
   getCommonMessagesByName(key: string): {} {
     try {

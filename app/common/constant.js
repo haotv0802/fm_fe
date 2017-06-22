@@ -17,8 +17,8 @@ var Constants = (function () {
         this.TOASTER_ERROR = "error";
         // Messages services
         this.COMMON_MESSAGES_SERVICE_URL = this.HOST + "/messages";
-        this.ADMIN_MESSAGES_SERVICE_URL = this.HOST + "/admin/messages";
-        this.CUSTOMER_MESSAGES_SERVICE_URL = this.HOST + "/customer/messages";
+        // public readonly ADMIN_MESSAGES_SERVICE_URL = this.HOST + "/admin/messages";
+        // public readonly CUSTOMER_MESSAGES_SERVICE_URL = this.HOST + "/customer/messages";
         // HTTP Status
         this.HTTP_STATUS_OK = 200;
         this.HTTP_STATUS_NO_CONTENT = 204;

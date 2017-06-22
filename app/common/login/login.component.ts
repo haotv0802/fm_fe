@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     // this.loadMessages();
 
     this.loginForm = this.fb.group({
-      username: ['admin', [Validators.required]],
-      password: ['admin', [Validators.required]],
+      username: ['haho', [Validators.required]],
+      password: ['hoanhhao', [Validators.required]],
       language: [this._constants.LANGUAGE, [Validators.required]]
     });
   }
@@ -82,11 +82,11 @@ export class LoginComponent implements OnInit {
         this._authToken = headers.get(this._constants.X_AUTH_TOKEN_HEADER);
         sessionStorage.setItem(this._constants.AUTH_TOKEN, this._authToken);
         if (this._authToken) {
-          if (authority == this._constants.AUTHORITY_ADMIN) {
-            this._messagesService.getAdminMessages();
-          } else if (authority == this._constants.AUTHORITY_CUSTOMER) {
-            this._messagesService.getCustomerMessages();
-          }
+          // if (authority == this._constants.AUTHORITY_ADMIN) {
+          //   this._messagesService.getAdminMessages();
+          // } else if (authority == this._constants.AUTHORITY_CUSTOMER) {
+          //   this._messagesService.getCustomerMessages();
+          // }
           this._router.navigate(['welcome']);
         }
       },

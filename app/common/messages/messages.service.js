@@ -49,33 +49,38 @@ var MessagesService = (function () {
         // }
         // return result;
     };
-    MessagesService.prototype.getAdminMessages = function () {
-        var _this = this;
-        this._httpService.get(this._constants.ADMIN_MESSAGES_SERVICE_URL)
-            .map(function (res) {
-            // console.log(res.json());
-            return res.json();
-        })
-            .subscribe(function (res) {
-            _this.messages = res;
-        }, function (error) {
-            console.log(error);
-        });
-        ;
-    };
-    MessagesService.prototype.getCustomerMessages = function () {
-        var _this = this;
-        this._httpService.get(this._constants.CUSTOMER_MESSAGES_SERVICE_URL)
-            .map(function (res) {
-            return res.json();
-        })
-            .subscribe(function (res) {
-            _this.messages = res;
-        }, function (error) {
-            console.log(error);
-        });
-        ;
-    };
+    // getAdminMessages(): void {
+    //   this._httpService.get(this._constants.ADMIN_MESSAGES_SERVICE_URL)
+    //     .map(
+    //       (res) => {
+    //         // console.log(res.json());
+    //         return res.json();
+    //       }
+    //     )
+    //     // .do(
+    //     //   (data) => {
+    //     //     console.log("do print json");
+    //     //     console.log(JSON.stringify(data));
+    //     //   }
+    //     // )
+    //     // .subscribe(
+    //     //   (res) => {
+    //     //     this.keyValuePairs = res;
+    //     //   },
+    //     //   (error: Error) => {
+    //     //     console.log(error);
+    //     //   }
+    //     // )
+    //     .subscribe(
+    //       (res) => {
+    //         this.messages = res;
+    //       },
+    //       (error: Error) => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   ;
+    // }
     MessagesService.prototype.getCommonMessagesByName = function (key) {
         try {
             var result = this.commonMessages[key];

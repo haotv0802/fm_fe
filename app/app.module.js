@@ -12,10 +12,8 @@ var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
 var welcome_component_1 = require("./common/home/welcome.component");
-var staff_component_1 = require("./staff/staff.component");
 var nav_component_1 = require("./nav.component");
 var login_module_1 = require("./common/login/login.module");
-var admin_module_1 = require("./admin/admin.module");
 var product_module_1 = require("./products/product.module");
 var constant_1 = require("./common/constant");
 var HTTP_service_1 = require("./common/HTTP.service");
@@ -24,6 +22,7 @@ var angular2_toaster_1 = require("angular2-toaster");
 var angular2_modal_1 = require("angular2-modal");
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var messages_service_1 = require("./common/messages/messages.service");
+var admin_module_1 = require("./fm/admin.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -38,9 +37,6 @@ AppModule = __decorate([
                 { path: 'welcome', component: welcome_component_1.WelcomeComponent },
                 { path: '', redirectTo: 'welcome', pathMatch: 'full' },
             ]),
-            router_1.RouterModule.forChild([
-                { path: 'staff', component: staff_component_1.StaffComponent }
-            ]),
             login_module_1.LoginModule,
             product_module_1.ProductModule,
             admin_module_1.AdminModule,
@@ -52,7 +48,6 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             welcome_component_1.WelcomeComponent,
-            staff_component_1.StaffComponent,
             nav_component_1.NavComponent
         ],
         providers: [

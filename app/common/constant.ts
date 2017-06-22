@@ -5,7 +5,7 @@ export class Constants {
 
   public LANGUAGE: string = "en";
 
-  public readonly HOST = 'http://localhost:8880/ht-be/svc';
+  public readonly HOST = 'http://localhost:8880/fm-be/svc';
   public readonly LOGIN_SERVICE_URL: string = this.HOST + '/login';
 
   // Toaster types

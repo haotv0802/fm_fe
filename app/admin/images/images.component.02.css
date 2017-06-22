@@ -1,0 +1,87 @@
+/* smart image enlarger starts here */
+/* If your images are not linking to other pages leave the links as <a href="#nogo"> Otherwise enlarger won't work in IE6 */
+
+.ienlarger {
+    float: left;
+    clear: none; /* set to left or right if needed */
+    padding-bottom: 5px; /* space between thumbs. Don't change this to margin */
+    padding-right: 5px; /* space between thumbs and wrapping text when there is any text around it */
+}
+
+.ienlarger button {
+    display:block;
+    text-decoration: none;
+    /* add cursor:default; to this rule to disable the hand cursor */
+}
+
+.ienlarger button:hover{ /* don't move this positioning to normal state */
+    position:relative;
+}
+
+.ienlarger span img {
+    border: 1px solid #FFFFFF; /* adds a border around the image */
+    margin-bottom: 8px; /* pushes the text down from the image */
+}
+
+.ienlarger button span {  /* this is for the large image and the caption */
+    position: absolute;
+    display:none;
+    color: #FFCC00; /* caption text colour */
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px; /* caption text size */
+    background-color: #eae9d4;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 13px;
+    padding-left: 10px;
+    -webkit-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+    -moz-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+    box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+    /*and give the corners a small curve*/
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ienlarger img { /* leave or IE puts a border around links */
+    border-width: 0;
+}
+
+.ienlarger button:hover span {
+    display:block;
+    top: 50px; /* means the pop-up's top is 50px away from thumb's top */
+    left: 90px; /* means the pop-up's left is 90px far from the thumb's left */
+    z-index: 100;
+
+    /* If you want the pop-up open to the left of thumb, remove the left: 90px; and add
+    right: 90px; This would mean the right side of the pop-up is 90px far from the right side of thumb */
+
+    /* If you want the pop-up open above the thumb, remove the top: 50px; and add
+    bottom: 50px; This would mean the bottom of the pop-up is 50px far from the bottom of thumb */
+
+    /* add cursor:default; to this rule to disable the hand cursor only for the large image */
+}
+
+.resize_thumb {
+    width: 150px; /* enter desired thumb width here */
+    height : auto;
+}
+
+
+.thumbnailStyle {
+    /*give the thumbnails a frame*/
+    background-color: #eae9d4; /*frame colour*/
+    padding: 6px; /*frame size*/
+    /*add a drop shadow to the frame*/
+    -webkit-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+    -moz-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+    box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+    /*and give the corners a small curve*/
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    width: 150px; /* enter desired thumb width here */
+    height : auto;
+}

@@ -1,0 +1,90 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading' style='font-size:large'>
+        {{pageTitle}}
+    </div>
+    <loader-modal [opening]="isOpen" (loaderClicked)='onLoaderClicked($event)'></loader-modal>
+    <loader [opening]="isOpen"></loader>
+    <button (click)="onClick()">Alert</button>
+    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
+        <table class="table table-bordered table-hover">
+            <thead style="color: #337AB7">
+            <th class="col-sm-1">Id</th>
+            <th class="col-sm-2">Name</th>
+            <th class="col-sm-1">Birthday</th>
+            <th class="col-sm-0">Gender</th>
+            <th class="col-sm-1">Email</th>
+            <th class="col-sm-2">Phone Number</th>
+            <th class="col-sm-2">User Name</th>
+            <th class="col-sm-2" align="center">
+                <!--<button type="button" class="btn btn-link" (click)="addIndividual()">Add New Individual</button>-->
+                <a href="#" (click)="addIndividual()">
+                    <img src="./app/assets/icons/add.png" style="width: 24px; height: 24px;"/>
+                </a>
+            </th>
+            </thead>
+            <tbody *ngIf="individualsALL">
+            <tr *ngFor="let indiv of individualsALL">
+                <td>{{indiv.id}}</td>
+                <td>{{indiv.firstName}} {{indiv.lastName}}</td>
+                <td>{{indiv.birthday}}</td>
+                <td>{{indiv.gender}}</td>
+                <td>{{indiv.email}}</td>
+                <td>{{indiv.phoneNumber}}</td>
+                <td>{{indiv.userName}}</td>
+                <td>
+                    <button type="button" class="btn btn-link" (click)="displayIndividual(indiv)">View</button> |
+                    <button type="button" class="btn btn-link" (click)="editIndividual(indiv)">Edit</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br/><br/><br/>
+    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:400px;">
+        <table class="table table-bordered table-hover">
+            <thead style="color: #337AB7">
+                <th class="col-sm-1">Id</th>
+                <th class="col-sm-2">Name</th>
+                <th class="col-sm-1">Birthday</th>
+                <th class="col-sm-0">Gender</th>
+                <th class="col-sm-1">Email</th>
+                <th class="col-sm-2">Phone Number</th>
+                <th class="col-sm-2">User Name</th>
+                <th class="col-sm-2" align="center">
+                    <!--<button type="button" class="btn btn-link" (click)="addIndividual()">Add New Individual</button>-->
+                    <a href="#" (click)="addIndividual()">
+                        <img src="./app/assets/icons/add.png" style="width: 24px; height: 24px;"/>
+                    </a>
+                </th>
+            </thead>
+            <tbody *ngIf="individuals">
+                <tr *ngFor="let indiv of individuals">
+                    <td>{{indiv.id}}</td>
+                    <td>{{indiv.firstName}} {{indiv.lastName}}</td>
+                    <td>{{indiv.birthday}}</td>
+                    <td>{{indiv.gender}}</td>
+                    <td>{{indiv.email}}</td>
+                    <td>{{indiv.phoneNumber}}</td>
+                    <td>{{indiv.userName}}</td>
+                    <td>
+                        <button type="button" class="btn btn-link" (click)="displayIndividual(indiv)">View</button> |
+                        <button type="button" class="btn btn-link" (click)="editIndividual(indiv)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div align="center" *ngIf="pagination">
+        <ul class="pagination" *ngFor="let num of counter(pagination.numberOfPages), let idx = index">
+            <li *ngIf="(idx + 1) != pagination.number">
+                <!--<button type="button" class="btn btn-link" (click)="getIndividualsWithPageNum(idx)">{{idx + 1}}</button>-->
+                <a (click)="getIndividuals(idx + 1)" href="#">{{idx + 1}}</a>
+            </li>
+            <li *ngIf="(idx + 1) == pagination.number" class="active">
+                <!--<button type="button" class="btn btn-link" (click)="getIndividualsWithPageNum(idx)">{{idx + 1}}</button>-->
+                <a (click)="getIndividuals(idx + 1)" href="#">{{idx + 1}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

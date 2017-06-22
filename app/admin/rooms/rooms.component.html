@@ -1,0 +1,59 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading' style='font-size:large'>
+        {{pageTitle}}
+    </div>
+    <loader [opening]="!ready"></loader>
+    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;" *ngIf="messages">
+        <table class="table table-hover" style="width: 900px;">
+            <thead>
+                <th class="col-sm-2">{{messages.name || 'Name123'}}</th>
+                <th class="col-sm-1"></th>
+                <th class="col-sm-2">{{messages.numOfBeds || 'Num of beds'}}</th>
+                <th class="col-sm-2">{{messages.numOfPeople || 'Num of people'}}</th>
+                <th class="col-sm-2">{{messages.typeOfBed || 'Type of bed'}}</th>
+                <th class="col-sm-1"></th>
+            </thead>
+            <tr *ngFor="let roomType of roomTypes">
+                <td>{{roomType.name}}</td>
+                <td>
+                    <img *ngIf="roomType.images[0]" [src]='roomType.images[0].imageURL'
+                         [style.width.px]='100'
+                         [style.height.px]='50'
+                         [style.margin.px]='20' />
+                </td>
+
+                <td>
+                    <a (click)="displayImages(roomType.images)" href="#">
+                        <!--{{roomType.numOfPeople}}-->
+                        <img *ngFor="let num of counter(roomType.numOfPeople)" src="app/assets/icons/Person.png" style="width: 24px; height: 24px;"/>
+                    </a>
+                </td>
+                <td>
+                    <!--{{roomType.numOfBeds}}-->
+                    <span *ngIf="roomType.typeOfBed == 'Double Bed & Single Bed'">
+                        <img src="app/assets/icons/twin_bed.png" style="width: 32px; height: 32px;"/>
+                        <img src="app/assets/icons/single_bed.png" style="width: 32px; height: 32px;"/>
+                    </span>
+                    <span *ngIf="roomType.typeOfBed == 'Double Bed'">
+                        <img src="app/assets/icons/twin_bed.png" style="width: 32px; height: 32px;"/>
+                    </span>
+                    <span *ngIf="roomType.typeOfBed == 'Single Bed'">
+                        <img src="app/assets/icons/single_bed.png" style="width: 32px; height: 32px;"/>
+                    </span>
+                    <span *ngIf="roomType.typeOfBed == '2 Double Beds'">
+                        <img src="app/assets/icons/twin_bed.png" style="width: 32px; height: 32px;"/>
+                        <img src="app/assets/icons/twin_bed.png" style="width: 32px; height: 32px;"/>
+                    </span>
+                    <!--<img *ngFor="let num of counter(roomType.numOfBeds)" src="app/assets/icons/twin_bed.png" style="width: 32px; height: 32px;"/>-->
+                </td>
+                <td>{{roomType.typeOfBed}}</td>
+                <td>
+                    <button type="button" class="btn btn-info" (click)="editRoom(roomType)">Edit</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <modal (modalOutput)="syncData($event)">
+    </modal>
+</div>

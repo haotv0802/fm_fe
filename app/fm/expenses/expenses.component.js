@@ -13,16 +13,25 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var modal_component_1 = require("../../common/modal/modal.component");
 var expenses_service_1 = require("./expenses.service");
+var forms_1 = require("@angular/forms");
 var ExpensesComponent = (function () {
-    function ExpensesComponent(_usersService, _router) {
+    function ExpensesComponent(_usersService, _router, fb) {
         this._usersService = _usersService;
         this._router = _router;
+        this.fb = fb;
         this.loaderOpen = true;
         this.pageTitle = 'Expenses';
     }
     ExpensesComponent.prototype.ngOnInit = function () {
         this.getExpenses();
         this.getExpensesDetails();
+        this.expensesForm = this.fb.group({
+            amount: ['', [forms_1.Validators.required]],
+            date: [''],
+            place: ['', [forms_1.Validators.required]],
+            paymentMethod: ['', [forms_1.Validators.required]],
+            forPerson: ['']
+        });
     };
     ExpensesComponent.prototype.getExpenses = function () {
         var _this = this;
@@ -58,7 +67,8 @@ ExpensesComponent = __decorate([
         templateUrl: 'expenses.component.html'
     }),
     __metadata("design:paramtypes", [expenses_service_1.ExpensesService,
-        router_1.Router])
+        router_1.Router,
+        forms_1.FormBuilder])
 ], ExpensesComponent);
 exports.ExpensesComponent = ExpensesComponent;
 //# sourceMappingURL=expenses.component.js.map

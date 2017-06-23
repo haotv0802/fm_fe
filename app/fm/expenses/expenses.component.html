@@ -3,36 +3,77 @@
     <div class='panel-heading' style='font-size:large'>
         {{pageTitle}}
     </div>
-    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
-        <table class="table table-bordered table-hover" style="width: 1024px;">
-            <thead style="color: #337AB7">
-                <th class="col-sm-2">Amount</th>
-                <th class="col-sm-2">Date</th>
-                <th class="col-sm-2">Place</th>
-                <th class="col-sm-2">Payment Method</th>
-                <th class="col-sm-2">For Person</th>
-            </thead>
-            <tbody *ngIf="expensesDetails">
-                <!--<tr>-->
-                    <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
-                <!--</tr>-->
-                <tr *ngFor="let expense of expensesDetails.expenses">
-                    <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
-                    <td>{{expense.date | date: 'dd-MM-yyyy'}}</td>
-                    <td>{{expense.place}}</td>
-                    <td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>
-                    <td>{{expense.forPerson}}</td>
-                </tr>
-                <tr>
-                    <td>{{expensesDetails.total | currency:'VND':true:'1.2-2'}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <form class="form-horizontal" novalidate
+          [formGroup]="expensesForm">
+        <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
+            <table class="table table-bordered table-hover" style="width: 1024px;">
+                <thead style="color: #337AB7">
+                    <th class="col-sm-2">Amount</th>
+                    <th class="col-sm-2">Date</th>
+                    <th class="col-sm-2">Place</th>
+                    <th class="col-sm-2">Payment Method</th>
+                    <th class="col-sm-2">For Person</th>
+                </thead>
+                <tbody *ngIf="expensesDetails">
+                    <!--<tr>-->
+                        <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td>
+                            <input class="form-control"
+                                   id="amountId"
+                                   type="text"
+                                   placeholder="Amount (required)"
+                                   formControlName="amount"/>
+                        </td>
+                        <td>
+                            <input class="form-control"
+                                   id="dateId"
+                                   type="text"
+                                   placeholder="Date (required)"
+                                   formControlName="date"/>
+                        </td>
+                        <td>
+                            <input class="form-control"
+                                   id="placeId"
+                                   type="text"
+                                   placeholder="Place (required)"
+                                   formControlName="place"/>
+                        </td>
+                        <td>
+                            <input class="form-control"
+                                   id="paymentMethodId"
+                                   type="text"
+                                   placeholder="Payment Method (required)"
+                                   formControlName="paymentMethod"/>
+                        </td>
+                        <td>
+                            <input class="form-control"
+                                   id="forPersonId"
+                                   type="text"
+                                   placeholder="For Person (required"
+                                   formControlName="forPerson"/>
+                        </td>
+
+                    </tr>
+                    <tr *ngFor="let expense of expensesDetails.expenses">
+                        <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
+                        <td>{{expense.date | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{expense.place}}</td>
+                        <td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>
+                        <td>{{expense.forPerson}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{expensesDetails.total | currency:'VND':true:'1.2-2'}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
     <!--<div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">-->
         <!--<table class="table table-bordered table-hover" style="width: 1024px;">-->
             <!--<thead style="color: #337AB7">-->

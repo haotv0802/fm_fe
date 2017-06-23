@@ -5,6 +5,7 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
 import {HTCommonModule} from "../../common/htCommon.module";
 import {ExpensesComponent} from "./expenses.component";
 import {ExpensesService} from "./expenses.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import {ExpensesService} from "./expenses.service";
     ]),
     CommonModule,
     Ng2SmartTableModule,
-    HTCommonModule
+    HTCommonModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ExpensesComponent

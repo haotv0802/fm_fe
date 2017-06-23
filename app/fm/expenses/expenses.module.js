@@ -13,6 +13,7 @@ var ng2_smart_table_1 = require("ng2-smart-table");
 var htCommon_module_1 = require("../../common/htCommon.module");
 var expenses_component_1 = require("./expenses.component");
 var expenses_service_1 = require("./expenses.service");
+var forms_1 = require("@angular/forms");
 var ExpensesModule = (function () {
     function ExpensesModule() {
     }
@@ -26,7 +27,8 @@ ExpensesModule = __decorate([
             ]),
             common_1.CommonModule,
             ng2_smart_table_1.Ng2SmartTableModule,
-            htCommon_module_1.HTCommonModule
+            htCommon_module_1.HTCommonModule,
+            forms_1.ReactiveFormsModule
         ],
         declarations: [
             expenses_component_1.ExpensesComponent

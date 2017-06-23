@@ -4,6 +4,7 @@ import {ModalComponent} from "../../common/modal/modal.component";
 import {Expense} from "./expense";
 import {ExpensesService} from "./expenses.service";
 import {ExpensesDetails} from "./expensesDetails";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -14,11 +15,13 @@ export class ExpensesComponent implements OnInit {
   expenses: Expense[];
   expensesDetails: ExpensesDetails;
   loaderOpen: boolean = true;
+  expensesForm: FormGroup;
   @ViewChild(ModalComponent) modal: ModalComponent;
 
   constructor(
     private _usersService: ExpensesService,
-    private _router: Router
+    private _router: Router,
+    private fb: FormBuilder,
   ) {
     this.pageTitle = 'Expenses';
   }
@@ -26,6 +29,13 @@ export class ExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.getExpenses();
     this.getExpensesDetails();
+    this.expensesForm = this.fb.group({
+      amount: ['', [Validators.required]],
+      date: [''],
+      place: ['', [Validators.required]],
+      paymentMethod: ['', [Validators.required]],
+      forPerson: ['']
+    });
   }
 
   getExpenses(): void {

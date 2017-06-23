@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {ModalComponent} from "../../common/modal/modal.component";
 import {Expense} from "./expense";
 import {ExpensesService} from "./expenses.service";
+import {ExpensesDetails} from "./expensesDetails";
 
 @Component({
   moduleId: module.id,
@@ -11,6 +12,7 @@ import {ExpensesService} from "./expenses.service";
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
   expenses: Expense[];
+  expensesDetails: ExpensesDetails;
   loaderOpen: boolean = true;
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -23,12 +25,25 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getExpenses();
+    this.getExpensesDetails();
   }
 
   getExpenses(): void {
-    this._usersService.getUsers().subscribe(
+    this._usersService.getExpenses().subscribe(
       (expenses) => {
         this.expenses = expenses;
+        this.loaderOpen = false;
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  getExpensesDetails(): void {
+    this._usersService.getExpensesDetails().subscribe(
+      (expensesDetails) => {
+        this.expensesDetails = expensesDetails;
         this.loaderOpen = false;
       },
       (error) => {

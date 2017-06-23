@@ -26,6 +26,8 @@ export class Constants {
   ////      Services URLs for Admin
   //  Expenses
   public readonly EXPENSES_SERVICE_URL: string = this.HOST + '/expenses';
+  public readonly EXPENSES_DETAILS_SERVICE_URL: string = this.HOST + '/expensesDetails';
+  public readonly EXPENSES_PREVIOUS_SERVICE_URL: string = this.HOST + '/previousExpensesDetails';
 
   // Constants
   public readonly X_AUTH_TOKEN_HEADER: string = "X-AUTH-TOKEN";

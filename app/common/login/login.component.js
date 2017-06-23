@@ -78,12 +78,12 @@ var LoginComponent = (function () {
                 // } else if (authority == this._constants.AUTHORITY_CUSTOMER) {
                 //   this._messagesService.getCustomerMessages();
                 // }
-                _this._router.navigate(['welcome']);
+                _this._router.navigate(['expenses']);
             }
         }, function (error) {
             console.log(error);
             if (error.status == _this._constants.HTTP_STATUS_UNAUTHORIZED) {
-                _this._toasterService.pop('error', 'Username or Password is incorrect!');
+                _this._toasterService.pop(_this._constants.TOASTER_ERROR, 'Username or Password is incorrect!');
             }
             // this._router.navigate(['welcome']);
         });

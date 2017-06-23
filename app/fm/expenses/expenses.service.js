@@ -17,7 +17,7 @@ var ExpensesService = (function () {
         this._httpService = _httpService;
         this._constants = _constants;
     }
-    ExpensesService.prototype.getUsers = function () {
+    ExpensesService.prototype.getExpenses = function () {
         // let headers = new Headers();
         //
         // headers.append("Accept-Language", "en");
@@ -29,6 +29,20 @@ var ExpensesService = (function () {
         //   .catch(this.handleError)
         // ;
         return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
+            .map(function (res) { return res.json(); });
+    };
+    ExpensesService.prototype.getExpensesDetails = function () {
+        // let headers = new Headers();
+        //
+        // headers.append("Accept-Language", "en");
+        // headers.append("Content-Type", "application/json");
+        // headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
+        //
+        // return this._http.get(this._constants.ADMIN_USERS_SERVICE_URL, {headers: headers})
+        //   .map((res) => { return <User[]> res.json(); })
+        //   .catch(this.handleError)
+        // ;
+        return this._httpService.get(this._constants.EXPENSES_DETAILS_SERVICE_URL)
             .map(function (res) { return res.json(); });
     };
     return ExpensesService;

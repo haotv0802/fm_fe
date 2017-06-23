@@ -3,6 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Constants} from "../../common/constant";
 import {HTTPService} from "../../common/HTTP.service";
 import {Expense} from "./expense";
+import {ExpensesDetails} from "./expensesDetails";
 
 @Injectable()
 export class ExpensesService {
@@ -13,7 +14,7 @@ export class ExpensesService {
 
   }
 
-  getUsers(): Observable<Expense[]> {
+  getExpenses(): Observable<Expense[]> {
     // let headers = new Headers();
     //
     // headers.append("Accept-Language", "en");
@@ -29,4 +30,19 @@ export class ExpensesService {
       ;
   }
 
+  getExpensesDetails(): Observable<ExpensesDetails> {
+    // let headers = new Headers();
+    //
+    // headers.append("Accept-Language", "en");
+    // headers.append("Content-Type", "application/json");
+    // headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
+    //
+    // return this._http.get(this._constants.ADMIN_USERS_SERVICE_URL, {headers: headers})
+    //   .map((res) => { return <User[]> res.json(); })
+    //   .catch(this.handleError)
+    // ;
+    return this._httpService.get(this._constants.EXPENSES_DETAILS_SERVICE_URL)
+      .map((res) => { return <ExpensesDetails> res.json(); })
+      ;
+  }
 }

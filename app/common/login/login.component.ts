@@ -87,13 +87,13 @@ export class LoginComponent implements OnInit {
           // } else if (authority == this._constants.AUTHORITY_CUSTOMER) {
           //   this._messagesService.getCustomerMessages();
           // }
-          this._router.navigate(['welcome']);
+          this._router.navigate(['expenses']);
         }
       },
       (error: any) => {
         console.log(error);
         if (error.status == this._constants.HTTP_STATUS_UNAUTHORIZED) {
-          this._toasterService.pop('error', 'Username or Password is incorrect!');
+          this._toasterService.pop(this._constants.TOASTER_ERROR, 'Username or Password is incorrect!');
         }
         // this._router.navigate(['welcome']);
       }

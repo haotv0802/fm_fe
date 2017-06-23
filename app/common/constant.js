@@ -27,6 +27,8 @@ var Constants = (function () {
         ////      Services URLs for Admin
         //  Expenses
         this.EXPENSES_SERVICE_URL = this.HOST + '/expenses';
+        this.EXPENSES_DETAILS_SERVICE_URL = this.HOST + '/expensesDetails';
+        this.EXPENSES_PREVIOUS_SERVICE_URL = this.HOST + '/previousExpensesDetails';
         // Constants
         this.X_AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
         this.AUTH_TOKEN = "AUTH_TOKEN";

@@ -22,11 +22,21 @@ var ExpensesComponent = (function () {
     }
     ExpensesComponent.prototype.ngOnInit = function () {
         this.getExpenses();
+        this.getExpensesDetails();
     };
     ExpensesComponent.prototype.getExpenses = function () {
         var _this = this;
-        this._usersService.getUsers().subscribe(function (expenses) {
+        this._usersService.getExpenses().subscribe(function (expenses) {
             _this.expenses = expenses;
+            _this.loaderOpen = false;
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    ExpensesComponent.prototype.getExpensesDetails = function () {
+        var _this = this;
+        this._usersService.getExpensesDetails().subscribe(function (expensesDetails) {
+            _this.expensesDetails = expensesDetails;
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);

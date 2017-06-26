@@ -24,11 +24,12 @@ var Constants = (function () {
         this.HTTP_STATUS_NO_CONTENT = 204;
         this.HTTP_STATUS_BAD_REQUEST = 400;
         this.HTTP_STATUS_UNAUTHORIZED = 401;
-        ////      Services URLs for Admin
         //  Expenses
         this.EXPENSES_SERVICE_URL = this.HOST + '/expenses';
         this.EXPENSES_DETAILS_SERVICE_URL = this.HOST + '/expensesDetails';
         this.EXPENSES_PREVIOUS_SERVICE_URL = this.HOST + '/previousExpensesDetails';
+        // Payment methods || Cards information
+        this.PAYMENT_METHODS_SERVICE_URL = this.HOST + '/paymentMethods';
         // Constants
         this.X_AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
         this.AUTH_TOKEN = "AUTH_TOKEN";

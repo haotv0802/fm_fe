@@ -27,11 +27,16 @@
                                    formControlName="amount"/>
                         </td>
                         <td>
+                            <div class='input-group date' id='datetimepicker2'>
                             <input class="form-control"
                                    id="dateId"
                                    type="text"
                                    placeholder="Date (required)"
                                    formControlName="date"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </td>
                         <td>
                             <input class="form-control"
@@ -41,17 +46,19 @@
                                    formControlName="place"/>
                         </td>
                         <td>
-                            <input class="form-control"
-                                   id="paymentMethodId"
-                                   type="text"
-                                   placeholder="Payment Method (required)"
-                                   formControlName="paymentMethod"/>
+                            <select class="form-control"
+                                    id="paymentMethodId"
+                                    formControlName="paymentMethod">
+                                <option value="" disabled selected hidden>Select a method...</option>
+                                <option value="-1">CASH</option>
+                                <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
+                            </select>
                         </td>
                         <td>
                             <input class="form-control"
                                    id="forPersonId"
                                    type="text"
-                                   placeholder="For Person (required"
+                                   placeholder="For Person (required)"
                                    formControlName="forPerson"/>
                         </td>
 

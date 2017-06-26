@@ -5,6 +5,7 @@ import {Expense} from "./expense";
 import {ExpensesService} from "./expenses.service";
 import {ExpensesDetails} from "./expensesDetails";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {PaymentMethod} from "./paymentMethod";
 
 @Component({
   moduleId: module.id,
@@ -13,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
   expenses: Expense[];
+  paymentMethods: PaymentMethod[];
   expensesDetails: ExpensesDetails;
   loaderOpen: boolean = true;
   expensesForm: FormGroup;
@@ -29,6 +31,8 @@ export class ExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.getExpenses();
     this.getExpensesDetails();
+    this.getPaymentMethods();
+
     this.expensesForm = this.fb.group({
       amount: ['', [Validators.required]],
       date: [''],
@@ -50,10 +54,20 @@ export class ExpensesComponent implements OnInit {
     )
   }
 
+  getPaymentMethods(): void {
+    this._usersService.getPaymentMethods().subscribe(
+      (paymentMethods) => {
+        this.paymentMethods = paymentMethods;
+        console.log(this.paymentMethods);
+      }
+    );
+  }
+
   getExpensesDetails(): void {
     this._usersService.getExpensesDetails().subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
+        console.log(this.expensesDetails);
         this.loaderOpen = false;
       },
       (error) => {

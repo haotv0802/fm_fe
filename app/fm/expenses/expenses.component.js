@@ -25,6 +25,7 @@ var ExpensesComponent = (function () {
     ExpensesComponent.prototype.ngOnInit = function () {
         this.getExpenses();
         this.getExpensesDetails();
+        this.getPaymentMethods();
         this.expensesForm = this.fb.group({
             amount: ['', [forms_1.Validators.required]],
             date: [''],
@@ -42,10 +43,18 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
+    ExpensesComponent.prototype.getPaymentMethods = function () {
+        var _this = this;
+        this._usersService.getPaymentMethods().subscribe(function (paymentMethods) {
+            _this.paymentMethods = paymentMethods;
+            console.log(_this.paymentMethods);
+        });
+    };
     ExpensesComponent.prototype.getExpensesDetails = function () {
         var _this = this;
         this._usersService.getExpensesDetails().subscribe(function (expensesDetails) {
             _this.expensesDetails = expensesDetails;
+            console.log(_this.expensesDetails);
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);

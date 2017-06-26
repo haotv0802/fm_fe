@@ -23,11 +23,13 @@ export class Constants {
   public readonly HTTP_STATUS_BAD_REQUEST: number = 400;
   public readonly HTTP_STATUS_UNAUTHORIZED: number = 401;
 
-  ////      Services URLs for Admin
   //  Expenses
   public readonly EXPENSES_SERVICE_URL: string = this.HOST + '/expenses';
   public readonly EXPENSES_DETAILS_SERVICE_URL: string = this.HOST + '/expensesDetails';
   public readonly EXPENSES_PREVIOUS_SERVICE_URL: string = this.HOST + '/previousExpensesDetails';
+
+  // Payment methods || Cards information
+  public readonly PAYMENT_METHODS_SERVICE_URL: string = this.HOST + '/paymentMethods';
 
   // Constants
   public readonly X_AUTH_TOKEN_HEADER: string = "X-AUTH-TOKEN";

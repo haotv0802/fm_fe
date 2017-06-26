@@ -45,6 +45,10 @@ var ExpensesService = (function () {
         return this._httpService.get(this._constants.EXPENSES_DETAILS_SERVICE_URL)
             .map(function (res) { return res.json(); });
     };
+    ExpensesService.prototype.getPaymentMethods = function () {
+        return this._httpService.get(this._constants.PAYMENT_METHODS_SERVICE_URL)
+            .map(function (res) { return res.json(); });
+    };
     return ExpensesService;
 }());
 ExpensesService = __decorate([

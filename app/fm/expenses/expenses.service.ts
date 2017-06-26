@@ -4,6 +4,7 @@ import {Constants} from "../../common/constant";
 import {HTTPService} from "../../common/HTTP.service";
 import {Expense} from "./expense";
 import {ExpensesDetails} from "./expensesDetails";
+import {PaymentMethod} from "./paymentMethod";
 
 @Injectable()
 export class ExpensesService {
@@ -43,6 +44,12 @@ export class ExpensesService {
     // ;
     return this._httpService.get(this._constants.EXPENSES_DETAILS_SERVICE_URL)
       .map((res) => { return <ExpensesDetails> res.json(); })
+      ;
+  }
+
+  getPaymentMethods(): Observable<PaymentMethod[]> {
+    return this._httpService.get(this._constants.PAYMENT_METHODS_SERVICE_URL)
+      .map((res) => { return <PaymentMethod[]> res.json(); })
       ;
   }
 }

@@ -6,11 +6,14 @@ import {HTCommonModule} from "../../common/htCommon.module";
 import {ExpensesComponent} from "./expenses.component";
 import {ExpensesService} from "./expenses.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ExpenseEventComponent} from "./expenseEvents/expenseEvent.component";
+import {ExpenseEventService} from "./expenseEvents/expenseEvent.service";
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      {path: 'expenses', component: ExpensesComponent}
+      {path: 'expenses', component: ExpensesComponent},
+      {path: 'expenses/:expenseId', component: ExpenseEventComponent}
     ]),
     CommonModule,
     Ng2SmartTableModule,
@@ -18,10 +21,12 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule
   ],
   declarations: [
-    ExpensesComponent
+    ExpensesComponent,
+    ExpenseEventComponent
   ],
   providers: [
-    ExpensesService
+    ExpensesService,
+    ExpenseEventService
   ]
 })
 export class ExpensesModule {

@@ -14,6 +14,8 @@ var htCommon_module_1 = require("../../common/htCommon.module");
 var expenses_component_1 = require("./expenses.component");
 var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
+var expenseEvent_component_1 = require("./expenseEvents/expenseEvent.component");
+var expenseEvent_service_1 = require("./expenseEvents/expenseEvent.service");
 var ExpensesModule = (function () {
     function ExpensesModule() {
     }
@@ -23,7 +25,8 @@ ExpensesModule = __decorate([
     core_1.NgModule({
         imports: [
             router_1.RouterModule.forChild([
-                { path: 'expenses', component: expenses_component_1.ExpensesComponent }
+                { path: 'expenses', component: expenses_component_1.ExpensesComponent },
+                { path: 'expenses/:expenseId', component: expenseEvent_component_1.ExpenseEventComponent }
             ]),
             common_1.CommonModule,
             ng2_smart_table_1.Ng2SmartTableModule,
@@ -31,10 +34,12 @@ ExpensesModule = __decorate([
             forms_1.ReactiveFormsModule
         ],
         declarations: [
-            expenses_component_1.ExpensesComponent
+            expenses_component_1.ExpensesComponent,
+            expenseEvent_component_1.ExpenseEventComponent
         ],
         providers: [
-            expenses_service_1.ExpensesService
+            expenses_service_1.ExpensesService,
+            expenseEvent_service_1.ExpenseEventService
         ]
     })
 ], ExpensesModule);

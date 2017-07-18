@@ -152,6 +152,7 @@ export class ExpensesComponent implements OnInit {
       (res) => {
         console.log(res);
         this.loaderOpen = false;
+        this._router.navigate(["expenses/" + res.expenseId]);
       }
     );
   }

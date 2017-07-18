@@ -118,6 +118,7 @@ var ExpensesComponent = (function () {
         this._expensesService.addExpense(this.expenseEdit).subscribe(function (res) {
             console.log(res);
             _this.loaderOpen = false;
+            _this._router.navigate(["expenses/" + res.expenseId]);
         });
     };
     return ExpensesComponent;

@@ -18,7 +18,7 @@ export class ExpensesComponent implements OnInit {
   expensesDetails: ExpensesDetails;
   loaderOpen: boolean = true;
   expensesForm: FormGroup;
-  editHidden: boolean = false;
+  // editHidden: boolean = false;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -98,6 +98,5 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.place = this.expensesForm.get("place").value;
     this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-    this.editHidden = true;
   }
 }

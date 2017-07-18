@@ -18,7 +18,7 @@
                     <!--<tr>-->
                         <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
                     <!--</tr>-->
-                    <tr *ngIf="!editHidden">
+                    <tr>
                         <td>
                             <input class="form-control"
                                    id="amountId"
@@ -73,13 +73,6 @@
                             />
                         </td>
 
-                    </tr>
-                    <tr *ngIf="editHidden">
-                        <td>{{expenseEdit.amount | currency:'VND':true:'1.2-2'}}</td>
-                        <td>{{expenseEdit.date | date: 'dd-MM-yyyy'}}</td>
-                        <td>{{expenseEdit.place}}</td>
-                        <td>{{expenseEdit.paymentMethod}}</td>
-                        <td>{{expenseEdit.forPerson}}</td>
                     </tr>
                     <tr *ngFor="let expense of expensesDetails.expenses">
                         <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>

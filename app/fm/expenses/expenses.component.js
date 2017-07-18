@@ -21,7 +21,7 @@ var ExpensesComponent = (function () {
         this._router = _router;
         this.fb = fb;
         this.loaderOpen = true;
-        this.editHidden = false;
+        // editHidden: boolean = false;
         this.expenseEdit = new expense_1.Expense();
         this.pageTitle = 'Expenses';
     }
@@ -81,7 +81,6 @@ var ExpensesComponent = (function () {
         this.expenseEdit.place = this.expensesForm.get("place").value;
         this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-        this.editHidden = true;
     };
     return ExpensesComponent;
 }());

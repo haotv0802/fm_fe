@@ -3,7 +3,7 @@ import {HTTPService} from "../../../common/HTTP.service";
 import {Constants} from "../../../common/constant";
 
 @Injectable()
-export class ExpenseEventService {
+export class EventExpenseService {
 
   constructor(
     private _httpService: HTTPService,

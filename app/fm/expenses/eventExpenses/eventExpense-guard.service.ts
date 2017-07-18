@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
 @Injectable()
-export class ExpenseEventGuard implements CanActivate {
+export class EventExpenseGuard implements CanActivate {
 
     constructor(private _router: Router) {
     }
@@ -10,7 +10,7 @@ export class ExpenseEventGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot): boolean {
         let id = +route.url[1].path;
         if (isNaN(id) || id < 1) {
-            alert('Invalid expense Id');
+            // alert('Invalid expense Id');
             // start a new navigation to redirect to list page
             this._router.navigate(['/expenses']);
             // abort current navigation

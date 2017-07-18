@@ -10,28 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var ExpenseEventGuard = (function () {
-    function ExpenseEventGuard(_router) {
-        this._router = _router;
+var HTTP_service_1 = require("../../../common/HTTP.service");
+var constant_1 = require("../../../common/constant");
+var EventExpenseService = (function () {
+    function EventExpenseService(_httpService, _constants) {
+        this._httpService = _httpService;
+        this._constants = _constants;
     }
-    ExpenseEventGuard.prototype.canActivate = function (route) {
-        var id = +route.url[1].path;
-        if (isNaN(id) || id < 1) {
-            alert('Invalid expense Id');
-            // start a new navigation to redirect to list page
-            this._router.navigate(['/expenses']);
-            // abort current navigation
-            return false;
-        }
-        ;
-        return true;
-    };
-    return ExpenseEventGuard;
+    return EventExpenseService;
 }());
-ExpenseEventGuard = __decorate([
+EventExpenseService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router])
-], ExpenseEventGuard);
-exports.ExpenseEventGuard = ExpenseEventGuard;
-//# sourceMappingURL=expenseEvent-guard.service.js.map
+    __metadata("design:paramtypes", [HTTP_service_1.HTTPService,
+        constant_1.Constants])
+], EventExpenseService);
+exports.EventExpenseService = EventExpenseService;
+//# sourceMappingURL=eventExpense.service.js.map

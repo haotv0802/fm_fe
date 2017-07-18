@@ -2,19 +2,19 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Rx";
-import {ExpenseEventService} from "./expenseEvent.service";
 import {Subscription} from "rxjs/Subscription";
 import {PaymentMethod} from "../paymentMethod";
 import {ExpensesDetails} from "../expensesDetails";
 import {Expense} from "../expense";
 import {ModalComponent} from "../../../common/modal/modal.component";
 import {ExpensesService} from "../expenses.service";
+import {EventExpenseService} from "./eventExpense.service";
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'expenseEvent.component.html'
+  templateUrl: 'eventExpense.component.html'
 })
-export class ExpenseEventComponent implements OnInit {
+export class EventExpenseComponent implements OnInit {
   pageTitle: string;
   private sub: Subscription;
   paymentMethods: PaymentMethod[];
@@ -25,7 +25,7 @@ export class ExpenseEventComponent implements OnInit {
   @ViewChild(ModalComponent) modal: ModalComponent;
 
   constructor(
-    private _expenseEventService: ExpenseEventService,
+    private _expenseEventService: EventExpenseService,
     private _expensesService: ExpensesService,
     private _router: Router,
     private fb: FormBuilder,

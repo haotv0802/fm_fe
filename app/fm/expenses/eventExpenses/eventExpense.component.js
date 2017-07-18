@@ -13,12 +13,12 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
-var expenseEvent_service_1 = require("./expenseEvent.service");
 var expense_1 = require("../expense");
 var modal_component_1 = require("../../../common/modal/modal.component");
 var expenses_service_1 = require("../expenses.service");
-var ExpenseEventComponent = (function () {
-    function ExpenseEventComponent(_expenseEventService, _expensesService, _router, fb, _route) {
+var eventExpense_service_1 = require("./eventExpense.service");
+var EventExpenseComponent = (function () {
+    function EventExpenseComponent(_expenseEventService, _expensesService, _router, fb, _route) {
         this._expenseEventService = _expenseEventService;
         this._expensesService = _expensesService;
         this._router = _router;
@@ -28,7 +28,7 @@ var ExpenseEventComponent = (function () {
         this.expenseEdit = new expense_1.Expense();
         this.pageTitle = 'Expense Event';
     }
-    ExpenseEventComponent.prototype.ngOnInit = function () {
+    EventExpenseComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this._route.params.subscribe(function (params) {
             var expenseId = +params['expenseId'];
@@ -49,22 +49,22 @@ var ExpenseEventComponent = (function () {
             console.log(error);
         });
     };
-    return ExpenseEventComponent;
+    return EventExpenseComponent;
 }());
 __decorate([
     core_1.ViewChild(modal_component_1.ModalComponent),
     __metadata("design:type", modal_component_1.ModalComponent)
-], ExpenseEventComponent.prototype, "modal", void 0);
-ExpenseEventComponent = __decorate([
+], EventExpenseComponent.prototype, "modal", void 0);
+EventExpenseComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: 'expenseEvent.component.html'
+        templateUrl: 'eventExpense.component.html'
     }),
-    __metadata("design:paramtypes", [expenseEvent_service_1.ExpenseEventService,
+    __metadata("design:paramtypes", [eventExpense_service_1.EventExpenseService,
         expenses_service_1.ExpensesService,
         router_1.Router,
         forms_1.FormBuilder,
         router_1.ActivatedRoute])
-], ExpenseEventComponent);
-exports.ExpenseEventComponent = ExpenseEventComponent;
-//# sourceMappingURL=expenseEvent.component.js.map
+], EventExpenseComponent);
+exports.EventExpenseComponent = EventExpenseComponent;
+//# sourceMappingURL=eventExpense.component.js.map

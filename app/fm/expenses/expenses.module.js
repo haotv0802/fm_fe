@@ -14,9 +14,9 @@ var htCommon_module_1 = require("../../common/htCommon.module");
 var expenses_component_1 = require("./expenses.component");
 var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
-var expenseEvent_component_1 = require("./expenseEvents/expenseEvent.component");
-var expenseEvent_service_1 = require("./expenseEvents/expenseEvent.service");
-var expenseEvent_guard_service_1 = require("./expenseEvents/expenseEvent-guard.service");
+var eventExpense_component_1 = require("./eventExpenses/eventExpense.component");
+var eventExpense_guard_service_1 = require("./eventExpenses/eventExpense-guard.service");
+var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
 var ExpensesModule = (function () {
     function ExpensesModule() {
     }
@@ -27,7 +27,7 @@ ExpensesModule = __decorate([
         imports: [
             router_1.RouterModule.forChild([
                 { path: 'expenses', component: expenses_component_1.ExpensesComponent },
-                { path: 'expenses/:expenseId', canActivate: [expenseEvent_guard_service_1.ExpenseEventGuard], component: expenseEvent_component_1.ExpenseEventComponent }
+                { path: 'expenses/:expenseId', canActivate: [eventExpense_guard_service_1.EventExpenseGuard], component: eventExpense_component_1.EventExpenseComponent }
             ]),
             common_1.CommonModule,
             ng2_smart_table_1.Ng2SmartTableModule,
@@ -36,12 +36,12 @@ ExpensesModule = __decorate([
         ],
         declarations: [
             expenses_component_1.ExpensesComponent,
-            expenseEvent_component_1.ExpenseEventComponent
+            eventExpense_component_1.EventExpenseComponent
         ],
         providers: [
             expenses_service_1.ExpensesService,
-            expenseEvent_service_1.ExpenseEventService,
-            expenseEvent_guard_service_1.ExpenseEventGuard
+            eventExpense_service_1.EventExpenseService,
+            eventExpense_guard_service_1.EventExpenseGuard
         ]
     })
 ], ExpensesModule);

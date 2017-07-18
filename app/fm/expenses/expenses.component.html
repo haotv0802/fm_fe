@@ -18,21 +18,26 @@
                     <!--<tr>-->
                         <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
                     <!--</tr>-->
-                    <tr>
+                    <tr *ngIf="!editHidden">
                         <td>
                             <input class="form-control"
                                    id="amountId"
                                    type="text"
                                    placeholder="Amount (required)"
-                                   formControlName="amount"/>
+                                   formControlName="amount"
+                                   (keyup.enter)="editExpense()"
+                            />
                         </td>
                         <td>
                             <div class='input-group date' id='datetimepicker2'>
                             <input class="form-control"
                                    id="dateId"
-                                   type="text"
+                                   type="date"
                                    placeholder="Date (required)"
-                                   formControlName="date"/>
+                                   formControlName="date"
+                                   #date
+                                   (keyup.enter)="editExpense()"
+                            />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -42,13 +47,17 @@
                             <input class="form-control"
                                    id="placeId"
                                    type="text"
-                                   placeholder="Place (required)"
-                                   formControlName="place"/>
+                                   placeholder="Enter a Place"
+                                   formControlName="place"
+                                   (keyup.enter)="editExpense()"
+                            />
                         </td>
                         <td>
                             <select class="form-control"
                                     id="paymentMethodId"
-                                    formControlName="paymentMethod">
+                                    formControlName="paymentMethod"
+                                    (keyup.enter)="editExpense()"
+                            >
                                 <option value="" disabled selected hidden>Select a method...</option>
                                 <option value="-1">CASH</option>
                                 <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
@@ -58,10 +67,19 @@
                             <input class="form-control"
                                    id="forPersonId"
                                    type="text"
-                                   placeholder="For Person (required)"
-                                   formControlName="forPerson"/>
+                                   placeholder="Enter 'For Person'"
+                                   formControlName="forPerson"
+                                   (keyup.enter)="editExpense()"
+                            />
                         </td>
 
+                    </tr>
+                    <tr *ngIf="editHidden">
+                        <td>{{expenseEdit.amount | currency:'VND':true:'1.2-2'}}</td>
+                        <td>{{expenseEdit.date | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{expenseEdit.place}}</td>
+                        <td>{{expenseEdit.paymentMethod}}</td>
+                        <td>{{expenseEdit.forPerson}}</td>
                     </tr>
                     <tr *ngFor="let expense of expensesDetails.expenses">
                         <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>

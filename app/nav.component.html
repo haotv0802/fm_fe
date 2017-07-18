@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <a class="navbar-brand">{{pageTitle}}</a>
             <ul class="nav navbar-nav"  *ngIf="authority() == 'ADMIN'">
-                <li><a [routerLink]="['/welcome']">Home Admin</a></li>
+                <li><a [routerLink]="['/welcome']">Home</a></li>
                 <li><a [routerLink]="['/products']">Products</a></li>
                 <li><a [routerLink]="['/admin/users']">Users</a></li>
                 <li><a [routerLink]="['/admin/individuals']">Individuals</a></li>
@@ -19,7 +19,7 @@
                 </ul>
             </ul>
             <ul class="nav navbar-nav"  *ngIf="authority() == 'USER'">
-                <li><a [routerLink]="['/welcome']">Home Customer</a></li>
+                <li><a [routerLink]="['/welcome']">Home</a></li>
                 <li><a [routerLink]="['/products']">Products</a></li>
                 <li><a [routerLink]="['/expenses']">Expenses</a></li>
                 <li><a (click)='logout()'>Logout</a></li>

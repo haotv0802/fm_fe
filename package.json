@@ -1,8 +1,8 @@
 {
-  "name": "hotel-management",
+  "name": "finance-management",
   "version": "1.0.0",
   "author": "Hao Ho",
-  "description": "Package for the Hotel Management application",
+  "description": "Package for the Finance Management application",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "tsc": "tsc",

@@ -18,6 +18,8 @@ export class ExpensesComponent implements OnInit {
   expensesDetails: ExpensesDetails;
   loaderOpen: boolean = true;
   expensesForm: FormGroup;
+  editHidden: boolean = false;
+  expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
 
   constructor(
@@ -36,7 +38,7 @@ export class ExpensesComponent implements OnInit {
     this.expensesForm = this.fb.group({
       amount: ['', [Validators.required]],
       date: [''],
-      place: ['', [Validators.required]],
+      place: [''],
       paymentMethod: ['', [Validators.required]],
       forPerson: ['']
     });
@@ -89,4 +91,13 @@ export class ExpensesComponent implements OnInit {
   //   // this.modal.message = "Here Users Update component will load.";
   //   this.modal.open(UsersUpdateComponent);
   // }
+
+  editExpense(): void {
+    this.expenseEdit.amount = this.expensesForm.get("amount").value;
+    this.expenseEdit.date = this.expensesForm.get("date").value;
+    this.expenseEdit.place = this.expensesForm.get("place").value;
+    this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
+    this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
+    this.editHidden = true;
+  }
 }

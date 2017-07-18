@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var modal_component_1 = require("../../common/modal/modal.component");
+var expense_1 = require("./expense");
 var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
 var ExpensesComponent = (function () {
@@ -20,6 +21,8 @@ var ExpensesComponent = (function () {
         this._router = _router;
         this.fb = fb;
         this.loaderOpen = true;
+        this.editHidden = false;
+        this.expenseEdit = new expense_1.Expense();
         this.pageTitle = 'Expenses';
     }
     ExpensesComponent.prototype.ngOnInit = function () {
@@ -29,7 +32,7 @@ var ExpensesComponent = (function () {
         this.expensesForm = this.fb.group({
             amount: ['', [forms_1.Validators.required]],
             date: [''],
-            place: ['', [forms_1.Validators.required]],
+            place: [''],
             paymentMethod: ['', [forms_1.Validators.required]],
             forPerson: ['']
         });
@@ -63,6 +66,22 @@ var ExpensesComponent = (function () {
     ExpensesComponent.prototype.editUser = function () {
         // this._router.navigate(["admin/usersUpdate"]);
         // this.popupUsersUpdate();
+    };
+    // popupUsersUpdate(): void {
+    //   this.modal.modalTitle = "User Update";
+    //   this.modal.modalFooter = false;
+    //   this.modal.modalMessage = true;
+    //   this.modal.documentWidth = 800;
+    //   // this.modal.message = "Here Users Update component will load.";
+    //   this.modal.open(UsersUpdateComponent);
+    // }
+    ExpensesComponent.prototype.editExpense = function () {
+        this.expenseEdit.amount = this.expensesForm.get("amount").value;
+        this.expenseEdit.date = this.expensesForm.get("date").value;
+        this.expenseEdit.place = this.expensesForm.get("place").value;
+        this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
+        this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
+        this.editHidden = true;
     };
     return ExpensesComponent;
 }());

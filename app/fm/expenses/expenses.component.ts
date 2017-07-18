@@ -55,25 +55,6 @@ export class ExpensesComponent implements OnInit {
     ;
   }
 
-  loadExpenses(): void {
-    Observable.forkJoin(
-      this._expensesService.getExpensesDetails(),
-      this._expensesService.getPaymentMethods()
-    ).subscribe(
-      (data) => {
-        this.expensesDetails = data[0];
-        this.paymentMethods = data[1];
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-    ;
-    // this.getExpenses();
-    // this.getExpensesDetails();
-    // this.getPaymentMethods();
-  }
-
   getExpenses(): void {
     this._expensesService.getExpenses().subscribe(
       (expenses) => {
@@ -138,8 +119,7 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
     this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
-    // this.addExpense(this.expenseEdit);
-    // this.loadExpenses();
+
     this.loaderOpen = true;
     Observable.forkJoin(
       this._expensesService.addExpense(this.expenseEdit),
@@ -157,5 +137,22 @@ export class ExpensesComponent implements OnInit {
       }
     )
     ;
+  }
+
+  addEvent(): void {
+    this.expenseEdit.amount = this.expensesForm.get("amount").value;
+    this.expenseEdit.date = this.expensesForm.get("date").value;
+    this.expenseEdit.place = this.expensesForm.get("place").value;
+    // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
+    this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
+    this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+    this.expenseEdit.anEvent = true;
+    this.loaderOpen = true;
+    this._expensesService.addExpense(this.expenseEdit).subscribe(
+      (res) => {
+        console.log(res);
+        this.loaderOpen = false;
+      }
+    );
   }
 }

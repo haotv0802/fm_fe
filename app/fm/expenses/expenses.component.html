@@ -12,7 +12,7 @@
                     <th class="col-sm-2">Date</th>
                     <th class="col-sm-2">Place</th>
                     <th class="col-sm-2">Payment Method</th>
-                    <th class="col-sm-2">For Person</th>
+                    <th class="col-sm-3">For Person or Event</th>
                 </thead>
                 <tbody *ngIf="expensesDetails">
                     <!--<tr>-->
@@ -64,13 +64,16 @@
                             </select>
                         </td>
                         <td>
-                            <input class="form-control"
-                                   id="forPersonId"
-                                   type="text"
-                                   placeholder="Enter 'For Person'"
-                                   formControlName="forPerson"
-                                   (keyup.enter)="editExpense()"
-                            />
+                            <div class="form-inline">
+                                <input class="form-control"
+                                       id="forPersonId"
+                                       type="text"
+                                       placeholder="Enter 'For Person'"
+                                       formControlName="forPerson"
+                                       (keyup.enter)="editExpense()"
+                                       style="width: 130px;"
+                                /><button type="button" class="btn btn-link" (click)="addEvent()">New Event</button>
+                            </div>
                         </td>
 
                     </tr>

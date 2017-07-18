@@ -43,18 +43,6 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
-    ExpensesComponent.prototype.loadExpenses = function () {
-        var _this = this;
-        Rx_1.Observable.forkJoin(this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
-            _this.expensesDetails = data[0];
-            _this.paymentMethods = data[1];
-        }, function (error) {
-            console.log(error);
-        });
-        // this.getExpenses();
-        // this.getExpensesDetails();
-        // this.getPaymentMethods();
-    };
     ExpensesComponent.prototype.getExpenses = function () {
         var _this = this;
         this._expensesService.getExpenses().subscribe(function (expenses) {
@@ -107,8 +95,6 @@ var ExpensesComponent = (function () {
         this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
         this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
         console.log(this.expenseEdit);
-        // this.addExpense(this.expenseEdit);
-        // this.loadExpenses();
         this.loaderOpen = true;
         Rx_1.Observable.forkJoin(this._expensesService.addExpense(this.expenseEdit), this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
             console.log(data[0]);
@@ -117,6 +103,21 @@ var ExpensesComponent = (function () {
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);
+        });
+    };
+    ExpensesComponent.prototype.addEvent = function () {
+        var _this = this;
+        this.expenseEdit.amount = this.expensesForm.get("amount").value;
+        this.expenseEdit.date = this.expensesForm.get("date").value;
+        this.expenseEdit.place = this.expensesForm.get("place").value;
+        // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
+        this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
+        this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+        this.expenseEdit.anEvent = true;
+        this.loaderOpen = true;
+        this._expensesService.addExpense(this.expenseEdit).subscribe(function (res) {
+            console.log(res);
+            _this.loaderOpen = false;
         });
     };
     return ExpensesComponent;

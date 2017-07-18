@@ -15,9 +15,10 @@ var modal_component_1 = require("../../common/modal/modal.component");
 var expense_1 = require("./expense");
 var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
+var Rx_1 = require("rxjs/Rx");
 var ExpensesComponent = (function () {
-    function ExpensesComponent(_usersService, _router, fb) {
-        this._usersService = _usersService;
+    function ExpensesComponent(_expensesService, _router, fb) {
+        this._expensesService = _expensesService;
         this._router = _router;
         this.fb = fb;
         this.loaderOpen = true;
@@ -26,36 +27,58 @@ var ExpensesComponent = (function () {
         this.pageTitle = 'Expenses';
     }
     ExpensesComponent.prototype.ngOnInit = function () {
-        this.getExpenses();
-        this.getExpensesDetails();
-        this.getPaymentMethods();
-        this.expensesForm = this.fb.group({
-            amount: ['', [forms_1.Validators.required]],
-            date: [''],
-            place: [''],
-            paymentMethod: ['', [forms_1.Validators.required]],
-            forPerson: ['']
+        var _this = this;
+        Rx_1.Observable.forkJoin(this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
+            _this.expensesDetails = data[0];
+            _this.paymentMethods = data[1];
+            _this.expensesForm = _this.fb.group({
+                amount: ['', [forms_1.Validators.required]],
+                date: [''],
+                place: [''],
+                paymentMethod: ['', [forms_1.Validators.required]],
+                forPerson: ['']
+            });
+            _this.loaderOpen = false;
+        }, function (error) {
+            console.log(error);
         });
+    };
+    ExpensesComponent.prototype.loadExpenses = function () {
+        var _this = this;
+        Rx_1.Observable.forkJoin(this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
+            _this.expensesDetails = data[0];
+            _this.paymentMethods = data[1];
+        }, function (error) {
+            console.log(error);
+        });
+        // this.getExpenses();
+        // this.getExpensesDetails();
+        // this.getPaymentMethods();
     };
     ExpensesComponent.prototype.getExpenses = function () {
         var _this = this;
-        this._usersService.getExpenses().subscribe(function (expenses) {
+        this._expensesService.getExpenses().subscribe(function (expenses) {
             _this.expenses = expenses;
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);
         });
     };
+    ExpensesComponent.prototype.addExpense = function (expense) {
+        this._expensesService.addExpense(expense).subscribe(function (res) {
+            console.log(res);
+        });
+    };
     ExpensesComponent.prototype.getPaymentMethods = function () {
         var _this = this;
-        this._usersService.getPaymentMethods().subscribe(function (paymentMethods) {
+        this._expensesService.getPaymentMethods().subscribe(function (paymentMethods) {
             _this.paymentMethods = paymentMethods;
             console.log(_this.paymentMethods);
         });
     };
     ExpensesComponent.prototype.getExpensesDetails = function () {
         var _this = this;
-        this._usersService.getExpensesDetails().subscribe(function (expensesDetails) {
+        this._expensesService.getExpensesDetails().subscribe(function (expensesDetails) {
             _this.expensesDetails = expensesDetails;
             console.log(_this.expensesDetails);
             _this.loaderOpen = false;
@@ -76,11 +99,25 @@ var ExpensesComponent = (function () {
     //   this.modal.open(UsersUpdateComponent);
     // }
     ExpensesComponent.prototype.editExpense = function () {
+        var _this = this;
         this.expenseEdit.amount = this.expensesForm.get("amount").value;
         this.expenseEdit.date = this.expensesForm.get("date").value;
         this.expenseEdit.place = this.expensesForm.get("place").value;
-        this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
+        // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
+        this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+        console.log(this.expenseEdit);
+        // this.addExpense(this.expenseEdit);
+        // this.loadExpenses();
+        this.loaderOpen = true;
+        Rx_1.Observable.forkJoin(this._expensesService.addExpense(this.expenseEdit), this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
+            console.log(data[0]);
+            _this.expensesDetails = data[1];
+            _this.paymentMethods = data[2];
+            _this.loaderOpen = false;
+        }, function (error) {
+            console.log(error);
+        });
     };
     return ExpensesComponent;
 }());

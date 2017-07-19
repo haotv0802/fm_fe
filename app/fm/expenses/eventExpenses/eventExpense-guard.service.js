@@ -11,11 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var eventExpense_service_1 = require("./eventExpense.service");
 var EventExpenseGuard = (function () {
-    function EventExpenseGuard(_router) {
+    function EventExpenseGuard(_router, _eventExpenseService) {
         this._router = _router;
+        this._eventExpenseService = _eventExpenseService;
     }
     EventExpenseGuard.prototype.canActivate = function (route) {
+        var _this = this;
         var id = +route.url[1].path;
         if (isNaN(id) || id < 1) {
             // alert('Invalid expense Id');
@@ -24,14 +27,27 @@ var EventExpenseGuard = (function () {
             // abort current navigation
             return false;
         }
-        ;
-        return true;
+        this._eventExpenseService.checkEventExpenses(id).subscribe(function (res) {
+            console.log(res);
+            if (res == true) {
+                return true;
+            }
+            else {
+                _this._router.navigate(['/expenses']);
+                return false;
+            }
+        }, function (error) {
+            console.log(error);
+            _this._router.navigate(['/expenses']);
+            return false;
+        });
     };
     return EventExpenseGuard;
 }());
 EventExpenseGuard = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router,
+        eventExpense_service_1.EventExpenseService])
 ], EventExpenseGuard);
 exports.EventExpenseGuard = EventExpenseGuard;
 //# sourceMappingURL=eventExpense-guard.service.js.map

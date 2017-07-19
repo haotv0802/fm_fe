@@ -17,6 +17,12 @@ var EventExpenseService = (function () {
         this._httpService = _httpService;
         this._constants = _constants;
     }
+    EventExpenseService.prototype.checkEventExpenses = function (expenseId) {
+        return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId + "/check"))
+            .map(function (res) {
+            return res.json();
+        });
+    };
     return EventExpenseService;
 }());
 EventExpenseService = __decorate([

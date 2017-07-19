@@ -28,6 +28,9 @@ export class Constants {
   public readonly EXPENSES_DETAILS_SERVICE_URL: string = this.HOST + '/expensesDetails';
   public readonly EXPENSES_PREVIOUS_SERVICE_URL: string = this.HOST + '/previousExpensesDetails';
 
+  //  Event Expenses
+  public readonly EVENT_EXPENSES_SERVICE_URL: string = this.HOST + '/eventExpenses';
+
   // Payment methods || Cards information
   public readonly PAYMENT_METHODS_SERVICE_URL: string = this.HOST + '/paymentMethods';
 

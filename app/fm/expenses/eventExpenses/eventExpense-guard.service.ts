@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import {EventExpenseService} from "./eventExpense.service";
 
 @Injectable()
 export class EventExpenseGuard implements CanActivate {
 
-    constructor(private _router: Router) {
+    constructor(
+      private _router: Router,
+      private _eventExpenseService: EventExpenseService
+    ) {
     }
 
     canActivate(route: ActivatedRouteSnapshot): boolean {
@@ -15,7 +19,21 @@ export class EventExpenseGuard implements CanActivate {
             this._router.navigate(['/expenses']);
             // abort current navigation
             return false;
-        };
-        return true;
+        }
+        this._eventExpenseService.checkEventExpenses(id).subscribe(
+          (res) => {
+              console.log(res);
+              if (res == true) {
+                  return true;
+              } else {
+                this._router.navigate(['/expenses']);
+                return false;
+              }
+          }, (error) => {
+            console.log(error);
+            this._router.navigate(['/expenses']);
+            return false;
+          }
+        );
     }
 }

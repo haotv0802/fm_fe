@@ -60,7 +60,7 @@ export class HTTPService {
     requestOptions.headers = headers;
     requestOptions.params = params;
     return this._http.get(url, requestOptions)
-      // .catch(this.handleError)
+      .catch(this.handleError)
     ;
   }
 

@@ -28,6 +28,8 @@ var Constants = (function () {
         this.EXPENSES_SERVICE_URL = this.HOST + '/expenses';
         this.EXPENSES_DETAILS_SERVICE_URL = this.HOST + '/expensesDetails';
         this.EXPENSES_PREVIOUS_SERVICE_URL = this.HOST + '/previousExpensesDetails';
+        //  Event Expenses
+        this.EVENT_EXPENSES_SERVICE_URL = this.HOST + '/eventExpenses';
         // Payment methods || Cards information
         this.PAYMENT_METHODS_SERVICE_URL = this.HOST + '/paymentMethods';
         // Constants

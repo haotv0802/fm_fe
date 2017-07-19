@@ -11,10 +11,10 @@ export class EventExpenseService {
     private _constants: Constants) {
   }
 
-  checkEventExpenses(expenseId: number): Observable<any> {
+  checkEventExpenses(expenseId: number): Observable<boolean> {
     return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${expenseId}/check`)
       .map((res) => {
-        return res.json();
+        return <boolean>res.json().isEventExisting;
       })
       // .do((res) => {console.log(res)})
       ;

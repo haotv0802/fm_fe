@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var eventExpense_service_1 = require("./eventExpense.service");
+var HTTP_service_1 = require("../../../common/HTTP.service");
+var constant_1 = require("../../../common/constant");
 var EventExpenseGuard = (function () {
-    function EventExpenseGuard(_router, _eventExpenseService) {
+    function EventExpenseGuard(_router, _httpService, _constants) {
         this._router = _router;
-        this._eventExpenseService = _eventExpenseService;
+        this._httpService = _httpService;
+        this._constants = _constants;
     }
     EventExpenseGuard.prototype.canActivate = function (route) {
         var _this = this;
@@ -27,19 +29,28 @@ var EventExpenseGuard = (function () {
             // abort current navigation
             return false;
         }
-        this._eventExpenseService.checkEventExpenses(id).subscribe(function (res) {
-            console.log(res);
-            if (res == true) {
-                return true;
-            }
-            else {
+        // return this._eventExpenseService.checkEventExpenses(id).subscribe(
+        //   (res) => {
+        //       console.log(res);
+        //       if (res == false) {
+        //         this._router.navigate(['/expenses']);
+        //         return false;
+        //       }
+        //       return true;
+        //   }, (error) => {
+        //     console.log(error);
+        //     this._router.navigate(['/expenses']);
+        //     return false;
+        //   }
+        // );
+        // return this._eventExpenseService.checkEventExpenses(id);
+        return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + id + "/check"))
+            .map(function (res) {
+            var isExisting = res.json().isEventExisting;
+            if (isExisting == false) {
                 _this._router.navigate(['/expenses']);
-                return false;
             }
-        }, function (error) {
-            console.log(error);
-            _this._router.navigate(['/expenses']);
-            return false;
+            return isExisting;
         });
     };
     return EventExpenseGuard;
@@ -47,7 +58,8 @@ var EventExpenseGuard = (function () {
 EventExpenseGuard = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router,
-        eventExpense_service_1.EventExpenseService])
+        HTTP_service_1.HTTPService,
+        constant_1.Constants])
 ], EventExpenseGuard);
 exports.EventExpenseGuard = EventExpenseGuard;
 //# sourceMappingURL=eventExpense-guard.service.js.map

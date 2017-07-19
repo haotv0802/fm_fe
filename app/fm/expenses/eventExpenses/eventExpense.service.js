@@ -20,7 +20,7 @@ var EventExpenseService = (function () {
     EventExpenseService.prototype.checkEventExpenses = function (expenseId) {
         return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId + "/check"))
             .map(function (res) {
-            return res.json();
+            return res.json().isEventExisting;
         });
     };
     return EventExpenseService;

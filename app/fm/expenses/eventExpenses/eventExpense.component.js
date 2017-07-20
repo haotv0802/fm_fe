@@ -41,9 +41,8 @@ var EventExpenseComponent = (function () {
                 console.log(error);
             });
         });
-        Rx_1.Observable.forkJoin(this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
-            _this.expensesDetails = data[0];
-            _this.paymentMethods = data[1];
+        Rx_1.Observable.forkJoin(this._expensesService.getPaymentMethods()).subscribe(function (data) {
+            _this.paymentMethods = data[0];
             _this.expensesForm = _this.fb.group({
                 amount: ['', [forms_1.Validators.required]],
                 date: [''],
@@ -55,6 +54,9 @@ var EventExpenseComponent = (function () {
         }, function (error) {
             console.log(error);
         });
+    };
+    EventExpenseComponent.prototype.ngOnDestroy = function () {
+        this.sub.unsubscribe();
     };
     return EventExpenseComponent;
 }());

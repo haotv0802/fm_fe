@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Rx";
@@ -15,11 +15,10 @@ import {Event} from "./event";
   moduleId: module.id,
   templateUrl: 'eventExpense.component.html'
 })
-export class EventExpenseComponent implements OnInit {
+export class EventExpenseComponent implements OnInit, OnDestroy {
   pageTitle: string;
   private sub: Subscription;
   paymentMethods: PaymentMethod[];
-  expensesDetails: ExpensesDetails;
   loaderOpen: boolean = true;
   expensesForm: FormGroup;
   expenseEdit: Expense = new Expense();
@@ -52,12 +51,10 @@ export class EventExpenseComponent implements OnInit {
         );
       });
     Observable.forkJoin(
-      this._expensesService.getExpensesDetails(),
       this._expensesService.getPaymentMethods()
     ).subscribe(
       (data) => {
-        this.expensesDetails = data[0];
-        this.paymentMethods = data[1];
+        this.paymentMethods = data[0];
         this.expensesForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [''],
@@ -74,4 +71,7 @@ export class EventExpenseComponent implements OnInit {
     ;
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

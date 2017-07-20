@@ -23,6 +23,12 @@ var EventExpenseService = (function () {
             return res.json().isEventExisting;
         });
     };
+    EventExpenseService.prototype.getEventExpenses = function (expenseId) {
+        return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId))
+            .map(function (res) {
+            return res.json();
+        });
+    };
     return EventExpenseService;
 }());
 EventExpenseService = __decorate([

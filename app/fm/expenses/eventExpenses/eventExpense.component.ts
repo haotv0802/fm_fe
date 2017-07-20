@@ -9,6 +9,7 @@ import {Expense} from "../expense";
 import {ModalComponent} from "../../../common/modal/modal.component";
 import {ExpensesService} from "../expenses.service";
 import {EventExpenseService} from "./eventExpense.service";
+import {Event} from "./event";
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,7 @@ export class EventExpenseComponent implements OnInit {
   expensesForm: FormGroup;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
+  event: Event;
 
   constructor(
     private _expenseEventService: EventExpenseService,
@@ -39,6 +41,15 @@ export class EventExpenseComponent implements OnInit {
       params => {
         let expenseId = +params['expenseId'];
         console.log("expenseId: " + expenseId);
+        this._expenseEventService.getEventExpenses(expenseId).subscribe(
+          (event) => {
+            this.event = event;
+            console.log("event: ");
+            console.log(this.event);
+          }, (error) => {
+            console.log(error);
+          }
+        );
       });
     Observable.forkJoin(
       this._expensesService.getExpensesDetails(),

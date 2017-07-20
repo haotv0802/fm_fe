@@ -33,6 +33,13 @@ var EventExpenseComponent = (function () {
         this.sub = this._route.params.subscribe(function (params) {
             var expenseId = +params['expenseId'];
             console.log("expenseId: " + expenseId);
+            _this._expenseEventService.getEventExpenses(expenseId).subscribe(function (event) {
+                _this.event = event;
+                console.log("event: ");
+                console.log(_this.event);
+            }, function (error) {
+                console.log(error);
+            });
         });
         Rx_1.Observable.forkJoin(this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
             _this.expensesDetails = data[0];

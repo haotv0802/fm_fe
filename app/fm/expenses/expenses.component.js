@@ -28,7 +28,7 @@ var ExpensesComponent = (function () {
     }
     ExpensesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Rx_1.Observable.forkJoin(this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
+        Rx_1.Observable.forkJoin(this._expensesService.getExpenses(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
             _this.expensesDetails = data[0];
             _this.paymentMethods = data[1];
             _this.expensesForm = _this.fb.group({
@@ -38,15 +38,6 @@ var ExpensesComponent = (function () {
                 paymentMethod: ['', [forms_1.Validators.required]],
                 forPerson: ['']
             });
-            _this.loaderOpen = false;
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    ExpensesComponent.prototype.getExpenses = function () {
-        var _this = this;
-        this._expensesService.getExpenses().subscribe(function (expenses) {
-            _this.expenses = expenses;
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);
@@ -66,7 +57,7 @@ var ExpensesComponent = (function () {
     };
     ExpensesComponent.prototype.getExpensesDetails = function () {
         var _this = this;
-        this._expensesService.getExpensesDetails().subscribe(function (expensesDetails) {
+        this._expensesService.getExpenses().subscribe(function (expensesDetails) {
             _this.expensesDetails = expensesDetails;
             console.log(_this.expensesDetails);
             _this.loaderOpen = false;
@@ -96,7 +87,7 @@ var ExpensesComponent = (function () {
         this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
         console.log(this.expenseEdit);
         this.loaderOpen = true;
-        Rx_1.Observable.forkJoin(this._expensesService.addExpense(this.expenseEdit), this._expensesService.getExpensesDetails(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
+        Rx_1.Observable.forkJoin(this._expensesService.addExpense(this.expenseEdit), this._expensesService.getExpenses(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
             console.log(data[0]);
             _this.expensesDetails = data[1];
             _this.paymentMethods = data[2];

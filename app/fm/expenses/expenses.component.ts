@@ -3,10 +3,10 @@ import {Router} from "@angular/router";
 import {ModalComponent} from "../../common/modal/modal.component";
 import {Expense} from "./expense";
 import {ExpensesService} from "./expenses.service";
-import {ExpensesDetails} from "./expensesDetails";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
+import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +16,7 @@ export class ExpensesComponent implements OnInit {
   pageTitle: string;
   expenses: Expense[];
   paymentMethods: PaymentMethod[];
-  expensesDetails: ExpensesDetails;
+  expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
   expensesForm: FormGroup;
   // editHidden: boolean = false;
@@ -33,7 +33,7 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit(): void {
     Observable.forkJoin(
-      this._expensesService.getExpensesDetails(),
+      this._expensesService.getExpenses(),
       this._expensesService.getPaymentMethods()
     ).subscribe(
       (data) => {
@@ -55,18 +55,6 @@ export class ExpensesComponent implements OnInit {
     ;
   }
 
-  getExpenses(): void {
-    this._expensesService.getExpenses().subscribe(
-      (expenses) => {
-        this.expenses = expenses;
-        this.loaderOpen = false;
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-  }
-
   addExpense(expense: Expense): void {
     this._expensesService.addExpense(expense).subscribe(
       (res) => {
@@ -85,7 +73,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   getExpensesDetails(): void {
-    this._expensesService.getExpensesDetails().subscribe(
+    this._expensesService.getExpenses().subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
         console.log(this.expensesDetails);
@@ -123,7 +111,7 @@ export class ExpensesComponent implements OnInit {
     this.loaderOpen = true;
     Observable.forkJoin(
       this._expensesService.addExpense(this.expenseEdit),
-      this._expensesService.getExpensesDetails(),
+      this._expensesService.getExpenses(),
       this._expensesService.getPaymentMethods()
     ).subscribe(
       (data) => {

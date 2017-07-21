@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Rx";
 import {Subscription} from "rxjs/Subscription";
 import {PaymentMethod} from "../paymentMethod";
-import {ExpensesDetails} from "../expensesDetails";
 import {Expense} from "../expense";
 import {ModalComponent} from "../../../common/modal/modal.component";
 import {ExpensesService} from "../expenses.service";

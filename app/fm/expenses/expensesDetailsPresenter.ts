@@ -1,5 +1,5 @@
 import {Expense} from "./expense";
-export class ExpensesDetails {
+export class ExpensesDetailsPresenter {
   expenses: Expense[];
   total: number;
 

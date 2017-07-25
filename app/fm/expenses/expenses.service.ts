@@ -53,4 +53,13 @@ export class ExpensesService {
       .map((res) => { return <PaymentMethod[]> res.json(); })
       ;
   }
+
+  updateExpenseAmount(expenseId: number, amount: number): Observable<any> {
+    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${expenseId}/${amount}/update`)
+      .map((res) => {
+        return <Event>res.json();
+      })
+      // .do((res) => {console.log(res)})
+      ;
+  }
 }

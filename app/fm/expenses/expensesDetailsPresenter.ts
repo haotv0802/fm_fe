@@ -1,6 +1,6 @@
-import {Expense} from "./expense";
+import {ExpensePresenter} from "./expensePresenter";
 export class ExpensesDetailsPresenter {
-  expenses: Expense[];
+  expenses: ExpensePresenter[];
   total: number;
 
   constructor() {

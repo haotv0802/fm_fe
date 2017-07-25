@@ -25,7 +25,7 @@
                                type="text"
                                placeholder="Amount (required)"
                                formControlName="amount"
-                               (keyup.enter)="editExpense()"
+                               (keyup.enter)="addExpense()"
                         />
                     </td>
                     <td>
@@ -36,7 +36,7 @@
                                    placeholder="Date (required)"
                                    formControlName="date"
                                    #date
-                                   (keyup.enter)="editExpense()"
+                                   (keyup.enter)="addExpense()"
                             />
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -49,14 +49,14 @@
                                type="text"
                                placeholder="Enter a Place"
                                formControlName="place"
-                               (keyup.enter)="editExpense()"
+                               (keyup.enter)="addExpense()"
                         />
                     </td>
                     <td>
                         <select class="form-control"
                                 id="paymentMethodId"
                                 formControlName="paymentMethod"
-                                (keyup.enter)="editExpense()"
+                                (keyup.enter)="addExpense()"
                         >
                             <option value="" disabled selected hidden>Select a method...</option>
                             <option value="-1">CASH</option>
@@ -69,7 +69,7 @@
                                type="text"
                                placeholder="Enter 'For Person'"
                                formControlName="forPerson"
-                               (keyup.enter)="editExpense()"
+                               (keyup.enter)="addExpense()"
                         />
                     </td>
 

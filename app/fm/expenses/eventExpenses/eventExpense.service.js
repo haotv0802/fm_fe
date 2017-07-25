@@ -29,6 +29,20 @@ var EventExpenseService = (function () {
             return res.json();
         });
     };
+    EventExpenseService.prototype.addExpense = function (expense, expenseId) {
+        // let headers = new Headers();
+        //
+        // headers.append("Accept-Language", "en");
+        // headers.append("Content-Type", "application/json");
+        // headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
+        //
+        // return this._http.get(this._constants.ADMIN_USERS_SERVICE_URL, {headers: headers})
+        //   .map((res) => { return <User[]> res.json(); })
+        //   .catch(this.handleError)
+        // ;
+        return this._httpService.post(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId), expense)
+            .map(function (res) { return res.json(); });
+    };
     return EventExpenseService;
 }());
 EventExpenseService = __decorate([

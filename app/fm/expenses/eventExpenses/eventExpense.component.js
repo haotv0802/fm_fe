@@ -13,10 +13,10 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
-var expense_1 = require("../expense");
 var modal_component_1 = require("../../../common/modal/modal.component");
 var expenses_service_1 = require("../expenses.service");
 var eventExpense_service_1 = require("./eventExpense.service");
+var expense_1 = require("./expense");
 var EventExpenseComponent = (function () {
     function EventExpenseComponent(_expenseEventService, _expensesService, _router, fb, _route) {
         this._expenseEventService = _expenseEventService;
@@ -31,9 +31,9 @@ var EventExpenseComponent = (function () {
     EventExpenseComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this._route.params.subscribe(function (params) {
-            var expenseId = +params['expenseId'];
-            console.log("expenseId: " + expenseId);
-            _this._expenseEventService.getEventExpenses(expenseId).subscribe(function (event) {
+            _this.expenseId = +params['expenseId'];
+            console.log("expenseId: " + _this.expenseId);
+            _this._expenseEventService.getEventExpenses(_this.expenseId).subscribe(function (event) {
                 _this.event = event;
                 console.log("event: ");
                 console.log(_this.event);
@@ -57,6 +57,47 @@ var EventExpenseComponent = (function () {
     };
     EventExpenseComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+    };
+    EventExpenseComponent.prototype.updateTotalAmount = function (expenseId, amount) {
+        var totalAmount = 0;
+        for (var i = 0; i < this.event.expenses.length; i++) {
+            if (this.event.expenses[i].id == expenseId) {
+                totalAmount += amount;
+            }
+            else {
+                totalAmount += this.event.expenses[i].amount;
+            }
+        }
+        this._expensesService.updateExpenseAmount(this.event.id, totalAmount).subscribe(function (res) {
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    EventExpenseComponent.prototype.addAmount = function (amount) {
+        var totalAmount = this.event.total + amount;
+        this._expensesService.updateExpenseAmount(this.event.id, totalAmount).subscribe(function (res) {
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    EventExpenseComponent.prototype.addExpense = function () {
+        var _this = this;
+        this.expenseEdit.amount = this.expensesForm.get("amount").value;
+        this.expenseEdit.date = this.expensesForm.get("date").value;
+        this.expenseEdit.place = this.expensesForm.get("place").value;
+        // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
+        this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
+        this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+        console.log(this.expenseEdit);
+        this.loaderOpen = true;
+        Rx_1.Observable.forkJoin(this._expenseEventService.addExpense(this.expenseEdit, this.expenseId), this._expenseEventService.getEventExpenses(this.expenseId), this._expensesService.getPaymentMethods()).subscribe(function (data) {
+            console.log(data[0]);
+            _this.event = data[1];
+            _this.paymentMethods = data[2];
+            _this.loaderOpen = false;
+        }, function (error) {
+            console.log(error);
+        });
     };
     return EventExpenseComponent;
 }());

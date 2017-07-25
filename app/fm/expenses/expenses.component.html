@@ -12,7 +12,8 @@
                     <th class="col-sm-2">Date</th>
                     <th class="col-sm-2">Place</th>
                     <th class="col-sm-2">Payment Method</th>
-                    <th class="col-sm-3">For Person or Event</th>
+                    <th class="col-sm-2">For Person</th>
+                    <th class="col-sm-1"></th>
                 </thead>
                 <tbody *ngIf="expensesDetails">
                     <!--<tr>-->
@@ -72,10 +73,12 @@
                                        formControlName="forPerson"
                                        (keyup.enter)="editExpense()"
                                        style="width: 130px;"
-                                /><button type="button" class="btn btn-link" (click)="addEvent()">New Event</button>
+                                />
                             </div>
                         </td>
-
+                        <td>
+                            <button type="button" class="btn btn-link" (click)="addEvent()">New Event</button>
+                        </td>
                     </tr>
                     <tr *ngFor="let expense of expensesDetails.expenses">
                         <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
@@ -83,9 +86,13 @@
                         <td>{{expense.place}}</td>
                         <td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>
                         <td>{{expense.forPerson}}</td>
+                        <td>
+                            <button *ngIf="expense.anEvent" type="button" class="btn btn-link" (click)="openEvent(expense.id)">Event</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>{{expensesDetails.total | currency:'VND':true:'1.2-2'}}</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

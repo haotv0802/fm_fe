@@ -144,4 +144,8 @@ export class ExpensesComponent implements OnInit {
       }
     );
   }
+
+  openEvent(id: number): void {
+    this._router.navigate([`expenses/${id}`]);
+  }
 }

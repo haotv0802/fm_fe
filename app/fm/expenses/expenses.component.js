@@ -112,6 +112,9 @@ var ExpensesComponent = (function () {
             _this._router.navigate(["expenses/" + res.expenseId]);
         });
     };
+    ExpensesComponent.prototype.openEvent = function (id) {
+        this._router.navigate(["expenses/" + id]);
+    };
     return ExpensesComponent;
 }());
 __decorate([

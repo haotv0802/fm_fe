@@ -55,7 +55,7 @@ export class ExpensesService {
   }
 
   updateExpenseAmount(expenseId: number, amount: number): Observable<any> {
-    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${expenseId}/${amount}/update`)
+    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${expenseId}/${amount}/updateAmount`)
       .map((res) => {
         return <Event>res.json();
       })

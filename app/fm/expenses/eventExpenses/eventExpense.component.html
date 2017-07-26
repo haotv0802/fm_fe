@@ -9,10 +9,11 @@
             <table class="table table-bordered table-hover" style="width: 1024px;">
                 <thead style="color: #337AB7">
                 <th class="col-sm-2">Amount</th>
-                <th class="col-sm-2">Date</th>
+                <th class="col-sm-1">Date</th>
                 <th class="col-sm-2">Place</th>
                 <th class="col-sm-2">Payment Method</th>
                 <th class="col-sm-2">For Person</th>
+                <th class="col-sm-2"></th>
                 </thead>
                 <tbody *ngIf="event && event.expenses">
                 <!--<tr>-->
@@ -29,19 +30,20 @@
                         />
                     </td>
                     <td>
-                        <div class='input-group date' id='datetimepicker2'>
-                            <input class="form-control"
-                                   id="dateId"
-                                   type="date"
-                                   placeholder="Date (required)"
-                                   formControlName="date"
-                                   #date
-                                   (keyup.enter)="addExpense()"
-                            />
-                            <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                        </div>
+                        <input class="form-control"
+                               id="dateId"
+                               type="date"
+                               placeholder="Date (required)"
+                               formControlName="date"
+                               #date
+                               (keyup.enter)="addExpense()"
+                        />
+                        <!--<div class='input-group date' id='datetimepicker2'>-->
+
+                            <!--<span class="input-group-addon">-->
+                                <!--<span class="glyphicon glyphicon-calendar"></span>-->
+                            <!--</span>-->
+                        <!--</div>-->
                     </td>
                     <td>
                         <input class="form-control"
@@ -72,7 +74,7 @@
                                (keyup.enter)="addExpense()"
                         />
                     </td>
-
+                    <td></td>
                 </tr>
                 <tr *ngFor="let expense of event.expenses">
                     <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
@@ -80,9 +82,14 @@
                     <td>{{expense.place}}</td>
                     <td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>
                     <td>{{expense.forPerson}}</td>
+                    <td>
+                        <button type="button" class="btn btn-link" (click)="deleteExpense(event.id, expense.id)">Delete</button> |
+                        <button type="button" class="btn btn-link" (click)="updateExpense(expense.id)">Update</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>{{event.total | currency:'VND':true:'1.2-2'}}</td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

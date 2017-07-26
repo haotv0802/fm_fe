@@ -89,14 +89,45 @@ var EventExpenseComponent = (function () {
         this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
         this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
         console.log(this.expenseEdit);
-        this.loaderOpen = true;
-        Rx_1.Observable.forkJoin(this._expenseEventService.addExpense(this.expenseEdit, this.expenseId), this._expenseEventService.getEventExpenses(this.expenseId), this._expensesService.getPaymentMethods()).subscribe(function (data) {
-            console.log(data[0]);
-            _this.event = data[1];
-            _this.paymentMethods = data[2];
-            _this.loaderOpen = false;
+        this._expenseEventService.addExpense(this.expenseEdit, this.expenseId).subscribe(function (res) {
+            _this._expenseEventService.getEventExpenses(_this.expenseId).subscribe(function (event) {
+                _this.event = event;
+                _this.resetFormValues();
+            }, function (error) {
+                console.log(error);
+            });
         }, function (error) {
             console.log(error);
+        });
+    };
+    EventExpenseComponent.prototype.deleteExpense = function (expenseId, eventId) {
+        var _this = this;
+        this._expenseEventService.deleteExpense(expenseId, eventId).subscribe(function (res) {
+            _this._expenseEventService.getEventExpenses(_this.expenseId).subscribe(function (res) {
+                _this.event = res;
+            }, function (error) {
+                console.log(error);
+            });
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    EventExpenseComponent.prototype.updateExpense = function (eventId) {
+        // this._expenseEventService.updateExpense(eventId).subscribe(
+        //   (res) => {
+        //
+        //   }, (error: Error) => {
+        //     console.log(error);
+        //   }
+        // );
+    };
+    EventExpenseComponent.prototype.resetFormValues = function () {
+        this.expensesForm.setValue({
+            amount: '',
+            date: '',
+            place: '',
+            paymentMethod: '',
+            forPerson: ''
         });
     };
     return EventExpenseComponent;

@@ -1,3 +1,4 @@
+///<reference path="../../node_modules/@angular/http/src/http.d.ts"/>
 import {Injectable} from "@angular/core";
 import {Constants} from "./constant";
 import {Observable} from "rxjs/Observable";
@@ -32,6 +33,18 @@ export class HTTPService {
       headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
     }
     return this._http.patch(url, data, {headers: headers})
+      // .catch(this.handleError)
+      ;
+  }
+
+  public delete(url: string): Observable<Response> {
+    let headers = new Headers();
+    headers.append("Accept-Language", this.getAcceptLanguage());
+    headers.append("Content-Type", "application/json");
+    if (url != this._constants.LOGIN_SERVICE_URL) {
+      headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
+    }
+    return this._http.delete(url, {headers: headers})
       // .catch(this.handleError)
       ;
   }

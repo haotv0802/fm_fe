@@ -51,7 +51,7 @@ var ExpensesService = (function () {
             .map(function (res) { return res.json(); });
     };
     ExpensesService.prototype.updateExpenseAmount = function (expenseId, amount) {
-        return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + ("/" + expenseId + "/" + amount + "/update"))
+        return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + ("/" + expenseId + "/" + amount + "/updateAmount"))
             .map(function (res) {
             return res.json();
         });

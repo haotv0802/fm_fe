@@ -8,7 +8,6 @@ import {ModalComponent} from "../../../common/modal/modal.component";
 import {ExpensesService} from "../expenses.service";
 import {EventExpenseService} from "./eventExpense.service";
 import {Event} from "./event";
-import {ExpensesDetailsPresenter} from "../expensesDetailsPresenter";
 import {Expense} from "./expense";
 
 @Component({
@@ -114,22 +113,55 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
     this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
-    this.loaderOpen = true;
-    Observable.forkJoin(
-      this._expenseEventService.addExpense(this.expenseEdit, this.expenseId),
-      this._expenseEventService.getEventExpenses(this.expenseId),
-      this._expensesService.getPaymentMethods()
-    ).subscribe(
-      (data) => {
-        console.log(data[0]);
-        this.event = data[1];
-        this.paymentMethods = data[2];
-        this.loaderOpen = false;
-      },
-      (error) => {
+    this._expenseEventService.addExpense(this.expenseEdit, this.expenseId).subscribe(
+      (res) => {
+        this._expenseEventService.getEventExpenses(this.expenseId).subscribe(
+          (event) => {
+            this.event = event;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error: Error) => {
         console.log(error);
       }
-    )
-    ;
+    );
+  }
+
+  deleteExpense(expenseId: number, eventId: number): void {
+    this._expenseEventService.deleteExpense(expenseId, eventId).subscribe(
+      (res) => {
+        this._expenseEventService.getEventExpenses(this.expenseId).subscribe(
+          (res) => {
+            this.event = res;
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error: Error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateExpense(eventId: number): void {
+    // this._expenseEventService.updateExpense(eventId).subscribe(
+    //   (res) => {
+    //
+    //   }, (error: Error) => {
+    //     console.log(error);
+    //   }
+    // );
+  }
+
+  resetFormValues(): void {
+    this.expensesForm.setValue({
+      amount: '',
+      date: '',
+      place: '',
+      paymentMethod: '',
+      forPerson: ''
+    });
   }
 }

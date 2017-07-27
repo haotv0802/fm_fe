@@ -6,14 +6,15 @@
     <form class="form-horizontal" novalidate
           [formGroup]="expensesForm">
         <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
-            <table class="table table-bordered table-hover" style="width: 1024px;">
+            <table class="table table-bordered table-hover" style="width: 1145px;">
                 <thead style="color: #337AB7">
                     <th class="col-sm-2">Amount</th>
-                    <th class="col-sm-2">Date</th>
+                    <th class="col-sm-1">Date</th>
                     <th class="col-sm-2">Place</th>
                     <th class="col-sm-2">Payment Method</th>
                     <th class="col-sm-2">For Person</th>
                     <th class="col-sm-1"></th>
+                    <th class="col-sm-3"></th>
                 </thead>
                 <tbody *ngIf="expensesDetails">
                     <!--<tr>-->
@@ -30,7 +31,6 @@
                             />
                         </td>
                         <td>
-                            <div class='input-group date' id='datetimepicker2'>
                             <input class="form-control"
                                    id="dateId"
                                    type="date"
@@ -39,10 +39,12 @@
                                    #date
                                    (keyup.enter)="editExpense()"
                             />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                            <!--<div class='input-group date' id='datetimepicker2'>-->
+                            <!---->
+                                <!--<span class="input-group-addon">-->
+                                    <!--<span class="glyphicon glyphicon-calendar"></span>-->
+                                <!--</span>-->
+                            <!--</div>-->
                         </td>
                         <td>
                             <input class="form-control"
@@ -79,6 +81,7 @@
                         <td>
                             <button type="button" class="btn btn-link" (click)="addEvent()">New Event</button>
                         </td>
+                        <td></td>
                     </tr>
                     <tr *ngFor="let expense of expensesDetails.expenses">
                         <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
@@ -89,14 +92,13 @@
                         <td>
                             <button *ngIf="expense.anEvent" type="button" class="btn btn-link" (click)="openEvent(expense.id)">Event</button>
                         </td>
+                        <td>
+                            <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)">Delete</button> |
+                            <button type="button" class="btn btn-link" (click)="updateExpense(expense.id)">Update</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>{{expensesDetails.total | currency:'VND':true:'1.2-2'}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                     </tr>
                 </tbody>
             </table>

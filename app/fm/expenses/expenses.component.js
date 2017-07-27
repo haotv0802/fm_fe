@@ -48,6 +48,22 @@ var ExpensesComponent = (function () {
             console.log(res);
         });
     };
+    ExpensesComponent.prototype.updateExpense = function (expenseId) {
+        console.log(expenseId);
+    };
+    ExpensesComponent.prototype.deleteExpense = function (expenseId) {
+        var _this = this;
+        this._expensesService.deleteExpense(expenseId).subscribe(function (res) {
+            _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
+                _this.expensesDetails = expensesDetails;
+                _this.resetFormValues();
+            }, function (error) {
+                console.log(error);
+            });
+        }, function (error) {
+            console.log(error);
+        });
+    };
     ExpensesComponent.prototype.getPaymentMethods = function () {
         var _this = this;
         this._expensesService.getPaymentMethods().subscribe(function (paymentMethods) {
@@ -86,12 +102,13 @@ var ExpensesComponent = (function () {
         this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
         this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
         console.log(this.expenseEdit);
-        this.loaderOpen = true;
-        Rx_1.Observable.forkJoin(this._expensesService.addExpense(this.expenseEdit), this._expensesService.getExpenses(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
-            console.log(data[0]);
-            _this.expensesDetails = data[1];
-            _this.paymentMethods = data[2];
-            _this.loaderOpen = false;
+        this._expensesService.addExpense(this.expenseEdit).subscribe(function (res) {
+            _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
+                _this.expensesDetails = expensesDetails;
+                _this.resetFormValues();
+            }, function (error) {
+                console.log(error);
+            });
         }, function (error) {
             console.log(error);
         });
@@ -114,6 +131,15 @@ var ExpensesComponent = (function () {
     };
     ExpensesComponent.prototype.openEvent = function (id) {
         this._router.navigate(["expenses/" + id]);
+    };
+    ExpensesComponent.prototype.resetFormValues = function () {
+        this.expensesForm.setValue({
+            amount: '',
+            date: '',
+            place: '',
+            paymentMethod: '',
+            forPerson: ''
+        });
     };
     return ExpensesComponent;
 }());

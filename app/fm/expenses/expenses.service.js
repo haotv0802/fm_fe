@@ -19,30 +19,14 @@ var ExpensesService = (function () {
         this._constants = _constants;
     }
     ExpensesService.prototype.addExpense = function (expense) {
-        // let headers = new Headers();
-        //
-        // headers.append("Accept-Language", "en");
-        // headers.append("Content-Type", "application/json");
-        // headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
-        //
-        // return this._http.get(this._constants.ADMIN_USERS_SERVICE_URL, {headers: headers})
-        //   .map((res) => { return <User[]> res.json(); })
-        //   .catch(this.handleError)
-        // ;
         return this._httpService.post(this._constants.EXPENSES_SERVICE_URL, expense)
             .map(function (res) { return res.json(); });
     };
+    ExpensesService.prototype.deleteExpense = function (expenseId) {
+        return this._httpService.delete(this._constants.EXPENSES_SERVICE_URL + ("/" + expenseId + "/delete"))
+            .map(function (res) { return res.json(); });
+    };
     ExpensesService.prototype.getExpenses = function () {
-        // let headers = new Headers();
-        //
-        // headers.append("Accept-Language", "en");
-        // headers.append("Content-Type", "application/json");
-        // headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
-        //
-        // return this._http.get(this._constants.ADMIN_USERS_SERVICE_URL, {headers: headers})
-        //   .map((res) => { return <User[]> res.json(); })
-        //   .catch(this.handleError)
-        // ;
         return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
             .map(function (res) { return res.json(); });
     };

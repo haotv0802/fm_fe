@@ -63,6 +63,27 @@ export class ExpensesComponent implements OnInit {
     );
   }
 
+  updateExpense(expenseId: number): void {
+    console.log(expenseId);
+  }
+
+  deleteExpense(expenseId: number): void {
+    this._expensesService.deleteExpense(expenseId).subscribe(
+      (res) => {
+        this._expensesService.getExpenses().subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getPaymentMethods(): void {
     this._expensesService.getPaymentMethods().subscribe(
       (paymentMethods) => {
@@ -108,23 +129,21 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
-    this.loaderOpen = true;
-    Observable.forkJoin(
-      this._expensesService.addExpense(this.expenseEdit),
-      this._expensesService.getExpenses(),
-      this._expensesService.getPaymentMethods()
-    ).subscribe(
-      (data) => {
-        console.log(data[0]);
-        this.expensesDetails = data[1];
-        this.paymentMethods = data[2];
-        this.loaderOpen = false;
-      },
-      (error) => {
+    this._expensesService.addExpense(this.expenseEdit).subscribe(
+      (res) => {
+        this._expensesService.getExpenses().subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error: Error) => {
         console.log(error);
       }
-    )
-    ;
+    );
+
   }
 
   addEvent(): void {
@@ -147,5 +166,16 @@ export class ExpensesComponent implements OnInit {
 
   openEvent(id: number): void {
     this._router.navigate([`expenses/${id}`]);
+  }
+
+
+  resetFormValues(): void {
+    this.expensesForm.setValue({
+      amount: '',
+      date: '',
+      place: '',
+      paymentMethod: '',
+      forPerson: ''
+    });
   }
 }

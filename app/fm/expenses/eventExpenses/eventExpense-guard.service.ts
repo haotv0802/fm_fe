@@ -16,7 +16,7 @@ export class EventExpenseGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
         let id = +route.url[1].path;
-        if (isNaN(id) || id < 1) {
+        if (isNaN(id)) {
             // alert('Invalid expense Id');
             // start a new navigation to redirect to list page
             this._router.navigate(['/expenses']);
@@ -38,15 +38,19 @@ export class EventExpenseGuard implements CanActivate {
         //   }
         // );
       // return this._eventExpenseService.checkEventExpenses(id);
+      if (id > 0) {
         return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${id}/check`)
           .map((res) => {
-              let isExisting = <boolean>res.json().isEventExisting;
-              if (isExisting == false) {
-                this._router.navigate(['/expenses']);
-              }
-              return isExisting;
+            let isExisting = <boolean>res.json().isEventExisting;
+            if (isExisting == false) {
+              this._router.navigate(['/expenses']);
+            }
+            return isExisting;
           })
           // .do((res) => {console.log(res)})
           ;
+      } else {
+          return true;
+      }
     }
 }

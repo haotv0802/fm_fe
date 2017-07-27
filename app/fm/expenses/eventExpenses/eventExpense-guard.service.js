@@ -22,7 +22,7 @@ var EventExpenseGuard = (function () {
     EventExpenseGuard.prototype.canActivate = function (route) {
         var _this = this;
         var id = +route.url[1].path;
-        if (isNaN(id) || id < 1) {
+        if (isNaN(id)) {
             // alert('Invalid expense Id');
             // start a new navigation to redirect to list page
             this._router.navigate(['/expenses']);
@@ -44,14 +44,19 @@ var EventExpenseGuard = (function () {
         //   }
         // );
         // return this._eventExpenseService.checkEventExpenses(id);
-        return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + id + "/check"))
-            .map(function (res) {
-            var isExisting = res.json().isEventExisting;
-            if (isExisting == false) {
-                _this._router.navigate(['/expenses']);
-            }
-            return isExisting;
-        });
+        if (id > 0) {
+            return this._httpService.get(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + id + "/check"))
+                .map(function (res) {
+                var isExisting = res.json().isEventExisting;
+                if (isExisting == false) {
+                    _this._router.navigate(['/expenses']);
+                }
+                return isExisting;
+            });
+        }
+        else {
+            return true;
+        }
     };
     return EventExpenseGuard;
 }());

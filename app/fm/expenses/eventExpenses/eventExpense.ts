@@ -1,4 +1,4 @@
-export class Expense {
+export class EventExpense {
   id: number;
   amount: number;
   date: Date;

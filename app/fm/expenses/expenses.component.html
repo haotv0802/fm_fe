@@ -87,7 +87,11 @@
                         <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
                         <td>{{expense.date | date: 'dd-MM-yyyy'}}</td>
                         <td>{{expense.place}}</td>
-                        <td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>
+                        <td>
+                            <span *ngIf="expense.anEvent == false">
+                                {{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}
+                            </span>
+                        </td>
                         <td>{{expense.forPerson}}</td>
                         <td>
                             <button *ngIf="expense.anEvent" type="button" class="btn btn-link" (click)="openEvent(expense.id)">Event</button>

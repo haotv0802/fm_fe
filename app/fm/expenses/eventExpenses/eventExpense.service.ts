@@ -3,10 +3,12 @@ import {HTTPService} from "../../../common/HTTP.service";
 import {Constants} from "../../../common/constant";
 import {Observable} from "rxjs/Observable";
 import {Event} from "./event";
-import {Expense} from "./expense";
+import {Expense} from "../expense";
+import {EventExpense} from "./eventExpense";
 
 @Injectable()
 export class EventExpenseService {
+  expenseCreation: Expense;
 
   constructor(
     private _httpService: HTTPService,
@@ -31,7 +33,7 @@ export class EventExpenseService {
       ;
   }
 
-  addExpense(expense: Expense, expenseId: number): Observable<any> {
+  addExpense(expense: EventExpense, expenseId: number): Observable<any> {
     return this._httpService.post(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${expenseId}`, expense)
       .map((res) => { return res.json(); })
       ;

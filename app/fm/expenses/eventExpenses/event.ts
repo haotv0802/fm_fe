@@ -1,4 +1,4 @@
-import {Expense} from "./expense";
+import {EventExpense} from "./eventExpense";
 export class Event {
   id: number;
   userId: number;
@@ -6,7 +6,7 @@ export class Event {
   amount: number;
   date: Date;
   forPerson: string;
-  expenses: Expense[];
+  expenses: EventExpense[];
   total: number;
   constructor() {
   }

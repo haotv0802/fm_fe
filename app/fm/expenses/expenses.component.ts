@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
+import {EventExpenseService} from "./eventExpenses/eventExpense.service";
 
 @Component({
   moduleId: module.id,
@@ -25,6 +26,7 @@ export class ExpensesComponent implements OnInit {
 
   constructor(
     private _expensesService: ExpensesService,
+    private _eventExpenseService: EventExpenseService,
     private _router: Router,
     private fb: FormBuilder,
   ) {
@@ -106,20 +108,6 @@ export class ExpensesComponent implements OnInit {
     )
   }
 
-  editUser(): void {
-    // this._router.navigate(["admin/usersUpdate"]);
-    // this.popupUsersUpdate();
-  }
-
-  // popupUsersUpdate(): void {
-  //   this.modal.modalTitle = "User Update";
-  //   this.modal.modalFooter = false;
-  //   this.modal.modalMessage = true;
-  //   this.modal.documentWidth = 800;
-  //   // this.modal.message = "Here Users Update component will load.";
-  //   this.modal.open(UsersUpdateComponent);
-  // }
-
   editExpense(): void {
     this.expenseEdit.amount = this.expensesForm.get("amount").value;
     this.expenseEdit.date = this.expensesForm.get("date").value;
@@ -150,18 +138,18 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.amount = this.expensesForm.get("amount").value;
     this.expenseEdit.date = this.expensesForm.get("date").value;
     this.expenseEdit.place = this.expensesForm.get("place").value;
-    // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
     this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.anEvent = true;
-    this.loaderOpen = true;
-    this._expensesService.addExpense(this.expenseEdit).subscribe(
-      (res) => {
-        console.log(res);
-        this.loaderOpen = false;
-        this._router.navigate(["expenses/" + res.expenseId]);
-      }
-    );
+    this._eventExpenseService.expenseCreation = this.expenseEdit;
+    this._router.navigate(["expenses/-1"]);
+    // this._expensesService.addExpense(this.expenseEdit).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //     this.loaderOpen = false;
+    //     this._router.navigate(["expenses/" + res.expenseId]);
+    //   }
+    // );
   }
 
   openEvent(id: number): void {

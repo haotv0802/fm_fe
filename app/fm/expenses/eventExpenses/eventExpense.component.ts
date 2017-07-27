@@ -8,7 +8,7 @@ import {ModalComponent} from "../../../common/modal/modal.component";
 import {ExpensesService} from "../expenses.service";
 import {EventExpenseService} from "./eventExpense.service";
 import {Event} from "./event";
-import {Expense} from "./expense";
+import {EventExpense} from "./eventExpense";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +20,7 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
   paymentMethods: PaymentMethod[];
   loaderOpen: boolean = true;
   expensesForm: FormGroup;
-  expenseEdit: Expense = new Expense();
+  expenseEdit: EventExpense = new EventExpense();
   expenseId: number;
   @ViewChild(ModalComponent) modal: ModalComponent;
   event: Event;
@@ -39,16 +39,15 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
     this.sub = this._route.params.subscribe(
       params => {
         this.expenseId = +params['expenseId'];
-        console.log("expenseId: " + this.expenseId);
-        this._expenseEventService.getEventExpenses(this.expenseId).subscribe(
-          (event) => {
-            this.event = event;
-            console.log("event: ");
-            console.log(this.event);
-          }, (error) => {
-            console.log(error);
-          }
-        );
+        if (this.expenseId > 0) {
+          this._expenseEventService.getEventExpenses(this.expenseId).subscribe(
+            (event) => {
+              this.event = event;
+            }, (error) => {
+              console.log(error);
+            }
+          );
+        }
       });
     Observable.forkJoin(
       this._expensesService.getPaymentMethods()
@@ -111,8 +110,20 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
     this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
-    console.log(this.expenseEdit);
 
+    if (this.expenseId == -1) {
+      this._expensesService.addExpense(this._expenseEventService.expenseCreation).subscribe(
+        (res) => {
+          this.expenseId = res.expenseId;
+          this._addExpense();
+        }
+      );
+    } else {
+      this._addExpense();
+    }
+  }
+
+  private _addExpense(): void {
     this._expenseEventService.addExpense(this.expenseEdit, this.expenseId).subscribe(
       (res) => {
         this._expenseEventService.getEventExpenses(this.expenseId).subscribe(

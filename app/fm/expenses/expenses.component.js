@@ -16,9 +16,11 @@ var expense_1 = require("./expense");
 var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
+var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
 var ExpensesComponent = (function () {
-    function ExpensesComponent(_expensesService, _router, fb) {
+    function ExpensesComponent(_expensesService, _eventExpenseService, _router, fb) {
         this._expensesService = _expensesService;
+        this._eventExpenseService = _eventExpenseService;
         this._router = _router;
         this.fb = fb;
         this.loaderOpen = true;
@@ -81,18 +83,6 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
-    ExpensesComponent.prototype.editUser = function () {
-        // this._router.navigate(["admin/usersUpdate"]);
-        // this.popupUsersUpdate();
-    };
-    // popupUsersUpdate(): void {
-    //   this.modal.modalTitle = "User Update";
-    //   this.modal.modalFooter = false;
-    //   this.modal.modalMessage = true;
-    //   this.modal.documentWidth = 800;
-    //   // this.modal.message = "Here Users Update component will load.";
-    //   this.modal.open(UsersUpdateComponent);
-    // }
     ExpensesComponent.prototype.editExpense = function () {
         var _this = this;
         this.expenseEdit.amount = this.expensesForm.get("amount").value;
@@ -114,20 +104,21 @@ var ExpensesComponent = (function () {
         });
     };
     ExpensesComponent.prototype.addEvent = function () {
-        var _this = this;
         this.expenseEdit.amount = this.expensesForm.get("amount").value;
         this.expenseEdit.date = this.expensesForm.get("date").value;
         this.expenseEdit.place = this.expensesForm.get("place").value;
-        // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
         this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.anEvent = true;
-        this.loaderOpen = true;
-        this._expensesService.addExpense(this.expenseEdit).subscribe(function (res) {
-            console.log(res);
-            _this.loaderOpen = false;
-            _this._router.navigate(["expenses/" + res.expenseId]);
-        });
+        this._eventExpenseService.expenseCreation = this.expenseEdit;
+        this._router.navigate(["expenses/-1"]);
+        // this._expensesService.addExpense(this.expenseEdit).subscribe(
+        //   (res) => {
+        //     console.log(res);
+        //     this.loaderOpen = false;
+        //     this._router.navigate(["expenses/" + res.expenseId]);
+        //   }
+        // );
     };
     ExpensesComponent.prototype.openEvent = function (id) {
         this._router.navigate(["expenses/" + id]);
@@ -153,6 +144,7 @@ ExpensesComponent = __decorate([
         templateUrl: 'expenses.component.html'
     }),
     __metadata("design:paramtypes", [expenses_service_1.ExpensesService,
+        eventExpense_service_1.EventExpenseService,
         router_1.Router,
         forms_1.FormBuilder])
 ], ExpensesComponent);

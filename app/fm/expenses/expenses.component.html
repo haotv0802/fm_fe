@@ -4,7 +4,7 @@
         {{pageTitle}}
     </div>
     <form class="form-horizontal" novalidate
-          [formGroup]="expensesForm">
+          [formGroup]="expenseAddForm">
         <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
             <table class="table table-bordered table-hover" style="width: 1145px;">
                 <thead style="color: #337AB7">
@@ -27,7 +27,7 @@
                                    type="text"
                                    placeholder="Amount (required)"
                                    formControlName="amount"
-                                   (keyup.enter)="editExpense()"
+                                   (keyup.enter)="addExpense()"
                             />
                         </td>
                         <td>
@@ -37,7 +37,7 @@
                                    placeholder="Date (required)"
                                    formControlName="date"
                                    #date
-                                   (keyup.enter)="editExpense()"
+                                   (keyup.enter)="addExpense()"
                                    style="width: 150px;"
                             />
                             <!--<div class='input-group date' id='datetimepicker2'>-->
@@ -53,14 +53,14 @@
                                    type="text"
                                    placeholder="Enter a Place"
                                    formControlName="place"
-                                   (keyup.enter)="editExpense()"
+                                   (keyup.enter)="addExpense()"
                             />
                         </td>
                         <td>
                             <select class="form-control"
                                     id="paymentMethodId"
                                     formControlName="paymentMethod"
-                                    (keyup.enter)="editExpense()"
+                                    (keyup.enter)="addExpense()"
                             >
                                 <option value="" disabled selected hidden>Select a method...</option>
                                 <option value="-1">CASH</option>
@@ -74,7 +74,7 @@
                                        type="text"
                                        placeholder="Enter 'For Person'"
                                        formControlName="forPerson"
-                                       (keyup.enter)="editExpense()"
+                                       (keyup.enter)="addExpense()"
                                        style="width: 120px;"
                                 />
                             </div>

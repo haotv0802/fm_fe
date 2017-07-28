@@ -18,7 +18,7 @@ export class ExpensesComponent implements OnInit {
   paymentMethods: PaymentMethod[];
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
-  expensesForm: FormGroup;
+  expenseAddForm: FormGroup;
   // editHidden: boolean = false;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
@@ -43,7 +43,7 @@ export class ExpensesComponent implements OnInit {
         this.paymentMethods = data[1];
         console.log(this.paymentMethods);
         console.log(this.expensesDetails);
-        this.expensesForm = this.fb.group({
+        this.expenseAddForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [''],
           place: [''],
@@ -57,14 +57,6 @@ export class ExpensesComponent implements OnInit {
       }
     )
     ;
-  }
-
-  addExpense(expense: Expense): void {
-    this._expensesService.addExpense(expense).subscribe(
-      (res) => {
-        console.log(res);
-      }
-    );
   }
 
   updateExpense(expense: Expense): void {
@@ -115,13 +107,13 @@ export class ExpensesComponent implements OnInit {
     )
   }
 
-  editExpense(): void {
-    this.expenseEdit.amount = this.expensesForm.get("amount").value;
-    this.expenseEdit.date = this.expensesForm.get("date").value;
-    this.expenseEdit.place = this.expensesForm.get("place").value;
+  addExpense(): void {
+    this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
+    this.expenseEdit.date = this.expenseAddForm.get("date").value;
+    this.expenseEdit.place = this.expenseAddForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
-    this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-    this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+    this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson").value;
+    this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
     this._expensesService.addExpense(this.expenseEdit).subscribe(
@@ -141,22 +133,19 @@ export class ExpensesComponent implements OnInit {
 
   }
 
+  editExpense(): void {
+
+  }
+
   addEvent(): void {
-    this.expenseEdit.amount = this.expensesForm.get("amount").value;
-    this.expenseEdit.date = this.expensesForm.get("date").value;
-    this.expenseEdit.place = this.expensesForm.get("place").value;
-    this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-    this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+    this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
+    this.expenseEdit.date = this.expenseAddForm.get("date").value;
+    this.expenseEdit.place = this.expenseAddForm.get("place").value;
+    this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson").value;
+    this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod").value;
     this.expenseEdit.anEvent = true;
     this._eventExpenseService.expenseCreation = this.expenseEdit;
     this._router.navigate(["expenses/-1"]);
-    // this._expensesService.addExpense(this.expenseEdit).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //     this.loaderOpen = false;
-    //     this._router.navigate(["expenses/" + res.expenseId]);
-    //   }
-    // );
   }
 
   openEvent(id: number): void {
@@ -165,7 +154,7 @@ export class ExpensesComponent implements OnInit {
 
 
   resetFormValues(): void {
-    this.expensesForm.setValue({
+    this.expenseAddForm.setValue({
       amount: '',
       date: '',
       place: '',

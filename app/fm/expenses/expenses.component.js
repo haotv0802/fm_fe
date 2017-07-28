@@ -35,7 +35,7 @@ var ExpensesComponent = (function () {
             _this.paymentMethods = data[1];
             console.log(_this.paymentMethods);
             console.log(_this.expensesDetails);
-            _this.expensesForm = _this.fb.group({
+            _this.expenseAddForm = _this.fb.group({
                 amount: ['', [forms_1.Validators.required]],
                 date: [''],
                 place: [''],
@@ -45,11 +45,6 @@ var ExpensesComponent = (function () {
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);
-        });
-    };
-    ExpensesComponent.prototype.addExpense = function (expense) {
-        this._expensesService.addExpense(expense).subscribe(function (res) {
-            console.log(res);
         });
     };
     ExpensesComponent.prototype.updateExpense = function (expense) {
@@ -91,14 +86,14 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
-    ExpensesComponent.prototype.editExpense = function () {
+    ExpensesComponent.prototype.addExpense = function () {
         var _this = this;
-        this.expenseEdit.amount = this.expensesForm.get("amount").value;
-        this.expenseEdit.date = this.expensesForm.get("date").value;
-        this.expenseEdit.place = this.expensesForm.get("place").value;
+        this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
+        this.expenseEdit.date = this.expenseAddForm.get("date").value;
+        this.expenseEdit.place = this.expenseAddForm.get("place").value;
         // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
-        this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-        this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+        this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson").value;
+        this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod").value;
         console.log(this.expenseEdit);
         this._expensesService.addExpense(this.expenseEdit).subscribe(function (res) {
             _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
@@ -111,28 +106,23 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
+    ExpensesComponent.prototype.editExpense = function () {
+    };
     ExpensesComponent.prototype.addEvent = function () {
-        this.expenseEdit.amount = this.expensesForm.get("amount").value;
-        this.expenseEdit.date = this.expensesForm.get("date").value;
-        this.expenseEdit.place = this.expensesForm.get("place").value;
-        this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-        this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+        this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
+        this.expenseEdit.date = this.expenseAddForm.get("date").value;
+        this.expenseEdit.place = this.expenseAddForm.get("place").value;
+        this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson").value;
+        this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod").value;
         this.expenseEdit.anEvent = true;
         this._eventExpenseService.expenseCreation = this.expenseEdit;
         this._router.navigate(["expenses/-1"]);
-        // this._expensesService.addExpense(this.expenseEdit).subscribe(
-        //   (res) => {
-        //     console.log(res);
-        //     this.loaderOpen = false;
-        //     this._router.navigate(["expenses/" + res.expenseId]);
-        //   }
-        // );
     };
     ExpensesComponent.prototype.openEvent = function (id) {
         this._router.navigate(["expenses/" + id]);
     };
     ExpensesComponent.prototype.resetFormValues = function () {
-        this.expensesForm.setValue({
+        this.expenseAddForm.setValue({
             amount: '',
             date: '',
             place: '',

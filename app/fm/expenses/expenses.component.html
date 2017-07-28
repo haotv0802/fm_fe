@@ -38,6 +38,7 @@
                                    formControlName="date"
                                    #date
                                    (keyup.enter)="editExpense()"
+                                   style="width: 150px;"
                             />
                             <!--<div class='input-group date' id='datetimepicker2'>-->
                             <!---->
@@ -74,7 +75,7 @@
                                        placeholder="Enter 'For Person'"
                                        formControlName="forPerson"
                                        (keyup.enter)="editExpense()"
-                                       style="width: 130px;"
+                                       style="width: 120px;"
                                 />
                             </div>
                         </td>
@@ -84,21 +85,87 @@
                         <td></td>
                     </tr>
                     <tr *ngFor="let expense of expensesDetails.expenses">
-                        <td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>
-                        <td>{{expense.date | date: 'dd-MM-yyyy'}}</td>
-                        <td>{{expense.place}}</td>
                         <td>
-                            <span *ngIf="expense.anEvent == false">
-                                {{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}
+                            <span *ngIf="expense.id > 0">
+                                {{expense.amount | currency:'VND':true:'1.2-2'}}
+                            </span>
+                            <span *ngIf="(expense.id * -1) > 0">
+                                <input class="form-control"
+                                       id="amout_{{expense.id}}"
+                                       type="text"
+                                       value="{{expense.amount | currency:'VND':true:'1.2-2'}}"
+                                       formControlName="amount"
+                                       (keyup.enter)="editExpense()"
+                                />
                             </span>
                         </td>
-                        <td>{{expense.forPerson}}</td>
+                        <td>
+                            <span *ngIf="expense.id > 0">
+                                {{expense.date | date: 'dd-MM-yy'}}
+                            </span>
+                            <span *ngIf="(expense.id * -1) > 0">
+                                <input class="form-control"
+                                       id="date_{{expense.id}}"
+                                       type="text"
+                                       value="{{expense.date | date: 'dd-MM-yy'}}"
+                                       formControlName="date"
+                                       (keyup.enter)="editExpense()"
+                                />
+                            </span>
+                        </td>
+                        <td>
+                            <span *ngIf="expense.id > 0">
+                                {{expense.place}}
+                            </span>
+                            <span *ngIf="(expense.id * -1) > 0">
+                                <input class="form-control"
+                                       id="place_{{expense.id}}"
+                                       type="text"
+                                       value="{{expense.place}}"
+                                       formControlName="place"
+                                       (keyup.enter)="editExpense()"
+                                />
+                            </span>
+                        </td>
+                        <td>
+                            <span *ngIf="expense.id > 0">
+                                <span *ngIf="expense.anEvent == false">
+                                {{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}
+                            </span>
+                            </span>
+                            <span *ngIf="expense.anEvent == false && (expense.id * -1) > 0">
+                                <select class="form-control"
+                                        id="paymentMethod_{{expense.id}}"
+                                        formControlName="paymentMethod"
+                                        (keyup.enter)="editExpense()"
+                                >
+                                    <option value="-1" [selected]="expense.cardId <= 0">CASH</option>
+                                    <option value="{{method.id}}" [selected]="expense.cardId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
+                                </select>
+                            </span>
+                        </td>
+                        <td>
+                            <span *ngIf="expense.anEvent == false">
+                                <span *ngIf="expense.id > 0">
+                                    {{expense.forPerson}}
+                                </span>
+                                <span *ngIf="(expense.id * -1) > 0">
+                                    <input class="form-control"
+                                           id="forPerson_{{expense.id}}"
+                                           type="text"
+                                           value="{{expense.forPerson}}"
+                                           formControlName="forPerson"
+                                           (keyup.enter)="editExpense()"
+                                    />
+                                </span>
+                            </span>
+                        </td>
                         <td>
                             <button *ngIf="expense.anEvent" type="button" class="btn btn-link" (click)="openEvent(expense.id)">Event</button>
                         </td>
                         <td>
                             <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)">Delete</button> |
-                            <button type="button" class="btn btn-link" (click)="updateExpense(expense.id)">Update</button>
+                            <button type="button" class="btn btn-link" (click)="updateExpense(expense)">Update</button>
                         </td>
                     </tr>
                     <tr>
@@ -108,29 +175,9 @@
             </table>
         </div>
     </form>
-    <!--<div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">-->
-        <!--<table class="table table-bordered table-hover" style="width: 1024px;">-->
-            <!--<thead style="color: #337AB7">-->
-                <!--<th class="col-sm-2">Amount</th>-->
-                <!--<th class="col-sm-2">Date</th>-->
-                <!--<th class="col-sm-2">Place</th>-->
-                <!--<th class="col-sm-2">Payment Method</th>-->
-                <!--<th class="col-sm-2">For Person</th>-->
-            <!--</thead>-->
-            <!--<tr *ngFor="let expense of expenses">-->
-                <!--<td>{{expense.amount | currency:'VND':true:'1.2-2'}}</td>-->
-                <!--<td>{{expense.date | date: 'dd-MM-yyyy'}}</td>-->
-                <!--<td>{{expense.place}}</td>-->
-                <!--<td>{{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}</td>-->
-                <!--<td>{{expense.forPerson}}</td>-->
-            <!--</tr>-->
-        <!--</table>-->
-    <!--</div>-->
-
     <br/>
     <br/>
     <br/>
-    <!--<ng2-smart-table [settings]="settings" [source]="users"></ng2-smart-table>-->
     <modal (modalOutput)="getData($event)">
     </modal>
 </div>

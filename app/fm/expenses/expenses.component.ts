@@ -15,7 +15,6 @@ import {EventExpenseService} from "./eventExpenses/eventExpense.service";
 })
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
-  expenses: Expense[];
   paymentMethods: PaymentMethod[];
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
@@ -23,6 +22,7 @@ export class ExpensesComponent implements OnInit {
   // editHidden: boolean = false;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
+  idUpdate: number;
 
   constructor(
     private _expensesService: ExpensesService,
@@ -41,6 +41,8 @@ export class ExpensesComponent implements OnInit {
       (data) => {
         this.expensesDetails = data[0];
         this.paymentMethods = data[1];
+        console.log(this.paymentMethods);
+        console.log(this.expensesDetails);
         this.expensesForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [''],
@@ -65,8 +67,13 @@ export class ExpensesComponent implements OnInit {
     );
   }
 
-  updateExpense(expenseId: number): void {
-    console.log(expenseId);
+  updateExpense(expense: Expense): void {
+    if (this.idUpdate != expense.id && this.idUpdate) {
+      let exp = this.expensesDetails.expenses.find(x => x.id == this.idUpdate);
+      exp.id = exp.id * -1;
+    }
+    expense.id = expense.id * -1;
+    this.idUpdate = expense.id;
   }
 
   deleteExpense(expenseId: number): void {

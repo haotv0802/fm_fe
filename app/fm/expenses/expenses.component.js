@@ -33,6 +33,8 @@ var ExpensesComponent = (function () {
         Rx_1.Observable.forkJoin(this._expensesService.getExpenses(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
             _this.expensesDetails = data[0];
             _this.paymentMethods = data[1];
+            console.log(_this.paymentMethods);
+            console.log(_this.expensesDetails);
             _this.expensesForm = _this.fb.group({
                 amount: ['', [forms_1.Validators.required]],
                 date: [''],
@@ -50,8 +52,14 @@ var ExpensesComponent = (function () {
             console.log(res);
         });
     };
-    ExpensesComponent.prototype.updateExpense = function (expenseId) {
-        console.log(expenseId);
+    ExpensesComponent.prototype.updateExpense = function (expense) {
+        var _this = this;
+        if (this.idUpdate != expense.id && this.idUpdate) {
+            var exp = this.expensesDetails.expenses.find(function (x) { return x.id == _this.idUpdate; });
+            exp.id = exp.id * -1;
+        }
+        expense.id = expense.id * -1;
+        this.idUpdate = expense.id;
     };
     ExpensesComponent.prototype.deleteExpense = function (expenseId) {
         var _this = this;

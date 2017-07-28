@@ -26,6 +26,10 @@ var ExpensesService = (function () {
         return this._httpService.delete(this._constants.EXPENSES_SERVICE_URL + ("/" + expenseId + "/delete"))
             .map(function (res) { return res.json(); });
     };
+    ExpensesService.prototype.updateExpense = function (expense) {
+        return this._httpService.patch(this._constants.EXPENSES_SERVICE_URL, expense)
+            .map(function (res) { return res.json(); });
+    };
     ExpensesService.prototype.getExpenses = function () {
         return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
             .map(function (res) { return res.json(); });

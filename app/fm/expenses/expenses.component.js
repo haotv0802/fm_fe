@@ -40,21 +40,18 @@ var ExpensesComponent = (function () {
                 date: [''],
                 place: [''],
                 paymentMethod: ['', [forms_1.Validators.required]],
-                forPerson: ['']
+                forPerson: [''],
+                amount_edit: ['', [forms_1.Validators.required]],
+                date_edit: [''],
+                place_edit: [''],
+                paymentMethod_edit: ['', [forms_1.Validators.required]],
+                forPerson_edit: [''],
+                anEvent_edit: ['']
             });
             _this.loaderOpen = false;
         }, function (error) {
             console.log(error);
         });
-    };
-    ExpensesComponent.prototype.updateExpense = function (expense) {
-        var _this = this;
-        if (this.idUpdate != expense.id && this.idUpdate) {
-            var exp = this.expensesDetails.expenses.find(function (x) { return x.id == _this.idUpdate; });
-            exp.id = exp.id * -1;
-        }
-        expense.id = expense.id * -1;
-        this.idUpdate = expense.id;
     };
     ExpensesComponent.prototype.deleteExpense = function (expenseId) {
         var _this = this;
@@ -106,7 +103,44 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
-    ExpensesComponent.prototype.editExpense = function () {
+    ExpensesComponent.prototype.openUpdateExpense = function (expense) {
+        var _this = this;
+        console.log("last id: " + this.idUpdate);
+        if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
+            var exp = this.expensesDetails.expenses.find(function (x) { return x.id == _this.idUpdate; });
+            exp.id = exp.id * -1;
+        }
+        expense.id = expense.id * -1;
+        this.idUpdate = expense.id;
+        this.expenseAddForm.get("amount_edit").setValue(expense.amount);
+        this.expenseAddForm.get("date_edit").setValue(expense.date);
+        this.expenseAddForm.get("place_edit").setValue(expense.place);
+        this.expenseAddForm.get("forPerson_edit").setValue(expense.forPerson);
+        this.expenseAddForm.get("paymentMethod_edit").setValue(expense.cardId);
+        this.expenseAddForm.get("anEvent_edit").setValue(expense.anEvent);
+        console.log("latest id: " + this.idUpdate);
+    };
+    ExpensesComponent.prototype.updateExpense = function (expenseId) {
+        var _this = this;
+        this.expenseEdit.amount = this.expenseAddForm.get("amount_edit").value;
+        this.expenseEdit.date = this.expenseAddForm.get("date_edit").value;
+        this.expenseEdit.place = this.expenseAddForm.get("place_edit").value;
+        this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson_edit").value;
+        this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod_edit").value;
+        this.expenseEdit.anEvent = this.expenseAddForm.get("anEvent_edit").value;
+        this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
+        console.log(this.expenseEdit);
+        this._expensesService.updateExpense(this.expenseEdit).subscribe(function (res) {
+            _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
+                _this.expensesDetails = expensesDetails;
+                _this.resetFormValues();
+            }, function (error) {
+                console.log("-------------------updateExpense function: ");
+                console.log(error);
+            });
+        }, function (error) {
+            console.log(error);
+        });
     };
     ExpensesComponent.prototype.addEvent = function () {
         this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
@@ -127,8 +161,15 @@ var ExpensesComponent = (function () {
             date: '',
             place: '',
             paymentMethod: '',
-            forPerson: ''
+            forPerson: '',
+            amount_edit: '',
+            date_edit: '',
+            place_edit: '',
+            paymentMethod_edit: '',
+            forPerson_edit: '',
+            anEvent_edit: ''
         });
+        this.idUpdate = undefined;
     };
     return ExpensesComponent;
 }());

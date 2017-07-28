@@ -94,8 +94,8 @@
                                        id="amout_{{expense.id}}"
                                        type="text"
                                        value="{{expense.amount | currency:'VND':true:'1.2-2'}}"
-                                       formControlName="amount"
-                                       (keyup.enter)="editExpense()"
+                                       formControlName="amount_edit"
+                                       (keyup.enter)="updateExpense(expense.id)"
                                 />
                             </span>
                         </td>
@@ -108,8 +108,8 @@
                                        id="date_{{expense.id}}"
                                        type="text"
                                        value="{{expense.date | date: 'dd-MM-yy'}}"
-                                       formControlName="date"
-                                       (keyup.enter)="editExpense()"
+                                       formControlName="date_edit"
+                                       (keyup.enter)="updateExpense(expense.id)"
                                 />
                             </span>
                         </td>
@@ -122,8 +122,8 @@
                                        id="place_{{expense.id}}"
                                        type="text"
                                        value="{{expense.place}}"
-                                       formControlName="place"
-                                       (keyup.enter)="editExpense()"
+                                       formControlName="place_edit"
+                                       (keyup.enter)="updateExpense(expense.id)"
                                 />
                             </span>
                         </td>
@@ -136,8 +136,8 @@
                             <span *ngIf="expense.anEvent == false && (expense.id * -1) > 0">
                                 <select class="form-control"
                                         id="paymentMethod_{{expense.id}}"
-                                        formControlName="paymentMethod"
-                                        (keyup.enter)="editExpense()"
+                                        formControlName="paymentMethod_edit"
+                                        (keyup.enter)="updateExpense(expense.id)"
                                 >
                                     <option value="-1" [selected]="expense.cardId <= 0">CASH</option>
                                     <option value="{{method.id}}" [selected]="expense.cardId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
@@ -154,8 +154,8 @@
                                            id="forPerson_{{expense.id}}"
                                            type="text"
                                            value="{{expense.forPerson}}"
-                                           formControlName="forPerson"
-                                           (keyup.enter)="editExpense()"
+                                           formControlName="forPerson_edit"
+                                           (keyup.enter)="updateExpense(expense.id)"
                                     />
                                 </span>
                             </span>
@@ -165,7 +165,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)">Delete</button> |
-                            <button type="button" class="btn btn-link" (click)="updateExpense(expense)">Update</button>
+                            <button type="button" class="btn btn-link" (click)="openUpdateExpense(expense)">Update</button>
                         </td>
                     </tr>
                     <tr>

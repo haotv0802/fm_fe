@@ -28,6 +28,12 @@ export class ExpensesService {
       ;
   }
 
+  updateExpense(expense: Expense): Observable<any> {
+    return this._httpService.patch(this._constants.EXPENSES_SERVICE_URL, expense)
+      .map((res) => { return res.json(); })
+      ;
+  }
+
   getExpenses(): Observable<ExpensesDetailsPresenter> {
     return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
       .map((res) => { return <ExpensesDetailsPresenter> res.json(); })

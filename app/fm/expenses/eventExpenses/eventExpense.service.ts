@@ -39,14 +39,15 @@ export class EventExpenseService {
       ;
   }
 
-  updateExpense(expense: Expense, eventId: number): Observable<any> {
-    return this._httpService.patch(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${eventId}`, expense)
+  updateExpense(expense: EventExpense, expenseId: number): Observable<any> {
+    console.log(expense);
+    return this._httpService.patch(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${expenseId}/${expense.id}`, expense)
       .map((res) => { return res.json(); })
       ;
   }
 
-  deleteExpense(expenseId: number, eventId: number): Observable<any> {
-    return this._httpService.delete(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${expenseId}/${eventId}`)
+  deleteExpense(expenseId: number, eventExpenseId: number): Observable<any> {
+    return this._httpService.delete(this._constants.EVENT_EXPENSES_SERVICE_URL + `/${expenseId}/${eventExpenseId}`)
       .map((res) => { return res.json(); })
       ;
   }

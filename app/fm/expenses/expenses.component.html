@@ -84,14 +84,14 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr *ngFor="let expense of expensesDetails.expenses" (click)="openUpdateExpense(expense)">
-                        <td>
+                    <tr *ngFor="let expense of expensesDetails.expenses">
+                        <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">
                                 {{expense.amount | currency:'VND':true:'1.2-2'}}
                             </span>
                             <span *ngIf="(expense.id * -1) > 0">
                                 <input class="form-control"
-                                       id="amout_{{expense.id}}"
+                                       id="amount_{{expense.id}}"
                                        type="text"
                                        value="{{expense.amount}}"
                                        formControlName="amount_edit"
@@ -102,7 +102,7 @@
                                 <!--{{amount_edit.focus()}}-->
                             </span>
                         </td>
-                        <td>
+                        <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">
                                 {{expense.date | date: 'dd-MM-yy'}}
                             </span>
@@ -117,7 +117,7 @@
                                 />
                             </span>
                         </td>
-                        <td>
+                        <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">
                                 {{expense.place}}
                             </span>
@@ -132,7 +132,7 @@
                                 />
                             </span>
                         </td>
-                        <td>
+                        <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">
                                 <span *ngIf="expense.anEvent == false">
                                 {{expense.paymentMethod == 'CASH' ? expense.paymentMethod : (expense.cardNumber + ', ' + expense.cardInfo)}}
@@ -149,7 +149,7 @@
                                 </select>
                             </span>
                         </td>
-                        <td>
+                        <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.anEvent == false">
                                 <span *ngIf="expense.id > 0">
                                     {{expense.forPerson}}

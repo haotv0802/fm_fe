@@ -19,11 +19,12 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   paymentMethods: PaymentMethod[];
   loaderOpen: boolean = true;
-  expensesForm: FormGroup;
+  expenseForm: FormGroup;
   expenseEdit: EventExpense = new EventExpense();
   expenseId: number;
   @ViewChild(ModalComponent) modal: ModalComponent;
   event: Event;
+  idUpdate: number;
 
   constructor(
     private _expenseEventService: EventExpenseService,
@@ -54,12 +55,17 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
     ).subscribe(
       (data) => {
         this.paymentMethods = data[0];
-        this.expensesForm = this.fb.group({
+        this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [''],
           place: [''],
           paymentMethod: ['', [Validators.required]],
-          forPerson: ['']
+          forPerson: [''],
+          amount_edit: ['', [Validators.required]],
+          date_edit: [''],
+          place_edit: [''],
+          paymentMethod_edit: ['', [Validators.required]],
+          forPerson_edit: ['']
         });
         this.loaderOpen = false;
       },
@@ -104,12 +110,12 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
   }
 
   addExpense(): void {
-    this.expenseEdit.amount = this.expensesForm.get("amount").value;
-    this.expenseEdit.date = this.expensesForm.get("date").value;
-    this.expenseEdit.place = this.expensesForm.get("place").value;
+    this.expenseEdit.amount = this.expenseForm.get("amount").value;
+    this.expenseEdit.date = this.expenseForm.get("date").value;
+    this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
-    this.expenseEdit.forPerson = this.expensesForm.get("forPerson").value;
-    this.expenseEdit.cardId = this.expensesForm.get("paymentMethod").value;
+    this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
+    this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
 
     if (this.expenseId == -1) {
       this._expensesService.addExpense(this._expenseEventService.expenseCreation).subscribe(
@@ -140,8 +146,8 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
     );
   }
 
-  deleteExpense(expenseId: number, eventId: number): void {
-    this._expenseEventService.deleteExpense(expenseId, eventId).subscribe(
+  deleteExpense(expenseId: number, eventExpenseId: number): void {
+    this._expenseEventService.deleteExpense(expenseId, eventExpenseId).subscribe(
       (res) => {
         this._expenseEventService.getEventExpenses(this.expenseId).subscribe(
           (res) => {
@@ -156,23 +162,80 @@ export class EventExpenseComponent implements OnInit, OnDestroy {
     );
   }
 
-  updateExpense(eventId: number): void {
-    // this._expenseEventService.updateExpense(eventId).subscribe(
-    //   (res) => {
-    //
-    //   }, (error: Error) => {
-    //     console.log(error);
-    //   }
-    // );
+  updateExpense(expenseId: number): void {
+    this.expenseEdit.amount = this.expenseForm.get("amount_edit").value;
+    this.expenseEdit.date = this.expenseForm.get("date_edit").value;
+    this.expenseEdit.place = this.expenseForm.get("place_edit").value;
+    this.expenseEdit.forPerson = this.expenseForm.get("forPerson_edit").value;
+    this.expenseEdit.cardId = this.expenseForm.get("paymentMethod_edit").value;
+    this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
+
+    this._expenseEventService.updateExpense(this.expenseEdit, this.event.id).subscribe(
+      (res) => {
+        this._expenseEventService.getEventExpenses(this.expenseId).subscribe(
+          (event) => {
+            this.event = event;
+            this.resetFormValues();
+          }, (error) => {
+            console.log(error);
+          }
+        );
+      }, (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  closeUpdateExpense(expense: EventExpense): void {
+    expense.id = expense.id * -1;
+    this.idUpdate = this.idUpdate * -1;
+  }
+
+  openUpdateExpense(expense: EventExpense): void {
+    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
+      let exp = this.event.expenses.find(x => x.id == this.idUpdate);
+      exp.id = exp.id * -1;
+    }
+    if (this.idUpdate && this.idUpdate == expense.id) {
+      return;
+    }
+    expense.id = expense.id * -1;
+    this.idUpdate = expense.id;
+    this.expenseForm.get("amount_edit").setValue(expense.amount);
+    this.expenseForm.get("date_edit").setValue(expense.date);
+    this.expenseForm.get("place_edit").setValue(expense.place);
+    this.expenseForm.get("forPerson_edit").setValue(expense.forPerson);
+    this.expenseForm.get("paymentMethod_edit").setValue(expense.cardId);
+  }
+
+  openOrCloseUpdateExpense(expense: EventExpense): void {
+    // console.log(event);
+    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
+      let exp = this.event.expenses.find(x => x.id == this.idUpdate);
+      exp.id = exp.id * -1;
+    }
+    expense.id = expense.id * -1;
+    this.idUpdate = expense.id;
+    this.expenseForm.get("amount_edit").setValue(expense.amount);
+    this.expenseForm.get("date_edit").setValue(expense.date);
+    this.expenseForm.get("place_edit").setValue(expense.place);
+    this.expenseForm.get("forPerson_edit").setValue(expense.forPerson);
+    this.expenseForm.get("paymentMethod_edit").setValue(expense.cardId);
   }
 
   resetFormValues(): void {
-    this.expensesForm.setValue({
+    this.expenseForm.setValue({
       amount: '',
       date: '',
       place: '',
       paymentMethod: '',
-      forPerson: ''
+      forPerson: '',
+      amount_edit: '',
+      date_edit: '',
+      place_edit: '',
+      paymentMethod_edit: '',
+      forPerson_edit: ''
     });
+    this.idUpdate = undefined;
   }
 }

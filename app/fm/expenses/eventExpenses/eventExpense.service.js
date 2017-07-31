@@ -33,12 +33,13 @@ var EventExpenseService = (function () {
         return this._httpService.post(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId), expense)
             .map(function (res) { return res.json(); });
     };
-    EventExpenseService.prototype.updateExpense = function (expense, eventId) {
-        return this._httpService.patch(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + eventId), expense)
+    EventExpenseService.prototype.updateExpense = function (expense, expenseId) {
+        console.log(expense);
+        return this._httpService.patch(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId + "/" + expense.id), expense)
             .map(function (res) { return res.json(); });
     };
-    EventExpenseService.prototype.deleteExpense = function (expenseId, eventId) {
-        return this._httpService.delete(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId + "/" + eventId))
+    EventExpenseService.prototype.deleteExpense = function (expenseId, eventExpenseId) {
+        return this._httpService.delete(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId + "/" + eventExpenseId))
             .map(function (res) { return res.json(); });
     };
     return EventExpenseService;

@@ -84,7 +84,7 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr *ngFor="let expense of expensesDetails.expenses" (dblclick)="openUpdateExpense(expense)">
+                    <tr *ngFor="let expense of expensesDetails.expenses" (click)="openUpdateExpense(expense)">
                         <td>
                             <span *ngIf="expense.id > 0">
                                 {{expense.amount | currency:'VND':true:'1.2-2'}}

@@ -15,14 +15,12 @@
                     <th class="col-sm-2">For Person</th>
                     <th class="col-sm-2"></th>
                 </thead>
+                <!-- Add New Event -->
                 <tbody *ngIf="expenseId == -1">
-                <!--<tr>-->
-                <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
-                <!--</tr>-->
                 <tr>
                     <td>
                         <input class="form-control"
-                               id="amountId"
+                               id="amountNewEventId"
                                type="text"
                                placeholder="Amount (required)"
                                formControlName="amount"
@@ -31,7 +29,7 @@
                     </td>
                     <td>
                         <input class="form-control"
-                               id="dateId"
+                               id="dateNewEventId"
                                type="date"
                                placeholder="Date (required)"
                                formControlName="date"
@@ -47,7 +45,7 @@
                     </td>
                     <td>
                         <input class="form-control"
-                               id="placeId"
+                               id="placeNewEventId"
                                type="text"
                                placeholder="Enter a Place"
                                formControlName="place"
@@ -56,7 +54,7 @@
                     </td>
                     <td>
                         <select class="form-control"
-                                id="paymentMethodId"
+                                id="paymentMethodNewEventId"
                                 formControlName="paymentMethod"
                                 (keyup.enter)="addExpense()"
                         >
@@ -67,7 +65,7 @@
                     </td>
                     <td>
                         <input class="form-control"
-                               id="forPersonId"
+                               id="forPersonNewEventId"
                                type="text"
                                placeholder="Enter 'For Person'"
                                formControlName="forPerson"
@@ -78,9 +76,6 @@
                 </tr>
                 </tbody>
                 <tbody *ngIf="event && event.expenses">
-                <!--<tr>-->
-                <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
-                <!--</tr>-->
                 <tr>
                     <td>
                         <input class="form-control"

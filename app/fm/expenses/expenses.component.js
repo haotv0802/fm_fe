@@ -103,9 +103,17 @@ var ExpensesComponent = (function () {
             console.log(error);
         });
     };
+    ExpensesComponent.prototype.closeUpdateExpense = function (expense) {
+        if (expense.id < 0) {
+            expense.id = expense.id * -1;
+        }
+        if (this.idUpdate < 0) {
+            this.idUpdate = this.idUpdate * -1;
+        }
+    };
     ExpensesComponent.prototype.openUpdateExpense = function (expense) {
         var _this = this;
-        console.log("last id: " + this.idUpdate);
+        // console.log(event);
         if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
             var exp = this.expensesDetails.expenses.find(function (x) { return x.id == _this.idUpdate; });
             exp.id = exp.id * -1;
@@ -118,7 +126,6 @@ var ExpensesComponent = (function () {
         this.expenseAddForm.get("forPerson_edit").setValue(expense.forPerson);
         this.expenseAddForm.get("paymentMethod_edit").setValue(expense.cardId);
         this.expenseAddForm.get("anEvent_edit").setValue(expense.anEvent);
-        console.log("latest id: " + this.idUpdate);
     };
     ExpensesComponent.prototype.updateExpense = function (expenseId) {
         var _this = this;
@@ -129,7 +136,6 @@ var ExpensesComponent = (function () {
         this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod_edit").value;
         this.expenseEdit.anEvent = this.expenseAddForm.get("anEvent_edit").value;
         this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
-        console.log(this.expenseEdit);
         this._expensesService.updateExpense(this.expenseEdit).subscribe(function (res) {
             _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
                 _this.expensesDetails = expensesDetails;

@@ -84,7 +84,7 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr *ngFor="let expense of expensesDetails.expenses">
+                    <tr *ngFor="let expense of expensesDetails.expenses" (dblclick)="openUpdateExpense(expense)">
                         <td>
                             <span *ngIf="expense.id > 0">
                                 {{expense.amount | currency:'VND':true:'1.2-2'}}
@@ -93,10 +93,13 @@
                                 <input class="form-control"
                                        id="amout_{{expense.id}}"
                                        type="text"
-                                       value="{{expense.amount | currency:'VND':true:'1.2-2'}}"
+                                       value="{{expense.amount}}"
                                        formControlName="amount_edit"
+                                       #amount_edit
                                        (keyup.enter)="updateExpense(expense.id)"
+                                       (keyup.esc)="closeUpdateExpense(expense)"
                                 />
+                                <!--{{amount_edit.focus()}}-->
                             </span>
                         </td>
                         <td>

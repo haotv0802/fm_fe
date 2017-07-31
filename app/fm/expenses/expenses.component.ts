@@ -130,8 +130,17 @@ export class ExpensesComponent implements OnInit {
 
   }
 
+  closeUpdateExpense(expense: Expense): void {
+    if (expense.id < 0) {
+      expense.id = expense.id * -1;
+    }
+    if (this.idUpdate < 0) {
+      this.idUpdate = this.idUpdate * -1;
+    }
+  }
+
   openUpdateExpense(expense: Expense): void {
-    console.log("last id: " + this.idUpdate);
+    // console.log(event);
     if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
       let exp = this.expensesDetails.expenses.find(x => x.id == this.idUpdate);
       exp.id = exp.id * -1;
@@ -144,7 +153,6 @@ export class ExpensesComponent implements OnInit {
     this.expenseAddForm.get("forPerson_edit").setValue(expense.forPerson);
     this.expenseAddForm.get("paymentMethod_edit").setValue(expense.cardId);
     this.expenseAddForm.get("anEvent_edit").setValue(expense.anEvent);
-    console.log("latest id: " + this.idUpdate);
   }
 
   updateExpense(expenseId: number): void {
@@ -155,8 +163,6 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod_edit").value;
     this.expenseEdit.anEvent = this.expenseAddForm.get("anEvent_edit").value;
     this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
-
-    console.log(this.expenseEdit);
 
     this._expensesService.updateExpense(this.expenseEdit).subscribe(
       (res) => {

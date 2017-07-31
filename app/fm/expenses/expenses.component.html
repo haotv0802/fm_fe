@@ -4,7 +4,7 @@
         {{pageTitle}}
     </div>
     <form class="form-horizontal" novalidate
-          [formGroup]="expenseAddForm">
+          [formGroup]="expenseForm">
         <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
             <table class="table table-bordered table-hover" style="width: 1145px;">
                 <thead style="color: #337AB7">
@@ -113,6 +113,7 @@
                                        value="{{expense.date | date: 'dd-MM-yy'}}"
                                        formControlName="date_edit"
                                        (keyup.enter)="updateExpense(expense.id)"
+                                       (keyup.esc)="closeUpdateExpense(expense)"
                                 />
                             </span>
                         </td>
@@ -127,6 +128,7 @@
                                        value="{{expense.place}}"
                                        formControlName="place_edit"
                                        (keyup.enter)="updateExpense(expense.id)"
+                                       (keyup.esc)="closeUpdateExpense(expense)"
                                 />
                             </span>
                         </td>
@@ -167,8 +169,8 @@
                             <button *ngIf="expense.anEvent" type="button" class="btn btn-link" (click)="openEvent(expense.id)">Event</button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)">Delete</button> |
-                            <button type="button" class="btn btn-link" (click)="openUpdateExpense(expense)">Update</button>
+                            <button type="button" class="btn btn-link" (click)="openOrCloseUpdateExpense(expense)">Update</button> |
+                            <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)">Delete</button>
                         </td>
                     </tr>
                     <tr>

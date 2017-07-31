@@ -18,7 +18,7 @@ export class ExpensesComponent implements OnInit {
   paymentMethods: PaymentMethod[];
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
-  expenseAddForm: FormGroup;
+  expenseForm: FormGroup;
   // editHidden: boolean = false;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
@@ -41,9 +41,7 @@ export class ExpensesComponent implements OnInit {
       (data) => {
         this.expensesDetails = data[0];
         this.paymentMethods = data[1];
-        console.log(this.paymentMethods);
-        console.log(this.expensesDetails);
-        this.expenseAddForm = this.fb.group({
+        this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [''],
           place: [''],
@@ -105,12 +103,12 @@ export class ExpensesComponent implements OnInit {
   }
 
   addExpense(): void {
-    this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
-    this.expenseEdit.date = this.expenseAddForm.get("date").value;
-    this.expenseEdit.place = this.expenseAddForm.get("place").value;
+    this.expenseEdit.amount = this.expenseForm.get("amount").value;
+    this.expenseEdit.date = this.expenseForm.get("date").value;
+    this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
-    this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson").value;
-    this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod").value;
+    this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
+    this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
     this._expensesService.addExpense(this.expenseEdit).subscribe(
@@ -131,15 +129,29 @@ export class ExpensesComponent implements OnInit {
   }
 
   closeUpdateExpense(expense: Expense): void {
-    if (expense.id < 0) {
       expense.id = expense.id * -1;
-    }
-    if (this.idUpdate < 0) {
       this.idUpdate = this.idUpdate * -1;
-    }
   }
 
   openUpdateExpense(expense: Expense): void {
+    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
+      let exp = this.expensesDetails.expenses.find(x => x.id == this.idUpdate);
+      exp.id = exp.id * -1;
+    }
+    if (this.idUpdate && this.idUpdate == expense.id) {
+        return;
+    }
+    expense.id = expense.id * -1;
+    this.idUpdate = expense.id;
+    this.expenseForm.get("amount_edit").setValue(expense.amount);
+    this.expenseForm.get("date_edit").setValue(expense.date);
+    this.expenseForm.get("place_edit").setValue(expense.place);
+    this.expenseForm.get("forPerson_edit").setValue(expense.forPerson);
+    this.expenseForm.get("paymentMethod_edit").setValue(expense.cardId);
+    this.expenseForm.get("anEvent_edit").setValue(expense.anEvent);
+  }
+
+  openOrCloseUpdateExpense(expense: Expense): void {
     // console.log(event);
     if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
       let exp = this.expensesDetails.expenses.find(x => x.id == this.idUpdate);
@@ -147,21 +159,21 @@ export class ExpensesComponent implements OnInit {
     }
     expense.id = expense.id * -1;
     this.idUpdate = expense.id;
-    this.expenseAddForm.get("amount_edit").setValue(expense.amount);
-    this.expenseAddForm.get("date_edit").setValue(expense.date);
-    this.expenseAddForm.get("place_edit").setValue(expense.place);
-    this.expenseAddForm.get("forPerson_edit").setValue(expense.forPerson);
-    this.expenseAddForm.get("paymentMethod_edit").setValue(expense.cardId);
-    this.expenseAddForm.get("anEvent_edit").setValue(expense.anEvent);
+    this.expenseForm.get("amount_edit").setValue(expense.amount);
+    this.expenseForm.get("date_edit").setValue(expense.date);
+    this.expenseForm.get("place_edit").setValue(expense.place);
+    this.expenseForm.get("forPerson_edit").setValue(expense.forPerson);
+    this.expenseForm.get("paymentMethod_edit").setValue(expense.cardId);
+    this.expenseForm.get("anEvent_edit").setValue(expense.anEvent);
   }
 
   updateExpense(expenseId: number): void {
-    this.expenseEdit.amount = this.expenseAddForm.get("amount_edit").value;
-    this.expenseEdit.date = this.expenseAddForm.get("date_edit").value;
-    this.expenseEdit.place = this.expenseAddForm.get("place_edit").value;
-    this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson_edit").value;
-    this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod_edit").value;
-    this.expenseEdit.anEvent = this.expenseAddForm.get("anEvent_edit").value;
+    this.expenseEdit.amount = this.expenseForm.get("amount_edit").value;
+    this.expenseEdit.date = this.expenseForm.get("date_edit").value;
+    this.expenseEdit.place = this.expenseForm.get("place_edit").value;
+    this.expenseEdit.forPerson = this.expenseForm.get("forPerson_edit").value;
+    this.expenseEdit.cardId = this.expenseForm.get("paymentMethod_edit").value;
+    this.expenseEdit.anEvent = this.expenseForm.get("anEvent_edit").value;
     this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
 
     this._expensesService.updateExpense(this.expenseEdit).subscribe(
@@ -182,11 +194,11 @@ export class ExpensesComponent implements OnInit {
   }
 
   addEvent(): void {
-    this.expenseEdit.amount = this.expenseAddForm.get("amount").value;
-    this.expenseEdit.date = this.expenseAddForm.get("date").value;
-    this.expenseEdit.place = this.expenseAddForm.get("place").value;
-    this.expenseEdit.forPerson = this.expenseAddForm.get("forPerson").value;
-    this.expenseEdit.cardId = this.expenseAddForm.get("paymentMethod").value;
+    this.expenseEdit.amount = this.expenseForm.get("amount").value;
+    this.expenseEdit.date = this.expenseForm.get("date").value;
+    this.expenseEdit.place = this.expenseForm.get("place").value;
+    this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
+    this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
     this.expenseEdit.anEvent = true;
     this._eventExpenseService.expenseCreation = this.expenseEdit;
     this._router.navigate(["expenses/-1"]);
@@ -198,7 +210,7 @@ export class ExpensesComponent implements OnInit {
 
 
   resetFormValues(): void {
-    this.expenseAddForm.setValue({
+    this.expenseForm.setValue({
       amount: '',
       date: '',
       place: '',

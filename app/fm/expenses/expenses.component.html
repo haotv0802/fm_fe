@@ -17,9 +17,6 @@
                     <th class="col-sm-3"></th>
                 </thead>
                 <tbody *ngIf="expensesDetails">
-                    <!--<tr>-->
-                        <!--<td colspan="5">{{expensesDetails.total | currency:'VND':true:'1.2-2'}} spent this month</td>-->
-                    <!--</tr>-->
                     <tr>
                         <td>
                             <input class="form-control"
@@ -40,12 +37,6 @@
                                    (keyup.enter)="addExpense()"
                                    style="width: 150px;"
                             />
-                            <!--<div class='input-group date' id='datetimepicker2'>-->
-                            <!---->
-                                <!--<span class="input-group-addon">-->
-                                    <!--<span class="glyphicon glyphicon-calendar"></span>-->
-                                <!--</span>-->
-                            <!--</div>-->
                         </td>
                         <td>
                             <input class="form-control"

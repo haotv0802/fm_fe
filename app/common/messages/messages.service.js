@@ -99,6 +99,8 @@ var MessagesService = (function () {
         var _this = this;
         this._httpService.get(this._constants.COMMON_MESSAGES_SERVICE_URL)
             .map(function (res) {
+            console.log("getCommonMessages: ");
+            console.log(res.json());
             return res.json();
         })
             .subscribe(function (res) {
@@ -120,7 +122,6 @@ var MessagesService = (function () {
             .do(function (data) {
             // console.log("do print json");
             // console.log(JSON.stringify(data));
-            // console.log("doing");
             _this.commonMessages = data;
         });
     };

@@ -8,6 +8,7 @@ import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   moduleId: module.id,
@@ -43,7 +44,7 @@ export class ExpensesComponent implements OnInit {
         this.paymentMethods = data[1];
         this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],
-          date: [''],
+          date: [new Date()],
           place: [''],
           paymentMethod: ['', [Validators.required]],
           forPerson: [''],
@@ -111,20 +112,20 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
-    this._expensesService.addExpense(this.expenseEdit).subscribe(
-      (res) => {
-        this._expensesService.getExpenses().subscribe(
-          (expensesDetails) => {
-            this.expensesDetails = expensesDetails;
-            this.resetFormValues();
-          }, (error: Error) => {
-            console.log(error);
-          }
-        );
-      }, (error: Error) => {
-        console.log(error);
-      }
-    );
+    // this._expensesService.addExpense(this.expenseEdit).subscribe(
+    //   (res) => {
+    //     this._expensesService.getExpenses().subscribe(
+    //       (expensesDetails) => {
+    //         this.expensesDetails = expensesDetails;
+    //         this.resetFormValues();
+    //       }, (error: Error) => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   }, (error: Error) => {
+    //     console.log(error);
+    //   }
+    // );
 
   }
 

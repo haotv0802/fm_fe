@@ -98,6 +98,8 @@ export class MessagesService {
     this._httpService.get(this._constants.COMMON_MESSAGES_SERVICE_URL)
       .map(
         (res) => {
+          console.log("getCommonMessages: ")
+          console.log(res.json());
           return res.json();
         }
       )
@@ -126,7 +128,6 @@ export class MessagesService {
         (data) => {
           // console.log("do print json");
           // console.log(JSON.stringify(data));
-          // console.log("doing");
           this.commonMessages = data;
         }
       )

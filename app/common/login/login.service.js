@@ -30,12 +30,12 @@ var LoginService = (function () {
         // // .do(data => {console.log("All: login: "); console.log(data)})
         //   .catch(this.handleError);
     };
+    LoginService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [constant_1.Constants,
+            HTTP_service_1.HTTPService])
+    ], LoginService);
     return LoginService;
 }());
-LoginService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [constant_1.Constants,
-        HTTP_service_1.HTTPService])
-], LoginService);
 exports.LoginService = LoginService;
 //# sourceMappingURL=login.service.js.map

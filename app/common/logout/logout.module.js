@@ -15,24 +15,24 @@ var common_1 = require("@angular/common");
 var LogoutModule = (function () {
     function LogoutModule() {
     }
+    LogoutModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                router_1.RouterModule.forChild([
+                    { path: 'logout', component: logout_component_1.LogoutComponent }
+                ]),
+                forms_1.FormsModule,
+                common_1.CommonModule
+            ],
+            declarations: [
+                logout_component_1.LogoutComponent
+            ],
+            providers: [
+                logout_service_1.LogoutService
+            ]
+        })
+    ], LogoutModule);
     return LogoutModule;
 }());
-LogoutModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            router_1.RouterModule.forChild([
-                { path: 'logout', component: logout_component_1.LogoutComponent }
-            ]),
-            forms_1.FormsModule,
-            common_1.CommonModule
-        ],
-        declarations: [
-            logout_component_1.LogoutComponent
-        ],
-        providers: [
-            logout_service_1.LogoutService
-        ]
-    })
-], LogoutModule);
 exports.LogoutModule = LogoutModule;
 //# sourceMappingURL=logout.module.js.map

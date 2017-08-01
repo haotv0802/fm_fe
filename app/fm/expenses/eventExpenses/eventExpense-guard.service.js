@@ -58,13 +58,13 @@ var EventExpenseGuard = (function () {
             return true;
         }
     };
+    EventExpenseGuard = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [router_1.Router,
+            HTTP_service_1.HTTPService,
+            constant_1.Constants])
+    ], EventExpenseGuard);
     return EventExpenseGuard;
 }());
-EventExpenseGuard = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router,
-        HTTP_service_1.HTTPService,
-        constant_1.Constants])
-], EventExpenseGuard);
 exports.EventExpenseGuard = EventExpenseGuard;
 //# sourceMappingURL=eventExpense-guard.service.js.map

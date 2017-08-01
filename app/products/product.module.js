@@ -17,30 +17,30 @@ var shared_module_1 = require("../shared/shared.module");
 var ProductModule = (function () {
     function ProductModule() {
     }
+    ProductModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                shared_module_1.SharedModule,
+                router_1.RouterModule.forChild([
+                    { path: 'products', component: product_list_component_1.ProductListComponent },
+                    { path: 'product/:id',
+                        canActivate: [product_guard_service_1.ProductDetailGuard],
+                        component: product_detail_component_1.ProductDetailComponent
+                    }
+                ])
+            ],
+            declarations: [
+                product_list_component_1.ProductListComponent,
+                product_detail_component_1.ProductDetailComponent,
+                product_filter_pipe_1.ProductFilterPipe
+            ],
+            providers: [
+                product_service_1.ProductService,
+                product_guard_service_1.ProductDetailGuard
+            ]
+        })
+    ], ProductModule);
     return ProductModule;
 }());
-ProductModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            shared_module_1.SharedModule,
-            router_1.RouterModule.forChild([
-                { path: 'products', component: product_list_component_1.ProductListComponent },
-                { path: 'product/:id',
-                    canActivate: [product_guard_service_1.ProductDetailGuard],
-                    component: product_detail_component_1.ProductDetailComponent
-                }
-            ])
-        ],
-        declarations: [
-            product_list_component_1.ProductListComponent,
-            product_detail_component_1.ProductDetailComponent,
-            product_filter_pipe_1.ProductFilterPipe
-        ],
-        providers: [
-            product_service_1.ProductService,
-            product_guard_service_1.ProductDetailGuard
-        ]
-    })
-], ProductModule);
 exports.ProductModule = ProductModule;
 //# sourceMappingURL=product.module.js.map

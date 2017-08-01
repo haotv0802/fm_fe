@@ -13,18 +13,18 @@ var star_component_1 = require("./star.component");
 var SharedModule = (function () {
     function SharedModule() {
     }
+    SharedModule = __decorate([
+        core_1.NgModule({
+            imports: [common_1.CommonModule],
+            exports: [
+                common_1.CommonModule,
+                forms_1.FormsModule,
+                star_component_1.StarComponent
+            ],
+            declarations: [star_component_1.StarComponent],
+        })
+    ], SharedModule);
     return SharedModule;
 }());
-SharedModule = __decorate([
-    core_1.NgModule({
-        imports: [common_1.CommonModule],
-        exports: [
-            common_1.CommonModule,
-            forms_1.FormsModule,
-            star_component_1.StarComponent
-        ],
-        declarations: [star_component_1.StarComponent],
-    })
-], SharedModule);
 exports.SharedModule = SharedModule;
 //# sourceMappingURL=shared.module.js.map

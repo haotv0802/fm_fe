@@ -102,29 +102,29 @@ var ModalComponent = (function () {
             });
         }
     };
+    __decorate([
+        core_1.ViewChild("child", { read: core_1.ViewContainerRef }),
+        __metadata("design:type", Object)
+    ], ModalComponent.prototype, "target", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], ModalComponent.prototype, "modalOutput", void 0);
+    ModalComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'modal',
+            templateUrl: 'modal.component.html',
+            providers: [],
+            encapsulation: core_1.ViewEncapsulation.None
+        })
+        /**
+         * API to an open modal window.
+         */
+        ,
+        __metadata("design:paramtypes", [core_1.ComponentFactoryResolver, core_1.ViewContainerRef])
+    ], ModalComponent);
     return ModalComponent;
 }());
-__decorate([
-    core_1.ViewChild("child", { read: core_1.ViewContainerRef }),
-    __metadata("design:type", Object)
-], ModalComponent.prototype, "target", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], ModalComponent.prototype, "modalOutput", void 0);
-ModalComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'modal',
-        templateUrl: 'modal.component.html',
-        providers: [],
-        encapsulation: core_1.ViewEncapsulation.None
-    })
-    /**
-     * API to an open modal window.
-     */
-    ,
-    __metadata("design:paramtypes", [core_1.ComponentFactoryResolver, core_1.ViewContainerRef])
-], ModalComponent);
 exports.ModalComponent = ModalComponent;
 //# sourceMappingURL=modal.component.js.map

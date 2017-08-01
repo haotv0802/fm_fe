@@ -16,28 +16,28 @@ var loader_component_1 = require("./loader/loader.component");
 var HTCommonModule = (function () {
     function HTCommonModule() {
     }
+    HTCommonModule = __decorate([
+        core_1.NgModule({
+            imports: [common_1.CommonModule],
+            declarations: [
+                alert_component_1.AlertComponent,
+                open_component_1.OpenDirective,
+                modal_component_1.ModalComponent,
+                loader_modal_component_1.LoaderModalComponent,
+                loader_component_1.LoaderComponent
+            ],
+            exports: [
+                alert_component_1.AlertComponent,
+                open_component_1.OpenDirective,
+                modal_component_1.ModalComponent,
+                loader_modal_component_1.LoaderModalComponent,
+                common_1.CommonModule,
+                loader_component_1.LoaderComponent
+            ],
+            providers: []
+        })
+    ], HTCommonModule);
     return HTCommonModule;
 }());
-HTCommonModule = __decorate([
-    core_1.NgModule({
-        imports: [common_1.CommonModule],
-        declarations: [
-            alert_component_1.AlertComponent,
-            open_component_1.OpenDirective,
-            modal_component_1.ModalComponent,
-            loader_modal_component_1.LoaderModalComponent,
-            loader_component_1.LoaderComponent
-        ],
-        exports: [
-            alert_component_1.AlertComponent,
-            open_component_1.OpenDirective,
-            modal_component_1.ModalComponent,
-            loader_modal_component_1.LoaderModalComponent,
-            common_1.CommonModule,
-            loader_component_1.LoaderComponent
-        ],
-        providers: []
-    })
-], HTCommonModule);
 exports.HTCommonModule = HTCommonModule;
 //# sourceMappingURL=htCommon.module.js.map

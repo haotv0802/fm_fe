@@ -11,13 +11,13 @@ var WelcomeComponent = (function () {
     function WelcomeComponent() {
         this.pageTitle = 'Welcome';
     }
+    WelcomeComponent = __decorate([
+        core_1.Component({
+            templateUrl: 'app/common/home/welcome.component.html',
+            styleUrls: ['app/common/home/fountain.component.css', 'app/common/home/bubbling.component.css']
+        })
+    ], WelcomeComponent);
     return WelcomeComponent;
 }());
-WelcomeComponent = __decorate([
-    core_1.Component({
-        templateUrl: 'app/common/home/welcome.component.html',
-        styleUrls: ['app/common/home/fountain.component.css', 'app/common/home/bubbling.component.css']
-    })
-], WelcomeComponent);
 exports.WelcomeComponent = WelcomeComponent;
 //# sourceMappingURL=welcome.component.js.map

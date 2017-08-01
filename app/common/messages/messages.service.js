@@ -125,12 +125,12 @@ var MessagesService = (function () {
             _this.commonMessages = data;
         });
     };
+    MessagesService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [constant_1.Constants,
+            HTTP_service_1.HTTPService])
+    ], MessagesService);
     return MessagesService;
 }());
-MessagesService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [constant_1.Constants,
-        HTTP_service_1.HTTPService])
-], MessagesService);
 exports.MessagesService = MessagesService;
 //# sourceMappingURL=messages.service.js.map

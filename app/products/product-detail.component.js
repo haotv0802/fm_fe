@@ -39,15 +39,15 @@ var ProductDetailComponent = (function () {
     ProductDetailComponent.prototype.onRatingClicked = function (message) {
         this.pageTitle = 'Product Detail: ' + message;
     };
+    ProductDetailComponent = __decorate([
+        core_1.Component({
+            templateUrl: 'app/products/product-detail.component.html'
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            router_1.Router,
+            product_service_1.ProductService])
+    ], ProductDetailComponent);
     return ProductDetailComponent;
 }());
-ProductDetailComponent = __decorate([
-    core_1.Component({
-        templateUrl: 'app/products/product-detail.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        router_1.Router,
-        product_service_1.ProductService])
-], ProductDetailComponent);
 exports.ProductDetailComponent = ProductDetailComponent;
 //# sourceMappingURL=product-detail.component.js.map

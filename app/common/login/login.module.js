@@ -15,25 +15,25 @@ var common_1 = require("@angular/common");
 var LoginModule = (function () {
     function LoginModule() {
     }
+    LoginModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                router_1.RouterModule.forChild([
+                    { path: 'login', component: login_component_1.LoginComponent }
+                ]),
+                forms_1.FormsModule,
+                common_1.CommonModule,
+                forms_1.ReactiveFormsModule
+            ],
+            declarations: [
+                login_component_1.LoginComponent
+            ],
+            providers: [
+                login_service_1.LoginService
+            ]
+        })
+    ], LoginModule);
     return LoginModule;
 }());
-LoginModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            router_1.RouterModule.forChild([
-                { path: 'login', component: login_component_1.LoginComponent }
-            ]),
-            forms_1.FormsModule,
-            common_1.CommonModule,
-            forms_1.ReactiveFormsModule
-        ],
-        declarations: [
-            login_component_1.LoginComponent
-        ],
-        providers: [
-            login_service_1.LoginService
-        ]
-    })
-], LoginModule);
 exports.LoginModule = LoginModule;
 //# sourceMappingURL=login.module.js.map

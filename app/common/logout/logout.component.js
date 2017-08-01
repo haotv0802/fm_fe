@@ -21,13 +21,13 @@ var LogoutComponent = (function () {
         this._logoutService.logout();
         this._router.navigate(["welcome"]);
     };
+    LogoutComponent = __decorate([
+        core_1.Component({
+            template: ""
+        }),
+        __metadata("design:paramtypes", [logout_service_1.LogoutService, router_1.Router])
+    ], LogoutComponent);
     return LogoutComponent;
 }());
-LogoutComponent = __decorate([
-    core_1.Component({
-        template: ""
-    }),
-    __metadata("design:paramtypes", [logout_service_1.LogoutService, router_1.Router])
-], LogoutComponent);
 exports.LogoutComponent = LogoutComponent;
 //# sourceMappingURL=logout.component.js.map

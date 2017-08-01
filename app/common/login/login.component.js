@@ -88,18 +88,18 @@ var LoginComponent = (function () {
             // this._router.navigate(['welcome']);
         });
     };
+    LoginComponent = __decorate([
+        core_1.Component({
+            templateUrl: 'app/common/login/login.component.html'
+        }),
+        __metadata("design:paramtypes", [login_service_1.LoginService,
+            router_1.Router,
+            constant_1.Constants,
+            forms_1.FormBuilder,
+            angular2_toaster_1.ToasterService,
+            messages_service_1.MessagesService])
+    ], LoginComponent);
     return LoginComponent;
 }());
-LoginComponent = __decorate([
-    core_1.Component({
-        templateUrl: 'app/common/login/login.component.html'
-    }),
-    __metadata("design:paramtypes", [login_service_1.LoginService,
-        router_1.Router,
-        constant_1.Constants,
-        forms_1.FormBuilder,
-        angular2_toaster_1.ToasterService,
-        messages_service_1.MessagesService])
-], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

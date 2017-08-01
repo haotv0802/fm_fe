@@ -30,16 +30,16 @@ var NavComponent = (function () {
         this._router.navigate(["welcome"]);
         return false;
     };
+    NavComponent = __decorate([
+        core_1.Component({
+            selector: 'ht-nav',
+            moduleId: module.id,
+            templateUrl: 'nav.component.html',
+            styleUrls: ['nav.component.css']
+        }),
+        __metadata("design:paramtypes", [router_1.Router, constant_1.Constants])
+    ], NavComponent);
     return NavComponent;
 }());
-NavComponent = __decorate([
-    core_1.Component({
-        selector: 'ht-nav',
-        moduleId: module.id,
-        templateUrl: 'nav.component.html',
-        styleUrls: ['nav.component.css']
-    }),
-    __metadata("design:paramtypes", [router_1.Router, constant_1.Constants])
-], NavComponent);
 exports.NavComponent = NavComponent;
 //# sourceMappingURL=nav.component.js.map

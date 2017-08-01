@@ -15,10 +15,10 @@ var LogoutService = (function () {
         sessionStorage.setItem("authority", null);
         sessionStorage.setItem("authToken", null);
     };
+    LogoutService = __decorate([
+        core_1.Injectable()
+    ], LogoutService);
     return LogoutService;
 }());
-LogoutService = __decorate([
-    core_1.Injectable()
-], LogoutService);
 exports.LogoutService = LogoutService;
 //# sourceMappingURL=logout.service.js.map

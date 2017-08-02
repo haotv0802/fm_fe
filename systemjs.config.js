@@ -16,6 +16,9 @@
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+      '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
+      '@angular/cdk': 'npm:@angular/cdk/bundles/cdk.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
       '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
@@ -30,6 +33,7 @@
       // Smart-Table
       'ng2-completer':'npm:ng2-completer',
       'ng2-smart-table':'npm:ng2-smart-table',
+      'md-datetimepicker':'npm:md-datetimepicker',
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
@@ -61,6 +65,10 @@
         defaultExtension: 'js'
       },
       'ng2-smart-table': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'md-datetimepicker': {
         main: 'index.js',
         defaultExtension: 'js'
       }

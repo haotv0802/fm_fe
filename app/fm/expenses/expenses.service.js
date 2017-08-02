@@ -44,12 +44,12 @@ var ExpensesService = (function () {
             return res.json();
         });
     };
+    ExpensesService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [HTTP_service_1.HTTPService,
+            constant_1.Constants])
+    ], ExpensesService);
     return ExpensesService;
 }());
-ExpensesService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [HTTP_service_1.HTTPService,
-        constant_1.Constants])
-], ExpensesService);
 exports.ExpensesService = ExpensesService;
 //# sourceMappingURL=expenses.service.js.map

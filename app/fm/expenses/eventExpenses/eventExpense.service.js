@@ -42,12 +42,12 @@ var EventExpenseService = (function () {
         return this._httpService.delete(this._constants.EVENT_EXPENSES_SERVICE_URL + ("/" + expenseId + "/" + eventExpenseId))
             .map(function (res) { return res.json(); });
     };
+    EventExpenseService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [HTTP_service_1.HTTPService,
+            constant_1.Constants])
+    ], EventExpenseService);
     return EventExpenseService;
 }());
-EventExpenseService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [HTTP_service_1.HTTPService,
-        constant_1.Constants])
-], EventExpenseService);
 exports.EventExpenseService = EventExpenseService;
 //# sourceMappingURL=eventExpense.service.js.map

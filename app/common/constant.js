@@ -41,10 +41,10 @@ var Constants = (function () {
         // Names of Components
         this.WELCOME_URL = 'welcome';
     }
+    Constants = __decorate([
+        core_1.Injectable()
+    ], Constants);
     return Constants;
 }());
-Constants = __decorate([
-    core_1.Injectable()
-], Constants);
 exports.Constants = Constants;
 //# sourceMappingURL=constant.js.map

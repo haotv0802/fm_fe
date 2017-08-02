@@ -75,23 +75,23 @@ var AlertComponent = (function () {
     AlertComponent.prototype.cancel = function () {
         this.isOpen = false;
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], AlertComponent.prototype, "alertOutput", void 0);
+    AlertComponent = __decorate([
+        core_1.Component({
+            selector: 'alert',
+            template: "\n  <div class=\"modal fade\" [open]=\"!isOpen\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\" [hidden]=!alertHeader>\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" (click)='cancel()' aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n          <h4 class=\"modal-title text-center\" id=\"myModalLabel\">{{alertTitle}}</h4>\n        </div>\n        <div class=\"modal-body\">\n          <div [hidden]=!alertMessage>\n          {{message}}\n          </div>\n        </div>\n        <div class=\"modal-footer\" [hidden]=!alertFooter>\n        <span [hidden]=!okButton >\n          <button class=\"btn btn-primary\" (click)=\"ok()\">{{okButtonText}}</button>\n          </span>\n          <span [hidden]=!cancelButton>\n          <button class=\"btn btn-primary\" (click)=\"cancel()\">{{cancelButtonText}}</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n  ",
+            encapsulation: core_1.ViewEncapsulation.None
+        })
+        /**
+         * API to an open alert window.
+         */
+        ,
+        __metadata("design:paramtypes", [])
+    ], AlertComponent);
     return AlertComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], AlertComponent.prototype, "alertOutput", void 0);
-AlertComponent = __decorate([
-    core_1.Component({
-        selector: 'alert',
-        template: "\n  <div class=\"modal fade\" [open]=\"!isOpen\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\" [hidden]=!alertHeader>\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" (click)='cancel()' aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n          <h4 class=\"modal-title text-center\" id=\"myModalLabel\">{{alertTitle}}</h4>\n        </div>\n        <div class=\"modal-body\">\n          <div [hidden]=!alertMessage>\n          {{message}}\n          </div>\n        </div>\n        <div class=\"modal-footer\" [hidden]=!alertFooter>\n        <span [hidden]=!okButton >\n          <button class=\"btn btn-primary\" (click)=\"ok()\">{{okButtonText}}</button>\n          </span>\n          <span [hidden]=!cancelButton>\n          <button class=\"btn btn-primary\" (click)=\"cancel()\">{{cancelButtonText}}</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n  ",
-        encapsulation: core_1.ViewEncapsulation.None
-    })
-    /**
-     * API to an open alert window.
-     */
-    ,
-    __metadata("design:paramtypes", [])
-], AlertComponent);
 exports.AlertComponent = AlertComponent;
 //# sourceMappingURL=alert.component.js.map

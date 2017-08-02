@@ -22,23 +22,23 @@ var LoaderComponent = (function () {
         // this.loaderClicked.emit(`The rating ${this.isShown} was clicked!`);
         console.log(this.opening);
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], LoaderComponent.prototype, "opening", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], LoaderComponent.prototype, "loaderClicked", void 0);
+    LoaderComponent = __decorate([
+        core_1.Component({
+            selector: 'loader',
+            moduleId: module.id,
+            templateUrl: 'loader.component.html',
+            styleUrls: ['fountain.component.css', 'bubbling.component.css']
+        })
+    ], LoaderComponent);
     return LoaderComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], LoaderComponent.prototype, "opening", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], LoaderComponent.prototype, "loaderClicked", void 0);
-LoaderComponent = __decorate([
-    core_1.Component({
-        selector: 'loader',
-        moduleId: module.id,
-        templateUrl: 'loader.component.html',
-        styleUrls: ['fountain.component.css', 'bubbling.component.css']
-    })
-], LoaderComponent);
 exports.LoaderComponent = LoaderComponent;
 //# sourceMappingURL=loader.component.js.map

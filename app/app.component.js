@@ -32,32 +32,32 @@ var AppComponent = (function () {
             this._toasterService.clear(this.toastList[i].toastId, this.toastList[i].toastContainerId);
         }
     };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'ht-app',
+            // template: `
+            // <div>
+            //     <nav class='navbar navbar-default'>
+            //         <div class='container-fluid'>
+            //             <a class='navbar-brand'>{{pageTitle}}</a>
+            //             <ul class='nav navbar-nav'>
+            //                 <li><a [routerLink]="['/welcome']">Home</a></li>
+            //                 <li><a [routerLink]="['/login']">Login</a></li>
+            //                 <li><a [routerLink]="['/products']">Product List</a></li>
+            //             </ul>
+            //         </div>
+            //     </nav>
+            //     <div class='container'>
+            //         <router-outlet></router-outlet>
+            //     </div>
+            //  </div>
+            //  `
+            templateUrl: 'app/app.component.html'
+        }),
+        __metadata("design:paramtypes", [angular2_toaster_1.ToasterService,
+            messages_service_1.MessagesService])
+    ], AppComponent);
     return AppComponent;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'ht-app',
-        // template: `
-        // <div>
-        //     <nav class='navbar navbar-default'>
-        //         <div class='container-fluid'>
-        //             <a class='navbar-brand'>{{pageTitle}}</a>
-        //             <ul class='nav navbar-nav'>
-        //                 <li><a [routerLink]="['/welcome']">Home</a></li>
-        //                 <li><a [routerLink]="['/login']">Login</a></li>
-        //                 <li><a [routerLink]="['/products']">Product List</a></li>
-        //             </ul>
-        //         </div>
-        //     </nav>
-        //     <div class='container'>
-        //         <router-outlet></router-outlet>
-        //     </div>
-        //  </div>
-        //  `
-        templateUrl: 'app/app.component.html'
-    }),
-    __metadata("design:paramtypes", [angular2_toaster_1.ToasterService,
-        messages_service_1.MessagesService])
-], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

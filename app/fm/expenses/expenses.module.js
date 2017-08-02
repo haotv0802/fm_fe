@@ -20,30 +20,30 @@ var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
 var ExpensesModule = (function () {
     function ExpensesModule() {
     }
+    ExpensesModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                router_1.RouterModule.forChild([
+                    { path: 'expenses', component: expenses_component_1.ExpensesComponent },
+                    { path: 'expenses/:expenseId', canActivate: [eventExpense_guard_service_1.EventExpenseGuard], component: eventExpense_component_1.EventExpenseComponent }
+                ]),
+                common_1.CommonModule,
+                ng2_smart_table_1.Ng2SmartTableModule,
+                htCommon_module_1.HTCommonModule,
+                forms_1.ReactiveFormsModule
+            ],
+            declarations: [
+                expenses_component_1.ExpensesComponent,
+                eventExpense_component_1.EventExpenseComponent
+            ],
+            providers: [
+                expenses_service_1.ExpensesService,
+                eventExpense_service_1.EventExpenseService,
+                eventExpense_guard_service_1.EventExpenseGuard
+            ]
+        })
+    ], ExpensesModule);
     return ExpensesModule;
 }());
-ExpensesModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            router_1.RouterModule.forChild([
-                { path: 'expenses', component: expenses_component_1.ExpensesComponent },
-                { path: 'expenses/:expenseId', canActivate: [eventExpense_guard_service_1.EventExpenseGuard], component: eventExpense_component_1.EventExpenseComponent }
-            ]),
-            common_1.CommonModule,
-            ng2_smart_table_1.Ng2SmartTableModule,
-            htCommon_module_1.HTCommonModule,
-            forms_1.ReactiveFormsModule
-        ],
-        declarations: [
-            expenses_component_1.ExpensesComponent,
-            eventExpense_component_1.EventExpenseComponent
-        ],
-        providers: [
-            expenses_service_1.ExpensesService,
-            eventExpense_service_1.EventExpenseService,
-            eventExpense_guard_service_1.EventExpenseGuard
-        ]
-    })
-], ExpensesModule);
 exports.ExpensesModule = ExpensesModule;
 //# sourceMappingURL=expenses.module.js.map

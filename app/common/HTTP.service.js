@@ -91,12 +91,12 @@ var HTTPService = (function () {
         // console.log("this._constants.LANGUAGE: " + this._constants.LANGUAGE);
         return this._constants.LANGUAGE;
     };
+    HTTPService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http,
+            constant_1.Constants])
+    ], HTTPService);
     return HTTPService;
 }());
-HTTPService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http,
-        constant_1.Constants])
-], HTTPService);
 exports.HTTPService = HTTPService;
 //# sourceMappingURL=HTTP.service.js.map

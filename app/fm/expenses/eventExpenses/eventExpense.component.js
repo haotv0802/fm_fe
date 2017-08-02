@@ -197,22 +197,22 @@ var EventExpenseComponent = (function () {
         });
         this.idUpdate = undefined;
     };
+    __decorate([
+        core_1.ViewChild(modal_component_1.ModalComponent),
+        __metadata("design:type", modal_component_1.ModalComponent)
+    ], EventExpenseComponent.prototype, "modal", void 0);
+    EventExpenseComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            templateUrl: 'eventExpense.component.html'
+        }),
+        __metadata("design:paramtypes", [eventExpense_service_1.EventExpenseService,
+            expenses_service_1.ExpensesService,
+            router_1.Router,
+            forms_1.FormBuilder,
+            router_1.ActivatedRoute])
+    ], EventExpenseComponent);
     return EventExpenseComponent;
 }());
-__decorate([
-    core_1.ViewChild(modal_component_1.ModalComponent),
-    __metadata("design:type", modal_component_1.ModalComponent)
-], EventExpenseComponent.prototype, "modal", void 0);
-EventExpenseComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        templateUrl: 'eventExpense.component.html'
-    }),
-    __metadata("design:paramtypes", [eventExpense_service_1.EventExpenseService,
-        expenses_service_1.ExpensesService,
-        router_1.Router,
-        forms_1.FormBuilder,
-        router_1.ActivatedRoute])
-], EventExpenseComponent);
 exports.EventExpenseComponent = EventExpenseComponent;
 //# sourceMappingURL=eventExpense.component.js.map

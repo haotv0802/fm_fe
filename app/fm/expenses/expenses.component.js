@@ -192,21 +192,21 @@ var ExpensesComponent = (function () {
         });
         this.idUpdate = undefined;
     };
+    __decorate([
+        core_1.ViewChild(modal_component_1.ModalComponent),
+        __metadata("design:type", modal_component_1.ModalComponent)
+    ], ExpensesComponent.prototype, "modal", void 0);
+    ExpensesComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            templateUrl: 'expenses.component.html'
+        }),
+        __metadata("design:paramtypes", [expenses_service_1.ExpensesService,
+            eventExpense_service_1.EventExpenseService,
+            router_1.Router,
+            forms_1.FormBuilder])
+    ], ExpensesComponent);
     return ExpensesComponent;
 }());
-__decorate([
-    core_1.ViewChild(modal_component_1.ModalComponent),
-    __metadata("design:type", modal_component_1.ModalComponent)
-], ExpensesComponent.prototype, "modal", void 0);
-ExpensesComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        templateUrl: 'expenses.component.html'
-    }),
-    __metadata("design:paramtypes", [expenses_service_1.ExpensesService,
-        eventExpense_service_1.EventExpenseService,
-        router_1.Router,
-        forms_1.FormBuilder])
-], ExpensesComponent);
 exports.ExpensesComponent = ExpensesComponent;
 //# sourceMappingURL=expenses.component.js.map

@@ -50,25 +50,25 @@ var OpenDirective = (function () {
         this.isExpanded = true;
         this.display = 'block';
     };
+    __decorate([
+        core_1.HostBinding('style.display'),
+        __metadata("design:type", String)
+    ], OpenDirective.prototype, "display", void 0);
+    __decorate([
+        core_1.HostBinding('class.in'),
+        core_1.HostBinding('attr.aria-expanded'),
+        __metadata("design:type", Boolean)
+    ], OpenDirective.prototype, "isExpanded", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], OpenDirective.prototype, "open", null);
+    OpenDirective = __decorate([
+        core_1.Directive({ selector: '[open]' }),
+        __metadata("design:paramtypes", [])
+    ], OpenDirective);
     return OpenDirective;
 }());
-__decorate([
-    core_1.HostBinding('style.display'),
-    __metadata("design:type", String)
-], OpenDirective.prototype, "display", void 0);
-__decorate([
-    core_1.HostBinding('class.in'),
-    core_1.HostBinding('attr.aria-expanded'),
-    __metadata("design:type", Boolean)
-], OpenDirective.prototype, "isExpanded", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], OpenDirective.prototype, "open", null);
-OpenDirective = __decorate([
-    core_1.Directive({ selector: '[open]' }),
-    __metadata("design:paramtypes", [])
-], OpenDirective);
 exports.OpenDirective = OpenDirective;
 //# sourceMappingURL=open.component.js.map

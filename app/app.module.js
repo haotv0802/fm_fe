@@ -26,37 +26,37 @@ var fm_module_1 = require("./fm/fm.module");
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                router_1.RouterModule.forRoot([
+                    { path: 'welcome', component: welcome_component_1.WelcomeComponent },
+                    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+                ]),
+                login_module_1.LoginModule,
+                product_module_1.ProductModule,
+                fm_module_1.FmModule,
+                htCommon_module_1.HTCommonModule,
+                angular2_toaster_1.ToasterModule,
+                angular2_modal_1.ModalModule.forRoot(),
+                bootstrap_1.BootstrapModalModule
+            ],
+            declarations: [
+                app_component_1.AppComponent,
+                welcome_component_1.WelcomeComponent,
+                nav_component_1.NavComponent
+            ],
+            providers: [
+                constant_1.Constants,
+                messages_service_1.MessagesService,
+                HTTP_service_1.HTTPService
+            ],
+            bootstrap: [app_component_1.AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            http_1.HttpModule,
-            router_1.RouterModule.forRoot([
-                { path: 'welcome', component: welcome_component_1.WelcomeComponent },
-                { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-            ]),
-            login_module_1.LoginModule,
-            product_module_1.ProductModule,
-            fm_module_1.FmModule,
-            htCommon_module_1.HTCommonModule,
-            angular2_toaster_1.ToasterModule,
-            angular2_modal_1.ModalModule.forRoot(),
-            bootstrap_1.BootstrapModalModule
-        ],
-        declarations: [
-            app_component_1.AppComponent,
-            welcome_component_1.WelcomeComponent,
-            nav_component_1.NavComponent
-        ],
-        providers: [
-            constant_1.Constants,
-            messages_service_1.MessagesService,
-            HTTP_service_1.HTTPService
-        ],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

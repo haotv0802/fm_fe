@@ -16,12 +16,12 @@ var ProductFilterPipe = (function () {
             return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
         }) : value;
     };
+    ProductFilterPipe = __decorate([
+        core_1.Pipe({
+            name: 'productFilter'
+        })
+    ], ProductFilterPipe);
     return ProductFilterPipe;
 }());
-ProductFilterPipe = __decorate([
-    core_1.Pipe({
-        name: 'productFilter'
-    })
-], ProductFilterPipe);
 exports.ProductFilterPipe = ProductFilterPipe;
 //# sourceMappingURL=product-filter.pipe.js.map

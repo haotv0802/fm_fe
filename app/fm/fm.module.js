@@ -11,17 +11,17 @@ var expenses_module_1 = require("./expenses/expenses.module");
 var FmModule = (function () {
     function FmModule() {
     }
+    FmModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                expenses_module_1.ExpensesModule
+            ],
+            declarations: [],
+            exports: [],
+            providers: []
+        })
+    ], FmModule);
     return FmModule;
 }());
-FmModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            expenses_module_1.ExpensesModule
-        ],
-        declarations: [],
-        exports: [],
-        providers: []
-    })
-], FmModule);
 exports.FmModule = FmModule;
 //# sourceMappingURL=fm.module.js.map

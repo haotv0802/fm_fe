@@ -15,6 +15,7 @@
 
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+      '@angular/cli': 'npm:@angular/cli/lib/cli/index.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
       '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',

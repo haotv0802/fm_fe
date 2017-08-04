@@ -28,16 +28,15 @@
                             />
                         </td>
                         <td>
-                            <!--<input class="form-control"-->
-                                   <!--id="dateId"-->
-                                   <!--type="date"-->
-                                   <!--placeholder="Date (required)"-->
-                                   <!--formControlName="date"-->
-                                   <!--#date-->
-                                   <!--(keyup.enter)="addExpense()"-->
-                                   <!--style="width: 150px;"-->
-                            <!--/>-->
-                            <lc-datepicker [(opened)]="CalendarOpened" [config]="config" [(date)]="setDate"></lc-datepicker>
+                            <input class="form-control"
+                                   id="dateId"
+                                   type="date"
+                                   placeholder="Date (required)"
+                                   formControlName="date"
+                                   #date
+                                   (keyup.enter)="addExpense()"
+                                   style="width: 150px;"
+                            />
                         </td>
                         <td>
                             <input class="form-control"

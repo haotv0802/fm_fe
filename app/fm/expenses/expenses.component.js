@@ -17,8 +17,6 @@ var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
 var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
-// import {DatePickerConfig} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper";
-var lc_datepicker_1 = require("@libusoftcicom/lc-datepicker");
 var ExpensesComponent = (function () {
     function ExpensesComponent(_expensesService, _eventExpenseService, _router, fb) {
         this._expensesService = _expensesService;
@@ -28,7 +26,6 @@ var ExpensesComponent = (function () {
         this.loaderOpen = true;
         // editHidden: boolean = false;
         this.expenseEdit = new expense_1.Expense();
-        this.config = new lc_datepicker_1.DatePickerConfig();
         this.pageTitle = 'Expenses';
     }
     ExpensesComponent.prototype.ngOnInit = function () {

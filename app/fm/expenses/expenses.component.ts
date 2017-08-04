@@ -8,8 +8,6 @@ import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
-// import {DatePickerConfig} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper";
-import {LCDatePickerComponent, DatePickerConfig, ECalendarType} from '@libusoftcicom/lc-datepicker';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +23,6 @@ export class ExpensesComponent implements OnInit {
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
-  public config = new DatePickerConfig();
 
   constructor(
     private _expensesService: ExpensesService,

@@ -31,6 +31,8 @@
       'ng2-completer':'npm:ng2-completer',
       'ng2-smart-table':'npm:ng2-smart-table',
       'moment':'npm:moment',
+      '@libusoftcicom/lc-datepicker':'npm:@libusoftcicom/lc-datepicker/lib-dist',
+      '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': 'npm:@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker',
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
@@ -67,6 +69,14 @@
       },
       'moment': {
         main: 'moment.js',
+        defaultExtension: 'js'
+      },
+      '@libusoftcicom/lc-datepicker': {
+        main: 'lc-date-picker.module.js',
+        defaultExtension: 'js'
+      },
+      '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': {
+        main: 'lc-date-picker.component.js',
         defaultExtension: 'js'
       }
     }

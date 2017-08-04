@@ -17,8 +17,8 @@ var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
 var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
-var lc_date_picker_component_1 = require("../../lib/lc-date-picker/lc-date-picker.component");
-var lc_date_picker_config_helper_1 = require("../../lib/lc-date-picker/lc-date-picker-config-helper");
+var lc_date_picker_component_1 = require("@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker.component");
+var lc_date_picker_config_helper_1 = require("@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper");
 var ExpensesComponent = (function () {
     function ExpensesComponent(_expensesService, _eventExpenseService, _router, fb) {
         this._expensesService = _expensesService;

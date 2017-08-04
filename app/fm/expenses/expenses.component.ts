@@ -8,8 +8,11 @@ import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
-import {LCDatePickerComponent} from "../../lib/lc-date-picker/lc-date-picker.component";
-import {DatePickerConfig, ECalendarType} from "../../lib/lc-date-picker/lc-date-picker-config-helper";
+import {LCDatePickerComponent} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker.component";
+import {
+  DatePickerConfig,
+  ECalendarType
+} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper";
 
 @Component({
   moduleId: module.id,

@@ -15,6 +15,7 @@ import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
 import {MessagesService} from "./common/messages/messages.service";
 import {FmModule} from "./fm/fm.module";
+import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import {FmModule} from "./fm/fm.module";
     HTCommonModule,
     ToasterModule,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    LcDatePickerModule
   ],
   declarations: [
     AppComponent,

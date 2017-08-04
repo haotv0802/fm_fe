@@ -30,6 +30,7 @@
       // Smart-Table
       'ng2-completer':'npm:ng2-completer',
       'ng2-smart-table':'npm:ng2-smart-table',
+      'moment':'npm:moment',
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
@@ -62,6 +63,10 @@
       },
       'ng2-smart-table': {
         main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'moment': {
+        main: 'moment.js',
         defaultExtension: 'js'
       }
     }

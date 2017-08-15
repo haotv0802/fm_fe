@@ -37,7 +37,9 @@
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      'hammerjs': 'npm:hammerjs'
+
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -78,6 +80,10 @@
       },
       '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': {
         main: 'lc-date-picker.component.js',
+        defaultExtension: 'js'
+      },
+      'hammerjs': {
+        main: 'hammerjs.js',
         defaultExtension: 'js'
       }
     }

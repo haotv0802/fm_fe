@@ -1,9 +1,11 @@
 import {NgModule} from "@angular/core";
 import {ExpensesModule} from "./expenses/expenses.module";
+import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
 
 @NgModule({
   imports: [
-    ExpensesModule
+    ExpensesModule,
+    LcDatePickerModule
   ],
   declarations: [
   ],

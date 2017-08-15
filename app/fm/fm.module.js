@@ -8,13 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var expenses_module_1 = require("./expenses/expenses.module");
+var lc_datepicker_1 = require("@libusoftcicom/lc-datepicker");
 var FmModule = (function () {
     function FmModule() {
     }
     FmModule = __decorate([
         core_1.NgModule({
             imports: [
-                expenses_module_1.ExpensesModule
+                expenses_module_1.ExpensesModule,
+                lc_datepicker_1.LcDatePickerModule
             ],
             declarations: [],
             exports: [],

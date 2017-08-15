@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import {RouterModule} from "@angular/router";
@@ -32,8 +32,7 @@ import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
     HTCommonModule,
     ToasterModule,
     ModalModule.forRoot(),
-    BootstrapModalModule,
-    LcDatePickerModule
+    BootstrapModalModule
   ],
   declarations: [
     AppComponent,
@@ -46,6 +45,7 @@ import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
     HTTPService
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule {
 }

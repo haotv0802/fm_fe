@@ -10,6 +10,7 @@ import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
 import {DatePipe} from "@angular/common";
 import {DateModel, DatePickerOptions} from "ng2-datepicker";
+import {Moment} from "moment";
 
 @Component({
   moduleId: module.id,
@@ -110,27 +111,27 @@ export class ExpensesComponent implements OnInit {
 
   addExpense(): void {
     this.expenseEdit.amount = this.expenseForm.get("amount").value;
-    this.expenseEdit.date = this.expenseForm.get("date").value;
+    this.expenseEdit.date = this.expenseForm.get("date").value.formatted;
     this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
     this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
-    // this._expensesService.addExpense(this.expenseEdit).subscribe(
-    //   (res) => {
-    //     this._expensesService.getExpenses().subscribe(
-    //       (expensesDetails) => {
-    //         this.expensesDetails = expensesDetails;
-    //         this.resetFormValues();
-    //       }, (error: Error) => {
-    //         console.log(error);
-    //       }
-    //     );
-    //   }, (error: Error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this._expensesService.addExpense(this.expenseEdit).subscribe(
+      (res) => {
+        this._expensesService.getExpenses().subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error: Error) => {
+        console.log(error);
+      }
+    );
 
   }
 

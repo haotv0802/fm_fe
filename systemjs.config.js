@@ -34,7 +34,8 @@
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
       'rxjs': 'npm:rxjs',
-      'ng2-flatpickr':'npm:ng2-flatpickr'
+      'ng2-flatpickr':'npm:ng2-flatpickr',
+      'autoloader': 'npm:autoloader'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -67,6 +68,10 @@
       },
       'ng2-flatpickr': {
         main: 'ng2-flatpickr.js',
+        defaultExtension: 'js'
+      },
+      'autoloader': {
+        main: 'autoloader.js',
         defaultExtension: 'js'
       }
     }

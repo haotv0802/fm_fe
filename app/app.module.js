@@ -23,6 +23,7 @@ var angular2_modal_1 = require("angular2-modal");
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var messages_service_1 = require("./common/messages/messages.service");
 var fm_module_1 = require("./fm/fm.module");
+var ng2_flatpickr_1 = require("ng2-flatpickr");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -46,7 +47,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 welcome_component_1.WelcomeComponent,
-                nav_component_1.NavComponent
+                nav_component_1.NavComponent,
+                ng2_flatpickr_1.Ng2FlatpickrComponent
             ],
             providers: [
                 constant_1.Constants,

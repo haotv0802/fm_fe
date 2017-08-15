@@ -33,7 +33,8 @@
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      'ng2-flatpickr':'npm:ng2-flatpickr'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -62,6 +63,10 @@
       },
       'ng2-smart-table': {
         main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'ng2-flatpickr': {
+        main: 'ng2-flatpickr.js',
         defaultExtension: 'js'
       }
     }

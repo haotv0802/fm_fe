@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {LoaderModalComponent} from "./modal/loaderModal/loader.modal.component";
 import {LoaderComponent} from "./loader/loader.component";
 import {MessagesService} from "./messages/messages.service";
+import {Ng2FlatpickrComponent} from "ng2-flatpickr";
 
 @NgModule({
   imports: [CommonModule],

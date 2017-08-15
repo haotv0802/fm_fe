@@ -15,6 +15,7 @@ import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
 import {MessagesService} from "./common/messages/messages.service";
 import {FmModule} from "./fm/fm.module";
+import {Ng2FlatpickrComponent} from "ng2-flatpickr";
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {FmModule} from "./fm/fm.module";
   declarations: [
     AppComponent,
     WelcomeComponent,
-    NavComponent
+    NavComponent,
+    Ng2FlatpickrComponent
   ],
   providers: [
     Constants,

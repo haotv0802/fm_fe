@@ -13,12 +13,13 @@ var modal_component_1 = require("./modal/modal.component");
 var common_1 = require("@angular/common");
 var loader_modal_component_1 = require("./modal/loaderModal/loader.modal.component");
 var loader_component_1 = require("./loader/loader.component");
+var ng2_datepicker_1 = require("ng2-datepicker");
 var HTCommonModule = (function () {
     function HTCommonModule() {
     }
     HTCommonModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule],
+            imports: [common_1.CommonModule, ng2_datepicker_1.DatePickerModule],
             declarations: [
                 alert_component_1.AlertComponent,
                 open_component_1.OpenDirective,
@@ -32,7 +33,8 @@ var HTCommonModule = (function () {
                 modal_component_1.ModalComponent,
                 loader_modal_component_1.LoaderModalComponent,
                 common_1.CommonModule,
-                loader_component_1.LoaderComponent
+                loader_component_1.LoaderComponent,
+                ng2_datepicker_1.DatePickerModule
             ],
             providers: []
         })

@@ -6,9 +6,10 @@ import {CommonModule} from "@angular/common";
 import {LoaderModalComponent} from "./modal/loaderModal/loader.modal.component";
 import {LoaderComponent} from "./loader/loader.component";
 import {MessagesService} from "./messages/messages.service";
+import {DatePickerModule} from "ng2-datepicker";
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, DatePickerModule],
   declarations: [
     AlertComponent,
     OpenDirective,
@@ -22,7 +23,8 @@ import {MessagesService} from "./messages/messages.service";
     ModalComponent,
     LoaderModalComponent,
     CommonModule,
-    LoaderComponent
+    LoaderComponent,
+    DatePickerModule
   ],
   providers: []
 })

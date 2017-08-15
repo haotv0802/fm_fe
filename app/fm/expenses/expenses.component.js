@@ -17,6 +17,7 @@ var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
 var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
+var ng2_datepicker_1 = require("ng2-datepicker");
 var ExpensesComponent = (function () {
     function ExpensesComponent(_expensesService, _eventExpenseService, _router, fb) {
         this._expensesService = _expensesService;
@@ -27,6 +28,7 @@ var ExpensesComponent = (function () {
         // editHidden: boolean = false;
         this.expenseEdit = new expense_1.Expense();
         this.pageTitle = 'Expenses';
+        this.options = new ng2_datepicker_1.DatePickerOptions();
     }
     ExpensesComponent.prototype.ngOnInit = function () {
         var _this = this;

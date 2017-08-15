@@ -33,7 +33,10 @@
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      'ng2-datepicker': 'npm:ng2-datepicker/lib-dist',
+      'ng2-slimscroll': 'npm:ng2-slimscroll/bundles/ng2-slimscroll.umd.js',
+      'moment':'npm:moment'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -62,6 +65,14 @@
       },
       'ng2-smart-table': {
         main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'ng2-datepicker': {
+        main: 'ng2-datepicker.module.js',
+        defaultExtension: 'js'
+      },
+      'moment': {
+        main: 'moment.js',
         defaultExtension: 'js'
       }
     }

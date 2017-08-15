@@ -9,6 +9,7 @@ import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
 import {DatePipe} from "@angular/common";
+import {DateModel, DatePickerOptions} from "ng2-datepicker";
 
 @Component({
   moduleId: module.id,
@@ -25,6 +26,9 @@ export class ExpensesComponent implements OnInit {
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
 
+  date: DateModel;
+  options: DatePickerOptions;
+
   constructor(
     private _expensesService: ExpensesService,
     private _eventExpenseService: EventExpenseService,
@@ -32,6 +36,7 @@ export class ExpensesComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.pageTitle = 'Expenses';
+    this.options = new DatePickerOptions();
   }
 
   ngOnInit(): void {

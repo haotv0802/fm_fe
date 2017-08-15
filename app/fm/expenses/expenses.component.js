@@ -49,10 +49,12 @@ var ExpensesComponent = (function () {
     };
     Object.defineProperty(ExpensesComponent.prototype, "setDate", {
         get: function () {
-            return this.dateInput.nativeElement.value;
+            // return this.dateInput.nativeElement.value;
+            return "";
         },
         set: function (value) {
             this.dateInput.nativeElement.value = value;
+            this.expenseForm.get("date").setValue(value);
         },
         enumerable: true,
         configurable: true
@@ -111,6 +113,7 @@ var ExpensesComponent = (function () {
         });
     };
     ExpensesComponent.prototype.addExpense = function () {
+        var _this = this;
         this.expenseEdit.amount = this.expenseForm.get("amount").value;
         this.expenseEdit.date = this.expenseForm.get("date").value;
         this.expenseEdit.place = this.expenseForm.get("place").value;
@@ -118,20 +121,16 @@ var ExpensesComponent = (function () {
         this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
         this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
         console.log(this.expenseEdit);
-        // this._expensesService.addExpense(this.expenseEdit).subscribe(
-        //   (res) => {
-        //     this._expensesService.getExpenses().subscribe(
-        //       (expensesDetails) => {
-        //         this.expensesDetails = expensesDetails;
-        //         this.resetFormValues();
-        //       }, (error: Error) => {
-        //         console.log(error);
-        //       }
-        //     );
-        //   }, (error: Error) => {
-        //     console.log(error);
-        //   }
-        // );
+        this._expensesService.addExpense(this.expenseEdit).subscribe(function (res) {
+            _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
+                _this.expensesDetails = expensesDetails;
+                _this.resetFormValues();
+            }, function (error) {
+                console.log(error);
+            });
+        }, function (error) {
+            console.log(error);
+        });
     };
     ExpensesComponent.prototype.closeUpdateExpense = function (expense) {
         expense.id = expense.id * -1;

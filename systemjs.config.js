@@ -38,7 +38,8 @@
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
       'rxjs': 'npm:rxjs',
-      'hammerjs': 'npm:hammerjs'
+      'hammerjs': 'npm:hammerjs',
+      'font-awesome': 'npm:font-awesome/css/font-awesome.css'
 
     },
     // packages tells the System loader how to load when no filename and/or no extension

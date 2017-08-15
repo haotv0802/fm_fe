@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
+import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import {RouterModule} from "@angular/router";
@@ -15,7 +15,6 @@ import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
 import {MessagesService} from "./common/messages/messages.service";
 import {FmModule} from "./fm/fm.module";
-import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
 
 @NgModule({
   imports: [

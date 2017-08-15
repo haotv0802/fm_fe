@@ -65,11 +65,13 @@ export class ExpensesComponent implements OnInit {
   }
 
   public get setDate() {
-    return this.dateInput.nativeElement.value;
+    // return this.dateInput.nativeElement.value;
+    return "";
   }
 
   public set setDate(value) {
     this.dateInput.nativeElement.value = value;
+    this.expenseForm.get("date").setValue(value);
   }
 
   ngOnInit(): void {
@@ -150,20 +152,20 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
-    // this._expensesService.addExpense(this.expenseEdit).subscribe(
-    //   (res) => {
-    //     this._expensesService.getExpenses().subscribe(
-    //       (expensesDetails) => {
-    //         this.expensesDetails = expensesDetails;
-    //         this.resetFormValues();
-    //       }, (error: Error) => {
-    //         console.log(error);
-    //       }
-    //     );
-    //   }, (error: Error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this._expensesService.addExpense(this.expenseEdit).subscribe(
+      (res) => {
+        this._expensesService.getExpenses().subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error: Error) => {
+        console.log(error);
+      }
+    );
 
   }
 

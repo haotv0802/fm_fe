@@ -17,6 +17,9 @@
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+      '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
+      '@angular/cdk': 'npm:@angular/cdk/bundles/cdk.umd.js',
       '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
@@ -33,7 +36,8 @@
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      'md-datetimepicker': 'npm:md-datetimepicker'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -61,6 +65,10 @@
         defaultExtension: 'js'
       },
       'ng2-smart-table': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'md-datetimepicker': {
         main: 'index.js',
         defaultExtension: 'js'
       }

@@ -23,6 +23,7 @@ var angular2_modal_1 = require("angular2-modal");
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var messages_service_1 = require("./common/messages/messages.service");
 var fm_module_1 = require("./fm/fm.module");
+var md_datetimepicker_1 = require("md-datetimepicker");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -41,7 +42,8 @@ var AppModule = (function () {
                 htCommon_module_1.HTCommonModule,
                 angular2_toaster_1.ToasterModule,
                 angular2_modal_1.ModalModule.forRoot(),
-                bootstrap_1.BootstrapModalModule
+                bootstrap_1.BootstrapModalModule,
+                md_datetimepicker_1.MdDatetimepickerModule
             ],
             declarations: [
                 app_component_1.AppComponent,

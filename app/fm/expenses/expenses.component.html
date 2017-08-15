@@ -28,15 +28,20 @@
                             />
                         </td>
                         <td>
-                            <input class="form-control"
-                                   id="dateId"
-                                   type="date"
-                                   placeholder="Date (required)"
-                                   formControlName="date"
-                                   #date
-                                   (keyup.enter)="addExpense()"
-                                   style="width: 150px;"
-                            />
+                            <!--<input class="form-control"-->
+                                   <!--id="dateId"-->
+                                   <!--type="date"-->
+                                   <!--placeholder="Date (required)"-->
+                                   <!--formControlName="date"-->
+                                   <!--#date-->
+                                   <!--(keyup.enter)="addExpense()"-->
+                                   <!--style="width: 150px;"-->
+                            <!--/>-->
+                            <md-input-container>
+                                <input mdInput [MdDatetimepicker]="picker" [date]="now" placeholder="Choose a date">
+                                <button mdSuffix [mdDatetimepickerToggle]="picker" [hideTime]="false"></button>
+                            </md-input-container>
+                            <md-datetimepicker #picker [hideTime]="false"></md-datetimepicker>
                         </td>
                         <td>
                             <input class="form-control"

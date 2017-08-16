@@ -108,7 +108,7 @@ var ModalComponent = (function () {
     ], ModalComponent.prototype, "target", void 0);
     __decorate([
         core_1.Output(),
-        __metadata("design:type", typeof (_a = typeof core_1.EventEmitter !== "undefined" && core_1.EventEmitter) === "function" && _a || Object)
+        __metadata("design:type", core_1.EventEmitter)
     ], ModalComponent.prototype, "modalOutput", void 0);
     ModalComponent = __decorate([
         core_1.Component({
@@ -122,10 +122,9 @@ var ModalComponent = (function () {
          * API to an open modal window.
          */
         ,
-        __metadata("design:paramtypes", [typeof (_b = typeof core_1.ComponentFactoryResolver !== "undefined" && core_1.ComponentFactoryResolver) === "function" && _b || Object, typeof (_c = typeof core_1.ViewContainerRef !== "undefined" && core_1.ViewContainerRef) === "function" && _c || Object])
+        __metadata("design:paramtypes", [core_1.ComponentFactoryResolver, core_1.ViewContainerRef])
     ], ModalComponent);
     return ModalComponent;
-    var _a, _b, _c;
 }());
 exports.ModalComponent = ModalComponent;
 //# sourceMappingURL=modal.component.js.map

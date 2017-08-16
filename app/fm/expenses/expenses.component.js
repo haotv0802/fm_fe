@@ -199,10 +199,11 @@ var ExpensesComponent = (function () {
             templateUrl: 'expenses.component.html'
         }),
         __metadata("design:paramtypes", [expenses_service_1.ExpensesService,
-            eventExpense_service_1.EventExpenseService, typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof forms_1.FormBuilder !== "undefined" && forms_1.FormBuilder) === "function" && _b || Object])
+            eventExpense_service_1.EventExpenseService,
+            router_1.Router,
+            forms_1.FormBuilder])
     ], ExpensesComponent);
     return ExpensesComponent;
-    var _a, _b;
 }());
 exports.ExpensesComponent = ExpensesComponent;
 //# sourceMappingURL=expenses.component.js.map

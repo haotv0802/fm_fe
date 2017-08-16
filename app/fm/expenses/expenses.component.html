@@ -1,4 +1,9 @@
 <loader-modal [opening]="loaderOpen" (loaderClicked)='onLoaderClicked($event)'></loader-modal>
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+</script>
 <div class='panel panel-primary' *ngIf="!loaderOpen">
     <div class='panel-heading' style='font-size:large'>
         {{pageTitle}}
@@ -9,7 +14,7 @@
             <table class="table table-bordered table-hover" style="width: 1145px;">
                 <thead style="color: #337AB7">
                     <th class="col-sm-2">Amount</th>
-                    <th class="col-sm-1">Date</th>
+                    <th class="col-sm-2">Date</th>
                     <th class="col-sm-2">Place</th>
                     <th class="col-sm-2">Payment Method</th>
                     <th class="col-sm-2">For Person</th>
@@ -28,15 +33,25 @@
                             />
                         </td>
                         <td>
-                            <input class="form-control"
-                                   id="dateId"
-                                   type="date"
-                                   placeholder="Date (required)"
-                                   formControlName="date"
-                                   #date
-                                   (keyup.enter)="addExpense()"
-                                   style="width: 150px;"
-                            />
+                            <!--<input class="form-control"-->
+                                   <!--id="dateId"-->
+                                   <!--type="date"-->
+                                   <!--placeholder="Date (required)"-->
+                                   <!--formControlName="date"-->
+                                   <!--#date-->
+                                   <!--(keyup.enter)="addExpense()"-->
+                                   <!--style="width: 150px;"-->
+                            <!--/>-->
+                            <div class='col-sm-6'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker5'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                         <td>
                             <input class="form-control"

@@ -60,11 +60,11 @@ var EventExpenseGuard = (function () {
     };
     EventExpenseGuard = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [router_1.Router,
-            HTTP_service_1.HTTPService,
+        __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, HTTP_service_1.HTTPService,
             constant_1.Constants])
     ], EventExpenseGuard);
     return EventExpenseGuard;
+    var _a;
 }());
 exports.EventExpenseGuard = EventExpenseGuard;
 //# sourceMappingURL=eventExpense-guard.service.js.map

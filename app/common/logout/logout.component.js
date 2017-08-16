@@ -25,9 +25,10 @@ var LogoutComponent = (function () {
         core_1.Component({
             template: ""
         }),
-        __metadata("design:paramtypes", [logout_service_1.LogoutService, router_1.Router])
+        __metadata("design:paramtypes", [logout_service_1.LogoutService, typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object])
     ], LogoutComponent);
     return LogoutComponent;
+    var _a;
 }());
 exports.LogoutComponent = LogoutComponent;
 //# sourceMappingURL=logout.component.js.map

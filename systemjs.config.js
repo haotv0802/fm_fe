@@ -33,8 +33,7 @@
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs',
-      'angular2-calendar': 'npm:angular2-calendar/dist/umd/angular2-calendar.js'
+      'rxjs': 'npm:rxjs'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

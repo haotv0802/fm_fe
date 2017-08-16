@@ -15,7 +15,6 @@ import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
 import {MessagesService} from "./common/messages/messages.service";
 import {FmModule} from "./fm/fm.module";
-import {CalendarModule} from "angular2-calendar";
 
 @NgModule({
   imports: [
@@ -32,8 +31,7 @@ import {CalendarModule} from "angular2-calendar";
     HTCommonModule,
     ToasterModule,
     ModalModule.forRoot(),
-    BootstrapModalModule,
-    CalendarModule.forRoot()
+    BootstrapModalModule
   ],
   declarations: [
     AppComponent,

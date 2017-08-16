@@ -28,7 +28,7 @@ var LoaderComponent = (function () {
     ], LoaderComponent.prototype, "opening", void 0);
     __decorate([
         core_1.Output(),
-        __metadata("design:type", core_1.EventEmitter)
+        __metadata("design:type", typeof (_a = typeof core_1.EventEmitter !== "undefined" && core_1.EventEmitter) === "function" && _a || Object)
     ], LoaderComponent.prototype, "loaderClicked", void 0);
     LoaderComponent = __decorate([
         core_1.Component({
@@ -39,6 +39,7 @@ var LoaderComponent = (function () {
         })
     ], LoaderComponent);
     return LoaderComponent;
+    var _a;
 }());
 exports.LoaderComponent = LoaderComponent;
 //# sourceMappingURL=loader.component.js.map

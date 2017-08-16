@@ -28,7 +28,7 @@ var LoaderModalComponent = (function () {
     ], LoaderModalComponent.prototype, "opening", void 0);
     __decorate([
         core_1.Output(),
-        __metadata("design:type", core_1.EventEmitter)
+        __metadata("design:type", typeof (_a = typeof core_1.EventEmitter !== "undefined" && core_1.EventEmitter) === "function" && _a || Object)
     ], LoaderModalComponent.prototype, "loaderClicked", void 0);
     LoaderModalComponent = __decorate([
         core_1.Component({
@@ -39,6 +39,7 @@ var LoaderModalComponent = (function () {
         })
     ], LoaderModalComponent);
     return LoaderModalComponent;
+    var _a;
 }());
 exports.LoaderModalComponent = LoaderModalComponent;
 //# sourceMappingURL=loader.modal.component.js.map

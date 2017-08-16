@@ -15,6 +15,7 @@
 
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+      '@angular/cli': 'npm:@angular/cli/lib/cli/index.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
       '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
@@ -30,10 +31,16 @@
       // Smart-Table
       'ng2-completer':'npm:ng2-completer',
       'ng2-smart-table':'npm:ng2-smart-table',
+      'moment':'npm:moment',
+      '@libusoftcicom/lc-datepicker':'npm:@libusoftcicom/lc-datepicker/lib-dist',
+      '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': 'npm:@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker',
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      'hammerjs': 'npm:hammerjs',
+      'font-awesome': 'npm:font-awesome/css/font-awesome.css'
+
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -62,6 +69,22 @@
       },
       'ng2-smart-table': {
         main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'moment': {
+        main: 'moment.js',
+        defaultExtension: 'js'
+      },
+      '@libusoftcicom/lc-datepicker': {
+        main: 'lc-date-picker.module.js',
+        defaultExtension: 'js'
+      },
+      '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': {
+        main: 'lc-date-picker.component.js',
+        defaultExtension: 'js'
+      },
+      'hammerjs': {
+        main: 'hammerjs.js',
         defaultExtension: 'js'
       }
     }

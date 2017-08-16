@@ -13,6 +13,7 @@ var modal_component_1 = require("./modal/modal.component");
 var common_1 = require("@angular/common");
 var loader_modal_component_1 = require("./modal/loaderModal/loader.modal.component");
 var loader_component_1 = require("./loader/loader.component");
+var lc_datepicker_1 = require("@libusoftcicom/lc-datepicker");
 var HTCommonModule = (function () {
     function HTCommonModule() {
     }
@@ -32,9 +33,11 @@ var HTCommonModule = (function () {
                 modal_component_1.ModalComponent,
                 loader_modal_component_1.LoaderModalComponent,
                 common_1.CommonModule,
-                loader_component_1.LoaderComponent
+                loader_component_1.LoaderComponent,
+                lc_datepicker_1.LcDatePickerModule
             ],
-            providers: []
+            providers: [],
+            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA, core_1.NO_ERRORS_SCHEMA]
         })
     ], HTCommonModule);
     return HTCommonModule;

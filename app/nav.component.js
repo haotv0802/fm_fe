@@ -37,10 +37,9 @@ var NavComponent = (function () {
             templateUrl: 'nav.component.html',
             styleUrls: ['nav.component.css']
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, constant_1.Constants])
+        __metadata("design:paramtypes", [router_1.Router, constant_1.Constants])
     ], NavComponent);
     return NavComponent;
-    var _a;
 }());
 exports.NavComponent = NavComponent;
 //# sourceMappingURL=nav.component.js.map

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {ModalComponent} from "../../common/modal/modal.component";
 import {Expense} from "./expense";
@@ -8,7 +8,11 @@ import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
-import {DatePipe} from "@angular/common";
+import {LCDatePickerComponent} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker.component";
+import {
+  DatePickerConfig,
+  ECalendarType
+} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper";
 
 @Component({
   moduleId: module.id,
@@ -24,6 +28,13 @@ export class ExpensesComponent implements OnInit {
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
+  @ViewChild('calendar')
+  calendar: LCDatePickerComponent;
+
+  @ViewChild('dateInput')
+  dateInput: ElementRef;
+  public config = new DatePickerConfig();
+  public CalendarOpened = false;
 
   constructor(
     private _expensesService: ExpensesService,
@@ -32,6 +43,35 @@ export class ExpensesComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.pageTitle = 'Expenses';
+
+    this.config.CalendarType = ECalendarType.Date;
+    this.config.Localization = 'hr';
+    this.config.MinDate = { years: 1900 };
+    this.config.MaxDate = { years: 2100 };
+    this.config.Labels = {
+      confirmLabel: 'Ok',
+    };
+
+    this.config.PrimaryColor = '#5e666f';
+    this.config.FontColor = '#5e666f';
+  }
+
+  public openCalendar() {
+    this.CalendarOpened = !this.CalendarOpened;
+  }
+
+  public clearCalendar() {
+    this.dateInput.nativeElement.value = '';
+  }
+
+  public get setDate() {
+    // return this.dateInput.nativeElement.value;
+    return "";
+  }
+
+  public set setDate(value) {
+    this.dateInput.nativeElement.value = value;
+    this.expenseForm.get("date").setValue(value);
   }
 
   ngOnInit(): void {
@@ -130,8 +170,8 @@ export class ExpensesComponent implements OnInit {
   }
 
   closeUpdateExpense(expense: Expense): void {
-      expense.id = expense.id * -1;
-      this.idUpdate = this.idUpdate * -1;
+    expense.id = expense.id * -1;
+    this.idUpdate = this.idUpdate * -1;
   }
 
   openUpdateExpense(expense: Expense): void {
@@ -140,7 +180,7 @@ export class ExpensesComponent implements OnInit {
       exp.id = exp.id * -1;
     }
     if (this.idUpdate && this.idUpdate == expense.id) {
-        return;
+      return;
     }
     expense.id = expense.id * -1;
     this.idUpdate = expense.id;

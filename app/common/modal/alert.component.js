@@ -77,7 +77,7 @@ var AlertComponent = (function () {
     };
     __decorate([
         core_1.Output(),
-        __metadata("design:type", typeof (_a = typeof core_1.EventEmitter !== "undefined" && core_1.EventEmitter) === "function" && _a || Object)
+        __metadata("design:type", core_1.EventEmitter)
     ], AlertComponent.prototype, "alertOutput", void 0);
     AlertComponent = __decorate([
         core_1.Component({
@@ -92,7 +92,6 @@ var AlertComponent = (function () {
         __metadata("design:paramtypes", [])
     ], AlertComponent);
     return AlertComponent;
-    var _a;
 }());
 exports.AlertComponent = AlertComponent;
 //# sourceMappingURL=alert.component.js.map

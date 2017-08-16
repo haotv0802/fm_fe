@@ -112,20 +112,20 @@ export class ExpensesComponent implements OnInit {
     this.expenseEdit.cardId = this.expenseForm.get("paymentMethod").value;
     console.log(this.expenseEdit);
 
-    // this._expensesService.addExpense(this.expenseEdit).subscribe(
-    //   (res) => {
-    //     this._expensesService.getExpenses().subscribe(
-    //       (expensesDetails) => {
-    //         this.expensesDetails = expensesDetails;
-    //         this.resetFormValues();
-    //       }, (error: Error) => {
-    //         console.log(error);
-    //       }
-    //     );
-    //   }, (error: Error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this._expensesService.addExpense(this.expenseEdit).subscribe(
+      (res) => {
+        this._expensesService.getExpenses().subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
+      }, (error: Error) => {
+        console.log(error);
+      }
+    );
 
   }
 

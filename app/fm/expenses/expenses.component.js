@@ -28,7 +28,7 @@ var ExpensesComponent = (function () {
         this.expenseEdit = new expense_1.Expense();
         this.myOptions = {
             // other options...
-            dateFormat: 'dd.mm.yyyy',
+            dateFormat: 'dd-mm-yyyy',
         };
         this.model = { date: { year: 2018, month: 10, day: 9 } };
         this.pageTitle = 'Expenses';
@@ -92,7 +92,7 @@ var ExpensesComponent = (function () {
     ExpensesComponent.prototype.addExpense = function () {
         var _this = this;
         this.expenseEdit.amount = this.expenseForm.get("amount").value;
-        this.expenseEdit.date = this.expenseForm.get("date").value;
+        this.expenseEdit.date = this.expenseForm.get("date").value.formatted;
         this.expenseEdit.place = this.expenseForm.get("place").value;
         // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;

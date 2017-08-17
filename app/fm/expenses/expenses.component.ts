@@ -26,7 +26,7 @@ export class ExpensesComponent implements OnInit {
   idUpdate: number;
   private myOptions: INgxMyDpOptions = {
     // other options...
-    dateFormat: 'dd.mm.yyyy',
+    dateFormat: 'dd-mm-yyyy',
   };
   public model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
@@ -112,7 +112,7 @@ export class ExpensesComponent implements OnInit {
 
   addExpense(): void {
     this.expenseEdit.amount = this.expenseForm.get("amount").value;
-    this.expenseEdit.date = this.expenseForm.get("date").value;
+    this.expenseEdit.date = this.expenseForm.get("date").value.formatted;
     this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;

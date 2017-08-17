@@ -9,10 +9,10 @@
             <table class="table table-bordered table-hover" style="width: 1145px;">
                 <thead style="color: #337AB7">
                     <th class="col-sm-2">Amount</th>
-                    <th class="col-sm-1">Date</th>
+                    <th class="col-sm-2">Date</th>
                     <th class="col-sm-2">Place</th>
                     <th class="col-sm-2">Payment Method</th>
-                    <th class="col-sm-2">For Person</th>
+                    <th class="col-sm-1">For Person</th>
                     <th class="col-sm-1"></th>
                     <th class="col-sm-3"></th>
                 </thead>
@@ -38,12 +38,17 @@
                                    <!--style="width: 150px;"-->
                             <!--/>-->
                             <div class="input-group">
-                                <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
-                                    [(ngModel)]="model" [options]="myOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)"/>
+                                <input class="form-control"
+                                       style="float:none"
+                                       placeholder="Select a date"
+                                       ngx-mydatepicker name="mydate"
+                                       formControlName="date"
+                                    [options]="myOptions" #dp="ngx-mydatepicker"
+                                       (dateChanged)="onDateChanged($event)"/>
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" (click)="dp.clearDate()">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
+                                    <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">-->
+                                        <!--<i class="glyphicon glyphicon-remove"></i>-->
+                                    <!--</button>-->
                                     <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </button>

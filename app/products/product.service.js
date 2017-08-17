@@ -39,10 +39,9 @@ var ProductService = (function () {
     };
     ProductService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object])
+        __metadata("design:paramtypes", [http_1.Http])
     ], ProductService);
     return ProductService;
-    var _a;
 }());
 exports.ProductService = ProductService;
 //# sourceMappingURL=product.service.js.map

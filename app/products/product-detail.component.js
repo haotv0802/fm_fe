@@ -43,10 +43,11 @@ var ProductDetailComponent = (function () {
         core_1.Component({
             templateUrl: 'app/products/product-detail.component.html'
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object, product_service_1.ProductService])
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            router_1.Router,
+            product_service_1.ProductService])
     ], ProductDetailComponent);
     return ProductDetailComponent;
-    var _a, _b;
 }());
 exports.ProductDetailComponent = ProductDetailComponent;
 //# sourceMappingURL=product-detail.component.js.map

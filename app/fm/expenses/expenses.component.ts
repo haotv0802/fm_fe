@@ -8,7 +8,7 @@ import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
-import {DatePipe} from "@angular/common";
+import {IMyDateModel, INgxMyDpOptions} from "ngx-mydatepicker";
 
 @Component({
   moduleId: module.id,
@@ -24,6 +24,11 @@ export class ExpensesComponent implements OnInit {
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
+  private myOptions: INgxMyDpOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+  };
+  public model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(
     private _expensesService: ExpensesService,
@@ -33,7 +38,9 @@ export class ExpensesComponent implements OnInit {
   ) {
     this.pageTitle = 'Expenses';
   }
-
+  onDateChanged(event: IMyDateModel): void {
+    // date selected
+  }
   ngOnInit(): void {
     Observable.forkJoin(
       this._expensesService.getExpenses(),

@@ -33,7 +33,8 @@
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      'ngx-mydatepicker': 'npm:ngx-mydatepicker/bundles/ngx-mydatepicker.umd.min.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

@@ -92,10 +92,14 @@ var LoginComponent = (function () {
         core_1.Component({
             templateUrl: 'app/common/login/login.component.html'
         }),
-        __metadata("design:paramtypes", [login_service_1.LoginService, typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, constant_1.Constants, typeof (_b = typeof forms_1.FormBuilder !== "undefined" && forms_1.FormBuilder) === "function" && _b || Object, typeof (_c = typeof angular2_toaster_1.ToasterService !== "undefined" && angular2_toaster_1.ToasterService) === "function" && _c || Object, messages_service_1.MessagesService])
+        __metadata("design:paramtypes", [login_service_1.LoginService,
+            router_1.Router,
+            constant_1.Constants,
+            forms_1.FormBuilder,
+            angular2_toaster_1.ToasterService,
+            messages_service_1.MessagesService])
     ], LoginComponent);
     return LoginComponent;
-    var _a, _b, _c;
 }());
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

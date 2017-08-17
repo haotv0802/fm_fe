@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {LoaderModalComponent} from "./modal/loaderModal/loader.modal.component";
 import {LoaderComponent} from "./loader/loader.component";
 import {MessagesService} from "./messages/messages.service";
+import {NgxMyDatePickerModule} from "ngx-mydatepicker";
 
 @NgModule({
   imports: [CommonModule],
@@ -22,7 +23,8 @@ import {MessagesService} from "./messages/messages.service";
     ModalComponent,
     LoaderModalComponent,
     CommonModule,
-    LoaderComponent
+    LoaderComponent,
+    NgxMyDatePickerModule
   ],
   providers: []
 })

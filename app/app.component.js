@@ -54,10 +54,10 @@ var AppComponent = (function () {
             //  `
             templateUrl: 'app/app.component.html'
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof angular2_toaster_1.ToasterService !== "undefined" && angular2_toaster_1.ToasterService) === "function" && _a || Object, messages_service_1.MessagesService])
+        __metadata("design:paramtypes", [angular2_toaster_1.ToasterService,
+            messages_service_1.MessagesService])
     ], AppComponent);
     return AppComponent;
-    var _a;
 }());
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

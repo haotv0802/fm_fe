@@ -29,10 +29,9 @@ var ProductDetailGuard = (function () {
     };
     ProductDetailGuard = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object])
+        __metadata("design:paramtypes", [router_1.Router])
     ], ProductDetailGuard);
     return ProductDetailGuard;
-    var _a;
 }());
 exports.ProductDetailGuard = ProductDetailGuard;
 //# sourceMappingURL=product-guard.service.js.map

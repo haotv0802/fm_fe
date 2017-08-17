@@ -26,8 +26,16 @@ var ExpensesComponent = (function () {
         this.loaderOpen = true;
         // editHidden: boolean = false;
         this.expenseEdit = new expense_1.Expense();
+        this.myOptions = {
+            // other options...
+            dateFormat: 'dd.mm.yyyy',
+        };
+        this.model = { date: { year: 2018, month: 10, day: 9 } };
         this.pageTitle = 'Expenses';
     }
+    ExpensesComponent.prototype.onDateChanged = function (event) {
+        // date selected
+    };
     ExpensesComponent.prototype.ngOnInit = function () {
         var _this = this;
         Rx_1.Observable.forkJoin(this._expensesService.getExpenses(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
@@ -199,10 +207,11 @@ var ExpensesComponent = (function () {
             templateUrl: 'expenses.component.html'
         }),
         __metadata("design:paramtypes", [expenses_service_1.ExpensesService,
-            eventExpense_service_1.EventExpenseService, typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof forms_1.FormBuilder !== "undefined" && forms_1.FormBuilder) === "function" && _b || Object])
+            eventExpense_service_1.EventExpenseService,
+            router_1.Router,
+            forms_1.FormBuilder])
     ], ExpensesComponent);
     return ExpensesComponent;
-    var _a, _b;
 }());
 exports.ExpensesComponent = ExpensesComponent;
 //# sourceMappingURL=expenses.component.js.map

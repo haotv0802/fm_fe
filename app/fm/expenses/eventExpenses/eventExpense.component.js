@@ -207,10 +207,12 @@ var EventExpenseComponent = (function () {
             templateUrl: 'eventExpense.component.html'
         }),
         __metadata("design:paramtypes", [eventExpense_service_1.EventExpenseService,
-            expenses_service_1.ExpensesService, typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof forms_1.FormBuilder !== "undefined" && forms_1.FormBuilder) === "function" && _b || Object, typeof (_c = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _c || Object])
+            expenses_service_1.ExpensesService,
+            router_1.Router,
+            forms_1.FormBuilder,
+            router_1.ActivatedRoute])
     ], EventExpenseComponent);
     return EventExpenseComponent;
-    var _a, _b, _c;
 }());
 exports.EventExpenseComponent = EventExpenseComponent;
 //# sourceMappingURL=eventExpense.component.js.map

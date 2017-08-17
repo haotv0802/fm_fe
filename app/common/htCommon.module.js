@@ -13,6 +13,7 @@ var modal_component_1 = require("./modal/modal.component");
 var common_1 = require("@angular/common");
 var loader_modal_component_1 = require("./modal/loaderModal/loader.modal.component");
 var loader_component_1 = require("./loader/loader.component");
+var ngx_mydatepicker_1 = require("ngx-mydatepicker");
 var HTCommonModule = (function () {
     function HTCommonModule() {
     }
@@ -32,7 +33,8 @@ var HTCommonModule = (function () {
                 modal_component_1.ModalComponent,
                 loader_modal_component_1.LoaderModalComponent,
                 common_1.CommonModule,
-                loader_component_1.LoaderComponent
+                loader_component_1.LoaderComponent,
+                ngx_mydatepicker_1.NgxMyDatePickerModule
             ],
             providers: []
         })

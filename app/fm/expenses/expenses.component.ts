@@ -112,7 +112,7 @@ export class ExpensesComponent implements OnInit {
 
   addExpense(): void {
     this.expenseEdit.amount = this.expenseForm.get("amount").value;
-    this.expenseEdit.date = this.expenseForm.get("date").value.formatted;
+    this.expenseEdit.date = this.expenseForm.get("date").value.jsdate;
     this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;

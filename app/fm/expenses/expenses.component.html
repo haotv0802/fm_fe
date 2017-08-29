@@ -115,14 +115,32 @@
                                 {{expense.date | date: 'dd-MM-yy'}}
                             </span>
                             <span *ngIf="(expense.id * -1) > 0">
-                                <input class="form-control"
-                                       id="date_{{expense.id}}"
-                                       type="text"
-                                       value="{{expense.date | date: 'dd-MM-yy'}}"
-                                       formControlName="date_edit"
-                                       (keyup.enter)="updateExpense(expense.id)"
-                                       (keyup.esc)="closeUpdateExpense(expense)"
-                                />
+                                <!--<input class="form-control"-->
+                                       <!--id="date_{{expense.id}}"-->
+                                       <!--type="text"-->
+                                       <!--value="{{expense.date | date: 'dd-MM-yy'}}"-->
+                                       <!--formControlName="date_edit"-->
+                                       <!--(keyup.enter)="updateExpense(expense.id)"-->
+                                       <!--(keyup.esc)="closeUpdateExpense(expense)"-->
+                                <!--/>-->
+                                <div class="input-group">
+                                    <input class="form-control"
+                                           style="float:none"
+                                           placeholder="Select a date"
+                                           ngx-mydatepicker name="mydate"
+                                           formControlName="date_edit"
+                                           [options]="myOptions" #dp="ngx-mydatepicker"
+                                           value="{{expense.date | date: 'dd-MM-yy'}}"
+                                           (dateChanged)="onDateChanged($event)"/>
+                                    <span class="input-group-btn">
+                                        <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">-->
+                                        <!--<i class="glyphicon glyphicon-remove"></i>-->
+                                        <!--</button>-->
+                                        <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </span>
                         </td>
                         <td (click)="openUpdateExpense(expense)">

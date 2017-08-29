@@ -93,6 +93,9 @@ var ExpensesComponent = (function () {
         var _this = this;
         this.expenseEdit.amount = this.expenseForm.get("amount").value;
         this.expenseEdit.date = this.expenseForm.get("date").value.jsdate;
+        if (this.expenseEdit.date == undefined) {
+            this.expenseEdit.date = new Date();
+        }
         this.expenseEdit.place = this.expenseForm.get("place").value;
         // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
@@ -150,12 +153,16 @@ var ExpensesComponent = (function () {
     ExpensesComponent.prototype.updateExpense = function (expenseId) {
         var _this = this;
         this.expenseEdit.amount = this.expenseForm.get("amount_edit").value;
-        this.expenseEdit.date = this.expenseForm.get("date_edit").value;
+        this.expenseEdit.date = this.expenseForm.get("date_edit").value.jsdate;
+        if (this.expenseEdit.date == undefined) {
+            this.expenseEdit.date = new Date();
+        }
         this.expenseEdit.place = this.expenseForm.get("place_edit").value;
         this.expenseEdit.forPerson = this.expenseForm.get("forPerson_edit").value;
         this.expenseEdit.cardId = this.expenseForm.get("paymentMethod_edit").value;
         this.expenseEdit.anEvent = this.expenseForm.get("anEvent_edit").value;
         this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
+        // console.log(this.expenseEdit);
         this._expensesService.updateExpense(this.expenseEdit).subscribe(function (res) {
             _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
                 _this.expensesDetails = expensesDetails;

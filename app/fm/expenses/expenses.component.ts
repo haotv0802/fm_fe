@@ -113,6 +113,9 @@ export class ExpensesComponent implements OnInit {
   addExpense(): void {
     this.expenseEdit.amount = this.expenseForm.get("amount").value;
     this.expenseEdit.date = this.expenseForm.get("date").value.jsdate;
+    if (this.expenseEdit.date == undefined) {
+      this.expenseEdit.date = new Date();
+    }
     this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
@@ -177,13 +180,17 @@ export class ExpensesComponent implements OnInit {
 
   updateExpense(expenseId: number): void {
     this.expenseEdit.amount = this.expenseForm.get("amount_edit").value;
-    this.expenseEdit.date = this.expenseForm.get("date_edit").value;
+    this.expenseEdit.date = this.expenseForm.get("date_edit").value.jsdate;
+    if (this.expenseEdit.date == undefined) {
+      this.expenseEdit.date = new Date();
+    }
     this.expenseEdit.place = this.expenseForm.get("place_edit").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson_edit").value;
     this.expenseEdit.cardId = this.expenseForm.get("paymentMethod_edit").value;
     this.expenseEdit.anEvent = this.expenseForm.get("anEvent_edit").value;
     this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
 
+    // console.log(this.expenseEdit);
     this._expensesService.updateExpense(this.expenseEdit).subscribe(
       (res) => {
         this._expensesService.getExpenses().subscribe(

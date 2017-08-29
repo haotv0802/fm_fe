@@ -32,15 +32,13 @@
       'ng2-completer':'npm:ng2-completer',
       'ng2-smart-table':'npm:ng2-smart-table',
       'moment':'npm:moment',
-      '@libusoftcicom/lc-datepicker':'npm:@libusoftcicom/lc-datepicker/lib-dist',
-      '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': 'npm:@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker',
       'lodash':'npm:lodash',
       'traceur':'npm:traceur/bin/traceur.js',
       // other libraries
       'rxjs': 'npm:rxjs',
       'hammerjs': 'npm:hammerjs',
-      'font-awesome': 'npm:font-awesome/css/font-awesome.css'
-
+      'font-awesome': 'npm:font-awesome/css/font-awesome.css',
+      'ngx-mydatepicker': 'npm:ngx-mydatepicker/bundles/ngx-mydatepicker.umd.min.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -77,10 +75,6 @@
       },
       '@libusoftcicom/lc-datepicker': {
         main: 'lc-date-picker.module.js',
-        defaultExtension: 'js'
-      },
-      '@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker': {
-        main: 'lc-date-picker.component.js',
         defaultExtension: 'js'
       },
       'hammerjs': {

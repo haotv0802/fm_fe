@@ -37,14 +37,22 @@
                         <!--(keyup.enter)="addExpense()"-->
                         <!--style="width: 150px;"-->
                         <!--/>-->
-                        <div class="card-block">
-                            <div class="input-group">
-                                <input type="text" class="form-control" #dateInput formControlName="date">
-                                <span class="input-group-btn">
-                                        <button class="btn btn-secondary" type="button"  (click)="openCalendar()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
-                                    </span>
-                            </div>
-                            <lc-datepicker #calendar [(opened)]="CalendarOpened" [config]="config" [(date)]="setDate"></lc-datepicker>
+                        <div class="input-group">
+                            <input class="form-control"
+                                   style="float:none"
+                                   placeholder="Select a date"
+                                   ngx-mydatepicker name="mydate"
+                                   formControlName="date"
+                                   [options]="myOptions" #dp="ngx-mydatepicker"
+                                   (dateChanged)="onDateChanged($event)"/>
+                            <span class="input-group-btn">
+                                    <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">-->
+                                <!--<i class="glyphicon glyphicon-remove"></i>-->
+                                <!--</button>-->
+                                    <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
                         </div>
                     </td>
                     <td>
@@ -107,15 +115,25 @@
                                 {{expense.date | date: 'dd-MM-yy'}}
                             </span>
                         <span *ngIf="(expense.id * -1) > 0">
+                            <div class="input-group">
                                 <input class="form-control"
-                                       id="date_{{expense.id}}"
-                                       type="text"
-                                       value="{{expense.date | date: 'dd-MM-yy'}}"
+                                       style="float:none"
+                                       placeholder="Select a date"
+                                       ngx-mydatepicker name="mydate"
                                        formControlName="date_edit"
-                                       (keyup.enter)="updateExpense(expense.id)"
-                                       (keyup.esc)="closeUpdateExpense(expense)"
-                                />
-                            </span>
+                                       [options]="myOptions" #dp="ngx-mydatepicker"
+                                       value="{{expense.date | date: 'dd-MM-yy'}}"
+                                       (dateChanged)="onDateChanged($event)"/>
+                                <span class="input-group-btn">
+                                    <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">-->
+                                    <!--<i class="glyphicon glyphicon-remove"></i>-->
+                                    <!--</button>-->
+                                    <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </span>
                     </td>
                     <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">

@@ -5,7 +5,7 @@ import {ModalComponent} from "./modal/modal.component";
 import {CommonModule} from "@angular/common";
 import {LoaderModalComponent} from "./modal/loaderModal/loader.modal.component";
 import {LoaderComponent} from "./loader/loader.component";
-import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
+import {NgxMyDatePickerModule} from "ngx-mydatepicker";
 
 @NgModule({
   imports: [CommonModule],
@@ -23,7 +23,7 @@ import {LcDatePickerModule} from "@libusoftcicom/lc-datepicker";
     LoaderModalComponent,
     CommonModule,
     LoaderComponent,
-    LcDatePickerModule
+    NgxMyDatePickerModule
   ],
   providers: [],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]

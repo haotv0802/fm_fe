@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {ModalComponent} from "../../common/modal/modal.component";
 import {Expense} from "./expense";
@@ -8,11 +8,7 @@ import {PaymentMethod} from "./paymentMethod";
 import {Observable} from "rxjs/Rx";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import {EventExpenseService} from "./eventExpenses/eventExpense.service";
-import {LCDatePickerComponent} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker.component";
-import {
-  DatePickerConfig,
-  ECalendarType
-} from "@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper";
+import {IMyDateModel, INgxMyDpOptions} from "ngx-mydatepicker";
 
 @Component({
   moduleId: module.id,
@@ -28,13 +24,11 @@ export class ExpensesComponent implements OnInit {
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
-  @ViewChild('calendar')
-  calendar: LCDatePickerComponent;
-
-  @ViewChild('dateInput')
-  dateInput: ElementRef;
-  public config = new DatePickerConfig();
-  public CalendarOpened = false;
+  private myOptions: INgxMyDpOptions = {
+    // other options...
+    dateFormat: 'dd-mm-yyyy',
+  };
+  public model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(
     private _expensesService: ExpensesService,
@@ -43,37 +37,10 @@ export class ExpensesComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.pageTitle = 'Expenses';
-
-    this.config.CalendarType = ECalendarType.Date;
-    this.config.Localization = 'hr';
-    this.config.MinDate = { years: 1900 };
-    this.config.MaxDate = { years: 2100 };
-    this.config.Labels = {
-      confirmLabel: 'Ok',
-    };
-
-    this.config.PrimaryColor = '#5e666f';
-    this.config.FontColor = '#5e666f';
   }
-
-  public openCalendar() {
-    this.CalendarOpened = !this.CalendarOpened;
+  onDateChanged(event: IMyDateModel): void {
+    // date selected
   }
-
-  public clearCalendar() {
-    this.dateInput.nativeElement.value = '';
-  }
-
-  public get setDate() {
-    // return this.dateInput.nativeElement.value;
-    return "";
-  }
-
-  public set setDate(value) {
-    this.dateInput.nativeElement.value = value;
-    this.expenseForm.get("date").setValue(value);
-  }
-
   ngOnInit(): void {
     Observable.forkJoin(
       this._expensesService.getExpenses(),
@@ -145,7 +112,10 @@ export class ExpensesComponent implements OnInit {
 
   addExpense(): void {
     this.expenseEdit.amount = this.expenseForm.get("amount").value;
-    this.expenseEdit.date = this.expenseForm.get("date").value;
+    this.expenseEdit.date = this.expenseForm.get("date").value.jsdate;
+    if (this.expenseEdit.date == undefined) {
+      this.expenseEdit.date = new Date();
+    }
     this.expenseEdit.place = this.expenseForm.get("place").value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
@@ -210,13 +180,17 @@ export class ExpensesComponent implements OnInit {
 
   updateExpense(expenseId: number): void {
     this.expenseEdit.amount = this.expenseForm.get("amount_edit").value;
-    this.expenseEdit.date = this.expenseForm.get("date_edit").value;
+    this.expenseEdit.date = this.expenseForm.get("date_edit").value.jsdate;
+    if (this.expenseEdit.date == undefined) {
+      this.expenseEdit.date = new Date();
+    }
     this.expenseEdit.place = this.expenseForm.get("place_edit").value;
     this.expenseEdit.forPerson = this.expenseForm.get("forPerson_edit").value;
     this.expenseEdit.cardId = this.expenseForm.get("paymentMethod_edit").value;
     this.expenseEdit.anEvent = this.expenseForm.get("anEvent_edit").value;
     this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
 
+    // console.log(this.expenseEdit);
     this._expensesService.updateExpense(this.expenseEdit).subscribe(
       (res) => {
         this._expensesService.getExpenses().subscribe(

@@ -17,8 +17,6 @@ var expenses_service_1 = require("./expenses.service");
 var forms_1 = require("@angular/forms");
 var Rx_1 = require("rxjs/Rx");
 var eventExpense_service_1 = require("./eventExpenses/eventExpense.service");
-var lc_date_picker_component_1 = require("@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker.component");
-var lc_date_picker_config_helper_1 = require("@libusoftcicom/lc-datepicker/lib-dist/lc-date-picker/lc-date-picker-config-helper");
 var ExpensesComponent = (function () {
     function ExpensesComponent(_expensesService, _eventExpenseService, _router, fb) {
         this._expensesService = _expensesService;
@@ -28,37 +26,16 @@ var ExpensesComponent = (function () {
         this.loaderOpen = true;
         // editHidden: boolean = false;
         this.expenseEdit = new expense_1.Expense();
-        this.config = new lc_date_picker_config_helper_1.DatePickerConfig();
-        this.CalendarOpened = false;
-        this.pageTitle = 'Expenses';
-        this.config.CalendarType = lc_date_picker_config_helper_1.ECalendarType.Date;
-        this.config.Localization = 'hr';
-        this.config.MinDate = { years: 1900 };
-        this.config.MaxDate = { years: 2100 };
-        this.config.Labels = {
-            confirmLabel: 'Ok',
+        this.myOptions = {
+            // other options...
+            dateFormat: 'dd-mm-yyyy',
         };
-        this.config.PrimaryColor = '#5e666f';
-        this.config.FontColor = '#5e666f';
+        this.model = { date: { year: 2018, month: 10, day: 9 } };
+        this.pageTitle = 'Expenses';
     }
-    ExpensesComponent.prototype.openCalendar = function () {
-        this.CalendarOpened = !this.CalendarOpened;
+    ExpensesComponent.prototype.onDateChanged = function (event) {
+        // date selected
     };
-    ExpensesComponent.prototype.clearCalendar = function () {
-        this.dateInput.nativeElement.value = '';
-    };
-    Object.defineProperty(ExpensesComponent.prototype, "setDate", {
-        get: function () {
-            // return this.dateInput.nativeElement.value;
-            return "";
-        },
-        set: function (value) {
-            this.dateInput.nativeElement.value = value;
-            this.expenseForm.get("date").setValue(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
     ExpensesComponent.prototype.ngOnInit = function () {
         var _this = this;
         Rx_1.Observable.forkJoin(this._expensesService.getExpenses(), this._expensesService.getPaymentMethods()).subscribe(function (data) {
@@ -115,7 +92,10 @@ var ExpensesComponent = (function () {
     ExpensesComponent.prototype.addExpense = function () {
         var _this = this;
         this.expenseEdit.amount = this.expenseForm.get("amount").value;
-        this.expenseEdit.date = this.expenseForm.get("date").value;
+        this.expenseEdit.date = this.expenseForm.get("date").value.jsdate;
+        if (this.expenseEdit.date == undefined) {
+            this.expenseEdit.date = new Date();
+        }
         this.expenseEdit.place = this.expenseForm.get("place").value;
         // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
         this.expenseEdit.forPerson = this.expenseForm.get("forPerson").value;
@@ -173,12 +153,16 @@ var ExpensesComponent = (function () {
     ExpensesComponent.prototype.updateExpense = function (expenseId) {
         var _this = this;
         this.expenseEdit.amount = this.expenseForm.get("amount_edit").value;
-        this.expenseEdit.date = this.expenseForm.get("date_edit").value;
+        this.expenseEdit.date = this.expenseForm.get("date_edit").value.jsdate;
+        if (this.expenseEdit.date == undefined) {
+            this.expenseEdit.date = new Date();
+        }
         this.expenseEdit.place = this.expenseForm.get("place_edit").value;
         this.expenseEdit.forPerson = this.expenseForm.get("forPerson_edit").value;
         this.expenseEdit.cardId = this.expenseForm.get("paymentMethod_edit").value;
         this.expenseEdit.anEvent = this.expenseForm.get("anEvent_edit").value;
         this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
+        // console.log(this.expenseEdit);
         this._expensesService.updateExpense(this.expenseEdit).subscribe(function (res) {
             _this._expensesService.getExpenses().subscribe(function (expensesDetails) {
                 _this.expensesDetails = expensesDetails;
@@ -224,14 +208,6 @@ var ExpensesComponent = (function () {
         core_1.ViewChild(modal_component_1.ModalComponent),
         __metadata("design:type", modal_component_1.ModalComponent)
     ], ExpensesComponent.prototype, "modal", void 0);
-    __decorate([
-        core_1.ViewChild('calendar'),
-        __metadata("design:type", lc_date_picker_component_1.LCDatePickerComponent)
-    ], ExpensesComponent.prototype, "calendar", void 0);
-    __decorate([
-        core_1.ViewChild('dateInput'),
-        __metadata("design:type", core_1.ElementRef)
-    ], ExpensesComponent.prototype, "dateInput", void 0);
     ExpensesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

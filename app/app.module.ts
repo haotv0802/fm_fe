@@ -33,6 +33,7 @@ import {NgxMyDatePickerModule} from "ngx-mydatepicker";
     ToasterModule,
     ModalModule.forRoot(),
     BootstrapModalModule
+
   ],
   declarations: [
     AppComponent,

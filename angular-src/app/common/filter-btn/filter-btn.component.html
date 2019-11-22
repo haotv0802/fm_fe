@@ -1,8 +1,0 @@
-<div class="row filter-btn-cmp">
-	<div class="col-md-12" *ngIf="label">
-		<label>{{label}}</label>
-	</div>
-	<div class="col-md-12">
-		<button *ngFor="let item of sources" type="button" class="btn filter-btn" [class.selected]="item.selected" (click)="handleClick(item)">{{item.label}}</button>
-	</div>
-</div>

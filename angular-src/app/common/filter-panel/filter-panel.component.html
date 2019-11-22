@@ -1,9 +1,0 @@
-<div class="well bs-component expand-panel">
-	<div class="header">
-		<label (click)="handleExpand()">{{title}}</label>
-		<span (click)="handleExpand()" class="glyphicon" [class.glyphicon-chevron-up]="expanded" [class.glyphicon-chevron-down]="!expanded"></span>
-	</div>
-	<div class="content" *ngIf="expanded">
-		<ng-content></ng-content>
-	</div>
-</div>

@@ -1,0 +1,32 @@
+.modal-dialog {
+    width: 100%;
+}
+
+.legend {
+    margin-top: 150px;
+}
+
+.legend-tmon{
+
+    border-left: 50px solid #FF0000;
+}
+
+.legend-coupang{
+    border-left: 50px solid #FF8C00;
+}
+
+.legend-cj{
+    border-left: 50px solid #1E90FF;
+}
+
+.legend-wemakeprice{
+    border-left: 50px solid #00FF7F;
+}
+
+.legend-tmon{
+    border-left: 50px solid #6A5ACD;
+}
+
+.legend-gmarket{
+    border-left: 50px solid #A0522D;
+}

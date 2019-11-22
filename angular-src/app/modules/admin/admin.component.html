@@ -1,0 +1,6 @@
+<div class="container-fluid">
+	<!--<tmon-header></tmon-header>-->
+	<navigation-bar [admin]="true" *ngIf="role ==='admin'"></navigation-bar>
+	<router-outlet *ngIf="role ==='admin'"></router-outlet>
+	<tmon-footer *ngIf="role ==='admin'"></tmon-footer>
+</div>

@@ -1,0 +1,100 @@
+.td-mix-table{
+    border-right:1px solid #dddddd ;padding:8px; width: 100px;
+}
+.td-mix-table-bold{
+    border-right:1px solid #dddddd ;padding:8px; width: 100px;font-weight: bold;
+}
+
+.filter-container {
+    display: inline-block;
+    width: 70%;
+}
+
+.filter-action {
+    display: inline-block;
+    width: 180px;
+    right: 10px;
+    top: 60px;
+    float: right
+}
+
+.filter-action>button {
+    min-width: 80px;
+    margin-left: 2px;
+}
+
+.filter-head-1 {
+    vertical-align: middle;
+    background: #f7f3ee;
+    font-weight: bold;
+}
+
+.filter-head-2 {
+    vertical-align: middle;
+    background: #fde7d5;
+    font-weight: bold;
+}
+
+.filter-cmp {
+    width: auto;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.head-title {
+    background-color: transparent;
+    background-image: none;
+    margin: 2px 2px;
+    padding: 3px 5px;
+    min-width: 80px;
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+}
+input[type=checkbox] {
+    zoom: 1.5;
+}
+span {
+    font-size: 14px;
+    padding-right: 10px;
+}
+
+input {
+    border:1;
+    line-height:30px;
+    resize: none
+}
+
+.textarea {
+    overflow-y: scroll;
+    display:block;
+    width: 100%;
+    line-height: 15px
+}
+
+span textarea {
+    left: 35px;
+    top: 3px;
+    height: 35px
+}
+
+.naver-deals-list {
+    overflow-x: auto;
+    display: inline;
+    float: left;
+}
+
+.search-keywords {
+    float:left;
+    display:block;
+    border: 1px solid #acacac;
+    width: 10%
+}
+
+

@@ -1,0 +1,81 @@
+<div class="filter-container">
+    <table class="table table-bordered">
+        <tr>
+            <td class="filter-head-1">{{'notification.status'|translate}}</td>
+            <td colspan="3">
+                <select class="form-control filter-cmp" [(ngModel)]="notificationFilter.status" style="width: 20%">
+                    <option value=""></option>
+                    <option value="Y">{{'label.status_yes'|translate}}</option>
+                    <option value="N">{{'label.status_no'|translate}}</option>
+                </select>
+            </td>
+            <td class="filter-head-1">{{'notification.content'|translate}}</td>
+            <td colspan="3">
+                <input type="text" size="50" id="dealName" [(ngModel)]="notificationFilter.content" style="width: 80%"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="filter-action">
+    <table>
+        <tr>
+            <td>
+                <button style="" type="button" (click)="onSearch()" class="btn btn-primary" [disabled]="disableBtn">
+                    {{'label.search'|translate}}
+                </button>
+            </td>
+            <td>
+                <button style="margin-left: 15px;" type="button" (click)="onCreation()" class="btn btn-warning" [disabled]="disableBtn" *ngIf="!isUpdateMode">
+                    {{'label.create'|translate}}
+                </button>
+                &nbsp;&nbsp;
+                <button style="margin-left: 15px;" type="button" (click)="onCreation()" class="btn btn-warning" [disabled]="disableBtn" *ngIf="isUpdateMode">
+                    {{'label.update'|translate}}
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="width: 100%;top: 150px; clear:both">
+    <div id="notification-list" class="notification-list">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 50px; text-align: center; background-color: #D4D4D4">
+                </th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.no'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.pageName'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.status'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.content'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.startDate'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.endDate'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.updatedDate'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'notification.updater'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of notificationList; let idx = index">
+                <td style="text-align: center; width: 10px;">
+                    <input type="checkbox" class="form-check-input" (change)="handleCheck($event, item)">
+                </td>
+                <td style="width: 50px;">{{idx + 1}}</td>
+                <td style="width: 100px;">{{item.pageName}}</td>
+                <td style="width: 10px;">{{(item.status === "Y" ? 'label.status_yes' : 'label.status_no') | translate}}</td>
+                <td style="width: 300px;" [innerHTML]=item.contentWithoutTag></td>
+                <td style="width: 80px;">{{item.startDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td style="width: 80px;">{{item.endDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td style="width: 80px;">{{(item.updatedAt ? item.updatedAt : item.createdAt) | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td style="width: 80px;">{{item.updatedId ? item.updatedId : item.createdId}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center; clear:both; padding-top: 20px;">
+        <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                    [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                    [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                    previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+    </div>
+</div>

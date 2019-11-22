@@ -1,0 +1,17 @@
+<div>
+    <h1>Test</h1>
+    <smart-table [settings]="settings" [sources]="sources" (onTableChange)="handleTableChange($event)">
+        <tfoot>
+            <tr>
+                <td>id</td>
+                <td colspan="4">group</td>
+                <td>number</td>
+                <td>percent</td>
+                <td>email</td>
+                <td>custom</td>
+            </tr>
+        </tfoot>
+    </smart-table>
+</div>
+
+<button (click)="addColumn()">Add column</button>

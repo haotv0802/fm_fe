@@ -1,0 +1,67 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="close()">&times;</button>
+            <h4 class="modal-title">{{'admin.category.createNewDialogTitle'|translate}}</h4>
+        </div>
+        <div class="modal-body" style="padding-left: 40px;">
+
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" value="Org"
+                   [checked]="model.organization.type==orgType" (change)="handleRadioOrganizationChange($event)">
+            <label class="form-check-label" style="margin-right: 20px;">{{'admin.category.organization'|translate}}</label>
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" value="Team"
+                   [checked]="model.organization.type==teamType" (change)="handleRadioOrganizationChange($event)">
+            <label class="form-check-label">{{'admin.category.team'|translate}}</label>
+            <table class="register_tbl">
+                <tr>
+                    <td class="td">{{'admin.category.orgCode'|translate}}</td>
+                    <td class="td_val">
+                        <input *ngIf="model.organization.type==orgType" type="text"
+                               [(ngModel)]="model.organization.orgCode" readonly class="readonlyInput"/>
+                        <input *ngIf="model.organization.type==teamType" type="text"
+                               [(ngModel)]="model.organization.orgCode" readonly class="readonlyInput"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">{{'admin.category.orgName'|translate}}</td>
+                    <td class="td_val">
+                        <input *ngIf="model.organization.type==orgType" type="text"
+                               [(ngModel)]="model.organization.orgName"
+                               (keypress)="validateInputValue(model.organization.orgName, model.organization.type)"
+                               (keyup)="validateInputValue(model.organization.orgName, model.organization.type)"
+                               (keydown)="validateInputValue(model.organization.orgName, model.organization.type)"/>
+
+                        <select *ngIf="model.organization.type==teamType" type="text"
+                                [(ngModel)]="model.organization.orgCode">
+                            <option *ngFor="let parent of model.organization.parentOrganizations"
+                                    value="{{parent.code}}">
+                                {{parent.name}}
+                            </option>
+                        </select>
+                        <span class="error">{{errorOrgName}}</span>
+                    </td>
+                </tr>
+                <tr *ngIf="model.organization.type==teamType">
+                    <td class="td">{{'admin.category.teamCode'|translate}}</td>
+                    <td class="td_val"><input type="text" [(ngModel)]="model.organization.teamCode" readonly
+                                              class="readonlyInput"/>
+                    </td>
+                </tr>
+                <tr *ngIf="model.organization.type==teamType">
+                    <td class="td">{{'admin.category.teamName'|translate}}</td>
+                    <td class="td_val"><input type="text" [(ngModel)]="model.organization.teamName"
+                                              (keypress)="validateInputValue(model.organization.teamName, model.organization.type)"
+                                              (keydown)="validateInputValue(model.organization.teamName, model.organization.type)"
+                                              (keyup)="validateInputValue(model.organization.teamName, model.organization.type)"/>
+                        <span class="error">{{errorTeamName}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnSave" (click)="handleSaveCreateOrganization()">
+                {{'label.save'|translate}}
+            </button>
+        </div>
+    </div>
+</div>

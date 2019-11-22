@@ -1,0 +1,41 @@
+.register_tbl{
+    margin-left: 20px;
+
+}
+.td{
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #ded2c3;
+    text-align: right;
+    background-color: #f7f3ee;
+}
+.td_val{
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #ded2c3;
+    text-align: left;
+    width: 350px;
+
+}
+.ls_dept{
+    display: inline;
+}
+.readonlyInput{
+    background-color: #e4e0e0;
+    border: 1px solid #e4e0e0;
+}
+input{
+    padding:5px;
+}
+select{
+    height: 38px;width: 138px;
+}
+#orgCodeErrorMsg, #teamCodeErrorMsg{
+    color: red;
+    display: none;
+}
+.error{
+    color: red;
+}

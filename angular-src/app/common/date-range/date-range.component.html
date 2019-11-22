@@ -1,0 +1,9 @@
+<div class="date-range">
+    <span class="picker">
+        <my-date-picker [options]="myDatePickerOptions" [ngModel]="startDate" (dateChanged)="handleStartDateChange($event)" [required]="required"></my-date-picker>
+    </span>
+    <span class="label">~</span>
+    <span class="picker right">
+        <my-date-picker [options]="myDatePickerOptions" [ngModel]="endDate" (dateChanged)="handleEndDateChange($event)" [required]="required"></my-date-picker>
+    </span>
+</div>

@@ -1,0 +1,48 @@
+<!--<filter-panel title="{{'label.filter'|translate}}">-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-3">-->
+            <!--<label>{{'admin.category.competitor'|translate}}</label>-->
+            <!--<select [(ngModel)]="filter.competitor" class="form-control">-->
+                <!--<option *ngFor="let competitor of competitors" [value]="competitor.code">{{competitor.name}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4">-->
+            <!--<label>{{'admin.category.startDate'|translate}}</label>-->
+            <!--<date-range [(startDate)]="filter.startDate" [(endDate)]="filter.endDate" required></date-range>-->
+        <!--</div>-->
+        <!--<div class="col-sm-2">-->
+            <!--<label>{{'admin.category.confirmation'|translate}}</label>-->
+            <!--<select [(ngModel)]="filter.confirm" class="form-control">-->
+                <!--<option value="">{{'admin.category.confirm_all'|translate}}</option>-->
+                <!--<option value="Y">{{'admin.category.confirm_y'|translate}}</option>-->
+                <!--<option value="N">{{'admin.category.confirm_n'|translate}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3">-->
+            <!--<div style="height: 60px; padding-top: 30px;">-->
+            <!--<input type="checkbox" name="sel_confirm" [checked]="filter.area == 'true'" (change)="handleCheckArea($event)" />-->
+            <!--<label for="sel_confirm">{{'admin.area.noArea'|translate}}</label>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-4">-->
+            <!--<input type="text" [(ngModel)]="filter.keyword" class="form-control input-search" placeholder="{{'admin.category.keyword'|translate}}"/>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4">-->
+            <!--<button style="min-width: 80px;" type="button" (click)="handleSearch($event)" class="btn btn-primary">{{'label.search'|translate}}</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</filter-panel>-->
+<!--<label *ngIf="pageRequest.totalItems">{{pageRequest.totalItems|number}} results.</label>-->
+<!--<div class="row">-->
+    <!--<div class="col-sm-12">-->
+        <!--<div style="overflow-x: auto;">-->
+            <!--<smart-table [settings]="settings" [sources]="sources" (onTableChange)="handleTableChange($event)">-->
+            <!--</smart-table>-->
+        <!--</div>-->
+        <!--<pagination [(ngModel)]="pageRequest.page" (pageChanged)="onPaginationChanged($event)" [boundaryLinks]="false" [totalItems]="pageRequest.totalItems"-->
+            <!--[maxSize]="10" [itemsPerPage]="pageRequest.size" class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;"-->
+            <!--firstText="&laquo;" lastText="&raquo;"></pagination>-->
+    <!--</div>-->
+<!--</div>-->

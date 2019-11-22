@@ -1,0 +1,37 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()">&times;</button>
+      <h4 class="modal-title">{{'admin.category.createNewDialogTitle'|translate}}</h4>
+    </div>
+    <div class="modal-body" style="padding-left: 40px;">
+      <p class="msg">{{('admin.category.thisOrganizationVersionIs' | translate).replace("{}", model.currentVersion) }}.<br/>
+        {{'admin.category.renewOrganizationVersionConfirmMessage'|translate}}
+      </p>
+      <table class="register_tbl">
+        <tr>
+          <td class="td">{{'admin.category.newVersionCode'|translate}}</td>
+          <td class="td_val">
+            <input type="text" [(ngModel)]="model.versionCode" maxlength="8"
+                   (keypress)="validateVersionCode()"
+                   (keydown)="validateVersionCode()"
+                   (keyup)="validateVersionCode()"/>
+            <span class="error">{{error}}</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="td">{{'admin.category.newVersionName'|translate}}</td>
+          <td class="td_val">
+            <input type="text" [(ngModel)]="model.versionName" />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="handleRenewalOrganization()" id="btnSave">
+        {{'label.save'|translate}}
+      </button>
+    </div>
+  </div>
+</div>

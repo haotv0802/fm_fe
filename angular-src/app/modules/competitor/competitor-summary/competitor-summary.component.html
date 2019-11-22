@@ -1,0 +1,112 @@
+<filter-panel>
+<div class="row">
+    <div class="col-sm-1">
+        <select [(ngModel)]="competitorSummaryFilter.typeSale" class="form-control" id="typeSale">
+            <option value="0">매출시점 기준</option>
+            <option value="1" selected>시작일 기준</option>
+        </select>
+    </div>
+
+    <div class="col-sm-3">
+        <date-range [(startDate)]="competitorSummaryFilter.startDate" [(endDate)]="competitorSummaryFilter.endDate" required></date-range>
+    </div>
+    <div class="col-sm-1">
+        <select [(ngModel)]="competitorSummaryFilter.unit" class="form-control" id="unit">
+            <option value="DAILY" selected>일 단위</option>
+            <option value="WEEKLY">주 단위</option>
+            <option value="MONTHLY">월 단위</option>
+        </select>
+    </div>
+
+    <div class="col-sm-1">
+        <select [(ngModel)]="competitorSummaryFilter.typeSearch" class="form-control" id="typeSearch">
+            <option value="0" selected>딜번호</option>
+        </select>
+    </div>
+
+    <div class="col-sm-2">
+        <button style="min-width: 80px;" type="button" (click)="onSearch()" class="btn btn-primary">{{'label.search'|translate}}</button>
+        <button style="min-width: 80px;" type="button" (click)="onReset()" class="btn btn-warning">{{'label.reset'|translate}}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <filter-btn [sources]="cat1Depths" (onSelect)="handleClickCat1Depth($event)"></filter-btn>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <filter-btn [sources]="cat2Depths" (onSelect)="handleClickCat2Depth($event)"></filter-btn>
+    </div>
+</div>
+</filter-panel>
+
+<div id="deal-list-tab-content" class="tab-content">
+    <div id="deal-list">
+        <table id="tbl-result" class="table table-bordered t-width">
+            <thead>
+            <tr>
+                <th style="width: 150px">{{'competitor.date' | translate}}</th>
+                <th *ngFor="let h of providers" style="width: 18%">{{h['providerId']}}</th>
+                <th style="width: 18%;" ng-repeat-end>{{'competitor.sum' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of competitors">
+                <td>{{d['date']}}</td>
+
+                <td *ngFor="let item of d['providers']" class="tb-tb">
+                   <table  class="t-width">
+                       <tr>
+                           <td class="td-mix-table"><a href="{{item[2]}}" target="_blank">{{item[0] | number: 0}}{{'currency' | translate}}</a></td>
+                           <td class="td-mix-table" style="color: green">{{item[1]}}%</td>
+                       </tr>
+                   </table>
+                </td>
+
+
+                <td>{{d['providerTotal'] | number: 0}}{{'currency' | translate}}</td>
+            </tr>
+
+            <tr style="background-color: #597D98; color: white;">
+                <td><strong>{{'competitor.total' | translate}}</strong></td>
+
+                <td *ngFor="let item of providers" class="tb-tb">
+                    <table class="t-width">
+                        <tr>
+                            <td class="td-mix-table-bold" style="color:white;">{{item['totalCountByProvider'] | number: 0}}{{'currency' | translate}}</td>
+                            <td class="td-mix-table-bold" style="color:lightgreen">{{item['totalAvaragePercent']}}%</td>
+                        </tr>
+                    </table>
+                </td>
+                <td><strong>{{total | number: 0}}{{'currency' | translate}}</strong></td>
+            </tr>
+            <tr style="background-color: #597D98; color: white;">
+                <td><strong>{{monthForecastTitle}}</strong></td>
+
+                <td *ngFor="let item of providers" class="tb-tb">
+                    <table class="t-width">
+                        <tr>
+                            <td class="td-mix-table-bold" style="color:white;">{{item['forecast'] | number: 0}}{{'currency' | translate}}</td>
+                            <td class="td-mix-table-bold" style="color:lightgreen">{{item['totalAvaragePercent']}}%</td>
+                        </tr>
+                    </table>
+                </td>
+                <td><strong>{{total | number: 0}}{{'currency' | translate}}</strong></td>
+            </tr>
+
+            <tr *ngIf="competitors.length == 0">
+                <td colspan="3">
+                    <span class="lead text-danger">{{'competitor.noResults' | translate}}</span>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<div>
+    <app-competitor-summary-chart-component *ngIf="chartData.length != 0" [chartData]='chartData'></app-competitor-summary-chart-component>
+</div>

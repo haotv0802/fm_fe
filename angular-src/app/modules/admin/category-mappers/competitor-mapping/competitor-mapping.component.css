@@ -1,0 +1,22 @@
+.filter-container {
+    display: inline-block;
+    width: 70%;
+}
+
+.filter-action {
+    display: inline-block;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.filter-action>button {
+    min-width: 80px;
+    margin: 2px;
+}
+
+.filter-label-name {
+    vertical-align: middle;
+    background: #fde7d5;
+    font-weight: bold;
+}

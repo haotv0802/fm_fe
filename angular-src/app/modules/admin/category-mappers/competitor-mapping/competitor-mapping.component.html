@@ -1,0 +1,100 @@
+<div class="filter-container">
+    <table class="table table-bordered">
+        <tr>
+            <td class="filter-label-name">{{'admin.category.competitor'|translate}}</td>
+            <td>
+                <select class="form-control" (change)="onCompanyChange($event)">
+                    <option value="" selected>전체</option>
+                    <option *ngFor="let comp of competitors" value="{{comp.coId}}">{{comp.name}}</option>
+                </select>
+            </td>
+            <td class="filter-label-name">{{'admin.category.compTeamFilterLabel'|translate}}</td>
+            <td>
+                <input id="tmon_team_name" type="text" [(ngModel)]="filterRequest.compTeamName" class="form-control" />
+            </td>
+            <td class="filter-label-name">{{'admin.category.snoopyTeamFilterLabel'|translate}}</td>
+            <td>
+                <input id="snoopy_name" type="text" [(ngModel)]="filterRequest.snoopyTeamName" class="form-control"/>
+
+            </td>
+            <td style="vertical-align: middle;background: #fde7d5;">
+                <input type="checkbox" (change) ="onCheckedUnmappedMapping($event)"  [checked]="filterRequest.isUnmapped"/>
+                {{'admin.category.inquiryUnmappingCompTeam'|translate}}
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="filter-action" *ngIf="isChangeMode; else viewModeTemplate">
+    <button style="min-width: 80px;" type="button" (click)="onBtnClickChangeMappers()" class="btn btn-primary">{{'admin.category.changeMappersBtnLabel'|translate}}</button>
+    <button style="min-width: 80px;" type="button" (click)="onBtnClickCancelChange()" class="btn btn-warning">{{'admin.category.cancelChangeMapperBtnLabel'|translate}}</button>
+</div>
+<ng-template #viewModeTemplate>
+    <div class="filter-action">
+        <button style="min-width: 80px;" type="button" (click)="onBtnClickExport()" class="btn btn-primary">{{'admin.category.exportBtnLabel'|translate}}</button>
+        <button style="min-width: 80px;" type="button" (click)="onBtnClickInquiry()" class="btn btn-primary">{{'admin.category.inquiryBtnLabel'|translate}}</button>
+        <button style="min-width: 80px;" type="button" (click)="onBtnClickChangeMode()" class="btn btn-warning">{{'admin.category.modifyModeBtnLabel'|translate}}</button>
+        <button id="btnUpload" (click)="file.click()" class="btn btn-primary" >{{'admin.category.importCSV'|translate}}</button>
+        <input style="visibility: hidden" #file type="file" ng2FileSelect [uploader]="fileUploader" (change)="onUpload($event)"/>
+    </div>
+</ng-template>
+<div>
+<label *ngIf="pageRequest.totalItems">{{('label.xResult' |translate).replace("{}", pageRequest.totalItems|number) }} </label>
+</div>
+<div style="width: 100%">
+    <div id="category-mapper-contents" style="overflow-x: auto;">
+        <div style="float: right;width: 26%;margin-bottom: 10px;" *ngIf="isChangeMode">
+            <select [(ngModel)]="teamSelectedIdForCheckAll" class="form-control" (change)="onTeamChangeForCheckAll()" [disabled]="checkAllSelectDisabled" id="dropdownSelectAll">
+            <option value="" selected>전체</option>
+            <option *ngFor="let comp of snoopyTeams" value="{{comp.id}}">{{comp.name}}</option>
+            </select>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+
+                <th style="text-align: center; background-color: #D4D4D4">{{'admin.category.compIdColName'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'admin.category.compTeamColName'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">{{'admin.category.snoopyOrgColName'|translate}}</th>
+                <th style="text-align: center; background-color: #D4D4D4">
+                    {{'admin.category.snoopyTeamColName'|translate}}
+                </th>
+                <th style="width: 50px; text-align: center; background-color: #D4D4D4" *ngIf="isChangeMode===true">
+                <input type="checkbox" id="chk_all" class="form-check-input" (change)="handleCheckAll($event)">
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of mappingRowsSource">
+                <td style="vertical-align: middle">{{item.coName}}</td>
+                <td style="vertical-align: middle">{{item.compTeamName}}</td>
+                <td style="vertical-align: middle">
+                    <div class="col-md-12">
+                        {{item.snoopyOrgName}} {{item.selectedOrgName}}
+                    </div>
+                </td>
+                <td style="vertical-align: middle">
+                    <div class="col-md-12">
+                        {{item.snoopyTeamName}}
+                    </div>
+                    <div class="col-md-12" *ngIf="isChangeMode===true">
+                        <select [(ngModel)]="item.selectedTeamId" class="form-control"  (change)="onSelectChangeItem(item)">
+                            <option *ngFor="let team of snoopyTeams" value="{{team.id}}" >{{team.name}}</option>
+                        </select>
+                    </div>
+
+                </td>
+                <td *ngIf="isChangeMode===true" style="vertical-align: middle;text-align: center">
+                    <input type="checkbox"  [(ngModel)]="item.checked" [checked]="item.checked" class="form-check-input" (click)="onCheckOnACheckBox(item, $event)">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <div style="text-align: center">
+        <pagination [(ngModel)]="pageRequest.page" (pageChanged)="onPaginationChanged($event)" [boundaryLinks]="false"
+                    [totalItems]="pageRequest.totalItems" [maxSize]="10" [itemsPerPage]="pageRequest.size" class="pagination-sm"
+                    previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+    </div>
+</div>

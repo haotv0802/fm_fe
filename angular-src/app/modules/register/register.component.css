@@ -1,0 +1,24 @@
+.register_tbl{
+    margin-left: 20px;
+
+}
+.td{
+    padding: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #ded2c3;
+    text-align: right;
+    background-color: #f7f3ee;
+}
+.td_val{
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #ded2c3;
+    text-align: left;
+    width: 400px;
+
+}
+.ls_dept{
+    display: inline;
+}

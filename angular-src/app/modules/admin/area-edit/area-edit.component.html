@@ -1,0 +1,32 @@
+<form #myForm="ngForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="close()">&times;</button>
+                <h4 class="modal-title">{{'admin.area.detail'|translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="departName">{{'admin.region.departName'|translate}}</label>
+                    <select name="departName" [ngModel]="model.departName" (change)="handleDepartChange($event)" class="form-control">
+                        <option *ngFor="let depart of departments" [value]="depart">{{depart}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regionNo">{{'admin.region.name'|translate}}</label>
+                    <select name="regionNo" [(ngModel)]="model.regionNo" class="form-control">
+                        <option *ngFor="let region of regions" [value]="region.regionNo">{{region.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address">{{'admin.area.address'|translate}}</label>
+                    <input name="address" type="text" class="form-control" required [(ngModel)]="model.address" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="handleCancel()">{{'label.cancel'|translate}}</button>
+                <button [disabled]="myForm.invalid" type="button" class="btn btn-primary" (click)="handleSubmit()">{{'label.save'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</form>

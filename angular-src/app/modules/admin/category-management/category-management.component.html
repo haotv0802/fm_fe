@@ -1,0 +1,33 @@
+<filter-panel title="{{'admin.category.categoryManagementHeadTitle' | translate}}"></filter-panel>
+<div *ngIf="onChangeMode == false" >
+    <label></label>
+    <div style="float:right;margin-bottom:5px;">
+        <button style="width: 150px;" type="button" (click)="handleModifyModeBtn($event)" class="btn btn-primary">{{'admin.category.modifyMode'|translate}}</button>
+        <button style="width: 150px;" type="button" (click)="handleCreateNewBtn($event)" class="btn btn-success">{{'admin.category.new'|translate}}</button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="tblhead">{{'admin.category.orgCode'|translate}}</th>
+            <th class="tblhead">{{'admin.category.orgName'|translate}}</th>
+            <th class="tblhead">{{'admin.category.teamCode'|translate}}</th>
+            <th class="tblhead">{{'admin.category.teamName'|translate}}</th>
+            <th class="tblhead" style="width:100px;">{{'admin.category.exposureYN'|translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let org of organizationsAndTeams;">
+            <td>{{org.orgCode}}</td>
+            <td>{{org.orgName}}</td>
+            <td>{{org.teamCode}}</td>
+            <td>{{org.teamName}}</td>
+            <td style="text-align: center">{{org.used}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="float:right;margin-bottom:5px;margin-bottom: 100px;">
+        <button style="min-width: 80px;" type="button" (click)="handleRevewalOrganization($event)" class="btn btn-danger">{{'admin.category.renewalOrganizationVersion'|translate}}</button>
+    </div>
+</div>
+
+<app-change-category *ngIf="onChangeMode == true" [organizationsAndTeams]='organizationsAndTeams' [parentOrganizations]='parentOrganizations' [organizationAndTeamsNameArray]="organizationAndTeamsNameArray" (onCancel)="handleCancel()" [version]='version'></app-change-category>

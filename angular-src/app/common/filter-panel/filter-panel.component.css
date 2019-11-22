@@ -1,0 +1,23 @@
+.expand-panel > .header {
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.expand-panel > .header > span {
+    float: right;
+    height: 35px;
+    width: 35px;
+    padding: 4px;
+    font-size: 21px;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+.expand-panel > .header > label {
+    margin-bottom: 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+.expand-panel > .content {
+    padding-top: 10px;
+}

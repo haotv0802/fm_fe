@@ -1,0 +1,34 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul *ngIf="!admin" class="nav navbar-nav">
+                <li *ngIf="!admin && showPage1" [class]="getActiveStatus('/competitor-by-category')"><a routerLink="/competitor-by-category" >{{'nav.category_group'|translate}}</a></li>
+                <li *ngIf="!admin && showPage2" [class]="getActiveStatus('/deal-list')"><a routerLink="/deal-list" style="cursor: pointer">{{'nav.deallist'|translate}}</a></li>
+                <li *ngIf="!admin && showPage3" [class]="getActiveStatus('/gross-report')"><a routerLink="/gross-report" style="cursor: pointer">{{'nav.admin.gross-report'|translate}}</a></li>
+                <li *ngIf="!admin && showPage4" [class]="getActiveStatus('/product-price-comparison')"><a routerLink="/product-price-comparison" [queryParams]="{isAdminView: false}" style="cursor: pointer">{{'nav.admin.productPriceComparison'|translate}}</a></li>
+                <li *ngIf="!admin && showPage5" [class]="getActiveStatus('/product-best-options')"><a routerLink="/product-best-options" style="cursor: pointer">{{'nav.bestoptions'|translate}}</a></li>
+                <li *ngIf="!admin && showPage6" [class]="getActiveStatus('/naver-search')"><a routerLink="/naver-search" style="cursor: pointer">{{'nav.naversearch'|translate}}</a></li>
+
+            </ul>
+            <ul *ngIf="admin" class="nav navbar-nav">
+                <li [class]="getActiveStatus('/admin/category-management')"><a routerLink="/admin/category-management" style="cursor: pointer">{{'nav.admin.category_management'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/competitor-mapping')"><a routerLink="/admin/competitor-mapping" style="cursor: pointer">{{'nav.admin.competitor_mapping'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/authority-approval')"><a routerLink="/admin/authority-approval" style="cursor: pointer">{{'nav.admin.authority-approval'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/authority-update')"><a routerLink="/admin/authority-update" style="cursor: pointer">{{'nav.admin.authority-update'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/report-adjustment')"><a routerLink="/admin/report-adjustment" style="cursor: pointer">{{'nav.admin.report-adjustment'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/product-price-comparison')"><a routerLink="/admin/product-price-comparison" [queryParams]="{isAdminView: true}" style="cursor: pointer">{{'nav.admin.productPriceComparison'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/notification')"><a routerLink="/admin/notification" style="cursor: pointer">{{'nav.notification'|translate}}</a></li>
+                <li [class]="getActiveStatus('/admin/monitor-user-activities')"><a routerLink="/admin/monitor-user-activities" style="cursor: pointer">{{'nav.monitor-user-activities'|translate}}</a></li>
+                <li><a href="/api/report/download?date={{currentDate}}" target="_blank">{{'nav.admin.downloadExcel'|translate}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="language-selector" ><language-selector></language-selector></li>
+                <li><a href="https://intstat.tmon.co.kr/competitors_sales2/?language=ko" >{{'nav.snoopy1'|translate}}</a></li>
+                 <li *ngIf="!admin && role === 'admin'"><a routerLink="/admin">{{'nav.management'|translate}}</a></li>
+                 <li *ngIf="admin && role ==='admin'"><a routerLink="/">{{'nav.user'|translate}}</a></li>
+                <li *ngIf="!admin"><a href="javascript:void(0)" (click)="showPopupRequestAuthorityChanges();">{{'nav.admin.request-permission-change'|translate}}</a></li>
+                <li><a href="#" (click)="doLogout()">{{'label.logout'|translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

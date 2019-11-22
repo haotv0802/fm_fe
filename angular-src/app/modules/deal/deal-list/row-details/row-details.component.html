@@ -1,0 +1,29 @@
+<script language="JavaScript1.5">
+  angular.element(function () {
+    console.log('page loading completed');
+});
+</script>
+<div style="float: left; margin-top: 20px;margin-left: 50px; width: 100%">
+  <select [(ngModel)]="chartType" (change)="changeChart(chartType)" (load)="changeChart(chartType)" style="float:left">
+    <option value="0" selected>일별 매출액 차트</option>
+    <option value="1">일별 매출액 누적 차트</option>
+  </select>
+</div>
+<div class="row" style="width: 1340px;margin-left: 25px;">
+  <div class="col-md-8">
+    <svg width="800" height="400"></svg>
+  </div>
+
+  <div class="col-md-2" style="max-height: 350px;overflow:auto;margin-top: 20px;width: 250px;" >
+    <div *ngFor="let item of saleDataSources" style="text-align: left">
+      <span>{{item['regDate']}}:00:00</span> : {{item["saleDiff"] | number}}
+      <span>({{item["sellCountDiff"] | number}})</span>
+    </div>
+  </div>
+
+</div>
+
+<div style="max-height:500px;overflow:auto;width: 1340px;margin-left: 100px">
+  <smart-table [settings]="optionListSetting" [sources]="options" (onTableChange)="handleTableChange($event)">
+  </smart-table>
+</div>

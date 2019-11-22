@@ -1,0 +1,109 @@
+<div class="row">
+        <div class="col-sm-10">
+            <table class="table table-bordered" style="width: 100%">
+                <tbody>
+                <tr>
+                    <td class="filter-head-1" style="width: 8%">{{'label.sale_date'|translate}}</td>
+                    <td style="width: 45%">
+
+                        <div class="controls form-inline">
+                            <select [(ngModel)]="dealSaleFilter.typeSale" class="form-control filter-cmp" id="typeSale" style="width: 20%; float: left;margin-right: 3px;">
+                            <option value="1" selected>매출시점 기준</option>
+                            <option value="0">시작일 기준</option>
+                            </select>
+
+                        <date-range [(startDate)]="dealSaleFilter.startDate" [(endDate)]="dealSaleFilter.endDate" (startDateChange)="handleDateChanged($event)" (endDateChange)="handleDateChanged($event)"
+                                    required style="float:left; width: 70%" ></date-range>
+                            <br/><label>{{'label.recommend_range_date_first'|translate}}<span style="color: #ff0000">{{'label.recommend_range_date_middle'|translate}}</span>{{'label.recommend_range_date_last'|translate}}</label>
+                        </div>
+                    </td>
+                    <td *ngIf="dealSaleFilter.isFullAccess" class="filter-head-2" style="width: 8%">{{'label.department'|translate}}</td>
+                    <td *ngIf="dealSaleFilter.isFullAccess" style="width: 42%">
+                        <div class="controls form-inline">
+                            <select [(ngModel)]="dealSaleFilter.coId" (change)="handleCoIdChanged($event)" class="form-control filter-cmp" style="width: 30%">
+                                <option value="">업체명(전체)</option>
+                                <option *ngFor="let co of companies" value="{{co.coId}}">{{co.coId | uppercase}}</option>
+                            </select>
+                            <select [(ngModel)]="dealSaleFilter.departmentId" (change)="handleDepartmentChanged($event)" class="form-control filter-cmp" style="width: 30%">
+                                <option value="" *ngIf="role ==='admin'">본부명(전체)</option>
+                                <option value="" *ngIf="role ==='user' && departments.length > 1" >본부명(전체)</option>
+                                <option *ngFor="let dep of departments" value="{{dep.id}}">{{dep.name}}</option>
+                            </select>
+                            <select [(ngModel)]="dealSaleFilter.teamId" (change)="handleTeamChanged($event)" class="form-control filter-cmp" style="width: 30%">
+                                <option value="">팀명(전체)</option>
+                                <option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="filter-head-1">{{'label.deal_number'|translate}}</td>
+                    <td>
+                        <input type="text" size="10" id="searchDealNumber" [(ngModel)]="dealSaleFilter.searchDealNumber"
+                               class="form-control input-search" style="width: 42%"/> <span id="errorDealNumSp" style="display: none;">{{'deal.message.error_input_deal_num' | translate}}</span>
+                    </td>
+                    <td class="filter-head-2">{{'label.deal_name'|translate}}</td>
+                    <td>
+                        <input type="text" size="10" id="searchDealName" [(ngModel)]="dealSaleFilter.searchDealName"
+                               class="form-control input-search" style="width: 40%"/> <span id="errorDealNameSp" style="display: none;">{{'message.error_invalid_input_text' | translate}}</span>
+                    </td>
+                </tr>
+                <tr *ngIf="dealSaleFilter.isFullAccess" >
+                    <td class="filter-head-1">{{'label.category'|translate}}</td>
+                    <td colspan="3">
+                        <select [(ngModel)]="dealSaleFilter.coId" (change)="resetCategoryFilter()" class="form-control filter-cmp" style="width: 20%; display: inline-block !important;">
+                            <option *ngFor="let comp of companies" value="{{comp.coId}}">{{comp.name}}</option>
+                        </select>
+
+                        <select [(ngModel)]="dealSaleFilter.categoryDepth1" class="form-control filter-cmp" style="width: 20%; display: inline-block !important;" (click)="handleShowCategoryDepth(1)" (change)="handleCategoryChange(1)">
+                            <option value="">카테고리 1depth (전체)</option>
+                            <option *ngFor="let item of categoryDepth1Items" value="{{item.cateNo}}">{{item.cateName}}</option>
+                        </select>
+
+                        <select [(ngModel)]="dealSaleFilter.categoryDepth2" class="form-control filter-cmp" style="width: 20%; display: inline-block !important;" (click)="handleShowCategoryDepth(2)" (change)="handleCategoryChange(2)">
+                            <option value="">카테고리 2depth (전체)</option>
+                            <option *ngFor="let item of categoryDepth2Items" value="{{item.cateNo}}">{{item.cateName}}</option>
+                        </select>
+
+                        <select [(ngModel)]="dealSaleFilter.categoryDepth3" class="form-control filter-cmp" style="width: 20%; display: inline-block !important;" (click)="handleShowCategoryDepth(3)" (change)="handleCategoryChange(3)">
+                            <option value="">카테고리 3depth (전체)</option>
+                            <option *ngFor="let item of categoryDepth3Items" value="{{item.cateNo}}">{{item.cateName}}</option>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr *ngIf="dealSaleFilter.isFullAccess">
+                    <td class="filter-head-1">{{'label.partner_name'|translate}}</td>
+                    <td colspan="3">
+                        <input type="text" size="10" id="searchPartnerName" [(ngModel)]="dealSaleFilter.searchPartnerName"
+                                               class="form-control input-search" style="width: 100%"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-2">
+            <button style="width: 120px; margin-bottom: 5px;" type="button" (click)="onSearch()" class="btn btn-primary" >
+                {{'label.search'|translate}}
+            </button> <br/>
+            <button style="width: 120px;" type="button" (click)="onExportExcel()" class="btn btn-warning">
+                {{'label.excel_export'|translate}}
+            </button>
+        </div>
+    </div>
+<label style="color:red">{{'deal.topHeaderTableDealList' | translate}}</label><br/>
+<label *ngIf="pagination.totalItems">{{('label.xResult' |translate).replace("{}", pagination.totalItems|number) }} </label>
+
+<div style="width: 100%;">
+    <div id="deal-list" style="overflow-x: auto;width: 100%">
+        <smart-table [settings]="dealSaleTableSettings" [sources]="dealSales"
+                     (onTableChange)="handleDealSaleTableAction($event)">
+        </smart-table>
+    </div>
+    <div style="text-align: center">
+    <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+    </div>
+</div>

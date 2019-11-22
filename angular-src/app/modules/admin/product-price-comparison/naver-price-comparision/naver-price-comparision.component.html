@@ -1,0 +1,88 @@
+<div class="filter-container">
+                                      <table class="table table-bordered">
+                                        <tr>
+                                          <td class="filter-head-1">{{'label.naverCheckingDate'|translate}}</td>
+                                          <td colspan="1">
+                                            <div style="width: 15%; float: left">
+                                                <my-date-picker [options]="myDatePickerOptions" [ngModel]="filter.searchDate" (dateChanged)="handleStartDateChange($event)" required="required"></my-date-picker>
+                                            </div>
+                                            <div style="width: 85%;float: right !important;line-height: 2.2 !important;font-size: 14px !important;color: red !important;padding-left: 15px;padding-top: 1px;">
+                                                <p class="msg">{{('naverComparision.lastCrawlingMessage' | translate).replace("{}", lastCrawlingMessage) }}</p>
+                                            </div>
+                                          </td>
+
+                                        </tr>
+                                          <tr>
+                                              <td class="filter-head-1">{{'label.category'|translate}}</td>
+                                              <td colspan="5">
+                                                  <select [(ngModel)]="filter.cat1" class="form-control filter-cmp" style="width: 20%" (change)="handleShowCategoryDepth(2)" required>
+                                                      <option value="" selected disabled>카테고리1</option>
+                                                      <option *ngFor="let item of categoryDepth1Items" [ngValue]="item">{{item}}</option>
+                                                  </select>
+
+                                                  <select [(ngModel)]="filter.cat2" class="form-control filter-cmp" style="width: 20%">
+                                                      <option value="" selected disabled>카테고리2</option>
+                                                      <option *ngFor="let item of categoryDepth2Items" [ngValue]="item">{{item}}</option>
+                                                  </select>
+                                                  <input type="checkbox" [(ngModel)]="naverTopSearch" (change)="loadKeywordAndBranch()"/>{{'label.naverTopSearch'|translate}}
+                                                  <input type="checkbox" [(ngModel)]="naverBranchSearch" (change)="loadKeywordAndBranch()"/>{{'label.naverBrachSearch'|translate}}
+                                                  <input type="checkbox" [(ngModel)]="naverTmonMatching"/>{{'label.naverTmonMatching'|translate}}
+
+                                                  <span id="errorInput" style="display: none;">{{'naverComparision.errors.cat1Required' | translate}}</span>
+
+                                              </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td class="filter-head-1">{{'label.naverTitle'|translate}}</td>
+                                            <td colspan="3">
+                                                <input type="text" size="10" id="dealName" [(ngModel)]="filter.productName"
+                                                       class="form-control input-search" style="width: 40%"/>
+                                            </td>
+                                        </tr>
+                                      </table>
+                                    </div>
+                        <div class="filter-action">
+                                      <button style="width: 120px; color: white;" type="button" (click)="onSearch()" class="btn btn-primary">{{'label.search'|translate}}</button>
+                                      <button style="width: 120px; color: white;" type="button" (click)="onExportExcel()" class="btn btn-warning">{{'label.excel_export'|translate}}</button>
+                                    </div>
+                        <div style="width: 100%">
+                                      <div *ngIf="naverTopSearch" style="overflow: hidden">
+                                        <div style="width: 260px;color: red">
+                                            {{'label.naver_collapse_topSearch' |translate}}
+                                        </div>
+                                      <div  style="overflow-x: auto;">
+                                        <table class="table-branch-keyword" id="topSearch">
+                                            <tr *ngFor="let row of naverBindedDataTopSearch; let i = index">
+                                                <td style="width:100px; border: 1px solid #acacac; padding-left: 4px;" *ngFor="let col of row; let j = index">{{(i*row.length + j + 1) + ". "}}{{col}}</td>
+                                            </tr>
+                                        </table>
+                                      </div>
+                                      </div>
+                                      <div *ngIf="naverBranchSearch"  style="overflow: hidden">
+                                        <div style="width: 260px;color: red">
+                                            {{'label.naver_collapse_branchSearch' |translate}}
+                                        </div>
+                                        <div style="overflow-x: auto;">
+                                            <table class="table-branch-keyword" id="brachSearch">
+                                                <tr *ngFor="let row of naverBindedDataBranch; let i = index">
+                                                    <td style="width:100px; border: 1px solid #acacac; padding-left: 4px;" *ngFor="let col of row; let j = index">{{(i*row.length + j + 1) + ". "}}{{col}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                      </div>
+
+                                      <div *ngIf="pagination.totalItems">
+                                        <label><b>{{'productComparison.totalItems'|translate}} </b></label> {{('label.xResult' |translate).replace("{}", pagination.totalItems) }}
+                                    </div>
+                                      <div id="product-search" style="overflow-x: auto;">
+                                                                                                                      <smart-table [settings]="naverDataSettingsProduct" [sources]="naverBindedDataProduct" (onTableChange)="handleTableChange($event)">
+                                                                                                                      </smart-table>
+                                                                                                                    </div>
+                                                                              <div style="text-align: center">
+                                                                                                <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                                                                                                            [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                                                                                                            [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                                                                                                            previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+                                                                              </div>
+                                    </div>

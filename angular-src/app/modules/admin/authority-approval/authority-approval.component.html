@@ -1,0 +1,87 @@
+<div>
+    <button style="width: 80px;" type="button" id='btn_save' (click)="onSave()"
+            class="btn btn-success">{{'label.save'|translate}}
+    </button> <br/><br/>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 50px; text-align: center; background-color: #D4D4D4">
+                <input type="checkbox"
+                       id="chk_all"
+                       class="form-check-input"
+                       (change)="handleCheckAll($event)"
+                       [(ngModel)]="checkAll"
+                >
+            </th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.system'|translate}}</th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.userId'|translate}}</th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.userName'|translate}}</th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.orgVer'|translate}}</th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.dept'|translate}}</th>
+            <th style="text-align: center; background-color: #D4D4D4">
+                {{'label.authorityRequest'|translate}}
+            </th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.pageList'|translate}}</th>
+            <th style="text-align: center; background-color: #D4D4D4">{{'label.pageAuthority'|translate}}
+            </th>
+            <th style="text-align: center;background-color: #D4D4D4">{{'permissionChange.reasonOfChangeRequest' | translate}}</th>
+            <th style="text-align: center;background-color: #D4D4D4">{{'permissionChange.returned' | translate}}</th>
+            <th style="text-align: center;background-color: #D4D4D4">{{'permissionChange.adminReasonOfReturned' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of authorityRequests; let idx = index">
+            <td style="text-align: center">
+                <input type="checkbox" id="chk_{{item.srl}}"
+
+                       (change)="handleCheck($event, item)" [checked]="item.isChecked"
+                       class="form-check-input">
+            </td>
+            <td>
+            <select [(ngModel)]="item.appliedToSystem" class="form-control" (change)="handleSystemChange(item)">
+                <option value="1">{{'register.snoopy1'|translate}}</option>
+                <option value="2">{{'register.snoopy2'|translate}}</option>
+                <option value="0">{{'register.snoopy12'|translate}}</option>
+            </select>
+            </td>
+            <td>{{item.userId}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.categoryVersion}}</td>
+            <td>{{item.department}}</td>
+            <td>
+                <span *ngFor="let subItem of item.authorityRequests">
+                    <input type="checkbox" id=`chkOrg_{{item.srl}}_{{subItem.no}}`
+                           (change)="handleCategoryCheck($event, subItem)" [checked]="subItem.checked"
+                           class="form-check-input">
+                    <label for=`chkOrg_{{item.srl}}_{{subItem.no}}`>{{subItem.name}}</label>
+                </span>
+            </td>
+            <td>
+                <span *ngFor="let subItem of item.pageAuthRequests">
+                    <input type="checkbox" id=`chkPageId_{{item.srl}}_{{subItem.no}}`
+                           (change)="handlePageAuthCheck($event, subItem)" [checked]="subItem.checked"
+                           class="form-check-input">
+                    <label for=`chkPageId_{{item.srl}}_{{subItem.no}}`>{{subItem.name}}</label>
+                </span>
+            </td>
+            <td>
+                <select class="form-control" id=`pageAuthority_{{item.srl}}` (change)="handlePageAuthorityChange($event, item)">
+                    <option value="admin" [selected] = "item.pageAuthority === 'admin'">{{'label.admin'|translate}}</option>
+                    <option value="user" [selected] = "item.pageAuthority === 'user'">{{'label.user'|translate}}</option>
+                </select>
+            </td>
+            <td>{{item.userMemo}}</td>
+            <td style="text-align: center;">
+                <input type="checkbox" [(ngModel)]="item.isReturnedCheck"/>
+            </td>
+            <td><input type="text" [(ngModel)] = "item.adminMemo" style="width: 100%;"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="text-align: center">
+    <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+    </div>
+</div>

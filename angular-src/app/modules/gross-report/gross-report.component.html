@@ -1,0 +1,58 @@
+<div>
+    <div class="filter-container" style="width: 80%">
+    <table class="table table-bordered">
+        <tr>
+            <td class="filter-label-name">{{'grossReport.sale_date'|translate}}</td>
+            <td>
+                <span class="picker">
+                    <date-range [(startDate)]="grossReportFilter.startDate" [(endDate)]="grossReportFilter.endDate"
+                                required style="float:left; width: 100%"></date-range>
+                </span>
+                <span style="color:red">{{'message.hint_download_limit' | translate}}</span>
+            </td>
+            <td class="filter-label-name">{{'grossReport.company'|translate}}</td>
+            <td style="width: 400px;">
+                <select class="form-control" [(ngModel)]="grossReportFilter.coId" style="width: 100px;display: inline;">
+                    <option value="">업체명(전체)</option>
+                    <option *ngFor="let co of companies" value="{{co.coId}}">{{co.coId | uppercase }}</option>
+                </select>
+                <select class="form-control" [(ngModel)]="grossReportFilter.departmentId"
+                        (change)="handleDepartmentChanged($event)" style="width: 100px;display: inline;">
+                    <option value="" *ngIf="role ==='admin'">본부명(전체)</option>
+                    <option value="" *ngIf="role ==='user' && departments.length > 1">본부명(전체)</option>
+                    <option *ngFor="let dep of departments" value="{{dep.id}}">{{dep.name}}</option>
+                </select>
+                <select class="form-control" [(ngModel)]="grossReportFilter.teamId"
+                        style="width: 100px;display: inline;">
+                    <option value="">팀명(전체)</option>
+                    <option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="filter-action">
+        <button style="min-width: 100px;" type="button" class="btn btn-primary" (click)="onSearch()">
+            {{'label.inquiryBtnLabel'|translate}}
+        </button>
+        <button style="width: 120px;" type="button" id='btn_save' (click)="onExportExcel()"
+                class="btn btn-warning">{{'label.excel_export'|translate}}
+        </button>
+    </div>
+</div>
+<label *ngIf="pagination.totalItems">{{('label.xResult' |translate).replace("{}", pagination.totalItems|number) }} </label>
+<div class="row">
+    <div class="col-sm-12">
+        <div id="deal-list" style="overflow-x: auto;">
+            <smart-table [settings]="tableSetting" [sources]="grossReportList"
+                         (onTableChange)="handleTableChange($event)">
+            </smart-table>
+        </div>
+        <div style="text-align: center">
+            <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                        [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                        [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                        previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+        </div>
+    </div>
+</div>

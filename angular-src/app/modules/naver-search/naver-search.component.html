@@ -1,0 +1,83 @@
+<div class="filter-container">
+<table class="table table-bordered">
+    <tr>
+        <td class="filter-head-1" style="width: 70px;">
+            {{'naverSearch.category'|translate}}
+        </td>
+        <td colspan="3">
+            <span *ngFor="let item of categoryDepth1Items; let i = index" style="font-size: 0px; padding-right: 0px">
+                <a *ngIf="filter.category1 !== item" style="font-size: small; color: black" type="button"
+                        (click)="handleShowCategoryDepth(2, item)"
+                        class="btn">{{item}}
+                </a>
+                <a *ngIf="filter.category1 === item" style="font-size: small; font-weight: bold; color: red" type="button"
+                        (click)="handleShowCategoryDepth(2, item)"
+                        class="btn">{{item}}
+                </a>
+            </span>
+        </td>
+    </tr>
+    <tr *ngIf="categoryDepth2Items && categoryDepth2Items.length > 0">
+        <td class="filter-head-1">
+        </td>
+        <td colspan="3">
+            <span *ngFor="let item of categoryDepth2Items; let i = index" style="font-size: 0px; padding-right: 0px">
+                <a *ngIf="filter.category2 !== item" style="font-size: small; color: black" type="button" (click)="onSelectCat2(i)"
+                        class="btn">{{item}}
+                </a>
+                <a *ngIf="filter.category2 === item" style="font-size: small; font-weight: bold; color: red" type="button" (click)="onSelectCat2(i)"
+                        class="btn">{{item}}
+                </a>
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <td class="filter-head-1">
+            {{'naverSearch.price'|translate}}
+        </td>
+        <td style="width: 400px;">
+            <div class="controls form-inline">
+                <input type="text" id="priceFrom" maxlength="20" onkeyup="this.value=this.value.replace(/[^\d]/,'')" class="form-control input-search" style="width: 150px; height: 30px; text-align: right" [(ngModel)]="filter.priceFrom" placeholder="원" /> ~
+                <input type="text" id="priceTo" maxlength="20" onkeyup="this.value=this.value.replace(/[^\d]/,'')" class="form-control input-search" style="width: 150px; height: 30px; text-align: right" [(ngModel)]="filter.priceTo" placeholder="원" />
+            </div>
+        </td>
+        <td class="filter-head-1">
+            {{'naverSearch.commonKeyword'|translate}}
+        </td>
+        <td>
+            <input type="text" id="keyword" maxlength="255" class="form-control input-search" style="width: 420px; height: 30px; text-align: left" [(ngModel)]="filter.keyword" placeholder="검색키워드에 추가될 공통 키워드를 입력하세요.(ex.브랜드명)" />
+        </td>
+    </tr>
+</table>
+    <span *ngIf="filter.category1" style="font-weight: bold">
+        현재 선택된 카테고리: {{filter.category1}} > {{filter.category2}}
+    </span>
+</div>
+
+<div class="filter-action">
+    <button style="width: 120px;" type="button" (click)="onSearch()" class="btn btn-primary" [disabled]="disableBtn">
+        {{'label.lookup'|translate}}
+    </button>
+</div>
+<div *ngIf="(allItems != null)">
+    <label><b>{{'naverSearch.totalDealItems'|translate}} </b></label> {{(allItems.length) }}
+</div>
+<div>
+    <label style="color: red"><b>{{'naverSearch.limitKeyword'|translate}} </b></label>
+</div>
+<div style="width: 100%;top: 150px; clear:both">
+    <div id="naver-deals-list" class="naver-deals-list">
+        <div class="search-keywords">
+            <span class="textarea" style="height: 35px; text-align: center; background-color: pink; padding-top: 6px;">{{'label.searchKeywords'|translate}}</span>
+            <textarea class="textarea" id="searchKeywords" [(ngModel)]="keywords"></textarea>
+        </div>
+        <smart-table [settings]="dataSettings" [sources]="bindedDataContents" style="top: 0px; width: 90%; float:left">
+        </smart-table>
+    </div>
+    <div style="text-align: center; clear:both; padding-top: 20px;">
+        <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                    [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                    [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                    previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+    </div>
+</div>

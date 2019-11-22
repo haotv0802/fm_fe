@@ -1,0 +1,36 @@
+<filter-panel title="{{'label.filter'|translate}}">
+    <div class="row">
+        <div class="col-sm-2">
+            <select [ngModel]="filter.depart" (change)="handleDepartChange($event)" class="form-control">
+                <option value="">{{'admin.area.all'|translate}}</option>
+                <option *ngFor="let depart of departments" [value]="depart">{{depart}}</option>
+            </select>
+        </div>
+        <div class="col-sm-2" *ngIf="regions?.length">
+            <select [(ngModel)]="filter.region" class="form-control">
+                <option value="">{{'admin.area.all'|translate}}</option>
+                <option *ngFor="let region of regions" [value]="region.regionNo">{{region.name}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" [(ngModel)]="filter.keyword" class="form-control input-search" placeholder="{{'admin.area.address'|translate}}"
+            />
+        </div>
+        <div class="col-sm-4">
+            <button style="min-width: 80px;" type="button" (click)="handleSearch($event)" class="btn btn-primary">{{'label.search'|translate}}</button>
+            <button style="min-width: 80px;" type="button" (click)="handleCreate($event)" class="btn btn-success">{{'label.create'|translate}}</button>
+        </div>
+    </div>
+</filter-panel>
+<label *ngIf="pageRequest.totalItems">{{pageRequest.totalItems|number}} results.</label>
+<div class="row">
+    <div class="col-sm-12">
+        <div style="overflow-x: auto;">
+            <smart-table [settings]="areaSetting" [sources]="areas" (onTableChange)="handleTableChange($event)">
+            </smart-table>
+        </div>
+        <pagination [(ngModel)]="pageRequest.page" (pageChanged)="onPaginationChanged($event)" [boundaryLinks]="false" [totalItems]="pageRequest.totalItems"
+            [maxSize]="10" [itemsPerPage]="pageRequest.size" class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;"
+            firstText="&laquo;" lastText="&raquo;"></pagination>
+    </div>
+</div>

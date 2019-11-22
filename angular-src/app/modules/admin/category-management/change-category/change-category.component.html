@@ -1,0 +1,52 @@
+<div style="float:right;margin-bottom:5px;">
+    <button style="width: 150px;" type="button" id="btnModify" (click)="handleModifyModeBtn($event)" class="btn btn-primary">
+        {{'label.change'|translate}}
+    </button>
+    <button style="width: 150px;" type="button" (click)="handleCancelBtn($event)" class="btn btn-default">
+        {{'label.cancel'|translate}}
+    </button>
+    <button style="width: 150px;" type="button" (click)="handleCreateNewBtn($event)" class="btn btn-success">
+        {{'admin.category.new'|translate}}
+    </button>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th class="tblhead">{{'admin.category.orgCode'|translate}}</th>
+        <th class="tblhead">{{'admin.category.orgName'|translate}}</th>
+        <th class="tblhead">{{'admin.category.teamCode'|translate}}</th>
+        <th class="tblhead">{{'admin.category.teamName'|translate}}</th>
+        <th class="tblhead" style="width:100px;">{{'admin.category.exposureYN'|translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let org of organizationsAndTeams;">
+        <td style="vertical-align: middle;">{{org.orgCode}}</td>
+        <td>
+            <select *ngIf="org.teamCode != null" class="form-control" [(ngModel)]="org.orgCode" (change)="handleOrganizationChange($event, org)">
+                <option *ngFor="let t of parentOrganizations" value="{{t.code}}" [selected]="org.orgCode === t.code">{{t.name}}</option>
+            </select>
+
+            <input *ngIf="org.teamCode == null" type="text" [(ngModel)]="org.orgName"
+                   (keypress)="validateInputValue(org)"
+                   (keydown)="validateInputValue(org)"
+                   (keyup)="validateInputValue(org)" />
+            <span class="error" id="error_{{org.orgCode}}"></span>
+
+        </td>
+        <td style="vertical-align: middle;">{{org.teamCode}}</td>
+        <td><input *ngIf="org.teamCode != null" type="text" [(ngModel)]="org.teamName"
+                   (keypress)="validateInputValue(org)"
+                   (keydown)="validateInputValue(org)"
+                   (keyup)="validateInputValue(org)" />
+            <span class="error" id="error_{{org.teamCode}}"></span>
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            <select class="form-control" (change)="handleUsedChange($event, org)" [(ngModel)]="org.used">
+                <option *ngFor="let u of used" value="{{u}}" [selected]="org.used === u">{{u}}</option>
+            </select>
+        </td>
+    </tr>
+    </tbody>
+</table>
+

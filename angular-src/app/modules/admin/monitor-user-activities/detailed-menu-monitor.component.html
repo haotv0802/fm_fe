@@ -1,0 +1,42 @@
+<div>
+    <tabset>
+        <tab title="일별접속현황" active="true">
+            <daily-status-monitor></daily-status-monitor>
+        </tab>
+        <tab title="사용자 상세 접속이력" >
+            <detailed-user-monitor></detailed-user-monitor>
+        </tab>
+        <tab title="조직별 사용현황">
+            <detailed-team-monitor></detailed-team-monitor>
+        </tab>
+        <tab title="사용자 상세 접속이력">
+            <div class="filter-container" style="width: 800px;">
+                <table class="table table-bordered">
+                    <tr>
+                        <td class="filter-head-1">{{'monitorUserActivities.label.checkingTime'|translate}}</td>
+                        <td colspan="3">
+                            <date-range [(startDate)]="filter.fromDateTime"
+                                        [(endDate)]="filter.toDateTime"></date-range>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="filter-action">
+                <button style="width: 120px; color: white;" type="button" (click)="onSearch()" class="btn btn-primary" [disabled]="disableSearch">{{'monitorUserActivities.button.search'|translate}}</button>
+            </div>
+            <div style="width: 100%">
+                <div id="product-search" style="overflow-x: auto; max-height: 500px">
+                    <smart-table [settings]="activityDataSettings" [sources]="auditActionPagging">
+                    </smart-table>
+                </div>
+                <div style="text-align: center">
+                    <pagination [(ngModel)]="pagination.pageRequest.page" (pageChanged)="onPaginationChanged($event)"
+                                [boundaryLinks]="false" [totalItems]="pagination.totalItems"
+                                [maxSize]="10" [itemsPerPage]="pagination.itemPerPage" class="pagination-sm"
+                                previousText="PREV" nextText="NEXT" firstText="FIRST" lastText="LAST"></pagination>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

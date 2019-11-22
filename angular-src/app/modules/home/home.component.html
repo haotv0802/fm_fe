@@ -1,0 +1,6 @@
+<div class="container-fluid">
+	<!--<tmon-header></tmon-header>-->
+	<navigation-bar *ngIf="role != null"></navigation-bar>
+	<router-outlet *ngIf="role != null"></router-outlet>
+	<tmon-footer *ngIf="role != null"></tmon-footer>
+</div>

@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CitiesComponent } from './cities/cities.component';
 import { ExpensesComponent } from './expenses/expenses.component';
+import {HTTPService} from './common/HTTP.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { ExpensesComponent } from './expenses/expenses.component';
       { path: 'expenses', component: ExpensesComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    HTTPService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

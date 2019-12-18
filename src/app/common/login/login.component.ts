@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
           // } else if (authority == this._constants.AUTHORITY_CUSTOMER) {
           //   this._messagesService.getCustomerMessages();
           // }
-          this._router.navigate(['expenses']);
+          this._router.navigate(['moneyflow']);
         }
       },
       (error: any) => {

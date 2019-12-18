@@ -24,9 +24,9 @@ export class Constants {
   public readonly HTTP_STATUS_UNAUTHORIZED: number = 401;
 
   //  Expenses
-  public readonly EXPENSES_SERVICE_URL: string = this.HOST + '/expenses';
-  public readonly EXPENSES_DETAILS_SERVICE_URL: string = this.HOST + '/expensesDetails';
-  public readonly EXPENSES_PREVIOUS_SERVICE_URL: string = this.HOST + '/previousExpensesDetails';
+  public readonly EXPENSES_SERVICE_URL: string = this.HOST + '/moneyflow';
+  public readonly EXPENSES_DETAILS_SERVICE_URL: string = this.HOST + '/moneyflowDetails';
+  public readonly EXPENSES_PREVIOUS_SERVICE_URL: string = this.HOST + '/moneyflowDetails';
 
   //  Event Expenses
   public readonly EVENT_EXPENSES_SERVICE_URL: string = this.HOST + '/eventExpenses';

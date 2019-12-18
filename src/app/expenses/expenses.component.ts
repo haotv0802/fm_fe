@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ExpensesService} from './expenses.service';
+import {Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'app-cities',
@@ -17,10 +19,22 @@ export class ExpensesComponent implements OnInit {
                { city_name: "Denpasar", prov_name: "Bali" },
                { city_name: "Makasar", prov_name: "Sulawesi Selatan" }];
 
-  constructor() { }
+  constructor(
+    private _expensesService: ExpensesService,
+  ) { }
 
   ngOnInit() {
     console.log("City Component Init");
+    Observable.forkJoin(
+      this._expensesService.getExpenses()
+    ).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+    ;
   }
-
 }

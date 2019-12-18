@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Constants} from "./constant";
 import {Observable} from "rxjs/Observable";
 import {Headers, Http, RequestOptions, Response, URLSearchParams} from "@angular/http";
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HTTPService {
@@ -20,7 +21,7 @@ export class HTTPService {
       headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
     }
     return this._http.post(url, data, {headers: headers})
-      // .catch(this.handleError)
+      .catch(this.handleError)
       ;
   }
 
@@ -32,7 +33,7 @@ export class HTTPService {
       headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
     }
     return this._http.patch(url, data, {headers: headers})
-      // .catch(this.handleError)
+      .catch(this.handleError)
       ;
   }
 
@@ -44,7 +45,7 @@ export class HTTPService {
       headers.append(this._constants.X_AUTH_TOKEN_HEADER, sessionStorage.getItem(this._constants.AUTH_TOKEN));
     }
     return this._http.delete(url, {headers: headers})
-      // .catch(this.handleError)
+      .catch(this.handleError)
       ;
   }
 
@@ -72,7 +73,7 @@ export class HTTPService {
     requestOptions.headers = headers;
     requestOptions.params = params;
     return this._http.get(url, requestOptions)
-      // .catch(this.handleError)
+      .catch(this.handleError)
     ;
   }
 

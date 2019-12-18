@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { CitiesComponent } from './cities/cities.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import {HTTPService} from './common/HTTP.service';
+import {LoginModule} from './common/login/login.module';
+import {ExpensesService} from './expenses/expenses.service';
+import {Constants} from './common/constant';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,13 @@ import {HTTPService} from './common/HTTP.service';
       { path: '', redirectTo: 'expenses', pathMatch: 'full' },
       { path: 'cities', component: CitiesComponent },
       { path: 'expenses', component: ExpensesComponent }
-    ])
+    ]),
+    LoginModule
   ],
   providers: [
-    HTTPService
+    HTTPService,
+    ExpensesService,
+    Constants
   ],
   bootstrap: [AppComponent]
 })

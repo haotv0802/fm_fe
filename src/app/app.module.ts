@@ -11,6 +11,8 @@ import {HTTPService} from './common/HTTP.service';
 import {LoginModule} from './common/login/login.module';
 import {ExpensesService} from './expenses/expenses.service';
 import {Constants} from './common/constant';
+import {ToasterModule} from 'angular2-toaster';
+import {MessagesService} from './common/messages/messages.service';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,14 @@ import {Constants} from './common/constant';
       { path: 'cities', component: CitiesComponent },
       { path: 'expenses', component: ExpensesComponent }
     ]),
-    LoginModule
+    LoginModule,
+    ToasterModule
   ],
   providers: [
     HTTPService,
     ExpensesService,
-    Constants
+    Constants,
+    MessagesService
   ],
   bootstrap: [AppComponent]
 })

@@ -25,9 +25,8 @@ import {MessagesService} from './common/messages/messages.service';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'expenses', pathMatch: 'full' },
-      { path: 'cities', component: CitiesComponent },
-      { path: 'expenses', component: ExpensesComponent }
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'moneyflow', component: ExpensesComponent }
     ]),
     LoginModule,
     ToasterModule

@@ -5,6 +5,7 @@ import {HTTPService} from "../common/HTTP.service";
 import {Expense} from "./expense";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import 'rxjs/add/operator/catch';
+import {PaymentMethod} from './paymentMethod';
 
 @Injectable()
 export class ExpensesService {
@@ -45,6 +46,12 @@ export class ExpensesService {
         return <Event>res.json();
       })
       // .do((res) => {console.log(res)})
+      ;
+  }
+
+  getPaymentMethods(): Observable<PaymentMethod[]> {
+    return this._httpService.get(this._constants.PAYMENT_METHODS_SERVICE_URL)
+      .map((res) => { return <PaymentMethod[]> res.json(); })
       ;
   }
 }

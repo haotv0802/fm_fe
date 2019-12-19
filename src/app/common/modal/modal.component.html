@@ -1,0 +1,32 @@
+<div class="modal fade" [open]="!isOpen" id="myModal" [attr.data-keyboard]="true" [attr.data-backdrop]="false"
+     tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" [style.width.px]="documentWidth">
+        <div class="modal-content">
+            <div class="modal-header" [hidden]=!modalHeader>
+                <button type="button" class="close" data-dismiss="modal" (click)='close()' aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="myModalLabel">{{modalTitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <button [hidden]=modalHeader type="button" class="close"
+                        data-dismiss="modal" (click)='close()' aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div [hidden]=!modalMessage>
+                    {{message}}
+                </div>
+                <div #child>
+                </div>
+            </div>
+            <div class="modal-footer" [hidden]=!modalFooter>
+        <span [hidden]=!okButton>
+          <button [hidden]=!okButton class="btn btn-primary" (click)="submit()">{{okButtonText}}</button>
+          </span>
+                <span [hidden]=!cancelButton>
+          <button [hidden]=!cancelButton class="btn btn-primary" (click)="close()">{{cancelButtonText}}</button>
+          </span>
+            </div>
+        </div>
+    </div>
+</div>

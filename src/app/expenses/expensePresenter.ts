@@ -3,11 +3,9 @@ export class ExpensePresenter {
   userId: number;
   amount: number;
   date: Date;
-  place: string;
-  forPerson: string;
+  name: string;
   cardId: number;
   paymentMethod: string;
-  anEvent: boolean;
   cardNumber: string;
   cardInfo: string;
 

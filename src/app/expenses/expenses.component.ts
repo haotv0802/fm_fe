@@ -49,6 +49,9 @@ export class ExpensesComponent implements OnInit {
       (data) => {
         this.expensesDetails = data[0];
         this.paymentMethods = data[1];
+        console.log(this.expensesDetails);
+        console.log(this.paymentMethods);
+
         this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [new Date()],

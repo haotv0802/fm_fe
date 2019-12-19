@@ -4,7 +4,7 @@ export class ExpensePresenter {
   amount: number;
   date: Date;
   name: string;
-  cardId: number;
+  moneySourceId: number;
   paymentMethod: string;
   cardNumber: string;
   cardInfo: string;

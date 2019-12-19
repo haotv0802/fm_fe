@@ -12,7 +12,6 @@
         <th class="col-sm-2">Date</th>
         <th class="col-sm-2">Name</th>
         <th class="col-sm-2">Payment Method</th>
-        <th class="col-sm-1"></th>
         <th class="col-sm-3"></th>
         </thead>
         <tbody *ngIf="expensesDetails">
@@ -73,9 +72,6 @@
               <option value="-1">CASH</option>
               <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
             </select>
-          </td>
-          <td>
-            <button type="button" class="btn btn-link">New Event</button>
           </td>
           <td></td>
         </tr>
@@ -146,19 +142,17 @@
                             </span>
           </td>
           <td (click)="openUpdateExpense(expense)">
-            <span *ngIf="(expense.id * -1) > 0">
-                                <select class="form-control"
-                                        id="paymentMethod_{{expense.id}}"
-                                        formControlName="paymentMethod_edit"
-                                        (keyup.enter)="updateExpense(expense.id)"
-                                >
-                                    <option value="-1" [selected]="expense.cardId <= 0">CASH</option>
-                                    <option value="{{method.id}}" [selected]="expense.cardId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
-                                </select>
-                            </span>
-          </td>
-          <td>
-            <button type="button" class="btn btn-link" (click)="openEvent(expense.id)">Event</button>
+            {{expense.cardId}}
+            <span>
+                            <select class="form-control"
+                                    id="paymentMethod_{{expense.id}}"
+                                    formControlName="paymentMethod_edit"
+                                    (keyup.enter)="updateExpense(expense.id)"
+                            >
+                                <option value="-1" [selected]="expense.moneySourceId <= 0">CASH</option>
+                                <option value="{{method.id}}" [selected]="expense.moneySourceId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
+                            </select>
+                        </span>
           </td>
           <td>
             <button type="button" class="btn btn-link" (click)="openOrCloseUpdateExpense(expense)">Update</button> |

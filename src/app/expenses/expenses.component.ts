@@ -55,23 +55,31 @@ export class ExpensesComponent implements OnInit {
         this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],
           date: [new Date()],
-          place: [''],
+          name: [''],
           paymentMethod: ['', [Validators.required]],
-          forPerson: [''],
+          spending: true,
           amount_edit: ['', [Validators.required]],
           date_edit: [''],
-          place_edit: [''],
+          name_edit: [''],
           paymentMethod_edit: ['', [Validators.required]],
-          forPerson_edit: [''],
-          anEvent_edit: ['']
+          spending_edit: true
         });
         this.loaderOpen = false;
+        console.log(this.expenseForm);
       },
       (error) => {
         console.log(error);
       }
     )
     ;
+  }
+
+  onChangeSpending(type: string) {
+    if (type === 'spent') {
+      this.expenseForm.get('spending').setValue(true);
+    } else {
+      this.expenseForm.get('spending').setValue(false);
+    }
   }
 
   deleteExpense(expenseId: number): void {
@@ -116,12 +124,11 @@ export class ExpensesComponent implements OnInit {
   addExpense(): void {
     this.expenseEdit.amount = this.expenseForm.get('amount').value;
     this.expenseEdit.date = this.expenseForm.get('date').value.jsdate;
-    if (this.expenseEdit.date == undefined) {
+    if (this.expenseEdit.date === undefined) {
       this.expenseEdit.date = new Date();
     }
-    this.expenseEdit.place = this.expenseForm.get('place').value;
+    this.expenseEdit.name = this.expenseForm.get('name').value;
     // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
-    this.expenseEdit.forPerson = this.expenseForm.get('forPerson').value;
     this.expenseEdit.cardId = this.expenseForm.get('paymentMethod').value;
     console.log(this.expenseEdit);
 
@@ -148,49 +155,43 @@ export class ExpensesComponent implements OnInit {
   }
 
   openUpdateExpense(expense: Expense): void {
-    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
-      let exp = this.expensesDetails.expenses.find(x => x.id == this.idUpdate);
+    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
+      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
       exp.id = exp.id * -1;
     }
-    if (this.idUpdate && this.idUpdate == expense.id) {
+    if (this.idUpdate && this.idUpdate === expense.id) {
       return;
     }
     expense.id = expense.id * -1;
     this.idUpdate = expense.id;
     this.expenseForm.get('amount_edit').setValue(expense.amount);
     this.expenseForm.get('date_edit').setValue(expense.date);
-    this.expenseForm.get('place_edit').setValue(expense.place);
-    this.expenseForm.get('forPerson_edit').setValue(expense.forPerson);
+    this.expenseForm.get('name_edit').setValue(expense.name);
     this.expenseForm.get('paymentMethod_edit').setValue(expense.cardId);
-    this.expenseForm.get('anEvent_edit').setValue(expense.anEvent);
   }
 
   openOrCloseUpdateExpense(expense: Expense): void {
     // console.log(event);
-    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate != expense.id) {
-      let exp = this.expensesDetails.expenses.find(x => x.id == this.idUpdate);
+    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
+      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
       exp.id = exp.id * -1;
     }
     expense.id = expense.id * -1;
     this.idUpdate = expense.id;
     this.expenseForm.get('amount_edit').setValue(expense.amount);
     this.expenseForm.get('date_edit').setValue(expense.date);
-    this.expenseForm.get('place_edit').setValue(expense.place);
-    this.expenseForm.get('forPerson_edit').setValue(expense.forPerson);
+    this.expenseForm.get('name_edit').setValue(expense.name);
     this.expenseForm.get('paymentMethod_edit').setValue(expense.cardId);
-    this.expenseForm.get('anEvent_edit').setValue(expense.anEvent);
   }
 
   updateExpense(expenseId: number): void {
     this.expenseEdit.amount = this.expenseForm.get('amount_edit').value;
     this.expenseEdit.date = this.expenseForm.get('date_edit').value.jsdate;
-    if (this.expenseEdit.date == undefined) {
+    if (this.expenseEdit.date === undefined) {
       this.expenseEdit.date = new Date();
     }
-    this.expenseEdit.place = this.expenseForm.get('place_edit').value;
-    this.expenseEdit.forPerson = this.expenseForm.get('forPerson_edit').value;
+    this.expenseEdit.name = this.expenseForm.get('name_edit').value;
     this.expenseEdit.cardId = this.expenseForm.get('paymentMethod_edit').value;
-    this.expenseEdit.anEvent = this.expenseForm.get('anEvent_edit').value;
     this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
 
     // console.log(this.expenseEdit);
@@ -220,15 +221,14 @@ export class ExpensesComponent implements OnInit {
     this.expenseForm.setValue({
       amount: '',
       date: '',
-      place: '',
+      name: '',
       paymentMethod: '',
-      forPerson: '',
+      spending: true,
       amount_edit: '',
       date_edit: '',
-      place_edit: '',
+      name_edit: '',
       paymentMethod_edit: '',
-      forPerson_edit: '',
-      anEvent_edit: ''
+      spending_edit: true
     });
     this.idUpdate = undefined;
   }

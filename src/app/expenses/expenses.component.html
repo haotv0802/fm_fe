@@ -27,15 +27,6 @@
             />
           </td>
           <td>
-            <!--<input class="form-control"-->
-            <!--id="dateId"-->
-            <!--type="date"-->
-            <!--placeholder="Date (required)"-->
-            <!--formControlName="date"-->
-            <!--#date-->
-            <!--(keyup.enter)="addExpense()"-->
-            <!--style="width: 150px;"-->
-            <!--/>-->
             <div class="input-group">
               <input class="form-control"
                      style="float:none"
@@ -45,21 +36,18 @@
                      [options]="myOptions" #dp="ngx-mydatepicker"
                      (dateChanged)="onDateChanged($event)"/>
               <span class="input-group-btn">
-                                    <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">-->
-                <!--<i class="glyphicon glyphicon-remove"></i>-->
-                <!--</button>-->
-                                    <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </button>
-                                </span>
+                  <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                      <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+              </span>
             </div>
           </td>
           <td>
             <input class="form-control"
-                   id="placeId"
+                   id="nameId"
                    type="text"
                    placeholder="Enter a name"
-                   formControlName="place"
+                   formControlName="name"
                    (keyup.enter)="addExpense()"
             />
           </td>
@@ -75,18 +63,18 @@
             </select>
           </td>
           <td>
-            <button style="min-width: 80px;" type="button" class="btn btn-default">
+            <button style="min-width: 80px;"  *ngIf="expenseForm.value.spending === false" (click)="onChangeSpending('spent')"  type="button" class="btn btn-default">
               Spent
             </button>
-<!--            <button style="min-width: 80px;" type="button" class="btn btn-danger">-->
-<!--              Spent-->
-<!--            </button>-->
-            <button style="min-width: 80px;" type="button" class="btn btn-default">
+            <button *ngIf="expenseForm.value.spending === true" style="min-width: 80px;"type="button" class="btn btn-danger">
+              Spent
+            </button>
+            <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === true" (click)="onChangeSpending('earned')" type="button" class="btn btn-default">
               Earned
             </button>
-<!--            <button style="min-width: 80px;" type="button" class="btn btn-success">-->
-<!--              Earned-->
-<!--            </button>-->
+            <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === false" type="button" class="btn btn-success">
+              Earned
+            </button>
           </td>
           <td></td>
         </tr>
@@ -147,10 +135,10 @@
                             </span>
             <span *ngIf="(expense.id * -1) > 0">
                                 <input class="form-control"
-                                       id="place_{{expense.id}}"
+                                       id="name_{{expense.id}}"
                                        type="text"
                                        value="{{expense.name}}"
-                                       formControlName="place_edit"
+                                       formControlName="name_edit"
                                        (keyup.enter)="updateExpense(expense.id)"
                                        (keyup.esc)="closeUpdateExpense(expense)"
                                 />

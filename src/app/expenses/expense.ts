@@ -2,10 +2,9 @@ export class Expense {
   id: number;
   amount: number;
   date: Date;
-  place: string;
-  forPerson: string;
+  name: string;
   cardId: number;
-  anEvent: boolean;
+  spending: boolean;
 
   constructor() {
   }

@@ -12,6 +12,7 @@
         <th class="col-sm-2">Date</th>
         <th class="col-sm-2">Name</th>
         <th class="col-sm-2">Payment Method</th>
+        <th class="col-sm-2"></th>
         <th class="col-sm-3"></th>
         </thead>
         <tbody *ngIf="expensesDetails">
@@ -72,6 +73,20 @@
               <option value="-1">CASH</option>
               <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
             </select>
+          </td>
+          <td>
+            <button style="min-width: 80px;" type="button" class="btn btn-default">
+              Spent
+            </button>
+<!--            <button style="min-width: 80px;" type="button" class="btn btn-danger">-->
+<!--              Spent-->
+<!--            </button>-->
+            <button style="min-width: 80px;" type="button" class="btn btn-default">
+              Earned
+            </button>
+<!--            <button style="min-width: 80px;" type="button" class="btn btn-success">-->
+<!--              Earned-->
+<!--            </button>-->
           </td>
           <td></td>
         </tr>
@@ -142,7 +157,6 @@
                             </span>
           </td>
           <td (click)="openUpdateExpense(expense)">
-            {{expense.cardId}}
             <span>
                             <select class="form-control"
                                     id="paymentMethod_{{expense.id}}"
@@ -153,6 +167,20 @@
                                 <option value="{{method.id}}" [selected]="expense.moneySourceId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
                             </select>
                         </span>
+          </td>
+          <td>
+            <button *ngIf="expense.spending === false" style="min-width: 80px;" type="button" class="btn btn-default">
+              Spent
+            </button>
+            <button *ngIf="expense.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
+              Spent
+            </button>
+            <button *ngIf="expense.spending === true" style="min-width: 80px;" type="button" class="btn btn-default">
+              Earned
+            </button>
+            <button *ngIf="expense.spending === false" style="min-width: 80px;" type="button" class="btn btn-success">
+              Earned
+            </button>
           </td>
           <td>
             <button type="button" class="btn btn-link" (click)="openOrCloseUpdateExpense(expense)">Update</button> |

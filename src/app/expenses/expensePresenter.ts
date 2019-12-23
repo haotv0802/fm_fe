@@ -8,6 +8,7 @@ export class ExpensePresenter {
   paymentMethod: string;
   cardNumber: string;
   cardInfo: string;
+  spending: boolean;
 
   constructor() {
   }

@@ -9,6 +9,7 @@ export class ExpensePresenter {
   cardNumber: string;
   cardInfo: string;
   spending: boolean;
+  updated: boolean;
 
   constructor() {
   }

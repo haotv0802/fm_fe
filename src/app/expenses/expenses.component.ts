@@ -19,7 +19,6 @@ export class ExpensesComponent implements OnInit {
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
   expenseForm: FormGroup;
-  // editHidden: boolean = false;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
@@ -74,11 +73,28 @@ export class ExpensesComponent implements OnInit {
     ;
   }
 
+  onSave() {
+    console.log("SAVING");
+  }
+
   onChangeSpending(type: string) {
     if (type === 'spent') {
       this.expenseForm.get('spending').setValue(true);
     } else {
       this.expenseForm.get('spending').setValue(false);
+    }
+  }
+
+  onChangeSpendingInList(type: string, id: number) {
+    let exp = this.expensesDetails.expenses.find(x => x.id === id);
+    if (exp) {
+      if (type === 'spent') {
+        exp.spending = true;
+      } else {
+        exp.spending = false;
+      }
+
+      exp.updated = true;
     }
   }
 
@@ -211,11 +227,6 @@ export class ExpensesComponent implements OnInit {
       }
     );
   }
-
-  openEvent(id: number): void {
-    this._router.navigate([`expenses/${id}`]);
-  }
-
 
   resetFormValues(): void {
     this.expenseForm.setValue({

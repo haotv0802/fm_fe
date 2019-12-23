@@ -21,7 +21,6 @@ export class ExpensesComponent implements OnInit {
   expenseForm: FormGroup;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
-  idUpdate: number;
   private myOptions: INgxMyDpOptions = {
     // other options...
     dateFormat: 'dd-mm-yyyy',
@@ -75,6 +74,21 @@ export class ExpensesComponent implements OnInit {
 
   onSave() {
     console.log("SAVING");
+    this._expensesService.updateItems(this.expensesDetails.expenses).subscribe(
+      (res) => {
+        this._expensesService.getExpenses().subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.resetFormValues();
+          }, (error: Error) => {
+            console.log('-------------------updateExpense function: ');
+            console.log(error);
+          }
+        );
+      }, (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onChangeSpending(type: string) {
@@ -165,41 +179,6 @@ export class ExpensesComponent implements OnInit {
 
   }
 
-  closeUpdateExpense(expense: Expense): void {
-    expense.id = expense.id * -1;
-    this.idUpdate = this.idUpdate * -1;
-  }
-
-  openUpdateExpense(expense: Expense): void {
-    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
-      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
-      exp.id = exp.id * -1;
-    }
-    if (this.idUpdate && this.idUpdate === expense.id) {
-      return;
-    }
-    expense.id = expense.id * -1;
-    this.idUpdate = expense.id;
-    this.expenseForm.get('amount_edit').setValue(expense.amount);
-    this.expenseForm.get('date_edit').setValue(expense.date);
-    this.expenseForm.get('name_edit').setValue(expense.name);
-    this.expenseForm.get('paymentMethod_edit').setValue(expense.cardId);
-  }
-
-  openOrCloseUpdateExpense(expense: Expense): void {
-    // console.log(event);
-    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
-      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
-      exp.id = exp.id * -1;
-    }
-    expense.id = expense.id * -1;
-    this.idUpdate = expense.id;
-    this.expenseForm.get('amount_edit').setValue(expense.amount);
-    this.expenseForm.get('date_edit').setValue(expense.date);
-    this.expenseForm.get('name_edit').setValue(expense.name);
-    this.expenseForm.get('paymentMethod_edit').setValue(expense.cardId);
-  }
-
   updateExpense(expenseId: number): void {
     this.expenseEdit.amount = this.expenseForm.get('amount_edit').value;
     this.expenseEdit.date = this.expenseForm.get('date_edit').value.jsdate;
@@ -241,6 +220,5 @@ export class ExpensesComponent implements OnInit {
       paymentMethod_edit: '',
       spending_edit: true
     });
-    this.idUpdate = undefined;
   }
 }

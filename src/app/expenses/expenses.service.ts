@@ -6,6 +6,7 @@ import {Expense} from "./expense";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import 'rxjs/add/operator/catch';
 import {PaymentMethod} from './paymentMethod';
+import {ExpensePresenter} from './expensePresenter';
 
 @Injectable()
 export class ExpensesService {
@@ -30,6 +31,12 @@ export class ExpensesService {
 
   updateExpense(expense: Expense): Observable<any> {
     return this._httpService.patch(this._constants.EXPENSES_SERVICE_URL, expense)
+      .map((res) => { return res.json(); })
+      ;
+  }
+
+  updateItems(items: ExpensePresenter[]): Observable<any> {
+    return this._httpService.patch(this._constants.EXPENSES_SERVICE_UPDATE_LIST_URL, items)
       .map((res) => { return res.json(); })
       ;
   }

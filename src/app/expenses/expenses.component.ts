@@ -8,6 +8,7 @@ import {PaymentMethod} from './paymentMethod';
 import {Observable} from 'rxjs/Rx';
 import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
 import {IMyDateModel, INgxMyDpOptions} from 'ngx-mydatepicker';
+import {ExpensePresenter} from './expensePresenter';
 
 @Component({
   moduleId: module.id,
@@ -21,6 +22,7 @@ export class ExpensesComponent implements OnInit {
   expenseForm: FormGroup;
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
+  idUpdate: number;
   private myOptions: INgxMyDpOptions = {
     // other options...
     dateFormat: 'dd-mm-yyyy',
@@ -63,7 +65,6 @@ export class ExpensesComponent implements OnInit {
           spending_edit: true
         });
         this.loaderOpen = false;
-        console.log(this.expenseForm);
       },
       (error) => {
         console.log(error);
@@ -179,32 +180,74 @@ export class ExpensesComponent implements OnInit {
 
   }
 
+  updateExpense2(expense: ExpensePresenter): void {
+    expense.updated = true;
+    console.log(expense);
+    console.log(this.expensesDetails.expenses);
+    console.log(this.expenseForm.get('amount_edit').value);
+    console.log(this.expenseForm.value);
+  }
+
   updateExpense(expenseId: number): void {
-    this.expenseEdit.amount = this.expenseForm.get('amount_edit').value;
-    this.expenseEdit.date = this.expenseForm.get('date_edit').value.jsdate;
-    if (this.expenseEdit.date === undefined) {
-      this.expenseEdit.date = new Date();
-    }
-    this.expenseEdit.name = this.expenseForm.get('name_edit').value;
-    this.expenseEdit.cardId = this.expenseForm.get('paymentMethod_edit').value;
-    this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
+
+    console.log(this.expensesDetails.expenses);
+
+    // this.expenseEdit.amount = this.expenseForm.get('amount_edit').value;
+    // this.expenseEdit.date = this.expenseForm.get('date_edit').value.jsdate;
+    // if (this.expenseEdit.date === undefined) {
+    //   this.expenseEdit.date = new Date();
+    // }
+    // this.expenseEdit.name = this.expenseForm.get('name_edit').value;
+    // this.expenseEdit.cardId = this.expenseForm.get('paymentMethod_edit').value;
+    // this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
 
     // console.log(this.expenseEdit);
-    this._expensesService.updateExpense(this.expenseEdit).subscribe(
-      (res) => {
-        this._expensesService.getExpenses().subscribe(
-          (expensesDetails) => {
-            this.expensesDetails = expensesDetails;
-            this.resetFormValues();
-          }, (error: Error) => {
-            console.log('-------------------updateExpense function: ');
-            console.log(error);
-          }
-        );
-      }, (error) => {
-        console.log(error);
-      }
-    );
+    // this._expensesService.updateExpense(this.expenseEdit).subscribe(
+    //   (res) => {
+    //     this._expensesService.getExpenses().subscribe(
+    //       (expensesDetails) => {
+    //         this.expensesDetails = expensesDetails;
+    //         this.resetFormValues();
+    //       }, (error: Error) => {
+    //         console.log('-------------------updateExpense function: ');
+    //         console.log(error);
+    //       }
+    //     );
+    //   }, (error) => {
+    //     console.log(error);
+    //   }
+    // );
+  }
+
+  closeUpdateExpense(expense: Expense): void {
+    let exp = this.expensesDetails.expenses.find(x => x.id === expense.id);
+    exp.amount = this.expenseForm.get('amount_edit').value;
+    exp.date = this.expenseForm.get('date_edit').value;
+    if (exp.date === undefined) {
+      exp.date = new Date();
+    }
+    exp.name = this.expenseForm.get('name_edit').value;
+    exp.moneySourceId = this.expenseForm.get('paymentMethod_edit').value;
+    exp.id = expense.id > 0 ? expense.id : expense.id * -1;
+
+    this.resetFormValues();
+  }
+
+  openUpdateExpense(expense: Expense): void {
+    if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
+      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
+      exp.id = exp.id * -1;
+    }
+    if (this.idUpdate && this.idUpdate === expense.id) {
+      return;
+    }
+    expense.id = expense.id * -1;
+    this.idUpdate = expense.id;
+
+    this.expenseForm.get('amount_edit').setValue(expense.amount);
+    this.expenseForm.get('date_edit').setValue(expense.date);
+    this.expenseForm.get('name_edit').setValue(expense.name);
+    this.expenseForm.get('paymentMethod_edit').setValue(expense.cardId);
   }
 
   resetFormValues(): void {
@@ -220,5 +263,6 @@ export class ExpensesComponent implements OnInit {
       paymentMethod_edit: '',
       spending_edit: true
     });
+    this.idUpdate = undefined;
   }
 }

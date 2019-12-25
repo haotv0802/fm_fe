@@ -94,7 +94,8 @@
                                        value="{{expense.amount}}"
                                        formControlName="amount_edit"
                                        #amount_edit
-                                       (keyup.enter)="updateExpense(expense.id)"
+                                       (keyup.enter)="updateExpense2(expense)"
+                                       (keyup)="updateExpense2(expense)"
                                        (keyup.esc)="closeUpdateExpense(expense)"
                                 />
               <!--{{amount_edit.focus()}}-->

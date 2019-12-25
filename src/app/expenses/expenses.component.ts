@@ -61,7 +61,7 @@ export class ExpensesComponent implements OnInit {
           amount_edit: ['', [Validators.required]],
           date_edit: [''],
           name_edit: [''],
-          paymentMethod_edit: ['', [Validators.required]],
+          paymentMethod_edit: ['1', [Validators.required]],
           spending_edit: true
         });
         this.loaderOpen = false;
@@ -74,15 +74,39 @@ export class ExpensesComponent implements OnInit {
   }
 
   onSave() {
-    console.log("SAVING");
-    this._expensesService.updateItems(this.expensesDetails.expenses).subscribe(
+    // in case user is in update mode and click on SAVE button (without pressing ESC button)
+    if (this.idUpdate && this.idUpdate < 0 && this.expenseForm.get('amount_edit').value) {
+      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
+
+      if (this.expenseForm.get('amount_edit').value) {
+        exp.amount = this.expenseForm.get('amount_edit').value;
+        exp.date = this.expenseForm.get('date_edit').value;
+        if (exp.date === undefined) {
+          exp.date = new Date();
+        }
+        exp.name = this.expenseForm.get('name_edit').value;
+        exp.moneySourceId = this.expenseForm.get('paymentMethod_edit').value;
+      }
+      exp.id = exp.id * -1;
+    }
+
+
+    // update id of item in case it is minus (for update mode)
+    let items = this.expensesDetails.expenses.filter((item) => {
+      if (item.updated) {
+        item.id = item.id > 0 ? item.id : item.id * -1;
+        return item;
+      }
+    });
+
+    this._expensesService.updateItems(items).subscribe(
       (res) => {
         this._expensesService.getExpenses().subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
             this.resetFormValues();
           }, (error: Error) => {
-            console.log('-------------------updateExpense function: ');
+            console.log('-------------------Saving function: ');
             console.log(error);
           }
         );
@@ -177,46 +201,20 @@ export class ExpensesComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
 
-  updateExpense2(expense: ExpensePresenter): void {
+  updateExpense(expense: ExpensePresenter): void {
     expense.updated = true;
-    console.log(expense);
-    console.log(this.expensesDetails.expenses);
-    console.log(this.expenseForm.get('amount_edit').value);
     console.log(this.expenseForm.value);
-  }
-
-  updateExpense(expenseId: number): void {
-
-    console.log(this.expensesDetails.expenses);
-
-    // this.expenseEdit.amount = this.expenseForm.get('amount_edit').value;
-    // this.expenseEdit.date = this.expenseForm.get('date_edit').value.jsdate;
-    // if (this.expenseEdit.date === undefined) {
-    //   this.expenseEdit.date = new Date();
+    // expense.amount = this.expenseForm.get('amount_edit').value;
+    // expense.date = this.expenseForm.get('date_edit').value;
+    // if (expense.date === undefined) {
+    //   expense.date = new Date();
     // }
-    // this.expenseEdit.name = this.expenseForm.get('name_edit').value;
-    // this.expenseEdit.cardId = this.expenseForm.get('paymentMethod_edit').value;
-    // this.expenseEdit.id = expenseId > 0 ? expenseId : expenseId * -1;
+    // expense.name = this.expenseForm.get('name_edit').value;
+    // expense.moneySourceId = this.expenseForm.get('paymentMethod_edit').value;
+    // expense.id = expense.id > 0 ? expense.id : expense.id * -1;
 
-    // console.log(this.expenseEdit);
-    // this._expensesService.updateExpense(this.expenseEdit).subscribe(
-    //   (res) => {
-    //     this._expensesService.getExpenses().subscribe(
-    //       (expensesDetails) => {
-    //         this.expensesDetails = expensesDetails;
-    //         this.resetFormValues();
-    //       }, (error: Error) => {
-    //         console.log('-------------------updateExpense function: ');
-    //         console.log(error);
-    //       }
-    //     );
-    //   }, (error) => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
   closeUpdateExpense(expense: Expense): void {
@@ -236,6 +234,16 @@ export class ExpensesComponent implements OnInit {
   openUpdateExpense(expense: Expense): void {
     if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
       let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
+
+      if (this.expenseForm.get('amount_edit').value) {
+        exp.amount = this.expenseForm.get('amount_edit').value;
+        exp.date = this.expenseForm.get('date_edit').value;
+        if (exp.date === undefined) {
+          exp.date = new Date();
+        }
+        exp.name = this.expenseForm.get('name_edit').value;
+        exp.moneySourceId = this.expenseForm.get('paymentMethod_edit').value;
+      }
       exp.id = exp.id * -1;
     }
     if (this.idUpdate && this.idUpdate === expense.id) {

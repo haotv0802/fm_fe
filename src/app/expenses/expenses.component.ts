@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Rx';
 import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
 import {ExpensePresenter} from './expensePresenter';
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
+import {createIMyDateModel} from '../utils';
 
 @Component({
   moduleId: module.id,
@@ -39,7 +40,9 @@ export class ExpensesComponent implements OnInit {
   }
 
   onDateChanged(event: IMyDateModel): void {
-    // date selected
+    console.log(event);
+    console.log(this.expenseForm.value);
+    console.log(this.expensesDetails.expenses);
   }
 
   ngOnInit(): void {
@@ -81,7 +84,7 @@ export class ExpensesComponent implements OnInit {
 
       if (this.expenseForm.get('amount_edit').value) {
         exp.amount = this.expenseForm.get('amount_edit').value;
-        exp.date = this.expenseForm.get('date_edit').value;
+        exp.date = this.expenseForm.get('date_edit').value.jsdate.getTime();
         if (exp.date === undefined) {
           exp.date = new Date();
         }
@@ -90,7 +93,6 @@ export class ExpensesComponent implements OnInit {
       }
       exp.id = exp.id * -1;
     }
-
 
     // update id of item in case it is minus (for update mode)
     let items = this.expensesDetails.expenses.filter((item) => {
@@ -221,7 +223,7 @@ export class ExpensesComponent implements OnInit {
   closeUpdateExpense(expense: Expense): void {
     let exp = this.expensesDetails.expenses.find(x => x.id === expense.id);
     exp.amount = this.expenseForm.get('amount_edit').value;
-    exp.date = this.expenseForm.get('date_edit').value;
+    exp.date = this.expenseForm.get('date_edit').value.jsdate.getTime();
     if (exp.date === undefined) {
       exp.date = new Date();
     }
@@ -238,7 +240,7 @@ export class ExpensesComponent implements OnInit {
 
       if (this.expenseForm.get('amount_edit').value) {
         exp.amount = this.expenseForm.get('amount_edit').value;
-        exp.date = this.expenseForm.get('date_edit').value;
+        exp.date = this.expenseForm.get('date_edit').value.jsdate.getTime();
         if (exp.date === undefined) {
           exp.date = new Date();
         }
@@ -254,7 +256,9 @@ export class ExpensesComponent implements OnInit {
     this.idUpdate = expense.id;
 
     this.expenseForm.get('amount_edit').setValue(expense.amount);
-    this.expenseForm.get('date_edit').setValue(expense.date);
+
+    let dateTemp = new Date(expense.date);
+    this.expenseForm.get('date_edit').setValue(createIMyDateModel(dateTemp));
     this.expenseForm.get('name_edit').setValue(expense.name);
     this.expenseForm.get('paymentMethod_edit').setValue(expense.cardId);
   }

@@ -7,12 +7,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PaymentMethod} from './paymentMethod';
 import {Observable} from 'rxjs/Rx';
 import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
-import {IMyDateModel, INgxMyDpOptions} from 'ngx-mydatepicker';
 import {ExpensePresenter} from './expensePresenter';
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'expenses.component.html'
+  templateUrl: 'expenses.component.html',
+  styleUrls: ['expenses.component.css']
 })
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
@@ -23,11 +24,11 @@ export class ExpensesComponent implements OnInit {
   expenseEdit: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
-  private myOptions: INgxMyDpOptions = {
+  private myOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'dd-mm-yyyy',
+    width: '150px'
   };
-  public model: Object = {date: {year: 2018, month: 10, day: 9}};
 
   constructor(
     private _expensesService: ExpensesService,

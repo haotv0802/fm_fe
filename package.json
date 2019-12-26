@@ -36,16 +36,16 @@
     "jquery": "^3.2.1",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
-    "mydatepicker": "^2.6.3",
+    "mydatepicker": "^2.6.8",
     "ng-multiselect-dropdown": "0.1.4",
     "ng2-bootstrap-modal": "1.0.1",
     "ng2-file-upload": "1.1.4-2",
     "ng2-markdown-to-html": "^1.2.1",
     "ngx-bootstrap": "1.6.6",
     "ngx-cookie": "^1.0.0",
+    "ngx-mydatepicker": "^2.0.13",
     "ngx-quill": "1.6.0",
     "rxjs": "5.4.2",
-    "ngx-mydatepicker": "^2.0.13",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

@@ -17,6 +17,7 @@ import {ModalComponent} from './common/modal/modal.component';
 import {LoaderModalComponent} from './common/modal/loaderModal/loader.modal.component';
 import {NgxMyDatePickerModule} from "ngx-mydatepicker";
 import {OpenDirective} from './common/modal/open.component';
+import {MyDatePickerModule} from 'mydatepicker';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {OpenDirective} from './common/modal/open.component';
     NgxMyDatePickerModule
   ],
   imports: [
+    MyDatePickerModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

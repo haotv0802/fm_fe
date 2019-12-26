@@ -28,18 +28,8 @@
           </td>
           <td>
             <div class="input-group">
-              <input class="form-control"
-                     style="float:none"
-                     placeholder="Select a date"
-                     ngx-mydatepicker name="mydate"
-                     formControlName="date"
-                     [options]="myOptions" #dp="ngx-mydatepicker"
-                     (dateChanged)="onDateChanged($event)"/>
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-                      <i class="glyphicon glyphicon-calendar"></i>
-                  </button>
-              </span>
+              <my-date-picker name="mydate" [options]="myOptions" style="width: 100px;"
+                              formControlName="date"></my-date-picker>
             </div>
           </td>
           <td>

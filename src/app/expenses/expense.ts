@@ -4,6 +4,7 @@ export class Expense {
   date: Date;
   name: string;
   cardId: number;
+  moneySourceId: number;
   spending: boolean;
 
   constructor() {

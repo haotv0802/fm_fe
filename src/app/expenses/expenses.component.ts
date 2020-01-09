@@ -22,7 +22,7 @@ export class ExpensesComponent implements OnInit {
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
   expenseForm: FormGroup;
-  expenseEdit: Expense = new Expense();
+  expenseAdd: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
   private myOptions: IMyDpOptions = {
@@ -180,17 +180,17 @@ export class ExpensesComponent implements OnInit {
   }
 
   addExpense(): void {
-    this.expenseEdit.amount = this.expenseForm.get('amount').value;
-    this.expenseEdit.date = this.expenseForm.get('date').value.jsdate;
-    if (this.expenseEdit.date === undefined) {
-      this.expenseEdit.date = new Date();
+    this.expenseAdd.amount = this.expenseForm.get('amount').value;
+    this.expenseAdd.date = this.expenseForm.get('date').value.jsdate;
+    if (this.expenseAdd.date === undefined) {
+      this.expenseAdd.date = new Date();
     }
-    this.expenseEdit.name = this.expenseForm.get('name').value;
-    // this.expenseEdit.paymentMethod = this.expensesForm.get("paymentMethod").value;
-    this.expenseEdit.cardId = this.expenseForm.get('paymentMethod').value;
-    console.log(this.expenseEdit);
+    this.expenseAdd.name = this.expenseForm.get('name').value;
+    this.expenseAdd.spending = this.expenseForm.get('spending').value;
+    this.expenseAdd.moneySourceId = this.expenseForm.get('paymentMethod').value;
+    console.log(this.expenseAdd);
 
-    this._expensesService.addExpense(this.expenseEdit).subscribe(
+    this._expensesService.addExpense(this.expenseAdd).subscribe(
       (res) => {
         this._expensesService.getExpenses().subscribe(
           (expensesDetails) => {

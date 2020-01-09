@@ -21,6 +21,7 @@ export class ExpensesComponent implements OnInit {
   paymentMethods: PaymentMethod[];
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
+  isSaveButtonDisplayed: boolean = false;
   expenseForm: FormGroup;
   expenseAdd: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
@@ -77,6 +78,18 @@ export class ExpensesComponent implements OnInit {
     ;
   }
 
+  onCancel() {
+    this._expensesService.getExpenses().subscribe(
+      (expensesDetails) => {
+        this.expensesDetails = expensesDetails;
+        this.resetFormValues();
+      }, (error: Error) => {
+        console.log('-------------------Saving function: ');
+        console.log(error);
+      }
+    );
+  }
+
   onSave() {
     // in case user is in update mode and click on SAVE button (without pressing ESC button)
     if (this.idUpdate && this.idUpdate < 0 && this.expenseForm.get('amount_edit').value) {
@@ -117,6 +130,11 @@ export class ExpensesComponent implements OnInit {
         console.log(error);
       }
     );
+
+    // in case user is adding and editing at the same time.
+    if (this.expenseForm.get('amount').value) {
+      this.addExpense();
+    }
   }
 
   onChangeSpending(type: string) {
@@ -138,6 +156,8 @@ export class ExpensesComponent implements OnInit {
 
       exp.updated = true;
     }
+
+    this.isSaveButtonDisplayed = true;
   }
 
   deleteExpense(expenseId: number): void {
@@ -179,7 +199,13 @@ export class ExpensesComponent implements OnInit {
     )
   }
 
+  onDisplaySaveButton() {
+    this.isSaveButtonDisplayed = true;
+    console.log(this.isSaveButtonDisplayed);
+  }
+
   addExpense(): void {
+
     this.expenseAdd.amount = this.expenseForm.get('amount').value;
     this.expenseAdd.date = this.expenseForm.get('date').value.jsdate;
     if (this.expenseAdd.date === undefined) {
@@ -208,16 +234,7 @@ export class ExpensesComponent implements OnInit {
 
   updateExpense(expense: ExpensePresenter): void {
     expense.updated = true;
-    console.log(this.expenseForm.value);
-    // expense.amount = this.expenseForm.get('amount_edit').value;
-    // expense.date = this.expenseForm.get('date_edit').value;
-    // if (expense.date === undefined) {
-    //   expense.date = new Date();
-    // }
-    // expense.name = this.expenseForm.get('name_edit').value;
-    // expense.moneySourceId = this.expenseForm.get('paymentMethod_edit').value;
-    // expense.id = expense.id > 0 ? expense.id : expense.id * -1;
-
+    this.isSaveButtonDisplayed = true;
   }
 
   closeUpdateExpense(expense: Expense): void {
@@ -277,5 +294,6 @@ export class ExpensesComponent implements OnInit {
       spending_edit: true
     });
     this.idUpdate = undefined;
+    this.isSaveButtonDisplayed = false;
   }
 }

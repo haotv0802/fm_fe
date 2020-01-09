@@ -24,6 +24,7 @@
                    placeholder="Amount (required)"
                    formControlName="amount"
                    (keyup.enter)="addExpense()"
+                   (keyup)="onDisplaySaveButton()"
             />
           </td>
           <td>
@@ -67,8 +68,11 @@
             </button>
           </td>
           <td>
-            <button style="min-width: 80px;" (click)="onSave()" type="button" class="btn btn-primary">
-              SAVE
+            <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>
+            </button>
+            <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-warning">
+              <span class="glyphicon glyphicon-remove"></span>
             </button>
           </td>
         </tr>

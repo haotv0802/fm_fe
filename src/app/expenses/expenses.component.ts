@@ -64,9 +64,9 @@ export class ExpensesComponent implements OnInit {
         for (let i = 0; i < this.yearsList.length; i++) {
           this._expensesService.getPreviousExpenses(this.yearsList[i]).subscribe(
             (previousExpense) => {
-              console.log("previousExpense---" + this.yearsList[i]);
+              console.log('previousExpense---' + this.yearsList[i]);
               console.log(previousExpense);
-              console.log("previousExpense---");
+              console.log('previousExpense---');
             }, (error: Error) => {
               console.log('-------------------Cancel function: ');
               console.log(error);

@@ -7,6 +7,8 @@ import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import 'rxjs/add/operator/catch';
 import {PaymentMethod} from './paymentMethod';
 import {ExpensePresenter} from './expensePresenter';
+import {HttpParams} from '@angular/common/http';
+import {RequestOptions} from '@angular/http';
 
 @Injectable()
 export class ExpensesService {
@@ -47,8 +49,8 @@ export class ExpensesService {
       ;
   }
 
-  getPreviousExpenses(): Observable<ExpensesDetailsPresenter> {
-    return this._httpService.get(this._constants.EXPENSES_PREVIOUS_SERVICE_URL)
+  getPreviousExpenses(year: number): Observable<ExpensesDetailsPresenter> {
+    return this._httpService.get(this._constants.EXPENSES_PREVIOUS_SERVICE_URL + `/${year}`)
       .map((res) => { return <ExpensesDetailsPresenter> res.json(); })
       ;
   }

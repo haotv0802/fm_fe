@@ -19,6 +19,7 @@ import {createIMyDateModel} from '../utils';
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
   paymentMethods: PaymentMethod[];
+  yearsList: number[];
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
   isSaveButtonDisplayed: boolean = false;
@@ -50,20 +51,28 @@ export class ExpensesComponent implements OnInit {
     Observable.forkJoin(
       this._expensesService.getExpenses(),
       this._expensesService.getPaymentMethods(),
-      this._expensesService.getPreviousExpenses(),
       this._expensesService.getYearList()
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
         this.paymentMethods = data[1];
+        this.yearsList = data[2];
         console.log(this.expensesDetails);
         console.log(this.paymentMethods);
-        console.log("previous expenses----");
-        console.log(data[2]);
-        console.log("previous expenses----");
-        console.log("yearList----");
-        console.log(data[3]);
-        console.log("yearList----");
+        console.log(this.yearsList);
+
+        for (let i = 0; i < this.yearsList.length; i++) {
+          this._expensesService.getPreviousExpenses(this.yearsList[i]).subscribe(
+            (previousExpense) => {
+              console.log("previousExpense---" + this.yearsList[i]);
+              console.log(previousExpense);
+              console.log("previousExpense---");
+            }, (error: Error) => {
+              console.log('-------------------Cancel function: ');
+              console.log(error);
+            }
+          );
+        }
 
         this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],

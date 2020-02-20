@@ -99,7 +99,7 @@ export class ExpensesComponent implements OnInit {
         this.calculateExpensesTotal(this.expensesDetails);
         this.resetFormValues();
       }, (error: Error) => {
-        console.log('-------------------Saving function: ');
+        console.log('-------------------Cancel function: ');
         console.log(error);
       }
     );
@@ -198,7 +198,6 @@ export class ExpensesComponent implements OnInit {
     this._expensesService.getPaymentMethods().subscribe(
       (paymentMethods) => {
         this.paymentMethods = paymentMethods;
-        console.log(this.paymentMethods);
       }
     );
   }
@@ -208,7 +207,6 @@ export class ExpensesComponent implements OnInit {
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
         this.calculateExpensesTotal(this.expensesDetails);
-        console.log(this.expensesDetails);
         this.loaderOpen = false;
       },
       (error) => {
@@ -219,7 +217,6 @@ export class ExpensesComponent implements OnInit {
 
   onDisplaySaveButton() {
     this.isSaveButtonDisplayed = true;
-    console.log(this.isSaveButtonDisplayed);
   }
 
   addExpense(): void {
@@ -232,7 +229,6 @@ export class ExpensesComponent implements OnInit {
     this.expenseAdd.name = this.expenseForm.get('name').value;
     this.expenseAdd.spending = this.expenseForm.get('spending').value;
     this.expenseAdd.moneySourceId = this.expenseForm.get('paymentMethod').value;
-    console.log(this.expenseAdd);
 
     this._expensesService.addExpense(this.expenseAdd).subscribe(
       (res) => {

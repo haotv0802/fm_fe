@@ -158,7 +158,12 @@
         </tr>
         <tr>
           <td>
-            <span style="color: red; font-weight: bold; font-size: large">{{expensesTotal | currency:'VND':true:'1.2-2'}}</span>
+            <span style="color: red; font-weight: bold; font-size: large" *ngIf="expensesTotal <= 0">
+              {{expensesTotal | currency:'VND':true:'1.2-2'}}
+            </span>
+            <span style="color: dodgerblue; font-weight: bold; font-size: large" *ngIf="expensesTotal > 0">
+              {{expensesTotal | currency:'VND':true:'1.2-2'}}
+            </span>
           </td>
         </tr>
         </tbody>

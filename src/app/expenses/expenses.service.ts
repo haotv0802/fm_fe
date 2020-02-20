@@ -3,6 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Constants} from "../common/constant";
 import {HTTPService} from "../common/HTTP.service";
 import {Expense} from "./expense";
+import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import 'rxjs/add/operator/catch';
 import {PaymentMethod} from './paymentMethod';
 import {ExpensePresenter} from './expensePresenter';
@@ -40,9 +41,9 @@ export class ExpensesService {
       ;
   }
 
-  getExpenses(): Observable<ExpensePresenter[]> {
+  getExpenses(): Observable<ExpensesDetailsPresenter> {
     return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
-      .map((res) => { return <ExpensePresenter[]> res.json(); })
+      .map((res) => { return <ExpensesDetailsPresenter> res.json(); })
       ;
   }
 

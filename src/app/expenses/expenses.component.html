@@ -76,7 +76,7 @@
             </button>
           </td>
         </tr>
-        <tr *ngFor="let expense of expensesDetails">
+        <tr *ngFor="let expense of expensesDetails.expenses">
           <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">
                                 {{expense.amount | currency:'VND':true:'1.2-2'}}
@@ -127,7 +127,7 @@
                 <span *ngIf="expense.id > 0">
                   {{expense.moneySourceName}}
                 </span>
-                <span *ngIf="(expense.id * -1) > 0">
+            <span *ngIf="(expense.id * -1) > 0">
                     <select class="form-control"
                             id="paymentMethod_{{expense.id}}"
                             formControlName="paymentMethod_edit"
@@ -157,14 +157,12 @@
           </td>
         </tr>
         <tr>
-          <td>
-            <span style="color: red; font-weight: bold; font-size: large" *ngIf="expensesTotal <= 0">
-              {{expensesTotal | currency:'VND':true:'1.2-2'}}
+          <span style="color: red; font-weight: bold; font-size: large" *ngIf="expensesDetails.total <= 0">
+              {{expensesDetails.total | currency:'VND':true:'1.2-2'}}
             </span>
-            <span style="color: dodgerblue; font-weight: bold; font-size: large" *ngIf="expensesTotal > 0">
-              {{expensesTotal | currency:'VND':true:'1.2-2'}}
+          <span style="color: dodgerblue; font-weight: bold; font-size: large" *ngIf="expensesDetails.total > 0">
+              {{expensesDetails.total | currency:'VND':true:'1.2-2'}}
             </span>
-          </td>
         </tr>
         </tbody>
       </table>

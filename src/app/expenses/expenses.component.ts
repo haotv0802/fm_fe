@@ -51,7 +51,8 @@ export class ExpensesComponent implements OnInit {
     Observable.forkJoin(
       this._expensesService.getExpenses(),
       this._expensesService.getPaymentMethods(),
-      this._expensesService.getYearList()
+      this._expensesService.getYearList(),
+      this._expensesService.getLastMonths()
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
@@ -60,9 +61,12 @@ export class ExpensesComponent implements OnInit {
         console.log(this.expensesDetails);
         console.log(this.paymentMethods);
         console.log(this.yearsList);
+        console.log("last months---");
+        console.log(data[3]);
+        console.log("lastmonth---");
 
         for (let i = 0; i < this.yearsList.length; i++) {
-          this._expensesService.getPreviousExpenses(this.yearsList[i]).subscribe(
+          this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
             (previousExpense) => {
               console.log('previousExpense---' + this.yearsList[i]);
               console.log(previousExpense);

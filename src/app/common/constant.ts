@@ -25,9 +25,9 @@ export class Constants {
 
   //  Expenses
   public readonly EXPENSES_SERVICE_URL: string = this.HOST + '/moneyflow';
+  public readonly EXPENSES_SERVICE_LAST_MONTH_URL: string = this.HOST + '/moneyflow/lastmonths';
   public readonly EXPENSES_SERVICE_YEAR_LIST_URL: string = this.HOST + '/moneyflowyearlist';
   public readonly EXPENSES_SERVICE_UPDATE_LIST_URL: string = this.HOST + '/moneyflow/list';
-  public readonly EXPENSES_PREVIOUS_SERVICE_URL: string = this.HOST + '/previousmoneyflow';
 
   //  Event Expenses
   public readonly EVENT_EXPENSES_SERVICE_URL: string = this.HOST + '/eventExpenses';

@@ -49,13 +49,21 @@ export class ExpensesComponent implements OnInit {
   ngOnInit(): void {
     Observable.forkJoin(
       this._expensesService.getExpenses(),
-      this._expensesService.getPaymentMethods()
+      this._expensesService.getPaymentMethods(),
+      this._expensesService.getPreviousExpenses(),
+      this._expensesService.getYearList()
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
         this.paymentMethods = data[1];
         console.log(this.expensesDetails);
         console.log(this.paymentMethods);
+        console.log("previous expenses----");
+        console.log(data[2]);
+        console.log("previous expenses----");
+        console.log("yearList----");
+        console.log(data[3]);
+        console.log("yearList----");
 
         this.expenseForm = this.fb.group({
           amount: ['', [Validators.required]],
@@ -84,7 +92,7 @@ export class ExpensesComponent implements OnInit {
         this.expensesDetails = expensesDetails;
         this.resetFormValues();
       }, (error: Error) => {
-        console.log('-------------------Saving function: ');
+        console.log('-------------------Cancel function: ');
         console.log(error);
       }
     );
@@ -181,7 +189,6 @@ export class ExpensesComponent implements OnInit {
     this._expensesService.getPaymentMethods().subscribe(
       (paymentMethods) => {
         this.paymentMethods = paymentMethods;
-        console.log(this.paymentMethods);
       }
     );
   }
@@ -190,7 +197,6 @@ export class ExpensesComponent implements OnInit {
     this._expensesService.getExpenses().subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
-        console.log(this.expensesDetails);
         this.loaderOpen = false;
       },
       (error) => {
@@ -201,7 +207,6 @@ export class ExpensesComponent implements OnInit {
 
   onDisplaySaveButton() {
     this.isSaveButtonDisplayed = true;
-    console.log(this.isSaveButtonDisplayed);
   }
 
   addExpense(): void {
@@ -214,7 +219,6 @@ export class ExpensesComponent implements OnInit {
     this.expenseAdd.name = this.expenseForm.get('name').value;
     this.expenseAdd.spending = this.expenseForm.get('spending').value;
     this.expenseAdd.moneySourceId = this.expenseForm.get('paymentMethod').value;
-    console.log(this.expenseAdd);
 
     this._expensesService.addExpense(this.expenseAdd).subscribe(
       (res) => {

@@ -47,6 +47,18 @@ export class ExpensesService {
       ;
   }
 
+  getPreviousExpenses(): Observable<ExpensesDetailsPresenter> {
+    return this._httpService.get(this._constants.EXPENSES_PREVIOUS_SERVICE_URL)
+      .map((res) => { return <ExpensesDetailsPresenter> res.json(); })
+      ;
+  }
+
+  getYearList(): Observable<number[]> {
+    return this._httpService.get(this._constants.EXPENSES_SERVICE_YEAR_LIST_URL)
+      .map((res) => { return <number[]> res.json(); })
+      ;
+  }
+
   updateExpenseAmount(expenseId: number, amount: number): Observable<any> {
     return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${expenseId}/${amount}/updateAmount`)
       .map((res) => {

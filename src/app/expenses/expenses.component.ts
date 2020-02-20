@@ -6,7 +6,6 @@ import {ExpensesService} from './expenses.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PaymentMethod} from './paymentMethod';
 import {Observable} from 'rxjs/Rx';
-import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
 import {ExpensePresenter} from './expensePresenter';
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
@@ -48,15 +47,15 @@ export class ExpensesComponent implements OnInit {
   }
 
   calculateExpensesTotal(expensesList: ExpensePresenter[]): void {
-    console.log('OUT');
-
     this.expensesTotal = 0;
     for (let i = 0; i < expensesList.length; i++) {
       let expense: ExpensePresenter = expensesList[i];
-      this.expensesTotal += expense.amount;
+      if (expense.spending) {
+        this.expensesTotal -= expense.amount;
+      } else {
+        this.expensesTotal += expense.amount;
+      }
     }
-
-    console.log(this.expensesTotal);
   }
 
   ngOnInit(): void {

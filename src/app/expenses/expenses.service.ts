@@ -3,7 +3,6 @@ import {Observable} from "rxjs/Observable";
 import {Constants} from "../common/constant";
 import {HTTPService} from "../common/HTTP.service";
 import {Expense} from "./expense";
-import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import 'rxjs/add/operator/catch';
 import {PaymentMethod} from './paymentMethod';
 import {ExpensePresenter} from './expensePresenter';

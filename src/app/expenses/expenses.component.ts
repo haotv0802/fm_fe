@@ -19,7 +19,8 @@ import {createIMyDateModel} from '../utils';
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
   paymentMethods: PaymentMethod[];
-  expensesDetails: ExpensesDetailsPresenter;
+  expensesDetails: ExpensePresenter[];
+  expensesTotal: number;
   loaderOpen: boolean = true;
   isSaveButtonDisplayed: boolean = false;
   expenseForm: FormGroup;
@@ -43,7 +44,19 @@ export class ExpensesComponent implements OnInit {
   onDateChanged(event: IMyDateModel): void {
     console.log(event);
     console.log(this.expenseForm.value);
-    console.log(this.expensesDetails.expenses);
+    console.log(this.expensesDetails);
+  }
+
+  calculateExpensesTotal(expensesList: ExpensePresenter[]): void {
+    console.log('OUT');
+
+    this.expensesTotal = 0;
+    for (let i = 0; i < expensesList.length; i++) {
+      let expense: ExpensePresenter = expensesList[i];
+      this.expensesTotal += expense.amount;
+    }
+
+    console.log(this.expensesTotal);
   }
 
   ngOnInit(): void {
@@ -53,6 +66,8 @@ export class ExpensesComponent implements OnInit {
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
+        this.calculateExpensesTotal(this.expensesDetails);
+
         this.paymentMethods = data[1];
         console.log(this.expensesDetails);
         console.log(this.paymentMethods);
@@ -82,6 +97,7 @@ export class ExpensesComponent implements OnInit {
     this._expensesService.getExpenses().subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
+        this.calculateExpensesTotal(this.expensesDetails);
         this.resetFormValues();
       }, (error: Error) => {
         console.log('-------------------Saving function: ');
@@ -93,7 +109,7 @@ export class ExpensesComponent implements OnInit {
   onSave() {
     // in case user is in update mode and click on SAVE button (without pressing ESC button)
     if (this.idUpdate && this.idUpdate < 0 && this.expenseForm.get('amount_edit').value) {
-      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
+      let exp = this.expensesDetails.find(x => x.id === this.idUpdate);
 
       if (this.expenseForm.get('amount_edit').value) {
         exp.amount = this.expenseForm.get('amount_edit').value;
@@ -108,7 +124,7 @@ export class ExpensesComponent implements OnInit {
     }
 
     // update id of item in case it is minus (for update mode)
-    let items = this.expensesDetails.expenses.filter((item) => {
+    let items = this.expensesDetails.filter((item) => {
       if (item.updated) {
         item.id = item.id > 0 ? item.id : item.id * -1;
         return item;
@@ -120,6 +136,7 @@ export class ExpensesComponent implements OnInit {
         this._expensesService.getExpenses().subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
+            this.calculateExpensesTotal(this.expensesDetails);
             this.resetFormValues();
           }, (error: Error) => {
             console.log('-------------------Saving function: ');
@@ -146,7 +163,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   onChangeSpendingInList(type: string, id: number) {
-    let exp = this.expensesDetails.expenses.find(x => x.id === id);
+    let exp = this.expensesDetails.find(x => x.id === id);
     if (exp) {
       if (type === 'spent') {
         exp.spending = true;
@@ -166,6 +183,7 @@ export class ExpensesComponent implements OnInit {
         this._expensesService.getExpenses().subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
+            this.calculateExpensesTotal(this.expensesDetails);
             this.resetFormValues();
           }, (error: Error) => {
             console.log(error);
@@ -190,6 +208,7 @@ export class ExpensesComponent implements OnInit {
     this._expensesService.getExpenses().subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
+        this.calculateExpensesTotal(this.expensesDetails);
         console.log(this.expensesDetails);
         this.loaderOpen = false;
       },
@@ -221,6 +240,7 @@ export class ExpensesComponent implements OnInit {
         this._expensesService.getExpenses().subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
+            this.calculateExpensesTotal(this.expensesDetails);
             this.resetFormValues();
           }, (error: Error) => {
             console.log(error);
@@ -238,7 +258,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   closeUpdateExpense(expense: Expense): void {
-    let exp = this.expensesDetails.expenses.find(x => x.id === expense.id);
+    let exp = this.expensesDetails.find(x => x.id === expense.id);
     exp.amount = this.expenseForm.get('amount_edit').value;
     exp.date = this.expenseForm.get('date_edit').value.jsdate.getTime();
     if (exp.date === undefined) {
@@ -253,7 +273,7 @@ export class ExpensesComponent implements OnInit {
 
   openUpdateExpense(expense: Expense): void {
     if (this.idUpdate && this.idUpdate < 0 && this.idUpdate !== expense.id) {
-      let exp = this.expensesDetails.expenses.find(x => x.id === this.idUpdate);
+      let exp = this.expensesDetails.find(x => x.id === this.idUpdate);
 
       if (this.expenseForm.get('amount_edit').value) {
         exp.amount = this.expenseForm.get('amount_edit').value;

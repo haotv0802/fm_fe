@@ -76,7 +76,7 @@
             </button>
           </td>
         </tr>
-        <tr *ngFor="let expense of expensesDetails.expenses">
+        <tr *ngFor="let expense of expensesDetails">
           <td (click)="openUpdateExpense(expense)">
                             <span *ngIf="expense.id > 0">
                                 {{expense.amount | currency:'VND':true:'1.2-2'}}
@@ -157,7 +157,7 @@
           </td>
         </tr>
         <tr>
-          <td>{{expensesDetails.total | currency:'VND':true:'1.2-2'}}</td>
+          <td>{{expensesTotal | currency:'VND':true:'1.2-2'}}</td>
         </tr>
         </tbody>
       </table>

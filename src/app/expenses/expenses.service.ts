@@ -41,9 +41,9 @@ export class ExpensesService {
       ;
   }
 
-  getExpenses(): Observable<ExpensesDetailsPresenter> {
+  getExpenses(): Observable<ExpensePresenter[]> {
     return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
-      .map((res) => { return <ExpensesDetailsPresenter> res.json(); })
+      .map((res) => { return <ExpensePresenter[]> res.json(); })
       ;
   }
 

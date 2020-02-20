@@ -171,13 +171,18 @@
   </form>
 
 
-  <div class="panel panel-success" *ngFor="let year of yearsList">
+  <div class="panel panel-success">
     <div class="panel-heading">
-      <a href="">
-        {{year}}
-      </a>
+      <button type="button" class="btn btn-link" (click)="hideAll()">Last Months</button>
     </div>
-    <div class="panel-body">Panel Content</div>
+    <div class="panel-body" *ngIf="!allHide">
+      <div class="panel panel-success" *ngFor="let year of yearsList">
+        <div class="panel-heading">
+            <button type="button" class="btn btn-link" (click)="hideYear(year)">{{year}}</button>
+        </div>
+        <div class="panel-body" *ngIf="!yearsListHide.get(year)">Panel Content</div>
+      </div>
+    </div>
   </div>
 
   <br/>

@@ -18,8 +18,12 @@ import {createIMyDateModel} from '../utils';
 })
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
+
+  allHide: boolean = true;
+
   paymentMethods: PaymentMethod[];
   yearsList: number[];
+  yearsListHide = new Map();
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
   isSaveButtonDisplayed: boolean = false;
@@ -47,6 +51,15 @@ export class ExpensesComponent implements OnInit {
     console.log(this.expensesDetails.expenses);
   }
 
+  hideAll(): void {
+    this.allHide = !this.allHide;
+    console.log(this.allHide);
+  }
+
+  hideYear(year: number) {
+    this.yearsListHide.set(year, !this.yearsListHide.get(year));
+  }
+
   ngOnInit(): void {
     Observable.forkJoin(
       this._expensesService.getExpenses(),
@@ -66,6 +79,9 @@ export class ExpensesComponent implements OnInit {
         console.log("lastmonth---");
 
         for (let i = 0; i < this.yearsList.length; i++) {
+
+          this.yearsListHide.set(this.yearsList[i], true);
+
           this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
             (previousExpense) => {
               console.log('previousExpense---' + this.yearsList[i]);

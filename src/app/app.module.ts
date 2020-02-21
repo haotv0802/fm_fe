@@ -18,6 +18,7 @@ import {LoaderModalComponent} from './common/modal/loaderModal/loader.modal.comp
 import {NgxMyDatePickerModule} from "ngx-mydatepicker";
 import {OpenDirective} from './common/modal/open.component';
 import {MyDatePickerModule} from 'mydatepicker';
+import {ExpenseItem} from './expenses/modals/expenseItem';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MyDatePickerModule} from 'mydatepicker';
     ExpensesComponent,
     ModalComponent,
     OpenDirective,
-    LoaderModalComponent
+    LoaderModalComponent,
+    ExpenseItem
   ],
   exports: [
     LoaderModalComponent,
@@ -53,7 +55,8 @@ import {MyDatePickerModule} from 'mydatepicker';
     Constants,
     MessagesService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent, ExpenseItem]
 })
 export class AppModule {
 }

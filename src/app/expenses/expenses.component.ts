@@ -10,6 +10,7 @@ import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
 import {ExpensePresenter} from './expensePresenter';
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
+import {ExpenseItem} from './modals/expenseItem';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +20,7 @@ import {createIMyDateModel} from '../utils';
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
 
-  allHide: boolean = true;
+  allHide = true;
 
   paymentMethods: PaymentMethod[];
   yearsList: number[];
@@ -28,8 +29,8 @@ export class ExpensesComponent implements OnInit {
   lastMonthsExpenses = new Map();
 
   expensesDetails: ExpensesDetailsPresenter;
-  loaderOpen: boolean = true;
-  isSaveButtonDisplayed: boolean = false;
+  loaderOpen = true;
+  isSaveButtonDisplayed = false;
   expenseForm: FormGroup;
   expenseAdd: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
@@ -52,6 +53,15 @@ export class ExpensesComponent implements OnInit {
     console.log(event);
     console.log(this.expenseForm.value);
     console.log(this.expensesDetails.expenses);
+  }
+
+  openDialog(id: string): void {
+    console.log("expense id: " + id);
+    this.modal.modalTitle = "LOGIN";
+    this.modal.modalFooter = false;
+    this.modal.modalMessage = true;
+    this.modal.message = "Here Login component will load.";
+    this.modal.open(ExpenseItem);
   }
 
   hideAll(): void {

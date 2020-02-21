@@ -24,6 +24,9 @@ export class ExpensesComponent implements OnInit {
   paymentMethods: PaymentMethod[];
   yearsList: number[];
   yearsListHide = new Map();
+
+  lastMonthsExpenses = new Map();
+
   expensesDetails: ExpensesDetailsPresenter;
   loaderOpen: boolean = true;
   isSaveButtonDisplayed: boolean = false;
@@ -81,6 +84,16 @@ export class ExpensesComponent implements OnInit {
         for (let i = 0; i < this.yearsList.length; i++) {
 
           this.yearsListHide.set(this.yearsList[i], true);
+          this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
+            (expenses) => {
+              this.lastMonthsExpenses.set(this.yearsList[i], expenses);
+              console.log("expenses last months" + this.yearsList[i]);
+              console.log(this.lastMonthsExpenses.get(this.yearsList[i]));
+            }, (error: Error) => {
+              console.log('-------------------Cancel function: ');
+              console.log(error);
+            }
+          );
 
           this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
             (previousExpense) => {

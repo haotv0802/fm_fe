@@ -176,11 +176,77 @@
       <button type="button" class="btn btn-link" (click)="hideAll()">Last Months</button>
     </div>
     <div class="panel-body" *ngIf="!allHide">
-      <div class="panel panel-success" *ngFor="let year of yearsList">
+      <div class="panel panel-info" *ngFor="let year of yearsList">
         <div class="panel-heading">
             <button type="button" class="btn btn-link" (click)="hideYear(year)">{{year}}</button>
         </div>
-        <div class="panel-body" *ngIf="!yearsListHide.get(year)">Panel Content</div>
+        <div class="panel-body" *ngIf="!yearsListHide.get(year)">
+          <!--        Content     -->
+          <div class="panel panel-warning" *ngFor="let item of lastMonthsExpenses.get(year); let i = index">
+            <div class="panel-heading">
+              {{year}} - {{item.month}}
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;" *ngIf="lastMonthsExpenses">
+                <table class="table table-bordered table-hover" style="width: 1000px;">
+                  <thead style="color: #337AB7">
+                  <th class="col-sm-2">Amount</th>
+                  <th class="col-sm-2">Date</th>
+                  <th class="col-sm-2">Name</th>
+                  <th class="col-sm-2">Payment Method</th>
+                  <th class="col-sm-1"></th>
+                  <th class="col-sm-1"></th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let expense of item.expenses">
+                    <td>
+                                <span *ngIf="expense.id > 0">
+                                    {{expense.amount | currency:'VND':true:'1.2-2'}}
+                                </span>
+
+                    </td>
+                    <td (click)="openUpdateExpense(expense)">
+                                <span *ngIf="expense.id > 0">
+                                    {{expense.date | date: 'dd-MM-yyyy'}}
+                                </span>
+                    </td>
+                    <td (click)="openUpdateExpense(expense)">
+                                <span *ngIf="expense.id > 0">
+                                    {{expense.name}}
+                                </span>
+
+                    </td>
+                    <td (click)="openUpdateExpense(expense)">
+                    <span *ngIf="expense.id > 0">
+                      {{expense.moneySourceName}}
+                    </span>
+                    </td>
+                    <td>
+                      <button *ngIf="expense.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
+                        Spent
+                      </button>
+                      <button *ngIf="expense.spending === false" style="min-width: 80px;" type="button" class="btn btn-success">
+                        Earned
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)"><span class="glyphicon glyphicon-edit"></span></button>
+                    </td>
+                  </tr>
+                  <tr>
+                  <span style="color: red; font-weight: bold; font-size: large" *ngIf="item.total <= 0">
+                      {{item.total | currency:'VND':true:'1.2-2'}}
+                    </span>
+                        <span style="color: dodgerblue; font-weight: bold; font-size: large" *ngIf="item.total > 0">
+                      {{item.total | currency:'VND':true:'1.2-2'}}
+                    </span>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

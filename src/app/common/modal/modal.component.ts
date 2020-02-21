@@ -7,8 +7,8 @@ import {
   ViewEncapsulation,
   ComponentRef,
   EventEmitter,
-  Output
-} from "@angular/core";
+  Output, HostListener
+} from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -72,6 +72,8 @@ export class ModalComponent {
    */
   public isOpen: boolean = false;
 
+  public data: any;
+
   /**
    * Width of document.
    * @type {number}
@@ -113,6 +115,12 @@ export class ModalComponent {
     }
   }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeyDownHandler(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      this.close()
+    }
+  }
   /**
    *  ok method dispose the component, closes the modal and emits true.
    */

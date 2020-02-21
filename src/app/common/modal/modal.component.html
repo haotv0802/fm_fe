@@ -1,6 +1,6 @@
 <div class="modal fade" [open]="!isOpen" id="myModal" [attr.data-keyboard]="true" [attr.data-backdrop]="false"
      tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" [style.width.px]="documentWidth">
+    <div class="modal-dialog" role="document" [style.width.px]="documentWidth" style="height: 100%; overflow-y: auto; overflow-x: auto;">
         <div class="modal-content">
             <div class="modal-header" [hidden]=!modalHeader>
                 <button type="button" class="close" data-dismiss="modal" (click)='close()' aria-label="Close">

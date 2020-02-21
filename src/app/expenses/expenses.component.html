@@ -17,6 +17,7 @@
         <th class="col-sm-1"></th>
         </thead>
         <tbody *ngIf="expensesDetails">
+        <!--        ADD section       -->
         <tr>
           <td>
             <input class="form-control"
@@ -185,6 +186,7 @@
           <div class="panel panel-warning" *ngFor="let item of lastMonthsExpenses.get(year); let i = index">
             <div class="panel-heading">
               {{year}} - {{item.month}}
+              <button type="button" class="btn btn-link" (click)="openExpenseItemsEdit(year, item.month)"><span class="glyphicon glyphicon-edit"></span></button>
             </div>
             <div class="panel-body">
               <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;" *ngIf="lastMonthsExpenses">
@@ -230,7 +232,7 @@
                       </button>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-link" (click)="openDialog(expense.id)"><span class="glyphicon glyphicon-edit"></span></button>
+                      <button type="button" class="btn btn-link" (click)="openExpenseItemEdit(expense)"><span class="glyphicon glyphicon-edit"></span></button>
                     </td>
                   </tr>
                   <tr>

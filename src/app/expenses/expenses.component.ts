@@ -11,6 +11,7 @@ import {ExpensePresenter} from './expensePresenter';
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
 import {ExpenseItem} from './modals/expenseItem';
+import {isNgTemplate} from '@angular/compiler';
 
 @Component({
   moduleId: module.id,
@@ -55,18 +56,45 @@ export class ExpensesComponent implements OnInit {
     console.log(this.expensesDetails.expenses);
   }
 
-  openDialog(id: string): void {
-    console.log("expense id: " + id);
-    this.modal.modalTitle = "LOGIN";
+  openExpenseItemsEdit(year: number, month: number): void {
     this.modal.modalFooter = false;
     this.modal.modalMessage = true;
-    this.modal.message = "Here Login component will load.";
+    this.modal.documentWidth = 1024;
+    console.log("year: " + year);
+    console.log("month: " + month);
+
+    let expensesDetails = this.lastMonthsExpenses.get(year).find((item) => item.month === month);
+
+    let data = new Map();
+
+    data.set("expense", expensesDetails);
+    data.set("paymentMethods", this.paymentMethods);
+    this.modal.data = data;
+
+
+    this.modal.open(ExpenseItem);
+  }
+  openExpenseItemEdit(expense: ExpensePresenter): void {
+    this.modal.modalFooter = false;
+    this.modal.modalMessage = true;
+    this.modal.documentWidth = 1024;
+
+    let expenseList: ExpensePresenter[] = new Array();
+    expenseList.push(expense);
+    let expenseDetails = new ExpensesDetailsPresenter();
+    expenseDetails.expenses = expenseList;
+
+    let data = new Map();
+    data.set("expense", expenseDetails);
+    data.set("paymentMethods", this.paymentMethods);
+    this.modal.data = data;
+
+
     this.modal.open(ExpenseItem);
   }
 
   hideAll(): void {
     this.allHide = !this.allHide;
-    console.log(this.allHide);
   }
 
   hideYear(year: number) {
@@ -84,12 +112,12 @@ export class ExpensesComponent implements OnInit {
         this.expensesDetails = data[0];
         this.paymentMethods = data[1];
         this.yearsList = data[2];
-        console.log(this.expensesDetails);
-        console.log(this.paymentMethods);
-        console.log(this.yearsList);
-        console.log("last months---");
-        console.log(data[3]);
-        console.log("lastmonth---");
+        // console.log(this.expensesDetails);
+        // console.log(this.paymentMethods);
+        // console.log(this.yearsList);
+        // console.log("last months---");
+        // console.log(data[3]);
+        // console.log("lastmonth---");
 
         for (let i = 0; i < this.yearsList.length; i++) {
 
@@ -107,9 +135,9 @@ export class ExpensesComponent implements OnInit {
 
           this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
             (previousExpense) => {
-              console.log('previousExpense---' + this.yearsList[i]);
-              console.log(previousExpense);
-              console.log('previousExpense---');
+              // console.log('previousExpense---' + this.yearsList[i]);
+              // console.log(previousExpense);
+              // console.log('previousExpense---');
             }, (error: Error) => {
               console.log('-------------------Cancel function: ');
               console.log(error);

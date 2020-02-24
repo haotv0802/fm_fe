@@ -133,8 +133,6 @@ export class ExpensesComponent implements OnInit {
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
-        console.log("this.expensesDetails:::::");
-        console.log(this.expensesDetails);
         this.paymentMethods = data[1];
         this.yearsList = data[2];
 

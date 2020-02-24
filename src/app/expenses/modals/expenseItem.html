@@ -1,4 +1,4 @@
-<form class="form-horizontal" novalidate>
+<form class="form-horizontal" novalidate [formGroup]="expenseForm">
   <table class="table table-bordered table-hover" style="width: 1000px;">
     <thead style="color: #337AB7">
     <th class="col-sm-2">Amount</th>
@@ -16,6 +16,70 @@
     <th class="col-sm-1"></th>
     </thead>
     <tbody *ngIf="expensesDetails">
+
+    <tr>
+      <td>
+        <input class="form-control"
+               id="amountId"
+               type="text"
+               placeholder="Amount (required)"
+               formControlName="amount"
+               (keyup.enter)="addExpense()"
+               (keyup)="onDisplaySaveButton()"
+        />
+      </td>
+      <td>
+        <div class="input-group">
+          <my-date-picker name="mydate"
+                          [options]="myOptions" style="width: 100px;"
+                          formControlName="date"></my-date-picker>
+        </div>
+      </td>
+      <td>
+        <input class="form-control"
+               id="nameId"
+               type="text"
+               placeholder="Enter a name"
+               formControlName="name"
+               (keyup.enter)="addExpense()"
+               (keyup)="onDisplaySaveButton()"
+        />
+      </td>
+      <td>
+        <select class="form-control"
+                id="paymentMethodId"
+                formControlName="paymentMethod"
+                (keyup.enter)="addExpense()"
+        >
+          <option value="" disabled selected hidden>Select a method...</option>
+          <option value="-1">CASH</option>
+          <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
+        </select>
+      </td>
+      <td>
+        <button style="min-width: 80px;"  *ngIf="expenseForm.value.spending === false" type="button" class="btn btn-default">
+          Spent
+        </button>
+        <button *ngIf="expenseForm.value.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
+          Spent
+        </button>
+        <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === true" type="button" class="btn btn-default">
+          Earned
+        </button>
+        <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === false" type="button" class="btn btn-success">
+          Earned
+        </button>
+      </td>
+      <td>
+        <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
+          <span class="glyphicon glyphicon-save"></span>
+        </button>
+        <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-warning">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </td>
+    </tr>
+
     <tr *ngFor="let expense of expensesDetails.expenses; let i = index">
       <td>
         <input class="form-control"

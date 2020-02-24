@@ -1,11 +1,13 @@
 import {Component} from "@angular/core";
 import {ModalComponent} from '../../common/modal/modal.component';
 import {ExpensePresenter} from '../expensePresenter';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {PaymentMethod} from '../paymentMethod';
 import {ExpensesDetailsPresenter} from '../expensesDetailsPresenter';
 import {ExpensesService} from '../expenses.service';
+import {createIMyDateModel} from '../../utils';
+import {Expense} from '../expense';
 
 @Component({
   selector: 'expenseItem',
@@ -18,24 +20,27 @@ export class ExpenseItem {
   expensesDetails: ExpensesDetailsPresenter;
   expenseForm: FormGroup;
   paymentMethods: PaymentMethod[];
-  // dateModel: any[];
+  dateModel: any;
   isSaveButtonDisplayed = false;
+  expenseAdd: Expense = new Expense();
+
   private myOptions: IMyDpOptions = {
     dateFormat: 'dd-mm-yyyy',
     width: '150px'
   };
 
-
   constructor(public _modal: ModalComponent,
-              private _expensesService: ExpensesService
+              private _expensesService: ExpensesService,
+              private fb: FormBuilder
   ) {
     this.modal = _modal;
+  }
+
+  ngOnInit(): void {
     this.expensesDetails = JSON.parse(JSON.stringify(this.modal.data.get("expense")));
     this.paymentMethods = JSON.parse(JSON.stringify(this.modal.data.get("paymentMethods")));
 
-    // this.dateModel = [];
     for (let i = 0; i < this.expensesDetails.expenses.length; i++) {
-      // this.dateModel.push(this.expensesDetails.expenses[i].date);
       let expenseDate = new Date(this.expensesDetails.expenses[i].date);
 
       this.expensesDetails.expenses[i].dateModel = {
@@ -52,6 +57,47 @@ export class ExpenseItem {
 
     console.log("payment methods: ");
     console.log(this.paymentMethods);
+
+    let dateTemp;
+    if (this.expensesDetails && this.expensesDetails.expenses && this.expensesDetails.expenses.length) {
+      dateTemp = new Date(this.expensesDetails.expenses[0].date);
+    }
+
+    this.expenseForm = this.fb.group({
+      amount: ['', [Validators.required]],
+      date: [{}],
+      name: [''],
+      paymentMethod: ['', [Validators.required]],
+      spending: true
+    });
+
+    this.expenseForm.get('date').setValue(createIMyDateModel(dateTemp));
+
+    console.log(this.expenseForm.value);
+  }
+
+  onDisplaySaveButton() {
+    this.isSaveButtonDisplayed = true;
+  }
+
+  addExpense(): void {
+
+    this.expenseAdd.amount = this.expenseForm.get('amount').value;
+    this.expenseAdd.date = this.expenseForm.get('date').value.jsdate;
+    if (this.expenseAdd.date === undefined) {
+      this.expenseAdd.date = new Date();
+    }
+    this.expenseAdd.name = this.expenseForm.get('name').value;
+    this.expenseAdd.spending = this.expenseForm.get('spending').value;
+    this.expenseAdd.moneySourceId = this.expenseForm.get('paymentMethod').value;
+
+    this._expensesService.addExpense(this.expenseAdd).subscribe(
+      (res) => {
+        this.resetFormValues();
+      }, (error: Error) => {
+        console.log(error);
+      }
+    );
   }
 
   onDateChanged(event: IMyDateModel, expense: ExpensePresenter): void {
@@ -108,5 +154,16 @@ export class ExpenseItem {
 
   close() {
     this.modal.close();
+  }
+
+  resetFormValues(): void {
+    this.expenseForm.setValue({
+      amount_edit: '',
+      date_edit: '',
+      name_edit: '',
+      paymentMethod_edit: '',
+      spending_edit: true
+    });
+    this.isSaveButtonDisplayed = false;
   }
 }

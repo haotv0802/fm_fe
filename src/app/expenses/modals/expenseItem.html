@@ -6,7 +6,7 @@
     <th class="col-sm-2">Name</th>
     <th class="col-sm-2">Payment Method</th>
     <th class="col-sm-2">
-      <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" type="button" class="btn btn-primary">
+      <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
         <span class="glyphicon glyphicon-save"></span>
       </button>
       <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button"
@@ -23,6 +23,10 @@
                id="amount_{{expense.id}}"
                type="text"
                value="{{expense.amount}}"
+               (keyup.enter)="updateExpense(expense)"
+               (keyup)="updateExpense(expense)"
+               [(ngModel)]="expense.amount"
+               [ngModelOptions]="{standalone: true}"
         />
       </td>
       <td>
@@ -35,14 +39,21 @@
                id="name_{{expense.id}}"
                type="text"
                value="{{expense.name}}"
+               (keyup.enter)="updateExpense(expense)"
+               (keyup)="updateExpense(expense)"
+               [(ngModel)]="expense.name"
+               [ngModelOptions]="{standalone: true}"
         />
       </td>
       <td>
         <select class="form-control"
                 id="paymentMethod_{{expense.id}}"
+                (change)="updateExpense(expense)"
+                [(ngModel)]="expense.moneySourceId"
+                [ngModelOptions]="{standalone: true}"
         >
           <option value="-1" [selected]="expense.moneySourceId <= 0">CASH</option>
-          <option value="{{method.id}}" [selected]="expense.moneySourceId == method.id"
+          <option value="{{method.id}}" [selected]="expense.moneySourceId === method.id"
                   *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
         </select>
       </td>

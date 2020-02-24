@@ -93,6 +93,10 @@ export class ExpensesComponent implements OnInit {
     this.modal.open(ExpenseItem);
   }
 
+  getData(data) {
+    console.log(data);
+  }
+
   hideAll(): void {
     this.allHide = !this.allHide;
   }

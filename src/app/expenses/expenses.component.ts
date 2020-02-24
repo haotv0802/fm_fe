@@ -21,7 +21,7 @@ import {isNgTemplate} from '@angular/compiler';
 export class ExpensesComponent implements OnInit {
   pageTitle: string;
 
-  allHide = true;
+  allHide = false;
 
   paymentMethods: PaymentMethod[];
   yearsList: number[];
@@ -94,7 +94,6 @@ export class ExpensesComponent implements OnInit {
     data.set("paymentMethods", this.paymentMethods);
     this.modal.data = data;
 
-
     this.modal.open(ExpenseItem);
   }
 
@@ -145,7 +144,7 @@ export class ExpensesComponent implements OnInit {
 
         for (let i = 0; i < this.yearsList.length; i++) {
 
-          this.yearsListHide.set(this.yearsList[i], true);
+          this.yearsListHide.set(this.yearsList[i], false);
           this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
             (expenses) => {
               this.lastMonthsExpenses.set(this.yearsList[i], expenses);

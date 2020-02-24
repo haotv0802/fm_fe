@@ -11,6 +11,7 @@ export class ExpensePresenter {
   cardInfo: string;
   spending: boolean;
   updated: boolean;
+  dateModal: any;
 
   constructor() {
   }

@@ -59,7 +59,7 @@
             <button style="min-width: 80px;"  *ngIf="expenseForm.value.spending === false" (click)="onChangeSpending('spent')"  type="button" class="btn btn-default">
               Spent
             </button>
-            <button *ngIf="expenseForm.value.spending === true" style="min-width: 80px;"type="button" class="btn btn-danger">
+            <button *ngIf="expenseForm.value.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
               Spent
             </button>
             <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === true" (click)="onChangeSpending('earned')" type="button" class="btn btn-default">
@@ -102,11 +102,11 @@
                                 {{expense.date | date: 'dd-MM-yyyy'}}
                             </span>
             <span *ngIf="(expense.id * -1) > 0">
-                                <my-date-picker name="date_edit"
-                                                (click)="updateExpense(expense)"
-                                                [options]="myOptions"
-                                                (dateChanged)="onDateChanged($event)"
-                                                formControlName="date_edit"></my-date-picker>
+                            <my-date-picker name="date_edit"
+                                            (click)="updateExpense(expense)"
+                                            [options]="myOptions"
+                                            (dateChanged)="onDateChanged($event)"
+                                            formControlName="date_edit"></my-date-picker>
                             </span>
           </td>
           <td (click)="openUpdateExpense(expense)">

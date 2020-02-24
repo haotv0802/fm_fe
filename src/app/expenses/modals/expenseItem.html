@@ -9,15 +9,14 @@
       <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
         <span class="glyphicon glyphicon-save"></span>
       </button>
-      <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button"
-              class="btn btn-warning">
+      <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-warning">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
     </th>
     <th class="col-sm-1"></th>
     </thead>
     <tbody *ngIf="expensesDetails">
-    <tr *ngFor="let expense of expensesDetails.expenses">
+    <tr *ngFor="let expense of expensesDetails.expenses; let i = index">
       <td>
         <input class="form-control"
                id="amount_{{expense.id}}"
@@ -31,7 +30,7 @@
       </td>
       <td>
         <div class="input-group">
-          <my-date-picker name="mydate" [options]="myOptions" style="width: 100px;"></my-date-picker>
+          <my-date-picker name="mydate" [(ngModel)]="expense.dateModal" [ngModelOptions]="{standalone: true}" [options]="myOptions" style="width: 100px;"></my-date-picker>
         </div>
       </td>
       <td>

@@ -18,11 +18,13 @@ export class ExpenseItem {
   expensesDetails: ExpensesDetailsPresenter;
   expenseForm: FormGroup;
   paymentMethods: PaymentMethod[];
+  // dateModel: any[];
   isSaveButtonDisplayed = false;
   private myOptions: IMyDpOptions = {
     dateFormat: 'dd-mm-yyyy',
     width: '150px'
   };
+
 
   constructor(public _modal: ModalComponent,
               private _expensesService: ExpensesService
@@ -30,6 +32,21 @@ export class ExpenseItem {
     this.modal = _modal;
     this.expensesDetails = JSON.parse(JSON.stringify(this.modal.data.get("expense")));
     this.paymentMethods = JSON.parse(JSON.stringify(this.modal.data.get("paymentMethods")));
+
+    // this.dateModel = [];
+    for (let i = 0; i < this.expensesDetails.expenses.length; i++) {
+      // this.dateModel.push(this.expensesDetails.expenses[i].date);
+      let expenseDate = new Date(this.expensesDetails.expenses[i].date);
+
+      this.expensesDetails.expenses[i].dateModal = {
+        date: {
+          year: expenseDate.getFullYear(),
+          month: (expenseDate.getMonth() + 1),
+          day: expenseDate.getDate()
+        }
+      };
+    }
+
     console.log("expenses details: ");
     console.log(this.expensesDetails);
 

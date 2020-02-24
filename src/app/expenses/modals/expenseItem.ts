@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {ModalComponent} from '../../common/modal/modal.component';
 import {ExpensePresenter} from '../expensePresenter';
 import {FormGroup} from '@angular/forms';
-import {IMyDpOptions} from 'mydatepicker';
+import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {PaymentMethod} from '../paymentMethod';
 import {ExpensesDetailsPresenter} from '../expensesDetailsPresenter';
 import {ExpensesService} from '../expenses.service';
@@ -38,7 +38,7 @@ export class ExpenseItem {
       // this.dateModel.push(this.expensesDetails.expenses[i].date);
       let expenseDate = new Date(this.expensesDetails.expenses[i].date);
 
-      this.expensesDetails.expenses[i].dateModal = {
+      this.expensesDetails.expenses[i].dateModel = {
         date: {
           year: expenseDate.getFullYear(),
           month: (expenseDate.getMonth() + 1),
@@ -52,6 +52,12 @@ export class ExpenseItem {
 
     console.log("payment methods: ");
     console.log(this.paymentMethods);
+  }
+
+  onDateChanged(event: IMyDateModel, expense: ExpensePresenter): void {
+    this.expensesDetails.expenses.find((item) => item.id === expense.id).date = event.jsdate;
+    expense.updated = true;
+    this.isSaveButtonDisplayed = true;
   }
 
   onChangeSpendingInList(type: string, id: number) {

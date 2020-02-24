@@ -30,7 +30,12 @@
       </td>
       <td>
         <div class="input-group">
-          <my-date-picker name="mydate" [(ngModel)]="expense.dateModal" [ngModelOptions]="{standalone: true}" [options]="myOptions" style="width: 100px;"></my-date-picker>
+          <my-date-picker name="mydate"
+                          [(ngModel)]="expense.dateModel"
+                          [ngModelOptions]="{standalone: true}"
+                          (dateChanged)="onDateChanged($event, expense)"
+                          [options]="myOptions" style="width: 100px;">
+          </my-date-picker>
         </div>
       </td>
       <td>
@@ -51,7 +56,7 @@
                 [(ngModel)]="expense.moneySourceId"
                 [ngModelOptions]="{standalone: true}"
         >
-          <option value="-1" [selected]="expense.moneySourceId <= 0">CASH</option>
+          <option value="0" [selected]="expense.moneySourceId <= 0">CASH</option>
           <option value="{{method.id}}" [selected]="expense.moneySourceId === method.id"
                   *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
         </select>

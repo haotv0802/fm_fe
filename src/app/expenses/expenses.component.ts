@@ -133,17 +133,12 @@ export class ExpensesComponent implements OnInit {
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
+        console.log("this.expensesDetails:::::");
+        console.log(this.expensesDetails);
         this.paymentMethods = data[1];
         this.yearsList = data[2];
-        // console.log(this.expensesDetails);
-        // console.log(this.paymentMethods);
-        // console.log(this.yearsList);
-        // console.log("last months---");
-        // console.log(data[3]);
-        // console.log("lastmonth---");
 
         for (let i = 0; i < this.yearsList.length; i++) {
-
           this.yearsListHide.set(this.yearsList[i], false);
           this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
             (expenses) => {

@@ -56,6 +56,7 @@ export class ExpensesComponent implements OnInit {
     console.log(this.expensesDetails.expenses);
   }
 
+  // In case user clicks to edit all expenses of specific month.
   openExpenseItemsEdit(year: number, month: number): void {
     this.modal.modalFooter = false;
     this.modal.modalMessage = true;
@@ -74,7 +75,9 @@ export class ExpensesComponent implements OnInit {
 
     this.modal.open(ExpenseItem);
   }
-  openExpenseItemEdit(expense: ExpensePresenter): void {
+
+  // In case, user clicks on single item
+  openExpenseItemEdit(expense: ExpensePresenter, total: number, year: number, month: number): void {
     this.modal.modalFooter = false;
     this.modal.modalMessage = true;
     this.modal.documentWidth = 1024;
@@ -83,6 +86,8 @@ export class ExpensesComponent implements OnInit {
     expenseList.push(expense);
     let expenseDetails = new ExpensesDetailsPresenter();
     expenseDetails.expenses = expenseList;
+    expenseDetails.year = year;
+    expenseDetails.month = month;
 
     let data = new Map();
     data.set("expense", expenseDetails);
@@ -94,7 +99,22 @@ export class ExpensesComponent implements OnInit {
   }
 
   getData(data) {
-    console.log(data);
+    if (!data.expenses || !data.expenses.length) {
+      return;
+    }
+
+    let year = data.year;
+    let month = data.month;
+
+    this._expensesService.getExpensesByYear(year).subscribe(
+      (expenses) => {
+        this.lastMonthsExpenses.set(year, expenses); // TODO since user clicks on expenses of the month to edit, but this is to load all months of the year
+                                                     /// Should try the way to load one month only.
+      }, (error: Error) => {
+        console.log('-------------------Cancel function: ');
+        console.log(error);
+      }
+    );
   }
 
   hideAll(): void {

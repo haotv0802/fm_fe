@@ -17,7 +17,7 @@
     </thead>
     <tbody *ngIf="expensesDetails">
 
-    <tr>
+    <tr *ngIf="addAllowed">
       <td>
         <input class="form-control"
                id="amountId"
@@ -68,14 +68,6 @@
         </button>
         <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === false" type="button" class="btn btn-success">
           Earned
-        </button>
-      </td>
-      <td>
-        <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
-          <span class="glyphicon glyphicon-save"></span>
-        </button>
-        <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-warning">
-          <span class="glyphicon glyphicon-remove"></span>
         </button>
       </td>
     </tr>
@@ -142,7 +134,7 @@
         </button>
       </td>
       <td>
-        <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-trash"></span></button>
+        <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)"><span class="glyphicon glyphicon-trash"></span></button>
       </td>
     </tr>
     <tr>

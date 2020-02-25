@@ -49,6 +49,12 @@ export class ExpensesService {
       ;
   }
 
+  getExpenseByYearAndMonth(year: number, month: number): Observable<ExpensesDetailsPresenter> {
+    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${year}` + `/${month}`)
+      .map((res) => { return <ExpensesDetailsPresenter> res.json(); })
+      ;
+  }
+
   getExpensesByYear(year: number): Observable<ExpensesDetailsPresenter[]> {
     return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${year}`)
       .map((res) => { return <ExpensesDetailsPresenter[]> res.json(); })

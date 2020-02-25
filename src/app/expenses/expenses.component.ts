@@ -174,6 +174,7 @@ export class ExpensesComponent implements OnInit {
           spending_edit: true
         });
         this.loaderOpen = false;
+        this.expenseForm.get('date').setValue(createIMyDateModel(new Date()));
       },
       (error) => {
         console.log(error);
@@ -395,5 +396,6 @@ export class ExpensesComponent implements OnInit {
     });
     this.idUpdate = undefined;
     this.isSaveButtonDisplayed = false;
+    this.expenseForm.get('date').setValue(createIMyDateModel(new Date()));
   }
 }

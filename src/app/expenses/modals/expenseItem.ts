@@ -23,6 +23,10 @@ export class ExpenseItem {
   dateModel: any;
   isSaveButtonDisplayed = false;
   expenseAdd: Expense = new Expense();
+  addAllowed = true;
+
+  year: number;
+  month: number;
 
   private myOptions: IMyDpOptions = {
     dateFormat: 'dd-mm-yyyy',
@@ -38,18 +42,15 @@ export class ExpenseItem {
 
   ngOnInit(): void {
     this.expensesDetails = JSON.parse(JSON.stringify(this.modal.data.get("expense")));
+    this.year = this.expensesDetails.year;
+    this.month = this.expensesDetails.month;
     this.paymentMethods = JSON.parse(JSON.stringify(this.modal.data.get("paymentMethods")));
 
-    for (let i = 0; i < this.expensesDetails.expenses.length; i++) {
-      let expenseDate = new Date(this.expensesDetails.expenses[i].date);
+    this.updateDateModelForExpenseDetails();
 
-      this.expensesDetails.expenses[i].dateModel = {
-        date: {
-          year: expenseDate.getFullYear(),
-          month: (expenseDate.getMonth() + 1),
-          day: expenseDate.getDate()
-        }
-      };
+    // User clicks on specific item, we do not allow Add form to be shown.
+    if (this.expensesDetails.expenses && this.expensesDetails.expenses.length === 1 && this.expensesDetails.total === undefined) {
+      this.addAllowed = false;
     }
 
     console.log("expenses details: ");
@@ -71,9 +72,34 @@ export class ExpenseItem {
       spending: true
     });
 
-    this.expenseForm.get('date').setValue(createIMyDateModel(dateTemp));
+    this.expenseForm.get('date').setValue(this.getLatestDateModelInList(this.expensesDetails));
 
     console.log(this.expenseForm.value);
+  }
+
+  getLatestDateModelInList(expenseDetails: ExpensesDetailsPresenter) {
+    let dateTemp;
+    if (this.expensesDetails && this.expensesDetails.expenses && this.expensesDetails.expenses.length) {
+      dateTemp = new Date(this.expensesDetails.expenses[0].date);
+    } else {
+      dateTemp = new Date();
+      dateTemp.setFullYear(this.year, this.month - 1, 1);
+    }
+    return createIMyDateModel(dateTemp);
+  }
+
+  updateDateModelForExpenseDetails() {
+    for (let i = 0; i < this.expensesDetails.expenses.length; i++) {
+      let expenseDate = new Date(this.expensesDetails.expenses[i].date);
+
+      this.expensesDetails.expenses[i].dateModel = {
+        date: {
+          year: expenseDate.getFullYear(),
+          month: (expenseDate.getMonth() + 1),
+          day: expenseDate.getDate()
+        }
+      };
+    }
   }
 
   onDisplaySaveButton() {
@@ -93,7 +119,17 @@ export class ExpenseItem {
 
     this._expensesService.addExpense(this.expenseAdd).subscribe(
       (res) => {
-        this.resetFormValues();
+        this._expensesService.getExpenseByYearAndMonth(this.year, this.month).subscribe(
+          (expensesDetails) => {
+            this.expensesDetails = expensesDetails;
+            this.updateDateModelForExpenseDetails();
+            this.resetFormValues();
+            this.expenseForm.get('date').setValue(this.getLatestDateModelInList(this.expensesDetails));
+            this.isSaveButtonDisplayed = true;
+          }, (error: Error) => {
+            console.log(error);
+          }
+        );
       }, (error: Error) => {
         console.log(error);
       }
@@ -126,7 +162,39 @@ export class ExpenseItem {
     this.isSaveButtonDisplayed = true;
   }
 
+  deleteExpense(expenseId: number): void {
+    this._expensesService.deleteExpense(expenseId).subscribe(
+      (res) => {
+
+        if (this.expensesDetails && this.expensesDetails.expenses && this.expensesDetails.expenses.length) {
+          if (this.expensesDetails.expenses.length === 1) {
+            this.modal.close(this.expensesDetails);
+          } else {
+            this._expensesService.getExpenseByYearAndMonth(this.year, this.month).subscribe(
+              (expensesDetails) => {
+                this.expensesDetails = expensesDetails;
+                this.updateDateModelForExpenseDetails();
+                this.resetFormValues();
+                this.expenseForm.get('date').setValue(this.getLatestDateModelInList(this.expensesDetails));
+                this.isSaveButtonDisplayed = true;
+              }, (error: Error) => {
+                console.log(error);
+              }
+            );
+          }
+        }
+      }, (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   onSave() {
+    // in case user is adding and editing at the same time.
+    if (this.expenseForm.get('amount').value) {
+      this.addExpense();
+    }
+
     // update id of item in case it is minus (for update mode)
     let items = this.expensesDetails.expenses.filter((item) => {
       if (item.updated) {
@@ -158,11 +226,11 @@ export class ExpenseItem {
 
   resetFormValues(): void {
     this.expenseForm.setValue({
-      amount_edit: '',
-      date_edit: '',
-      name_edit: '',
-      paymentMethod_edit: '',
-      spending_edit: true
+      amount: '',
+      date: '',
+      name: '',
+      paymentMethod: '',
+      spending: true
     });
     this.isSaveButtonDisplayed = false;
   }

@@ -10,7 +10,7 @@
       <table class="table table-bordered table-hover" style="width: 1145px;">
         <thead style="color: #337AB7">
         <th class="col-sm-2">Amount</th>
-        <th class="col-sm-2">Date</th>
+        <th class="col-sm-1">Date</th>
         <th class="col-sm-2">Name</th>
         <th class="col-sm-2">Payment Method</th>
         <th class="col-sm-2"></th>
@@ -31,7 +31,7 @@
           </td>
           <td>
             <div class="input-group">
-              <my-date-picker name="mydate" [options]="myOptions" style="width: 100px;"
+              <my-date-picker name="mydate" [options]="myOptions" style="width: 90px;"
                               formControlName="date"></my-date-picker>
             </div>
           </td>
@@ -42,6 +42,7 @@
                    placeholder="Enter a name"
                    formControlName="name"
                    (keyup.enter)="addExpense()"
+                   (keyup)="onDisplaySaveButton()"
             />
           </td>
           <td>

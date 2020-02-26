@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PaymentMethod} from './paymentMethod';
 import {Observable} from 'rxjs/Rx';
 import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
-import {ExpensePresenter} from './expensePresenter';
+import {ExpensePresenter, ExpensePresenterFilter} from './expensePresenter';
 import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
 import {ExpenseItem} from './modals/expenseItem';
@@ -36,6 +36,9 @@ export class ExpensesComponent implements OnInit {
   expenseAdd: Expense = new Expense();
   @ViewChild(ModalComponent) modal: ModalComponent;
   idUpdate: number;
+
+  expenseFilter: ExpensePresenterFilter = new ExpensePresenterFilter();
+
   private myOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'dd-mm-yyyy',
@@ -105,7 +108,7 @@ export class ExpensesComponent implements OnInit {
     let year = data.year;
     let month = data.month;
 
-    this._expensesService.getExpensesByYear(year).subscribe(
+    this._expensesService.getExpensesByYear(year, this.expenseFilter.name).subscribe(
       (expenses) => {
         this.lastMonthsExpenses.set(year, expenses); // TODO since user clicks on expenses of the month to edit, but this is to load all months of the year
                                                      /// Should try the way to load one month only.
@@ -129,7 +132,7 @@ export class ExpensesComponent implements OnInit {
       this._expensesService.getExpenses(),
       this._expensesService.getPaymentMethods(),
       this._expensesService.getYearList(),
-      this._expensesService.getLastMonths()
+      this._expensesService.getLastMonths(this.expenseFilter.name)
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
@@ -138,7 +141,7 @@ export class ExpensesComponent implements OnInit {
 
         for (let i = 0; i < this.yearsList.length; i++) {
           this.yearsListHide.set(this.yearsList[i], false);
-          this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
+          this._expensesService.getExpensesByYear(this.yearsList[i], this.expenseFilter.name).subscribe(
             (expenses) => {
               this.lastMonthsExpenses.set(this.yearsList[i], expenses);
               console.log("expenses last months" + this.yearsList[i]);
@@ -149,7 +152,7 @@ export class ExpensesComponent implements OnInit {
             }
           );
 
-          this._expensesService.getExpensesByYear(this.yearsList[i]).subscribe(
+          this._expensesService.getExpensesByYear(this.yearsList[i], this.expenseFilter.name).subscribe(
             (previousExpense) => {
               // console.log('previousExpense---' + this.yearsList[i]);
               // console.log(previousExpense);

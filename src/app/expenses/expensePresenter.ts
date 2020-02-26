@@ -16,3 +16,10 @@ export class ExpensePresenter {
   constructor() {
   }
 }
+
+export class ExpensePresenterFilter {
+  name: string;
+  constructor() {
+  }
+}
+

@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ModalComponent} from '../../common/modal/modal.component';
-import {ExpensePresenter} from '../expensePresenter';
+import {ExpensePresenter, ExpensePresenterFilter} from '../expensePresenter';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {PaymentMethod} from '../paymentMethod';
@@ -24,6 +24,8 @@ export class ExpenseItem {
   isSaveButtonDisplayed = false;
   expenseAdd: Expense = new Expense();
   addAllowed = true;
+
+  expenseFilter: ExpensePresenterFilter = new ExpensePresenterFilter();
 
   year: number;
   month: number;
@@ -119,7 +121,7 @@ export class ExpenseItem {
 
     this._expensesService.addExpense(this.expenseAdd).subscribe(
       (res) => {
-        this._expensesService.getExpenseByYearAndMonth(this.year, this.month).subscribe(
+        this._expensesService.getExpenseByYearAndMonth(this.year, this.month, this.expenseFilter.name).subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
             this.updateDateModelForExpenseDetails();
@@ -170,7 +172,7 @@ export class ExpenseItem {
           if (this.expensesDetails.expenses.length === 1) {
             this.modal.close(this.expensesDetails);
           } else {
-            this._expensesService.getExpenseByYearAndMonth(this.year, this.month).subscribe(
+            this._expensesService.getExpenseByYearAndMonth(this.year, this.month, this.expenseFilter.name).subscribe(
               (expensesDetails) => {
                 this.expensesDetails = expensesDetails;
                 this.updateDateModelForExpenseDetails();

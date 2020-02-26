@@ -3,7 +3,14 @@
   <div class='panel-heading' style='font-size:large'>
     {{pageTitle}}
   </div>
-
+  <input class="form-control"
+         id="keywordId"
+         type="text"
+         placeholder="Keywords"
+         style="width: 200px;"
+         [(ngModel)]="expenseFilter.name"
+         (keyup)="onFilter()"
+  />
   <form class="form-horizontal" novalidate
         [formGroup]="expenseForm">
     <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">

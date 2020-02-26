@@ -8,14 +8,16 @@ import 'rxjs/add/operator/catch';
 import {PaymentMethod} from './paymentMethod';
 import {ExpensePresenter} from './expensePresenter';
 import {HttpParams} from '@angular/common/http';
-import {RequestOptions} from '@angular/http';
+import {RequestOptions, URLSearchParams} from '@angular/http';
+import {CookieService} from 'ngx-cookie';
 
 @Injectable()
 export class ExpensesService {
 
   constructor(
     private _httpService: HTTPService,
-    private _constants: Constants) {
+    private _constants: Constants
+  ) {
 
   }
 
@@ -43,8 +45,10 @@ export class ExpensesService {
       ;
   }
 
-  getExpenses(): Observable<ExpensesDetailsPresenter> {
-    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL)
+  getExpenses(name: string): Observable<ExpensesDetailsPresenter> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set("name", name);
+    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL, params)
       .map((res) => { return <ExpensesDetailsPresenter> res.json(); })
       ;
   }
@@ -56,7 +60,10 @@ export class ExpensesService {
   }
 
   getExpensesByYear(year: number, name: string): Observable<ExpensesDetailsPresenter[]> {
-    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${year}`)
+    let params: URLSearchParams = new URLSearchParams();
+    params.set("name", name);
+
+    return this._httpService.get(this._constants.EXPENSES_SERVICE_URL + `/${year}`, params)
       .map((res) => { return <ExpensesDetailsPresenter[]> res.json(); })
       ;
   }

@@ -127,12 +127,30 @@ export class ExpensesComponent implements OnInit {
     this.yearsListHide.set(year, !this.yearsListHide.get(year));
   }
 
+  onFilter(): void {
+    this.loadExpenses();
+
+    for (let i = 0; i < this.yearsList.length; i++) {
+      this.yearsListHide.set(this.yearsList[i], false);
+      this._expensesService.getExpensesByYear(this.yearsList[i], this.expenseFilter.name).subscribe(
+        (expenses) => {
+          this.lastMonthsExpenses.set(this.yearsList[i], expenses);
+          console.log("expenses last months" + this.yearsList[i]);
+          console.log(this.lastMonthsExpenses.get(this.yearsList[i]));
+        }, (error: Error) => {
+          console.log('-------------------Cancel function: ');
+          console.log(error);
+        }
+      );
+    }
+  }
+
   ngOnInit(): void {
     Observable.forkJoin(
-      this._expensesService.getExpenses(),
+      this._expensesService.getExpenses(this.expenseFilter.name),
       this._expensesService.getPaymentMethods(),
       this._expensesService.getYearList(),
-      this._expensesService.getLastMonths(this.expenseFilter.name)
+      // this._expensesService.getLastMonths(this.expenseFilter.name)
     ).subscribe(
       (data) => {
         this.expensesDetails = data[0];
@@ -146,17 +164,6 @@ export class ExpensesComponent implements OnInit {
               this.lastMonthsExpenses.set(this.yearsList[i], expenses);
               console.log("expenses last months" + this.yearsList[i]);
               console.log(this.lastMonthsExpenses.get(this.yearsList[i]));
-            }, (error: Error) => {
-              console.log('-------------------Cancel function: ');
-              console.log(error);
-            }
-          );
-
-          this._expensesService.getExpensesByYear(this.yearsList[i], this.expenseFilter.name).subscribe(
-            (previousExpense) => {
-              // console.log('previousExpense---' + this.yearsList[i]);
-              // console.log(previousExpense);
-              // console.log('previousExpense---');
             }, (error: Error) => {
               console.log('-------------------Cancel function: ');
               console.log(error);
@@ -187,7 +194,11 @@ export class ExpensesComponent implements OnInit {
   }
 
   onCancel() {
-    this._expensesService.getExpenses().subscribe(
+    this.loadExpenses();
+  }
+
+  loadExpenses() {
+    this._expensesService.getExpenses(this.expenseFilter.name).subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
         this.resetFormValues();
@@ -225,7 +236,7 @@ export class ExpensesComponent implements OnInit {
 
     this._expensesService.updateItems(items).subscribe(
       (res) => {
-        this._expensesService.getExpenses().subscribe(
+        this._expensesService.getExpenses(this.expenseFilter.name).subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
             this.resetFormValues();
@@ -271,7 +282,7 @@ export class ExpensesComponent implements OnInit {
   deleteExpense(expenseId: number): void {
     this._expensesService.deleteExpense(expenseId).subscribe(
       (res) => {
-        this._expensesService.getExpenses().subscribe(
+        this._expensesService.getExpenses(this.expenseFilter.name).subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
             this.resetFormValues();
@@ -294,7 +305,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   getExpensesDetails(): void {
-    this._expensesService.getExpenses().subscribe(
+    this._expensesService.getExpenses(this.expenseFilter.name).subscribe(
       (expensesDetails) => {
         this.expensesDetails = expensesDetails;
         this.loaderOpen = false;
@@ -322,7 +333,7 @@ export class ExpensesComponent implements OnInit {
 
     this._expensesService.addExpense(this.expenseAdd).subscribe(
       (res) => {
-        this._expensesService.getExpenses().subscribe(
+        this._expensesService.getExpenses(this.expenseFilter.name).subscribe(
           (expensesDetails) => {
             this.expensesDetails = expensesDetails;
             this.resetFormValues();

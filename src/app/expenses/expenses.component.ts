@@ -48,7 +48,7 @@ export class ExpensesComponent implements OnInit {
   constructor(
     private _expensesService: ExpensesService,
     private _router: Router,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
     this.pageTitle = 'Expenses';
   }

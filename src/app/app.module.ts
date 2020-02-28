@@ -19,12 +19,15 @@ import {NgxMyDatePickerModule} from "ngx-mydatepicker";
 import {OpenDirective} from './common/modal/open.component';
 import {MyDatePickerModule} from 'mydatepicker';
 import {ExpenseItem} from './expenses/modals/expenseItem';
+import {IndividualService} from './individual/individual.service';
+import {IndividualComponent} from './individual/individual.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CitiesComponent,
     ExpensesComponent,
+    IndividualComponent,
     ModalComponent,
     OpenDirective,
     LoaderModalComponent,
@@ -44,7 +47,8 @@ import {ExpenseItem} from './expenses/modals/expenseItem';
     NgxMyDatePickerModule.forRoot(),
     RouterModule.forRoot([
       {path: '', redirectTo: 'login', pathMatch: 'full'},
-      {path: 'moneyflow', component: ExpensesComponent}
+      {path: 'moneyflow', component: ExpensesComponent},
+      {path: 'individual', component: IndividualComponent}
     ]),
     LoginModule,
     ToasterModule
@@ -52,6 +56,7 @@ import {ExpenseItem} from './expenses/modals/expenseItem';
   providers: [
     HTTPService,
     ExpensesService,
+    IndividualService,
     Constants,
     MessagesService
   ],

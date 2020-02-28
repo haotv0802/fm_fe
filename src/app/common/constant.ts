@@ -35,6 +35,9 @@ export class Constants {
   // Payment methods || Cards information
   public readonly PAYMENT_METHODS_SERVICE_URL: string = this.HOST + '/paymentMethods';
 
+  // Individual
+  public readonly INDIVIDUAL: string = this.HOST + '/individual';
+
   // Constants
   public readonly X_AUTH_TOKEN_HEADER: string = "X-AUTH-TOKEN";
   public readonly AUTH_TOKEN: string = "AUTH_TOKEN";

@@ -38,6 +38,9 @@ export class Constants {
   // Individual
   public readonly INDIVIDUAL: string = this.HOST + '/individual';
 
+  // Bank
+  public readonly BANK: string = this.HOST + '/bank';
+
   // Constants
   public readonly X_AUTH_TOKEN_HEADER: string = "X-AUTH-TOKEN";
   public readonly AUTH_TOKEN: string = "AUTH_TOKEN";

@@ -21,6 +21,7 @@ import {MyDatePickerModule} from 'mydatepicker';
 import {ExpenseItem} from './expenses/modals/expenseItem';
 import {IndividualService} from './individual/individual.service';
 import {IndividualComponent} from './individual/individual.component';
+import {BankService} from './bank/bank.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {IndividualComponent} from './individual/individual.component';
     HTTPService,
     ExpensesService,
     IndividualService,
+    BankService,
     Constants,
     MessagesService
   ],

@@ -4,6 +4,8 @@ import {IndividualService} from './individual.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {IndividualPresenter} from './individualPresenter';
 import {IMyDpOptions} from 'mydatepicker';
+import {createIMyDateModel} from '../utils';
+import {BankService} from '../bank/bank.service';
 
 @Component({
   moduleId: module.id,
@@ -24,6 +26,7 @@ export class IndividualComponent implements OnInit {
 
   constructor(
     private _individualService: IndividualService,
+    private _bankService: BankService,
     private _router: Router,
     private fb: FormBuilder
   ) {
@@ -31,6 +34,16 @@ export class IndividualComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this._bankService.getBanks().subscribe(
+      (res) => {
+        console.log("banks:");
+        console.log(res);
+      }, (error) => {
+        console.log(error);
+      }
+    );
+
     this._individualService.getIndividual().subscribe(
       (res) => {
         this.individual = res;
@@ -40,20 +53,24 @@ export class IndividualComponent implements OnInit {
           firstName: [this.individual.firstName],
           middleName: [this.individual.middleName],
           lastName: [this.individual.lastName],
-          birthday: [new Date()],
+          birthday: [''],
           gender: [this.individual.gender],
           email: [this.individual.email],
           phoneNumber: [this.individual.phoneNumber],
           income: [this.individual.income],
           moneySourceId: [this.individual.moneySourceId],
           moneySourceName: [this.individual.moneySourceName],
-          startDate: [new Date()],
-          expiryDate: [this.individual.expiryDate],
+          startDate: [''],
+          expiryDate: [''],
           cardNumber: [this.individual.cardNumber],
           creditLimit: [this.individual.creditLimit],
           bankId: [this.individual.bankId]
         });
-
+        this.individualForm.get('birthday').setValue(createIMyDateModel(new Date(this.individual.birthday)));
+        this.individualForm.get('startDate').setValue(createIMyDateModel(new Date(this.individual.startDate)));
+        this.individualForm.get('expiryDate').setValue(createIMyDateModel(new Date(this.individual.expiryDate)));
+        console.log("this.individual.gender");
+        console.log(this.individual.gender);
         this.loaderOpen = false;
       }, (error) => {
         console.log(error);

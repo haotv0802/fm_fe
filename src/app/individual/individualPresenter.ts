@@ -1,3 +1,5 @@
+import {MoneySourcePresenter} from './moneySourcePresenter';
+
 export class IndividualPresenter {
   id: number;
   firstName: string;
@@ -8,14 +10,8 @@ export class IndividualPresenter {
   email: string;
   phoneNumber: string;
   income: number;
-  moneySourceId: number;
-  moneySourceName: string;
-  startDate: string;
-  expiryDate: string;
-  cardNumber: string;
-  creditLimit: number;
-  terminated: boolean;
-  bankId: number;
+
+  moneySourcePresenters: MoneySourcePresenter[];
 
   constructor() {
   }

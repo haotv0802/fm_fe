@@ -102,68 +102,34 @@
           </td>
         </tr>
         <tr>
-          <td>Source</td>
-          <td>
-            <input class="form-control"
-                   id="sourceId"
-                   type="text"
-                   placeholder="Source"
-                   formControlName="moneySourceName"
-                   style="width: 300px;"
-            />
+          <td colspan="2">
+            <table class="table table-bordered table-hover" style="width: 500px; border-style : hidden!important;">
+              <tr *ngFor="let moneySource of individual.moneySourcePresenters"  style="border-style : hidden!important;">
+                <td style="border-style : hidden!important; width: 50px">Source: </td>
+                <td>
+                  {{moneySource.name}}
+                </td>
+                <td style="border-style : hidden!important; width: 100px">Credit limit: </td>
+                <td style="border-style : hidden!important;">
+                  {{moneySource.creditLimit}}
+                </td>
+                <td>
+                  <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-edit"></span></button>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
         <tr>
-          <td>Start Date</td>
-          <td>
-            <my-date-picker name="startDate" [options]="myOptions" style="width: 300px;"
-                            formControlName="startDate"></my-date-picker>
+          <td colspan="2" style="text-align: center">
+            <button style="min-width: 20px;" type="button" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>
+            </button>
+            <button style="min-width: 20px;" type="button" class="btn btn-warning">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
           </td>
         </tr>
-        <tr>
-          <td>Expiry Date</td>
-          <td>
-            <my-date-picker name="expiryDate" [options]="myOptions" style="width: 300px;"
-                            formControlName="expiryDate"></my-date-picker>
-          </td>
-        </tr>
-        <tr>
-          <td>Card Number</td>
-          <td>
-            <input class="form-control"
-                   id="cardNumberId"
-                   type="text"
-                   placeholder="Card Number"
-                   formControlName="cardNumber"
-                   style="width: 300px;"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Credit Limit</td>
-          <td>
-            <input class="form-control"
-                   id="creditLimitId"
-                   type="text"
-                   placeholder="Credit Limit"
-                   formControlName="creditLimit"
-                   style="width: 300px;"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Bank</td>
-          <td>
-            <input class="form-control"
-                   id="bankId"
-                   type="text"
-                   placeholder="Bank"
-                   formControlName="bankId"
-                   style="width: 300px;"
-            />
-          </td>
-        </tr>
-
       </table>
     </div>
   </form>

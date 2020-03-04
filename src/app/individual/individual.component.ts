@@ -69,14 +69,22 @@ export class IndividualComponent implements OnInit {
         this.individualForm.get('birthday').setValue(createIMyDateModel(new Date(this.individual.birthday)));
         this.individualForm.get('startDate').setValue(createIMyDateModel(new Date(this.individual.startDate)));
         this.individualForm.get('expiryDate').setValue(createIMyDateModel(new Date(this.individual.expiryDate)));
-        console.log("this.individual.gender");
-        console.log(this.individual.gender);
         this.loaderOpen = false;
       }, (error) => {
         console.log(error);
       }
     );
+  }
 
+  onSave() {
+    this.individual.firstName = this.individualForm.get('firstName').value;
+    this.individual.middleName = this.individualForm.get('middleName').value;
+    this.individual.lastName = this.individualForm.get('lastName').value;
+    this.individual.birthday = this.individualForm.get('birthday').value;
+    this.individual.gender = this.individualForm.get('gender').value;
+    this.individual.email = this.individualForm.get('email').value;
+    this.individual.phoneNumber = this.individualForm.get('phoneNumber').value;
+    this.individual.income = this.individualForm.get('income').value;
 
   }
 }

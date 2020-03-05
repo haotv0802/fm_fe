@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {IndividualService} from './individual.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -6,6 +6,9 @@ import {IndividualPresenter} from './individualPresenter';
 import {IMyDpOptions} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
 import {BankService} from '../bank/bank.service';
+import {ModalComponent} from '../common/modal/modal.component';
+import {MoneySourcePresenter} from './moneySourcePresenter';
+import {MoneySourceComponent} from './modals/moneySource.component';
 
 @Component({
   moduleId: module.id,
@@ -17,6 +20,7 @@ export class IndividualComponent implements OnInit {
   individual: IndividualPresenter;
   loaderOpen = true;
   individualForm: FormGroup;
+  @ViewChild(ModalComponent) modal: ModalComponent;
 
   private myOptions: IMyDpOptions = {
     // other options...
@@ -58,17 +62,8 @@ export class IndividualComponent implements OnInit {
           email: [this.individual.email],
           phoneNumber: [this.individual.phoneNumber],
           income: [this.individual.income],
-          moneySourceId: [this.individual.moneySourceId],
-          moneySourceName: [this.individual.moneySourceName],
-          startDate: [''],
-          expiryDate: [''],
-          cardNumber: [this.individual.cardNumber],
-          creditLimit: [this.individual.creditLimit],
-          bankId: [this.individual.bankId]
         });
         this.individualForm.get('birthday').setValue(createIMyDateModel(new Date(this.individual.birthday)));
-        this.individualForm.get('startDate').setValue(createIMyDateModel(new Date(this.individual.startDate)));
-        this.individualForm.get('expiryDate').setValue(createIMyDateModel(new Date(this.individual.expiryDate)));
         this.loaderOpen = false;
       }, (error) => {
         console.log(error);
@@ -76,7 +71,7 @@ export class IndividualComponent implements OnInit {
     );
   }
 
-  onSave() {
+  onSave(): void {
     this.individual.firstName = this.individualForm.get('firstName').value;
     this.individual.middleName = this.individualForm.get('middleName').value;
     this.individual.lastName = this.individualForm.get('lastName').value;
@@ -85,6 +80,19 @@ export class IndividualComponent implements OnInit {
     this.individual.email = this.individualForm.get('email').value;
     this.individual.phoneNumber = this.individualForm.get('phoneNumber').value;
     this.individual.income = this.individualForm.get('income').value;
+  }
 
+  onOpenEdit(moneySource: MoneySourcePresenter): void {
+    this.modal.modalFooter = false;
+    this.modal.modalMessage = true;
+    this.modal.documentWidth = 800;
+
+    this.modal.data = moneySource;
+
+    this.modal.open(MoneySourceComponent);
+  }
+
+  getData(data) {
+    console.log(data);
   }
 }

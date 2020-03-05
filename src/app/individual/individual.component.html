@@ -113,8 +113,12 @@
                 <td style="border-style : hidden!important;">
                   {{moneySource.creditLimit}}
                 </td>
+                <td style="border-style : hidden!important; width: 20px">by </td>
+                <td style="border-style : hidden!important;">
+                  {{moneySource.bank.name}}
+                </td>
                 <td>
-                  <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-edit"></span></button>
+                  <button type="button" class="btn btn-link" (click)="onOpenEdit(moneySource)"><span class="glyphicon glyphicon-edit"></span></button>
                 </td>
               </tr>
             </table>
@@ -133,4 +137,6 @@
       </table>
     </div>
   </form>
+  <modal (modalOutput)="getData($event)">
+  </modal>
 </div>

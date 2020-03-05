@@ -79,7 +79,7 @@ export class ExpensesComponent implements OnInit {
     this.modal.open(ExpenseItem);
   }
 
-  // In case, user clicks on single item
+  // In case, user clicks to edit on single item
   openExpenseItemEdit(expense: ExpensePresenter, total: number, year: number, month: number): void {
     this.modal.modalFooter = false;
     this.modal.modalMessage = true;

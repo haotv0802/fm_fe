@@ -22,6 +22,7 @@ import {ExpenseItem} from './expenses/modals/expenseItem';
 import {IndividualService} from './individual/individual.service';
 import {IndividualComponent} from './individual/individual.component';
 import {BankService} from './bank/bank.service';
+import {MoneySourceComponent} from './individual/modals/moneySource.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {BankService} from './bank/bank.service';
     ModalComponent,
     OpenDirective,
     LoaderModalComponent,
-    ExpenseItem
+    ExpenseItem,
+    MoneySourceComponent
   ],
   exports: [
     LoaderModalComponent,
@@ -63,7 +65,7 @@ import {BankService} from './bank/bank.service';
     MessagesService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent, ExpenseItem]
+  entryComponents: [ModalComponent, ExpenseItem, MoneySourceComponent]
 })
 export class AppModule {
 }

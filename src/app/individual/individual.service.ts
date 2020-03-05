@@ -3,6 +3,7 @@ import {Constants} from '../common/constant';
 import {HTTPService} from '../common/HTTP.service';
 import {IndividualPresenter} from './individualPresenter';
 import {Observable} from 'rxjs/Observable';
+import {MoneySourcePresenter} from './moneySourcePresenter';
 
 @Injectable()
 export class IndividualService {
@@ -16,6 +17,12 @@ export class IndividualService {
     return this._httpService.get(this._constants.INDIVIDUAL)
       .map((res) => {
         return <IndividualPresenter> res.json(); })
+      ;
+  }
+
+  updateMoneySource(moneySource: MoneySourcePresenter): Observable<any> {
+    return this._httpService.patch(this._constants.MONEY_SOURCE_UPDATE, moneySource)
+      .map((res) => { return res.json(); })
       ;
   }
 }

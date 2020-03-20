@@ -6,6 +6,7 @@ export class MoneySourcePresenter {
   startDate: string;
   expiryDate: string;
   cardNumber: string;
+  paymentMethodId: number;
   creditLimit: number;
   terminated: boolean;
   bankId: number;

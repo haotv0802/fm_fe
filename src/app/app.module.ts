@@ -23,6 +23,7 @@ import {IndividualService} from './individual/individual.service';
 import {IndividualComponent} from './individual/individual.component';
 import {BankService} from './bank/bank.service';
 import {MoneySourceComponent} from './individual/modals/moneySource.component';
+import {PaymentMethodService} from './payment/paymentMethod.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {MoneySourceComponent} from './individual/modals/moneySource.component';
     IndividualService,
     BankService,
     Constants,
-    MessagesService
+    MessagesService,
+    PaymentMethodService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, ExpenseItem, MoneySourceComponent]

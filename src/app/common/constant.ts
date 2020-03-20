@@ -34,6 +34,7 @@ export class Constants {
 
   // Payment methods || Cards information
   public readonly PAYMENT_METHODS_SERVICE_URL: string = this.HOST + '/paymentMethods';
+  public readonly PAYMENT_METHODS_LIST: string = this.HOST + '/paymentMethod/list';
 
   // Individual
   public readonly INDIVIDUAL: string = this.HOST + '/individual';

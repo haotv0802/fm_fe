@@ -56,6 +56,20 @@
         </td>
       </tr>
       <tr>
+        <td>Payment method</td>
+        <td>
+          <select class="form-control"
+                  id="paymentMethodId"
+                  formControlName="paymentMethod"
+                  style="width: 200px"
+                  (change)="onFormChange()"
+          >
+            <option value="" disabled selected hidden>Select a method...</option>
+<!--            <option value="{{bank.id}}" *ngFor="let bank of banks">{{bank.name}}</option>-->
+          </select>
+        </td>
+      </tr>
+      <tr>
         <td>Terminated</td>
         <td>
           <input
@@ -78,7 +92,7 @@
                   (change)="onFormChange()"
           >
             <option value="" disabled selected hidden>Select a method...</option>
-            <option value="{{bank.id}}" (select)="onBankSelected(bank)" *ngFor="let bank of banks">{{bank.name}}</option>
+            <option value="{{bank.id}}" *ngFor="let bank of banks">{{bank.name}}</option>
           </select>
         </td>
       </tr>

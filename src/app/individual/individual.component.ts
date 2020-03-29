@@ -48,10 +48,19 @@ export class IndividualComponent implements OnInit {
       }
     );
 
+    this._individualService.getBankPromos().subscribe(
+      (res) => {
+        console.log("promo");
+        console.log(res);
+      },(error)=>{
+        console.log(error);
+      }
+    )
+
     this._individualService.getIndividual().subscribe(
       (res) => {
         this.individual = res;
-        console.log(this.individual);
+        // console.log(this.individual);
 
         this.individualForm = this.fb.group({
           firstName: [this.individual.firstName],

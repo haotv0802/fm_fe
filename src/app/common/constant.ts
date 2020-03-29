@@ -55,4 +55,7 @@ export class Constants {
   // Names of Components
   public readonly WELCOME_URL: string = 'welcome';
 
+  // Bank Promotion Crawling
+  public readonly BANK_PROMO_CRAWL=this.HOST+"/promotions/crawler";
+
 }

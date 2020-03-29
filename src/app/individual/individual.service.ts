@@ -18,6 +18,12 @@ export class IndividualService {
       .map((res) => {
         return <IndividualPresenter> res.json(); })
       ;
+
+  }
+  getBankPromos(): Observable<String> {
+    return this._httpService.get(this._constants.BANK_PROMO_CRAWL+"/1").map((res)=>{
+      return <String> res.json();
+    });
   }
 
   updateMoneySource(moneySource: MoneySourcePresenter): Observable<any> {

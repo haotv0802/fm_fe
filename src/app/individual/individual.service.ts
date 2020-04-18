@@ -21,7 +21,7 @@ export class IndividualService {
 
   }
   getBankPromos(): Observable<String> {
-    return this._httpService.get(this._constants.BANK_PROMO_CRAWL+"/1").map((res)=>{
+    return this._httpService.get(this._constants.BANK_PROMO_CRAWL+"/scb").map((res)=>{
       return <String> res.json();
     });
   }

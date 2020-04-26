@@ -8,10 +8,11 @@ import {PaymentMethod} from './paymentMethod';
 import {Observable} from 'rxjs/Rx';
 import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
 import {ExpensePresenter, ExpensePresenterFilter} from './expensePresenter';
-import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
+import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
 import {ExpenseItem} from './modals/expenseItem';
-import {isNgTemplate} from '@angular/compiler';
+import {ToasterService} from 'angular2-toaster';
+import {Constants} from './../common/constant';
 
 @Component({
   moduleId: module.id,
@@ -48,7 +49,9 @@ export class ExpensesComponent implements OnInit {
   constructor(
     private _expensesService: ExpensesService,
     private _router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _constants: Constants,
+    private _toasterService: ToasterService
   ) {
     this.pageTitle = 'Expenses';
   }
@@ -251,9 +254,9 @@ export class ExpensesComponent implements OnInit {
     );
 
     // in case user is adding and editing at the same time.
-    if (this.expenseForm.get('amount').value) {
+    // if (this.expenseForm.get('amount').value) {
       this.addExpense();
-    }
+    // }
   }
 
   onChangeSpending(type: string) {
@@ -341,8 +344,9 @@ export class ExpensesComponent implements OnInit {
             console.log(error);
           }
         );
-      }, (error: Error) => {
+      }, (error: any) => {
         console.log(error);
+        this._toasterService.pop(this._constants.TOASTER_ERROR, error.faultMessage);
       }
     );
   }

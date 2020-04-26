@@ -24,17 +24,12 @@ export class ExpensesService {
   addExpense(expense: Expense): Observable<any> {
     return this._httpService.post(this._constants.EXPENSES_SERVICE_URL, expense)
       .map((res) => { return res.json(); })
+      .catch(err => Observable.throw(err))
       ;
   }
 
   deleteExpense(expenseId: number): Observable<any> {
     return this._httpService.delete(this._constants.EXPENSES_SERVICE_URL + `/${expenseId}/delete`)
-      .map((res) => { return res.json(); })
-      ;
-  }
-
-  updateExpense(expense: Expense): Observable<any> {
-    return this._httpService.patch(this._constants.EXPENSES_SERVICE_URL, expense)
       .map((res) => { return res.json(); })
       ;
   }

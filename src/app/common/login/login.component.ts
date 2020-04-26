@@ -92,9 +92,9 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
-        if (error.status === this._constants.HTTP_STATUS_UNAUTHORIZED) {
+        // if (error.status === this._constants.HTTP_STATUS_UNAUTHORIZED) {
           this._toasterService.pop(this._constants.TOASTER_ERROR, 'Username or Password is incorrect!');
-        }
+        // }
         // this._router.navigate(['welcome']);
       }
     );

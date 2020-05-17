@@ -1,4 +1,4 @@
-export class ExpensePresenter {
+export class PromotionPresenter {
   id: number;
   userId: number;
   amount: number;

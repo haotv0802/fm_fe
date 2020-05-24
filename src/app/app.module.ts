@@ -24,6 +24,8 @@ import {IndividualComponent} from './individual/individual.component';
 import {BankService} from './bank/bank.service';
 import {MoneySourceComponent} from './individual/modals/moneySource.component';
 import {PaymentMethodService} from './payment/paymentMethod.service';
+import {PromotionComponent} from './promotions/promotion.component';
+import {PromotionService} from './promotions/promotion.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {PaymentMethodService} from './payment/paymentMethod.service';
     OpenDirective,
     LoaderModalComponent,
     ExpenseItem,
-    MoneySourceComponent
+    MoneySourceComponent,
+    PromotionComponent
   ],
   exports: [
     LoaderModalComponent,
@@ -52,7 +55,8 @@ import {PaymentMethodService} from './payment/paymentMethod.service';
     RouterModule.forRoot([
       {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path: 'moneyflow', component: ExpensesComponent},
-      {path: 'individual', component: IndividualComponent}
+      {path: 'individual', component: IndividualComponent},
+      {path: 'promotion', component: PromotionComponent}
     ]),
     LoginModule,
     ToasterModule
@@ -64,7 +68,8 @@ import {PaymentMethodService} from './payment/paymentMethod.service';
     BankService,
     Constants,
     MessagesService,
-    PaymentMethodService
+    PaymentMethodService,
+    PromotionService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, ExpenseItem, MoneySourceComponent]

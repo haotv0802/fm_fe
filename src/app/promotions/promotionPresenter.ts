@@ -1,25 +1,19 @@
 export class PromotionPresenter {
   id: number;
-  userId: number;
-  amount: number;
-  date: Date;
-  name: string;
-  moneySourceId: number;
-  moneySourceName: string;
-  paymentMethod: string;
-  cardNumber: string;
-  cardInfo: string;
-  spending: boolean;
-  updated: boolean;
-  dateModel: any;
+  title: string;
+  content: string;
+  provision: string;
+  instalment: string;
+  start_date: Date;
+  end_date: Date;
+  bank_id: number;
+  category_id: number;
+  url: string;
+
 
   constructor() {
   }
 }
 
-export class ExpensePresenterFilter {
-  name: string;
-  constructor() {
-  }
-}
+
 

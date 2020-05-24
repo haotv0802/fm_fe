@@ -3,79 +3,64 @@
   <div class='panel-heading' style='font-size:large'>
     {{pageTitle}}
   </div>
-  <input class="form-control"
-         id="keywordId"
-         type="text"
-         placeholder="Keywords"
-         style="width: 200px;"
-         [(ngModel)]="expenseFilter.name"
-         (keyup)="onFilter()"
-  />
+  <!--<input class="form-control"-->
+         <!--id="keywordId"-->
+         <!--type="text"-->
+         <!--placeholder="Keywords"-->
+         <!--style="width: 200px;"-->
+         <!--[(ngModel)]="expenseFilter.name"-->
+         <!--(keyup)="onFilter()"-->
+  <!--/>-->
+
   <form class="form-horizontal" novalidate
-        [formGroup]="expenseForm">
+        [formGroup]="promotionFrom">
     <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
       <table class="table table-bordered table-hover" style="width: 1145px;">
         <thead style="color: #337AB7">
-        <th class="col-sm-2">Amount</th>
-        <th class="col-sm-1">Date</th>
-        <th class="col-sm-2">Name</th>
-        <th class="col-sm-2">Payment Method</th>
-        <th class="col-sm-2"></th>
-        <th class="col-sm-1"></th>
+        <th class="col-sm-1">id</th>
+        <th class="col-sm-2">Title</th>
+        <th class="col-sm-4">Content</th>
+        <th class="col-sm-2">Start Date</th>
+        <th class="col-sm-2">End Date</th>
+        <th class="col-sm-1">Bank ID</th>
+        <th class="col-sm-1">Category ID</th>
         </thead>
-        <tbody *ngIf="expensesDetails">
-        <!--        ADD section       -->
+        <tbody *ngIf="promotionpresenter">
         <tr>
           <td>
+            <!--//Id Column-->
+          </td>
+          <td>
+          <input class="form-control"
+                 id="title"
+                 type="text"
+                 placeholder="Title (required)"
+                 formControlName="title"
+                 (keyup.enter)="addExpense()"
+                 (keyup)="onDisplaySaveButton()"
+          />
+        </td>
+          <td>
             <input class="form-control"
-                   id="amountId"
+                   id="content"
                    type="text"
-                   placeholder="Amount (required)"
-                   formControlName="amount"
+                   placeholder="Content (required)"
+                   formControlName="content"
                    (keyup.enter)="addExpense()"
                    (keyup)="onDisplaySaveButton()"
             />
           </td>
           <td>
             <div class="input-group">
-              <my-date-picker name="mydate" [options]="myOptions" style="width: 90px;"
-                              formControlName="date"></my-date-picker>
+              <my-date-picker name="start_date" [options]="myOptions" style="width: 90px;"
+                              formControlName="start_date"></my-date-picker>
             </div>
           </td>
           <td>
-            <input class="form-control"
-                   id="nameId"
-                   type="text"
-                   placeholder="Enter a name"
-                   formControlName="name"
-                   (keyup.enter)="addExpense()"
-                   (keyup)="onDisplaySaveButton()"
-            />
-          </td>
-          <td>
-            <select class="form-control"
-                    id="paymentMethodId"
-                    formControlName="paymentMethod"
-                    (keyup.enter)="addExpense()"
-            >
-              <option value="" disabled selected hidden>Select a method...</option>
-              <option value="-1">CASH</option>
-              <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
-            </select>
-          </td>
-          <td>
-            <button style="min-width: 80px;"  *ngIf="expenseForm.value.spending === false" (click)="onChangeSpending('spent')"  type="button" class="btn btn-default">
-              Spent
-            </button>
-            <button *ngIf="expenseForm.value.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
-              Spent
-            </button>
-            <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === true" (click)="onChangeSpending('earned')" type="button" class="btn btn-default">
-              Earned
-            </button>
-            <button style="min-width: 80px;" *ngIf="expenseForm.value.spending === false" type="button" class="btn btn-success">
-              Earned
-            </button>
+            <div class="input-group">
+              <my-date-picker name="end_date" [options]="myOptions" style="width: 90px;"
+                              formControlName="end_date"></my-date-picker>
+            </div>
           </td>
           <td>
             <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
@@ -86,184 +71,37 @@
             </button>
           </td>
         </tr>
-        <tr *ngFor="let expense of expensesDetails.expenses">
-          <td (click)="openUpdateExpense(expense)">
-                            <span *ngIf="expense.id > 0">
-                                {{expense.amount | currency:'VND':true:'1.2-2'}}
-                            </span>
-            <span *ngIf="(expense.id * -1) > 0">
-                                <input class="form-control"
-                                       id="amount_{{expense.id}}"
-                                       type="text"
-                                       value="{{expense.amount}}"
-                                       formControlName="amount_edit"
-                                       #amount_edit
-                                       (keyup.enter)="updateExpense(expense)"
-                                       (keyup)="updateExpense(expense)"
-                                       (keyup.esc)="closeUpdateExpense(expense)"
-                                />
-              <!--{{amount_edit.focus()}}-->
-                            </span>
-          </td>
-          <td (click)="openUpdateExpense(expense)">
-                            <span *ngIf="expense.id > 0">
-                                {{expense.date | date: 'dd-MM-yyyy'}}
-                            </span>
-            <span *ngIf="(expense.id * -1) > 0">
-                            <my-date-picker name="date_edit"
-                                            (click)="updateExpense(expense)"
-                                            [options]="myOptions"
-                                            (dateChanged)="onDateChanged($event)"
-                                            formControlName="date_edit"></my-date-picker>
-                            </span>
-          </td>
-          <td (click)="openUpdateExpense(expense)">
-                            <span *ngIf="expense.id > 0">
-                                {{expense.name}}
-                            </span>
-            <span *ngIf="(expense.id * -1) > 0">
-                                <input class="form-control"
-                                       id="name_{{expense.id}}"
-                                       type="text"
-                                       value="{{expense.name}}"
-                                       formControlName="name_edit"
-                                       (keyup.enter)="updateExpense(expense)"
-                                       (keyup)="updateExpense(expense)"
-                                       (keyup.esc)="closeUpdateExpense(expense)"
-                                />
-                            </span>
-          </td>
-          <td (click)="openUpdateExpense(expense)">
-                <span *ngIf="expense.id > 0">
-                  {{expense.moneySourceName}}
-                </span>
-            <span *ngIf="(expense.id * -1) > 0">
-                    <select class="form-control"
-                            id="paymentMethod_{{expense.id}}"
-                            formControlName="paymentMethod_edit"
-                            (change)="updateExpense(expense)"
-                    >
-                        <option value="0" [selected]="expense.moneySourceId <= 0">CASH</option>
-                        <option value="{{method.id}}" [selected]="expense.moneySourceId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
-                    </select>
-                </span>
+
+
+
+        <tr *ngFor="let promotion of promotionpresenter">
+          <td>
+            {{promotion.id}}
           </td>
           <td>
-            <button *ngIf="expense.spending === false" (click)="onChangeSpendingInList('spent', expense.id)" style="min-width: 80px;" type="button" class="btn btn-default">
-              Spent
-            </button>
-            <button *ngIf="expense.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
-              Spent
-            </button>
-            <button *ngIf="expense.spending === true" (click)="onChangeSpendingInList('earned', expense.id)" style="min-width: 80px;" type="button" class="btn btn-default">
-              Earned
-            </button>
-            <button *ngIf="expense.spending === false" style="min-width: 80px;" type="button" class="btn btn-success">
-              Earned
-            </button>
+            {{promotion.title}}
           </td>
           <td>
-            <button type="button" class="btn btn-link" (click)="deleteExpense(expense.id)"><span class="glyphicon glyphicon-trash"></span></button>
+            {{promotion.content}}
           </td>
-        </tr>
-        <tr>
-          <span style="color: red; font-weight: bold; font-size: large" *ngIf="expensesDetails.total <= 0">
-              {{expensesDetails.total | currency:'VND':true:'1.2-2'}}
-            </span>
-          <span style="color: dodgerblue; font-weight: bold; font-size: large" *ngIf="expensesDetails.total > 0">
-              {{expensesDetails.total | currency:'VND':true:'1.2-2'}}
-            </span>
+          <td>
+            {{promotion.start_date.dayOfMonth}}-{{promotion.start_date.monthValue}}-{{promotion.start_date.year}}
+          </td>
+          <td>
+            {{promotion.end_date.dayOfMonth}}-{{promotion.end_date.monthValue}}-{{promotion.end_date.year}}
+          </td>
+          <td>
+            {{promotion.bank_id}}
+          </td>
+          <td>
+            {{promotion.category_id}}
+          </td>
+          <td></td>
+          <td></td>
         </tr>
         </tbody>
       </table>
     </div>
+
   </form>
-
-
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <button type="button" class="btn btn-link" (click)="hideAll()">Last Months</button>
-    </div>
-    <div class="panel-body" *ngIf="!allHide">
-      <div class="panel panel-info" *ngFor="let year of yearsList">
-        <div class="panel-heading">
-            <button type="button" class="btn btn-link" (click)="hideYear(year)">{{year}}</button>
-        </div>
-        <div class="panel-body" *ngIf="!yearsListHide.get(year)">
-          <!--        Content     -->
-          <div class="panel panel-warning" *ngFor="let item of lastMonthsExpenses.get(year); let i = index">
-            <div class="panel-heading">
-              {{year}} - {{item.month}}
-              <button type="button" class="btn btn-link" (click)="openExpenseItemsEdit(year, item.month)"><span class="glyphicon glyphicon-edit"></span></button>
-            </div>
-            <div class="panel-body">
-              <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;" *ngIf="lastMonthsExpenses">
-                <table class="table table-bordered table-hover" style="width: 1000px;">
-                  <thead style="color: #337AB7">
-                  <th class="col-sm-2">Amount</th>
-                  <th class="col-sm-2">Date</th>
-                  <th class="col-sm-2">Name</th>
-                  <th class="col-sm-2">Payment Method</th>
-                  <th class="col-sm-1"></th>
-                  <th class="col-sm-1"></th>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let expense of item.expenses">
-                    <td>
-                                <span *ngIf="expense.id > 0">
-                                    {{expense.amount | currency:'VND':true:'1.2-2'}}
-                                </span>
-
-                    </td>
-                    <td (click)="openUpdateExpense(expense)">
-                                <span *ngIf="expense.id > 0">
-                                    {{expense.date | date: 'dd-MM-yyyy'}}
-                                </span>
-                    </td>
-                    <td (click)="openUpdateExpense(expense)">
-                                <span *ngIf="expense.id > 0">
-                                    {{expense.name}}
-                                </span>
-
-                    </td>
-                    <td (click)="openUpdateExpense(expense)">
-                    <span *ngIf="expense.id > 0">
-                      {{expense.moneySourceName}}
-                    </span>
-                    </td>
-                    <td>
-                      <button *ngIf="expense.spending === true" style="min-width: 80px;" type="button" class="btn btn-danger">
-                        Spent
-                      </button>
-                      <button *ngIf="expense.spending === false" style="min-width: 80px;" type="button" class="btn btn-success">
-                        Earned
-                      </button>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-link" (click)="openExpenseItemEdit(expense, item.total, year, item.month)"><span class="glyphicon glyphicon-edit"></span></button>
-                    </td>
-                  </tr>
-                  <tr>
-                  <span style="color: red; font-weight: bold; font-size: large" *ngIf="item.total <= 0">
-                      {{item.total | currency:'VND':true:'1.2-2'}}
-                    </span>
-                        <span style="color: dodgerblue; font-weight: bold; font-size: large" *ngIf="item.total > 0">
-                      {{item.total | currency:'VND':true:'1.2-2'}}
-                    </span>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <br/>
-  <br/>
-  <br/>
-  <modal (modalOutput)="getData($event)">
-  </modal>
 </div>

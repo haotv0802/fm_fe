@@ -26,6 +26,7 @@ import {MoneySourceComponent} from './individual/modals/moneySource.component';
 import {PaymentMethodService} from './payment/paymentMethod.service';
 import {PromotionComponent} from './promotions/promotion.component';
 import {PromotionService} from './promotions/promotion.service';
+import {CategoryService} from './category/category.service';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {PromotionService} from './promotions/promotion.service';
     Constants,
     MessagesService,
     PaymentMethodService,
-    PromotionService
+    PromotionService,
+    CategoryService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, ExpenseItem, MoneySourceComponent]

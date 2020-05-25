@@ -22,10 +22,10 @@
         <th class="col-sm-4">Content</th>
         <th class="col-sm-2">Start Date</th>
         <th class="col-sm-2">End Date</th>
-        <th class="col-sm-1">Bank ID</th>
-        <th class="col-sm-1">Category ID</th>
+        <th class="col-sm-1">Bank Name</th>
+        <th class="col-sm-1">Category Name</th>
         </thead>
-        <tbody *ngIf="promotionpresenter">
+        <tbody *ngIf="promotionPresenter">
         <tr>
           <td>
             <!--//Id Column-->
@@ -63,23 +63,21 @@
             </div>
           </td>
           <td>
-            <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onSave()" type="button" class="btn btn-primary">
-              <span class="glyphicon glyphicon-save"></span>
-            </button>
-            <button *ngIf="isSaveButtonDisplayed === true" style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-warning">
-              <span class="glyphicon glyphicon-remove"></span>
-            </button>
+
           </td>
+          <td></td>
         </tr>
 
 
 
-        <tr *ngFor="let promotion of promotionpresenter">
+        <tr *ngFor="let promotion of promotionPresenter">
           <td>
             {{promotion.id}}
           </td>
           <td>
-            {{promotion.title}}
+            <a class="promotion-title" href="{{promotion.url}}" style="={text-decoration: none!important ; color: black}">
+              {{promotion.title}}
+            </a>
           </td>
           <td>
             {{promotion.content}}
@@ -90,14 +88,20 @@
           <td>
             {{promotion.end_date.dayOfMonth}}-{{promotion.end_date.monthValue}}-{{promotion.end_date.year}}
           </td>
-          <td>
-            {{promotion.bank_id}}
+          <td >
+            <div *ngFor="let bank of bankPresenter">
+              <p *ngIf="bank.id == promotion.bank_id ">
+                {{bank.name}}
+              </p>
+            </div>
           </td>
           <td>
-            {{promotion.category_id}}
+            <div *ngFor="let cate of catePresenter">
+              <p *ngIf="cate.id == promotion.category_id ">
+                {{cate.name}}
+              </p>
+            </div>
           </td>
-          <td></td>
-          <td></td>
         </tr>
         </tbody>
       </table>

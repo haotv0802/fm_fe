@@ -1,12 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {ModalComponent} from '../common/modal/modal.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Rx';
-import {ToasterService} from 'angular2-toaster';
-import {Constants} from './../common/constant';
 import {PromotionPresenter} from './promotionPresenter';
 import {PromotionService} from './promotion.service';
+import {BankService} from '../bank/bank.service';
+import {BankPresenter} from '../bank/bankPresenter';
+import {CategoryService} from '../category/category.service';
+import {CategoryPresenter} from '../category/categoryPresenter';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
 
@@ -20,7 +21,9 @@ import {createIMyDateModel} from '../utils';
 
 export class PromotionComponent implements OnInit {
   pageTitle: string;
-  promotionpresenter: PromotionPresenter;
+  promotionPresenter: PromotionPresenter;
+  bankPresenter: BankPresenter[];
+  catePresenter: CategoryPresenter[];
   promoTionFilter: PromotionPresenter = {id : null ,
                                         title : null ,
                                         content : null,
@@ -31,7 +34,6 @@ export class PromotionComponent implements OnInit {
                                         bank_id: null,
                                         category_id: null,
                                         url: null};
-  promotionData = [];
   promotionFrom: FormGroup;
   isSaveButtonDisplayed = false;
   loaderOpen = true;
@@ -42,6 +44,8 @@ export class PromotionComponent implements OnInit {
   };
   constructor(
     private _promotionService: PromotionService,
+    private _bankService: BankService,
+    private _cateService: CategoryService,
     private _router: Router,
     private fb: FormBuilder) {
     this.pageTitle = 'Promotion';
@@ -57,9 +61,15 @@ export class PromotionComponent implements OnInit {
     this.promoTionFilter.url = 'AAABA' ;
     this.promoTionFilter.id = 1 ;
     Observable.forkJoin(
-      this._promotionService.getPromotion(this.promoTionFilter)
+      this._promotionService.getPromotion(this.promoTionFilter),
+      this._bankService.getAllBanks(),
+      this._cateService.getAllCates()
     ).subscribe((data) => {
-      this.promotionpresenter = data[0];
+      this.promotionPresenter = data[0];
+      this.bankPresenter = data[1];
+      this.catePresenter = data[2];
+      console.log(this.bankPresenter);
+      console.log(this.catePresenter);
     });
     this.loaderOpen = false;
     this.promotionFrom = this.fb.group({

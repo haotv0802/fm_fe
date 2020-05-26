@@ -1,0 +1,142 @@
+<loader-modal [opening]="loaderOpen" (loaderClicked)='onLoaderClicked($event)'></loader-modal>
+<div class='panel panel-primary' *ngIf="!loaderOpen">
+  <div class='panel-heading' style='font-size:large'>
+    {{pageTitle}}
+  </div>
+  <form class="form-horizontal" novalidate
+        [formGroup]="individualForm">
+    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:800px;">
+      <table class="table table-bordered table-hover" style="width: 700px; border: none" >
+        <tr>
+          <td class="col-sm-1">First Name</td>
+          <td class="col-sm-2">
+            <input class="form-control"
+                   id="firstNameId"
+                   type="text"
+                   placeholder="First Name"
+                   formControlName="firstName"
+                   style="width: 300px;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Middle Name</td>
+          <td>
+            <input class="form-control"
+                   id="middleNameId"
+                   type="text"
+                   placeholder="Middle Name"
+                   formControlName="middleName"
+                   style="width: 300px;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td>
+            <input class="form-control"
+                   id="lastNameId"
+                   type="text"
+                   placeholder="Last Name"
+                   formControlName="lastName"
+                   style="width: 300px;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Birthday</td>
+          <td>
+            <my-date-picker name="birthday" [options]="myOptions" style="width: 300px;"
+                            formControlName="birthday"></my-date-picker>
+          </td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>
+            <select class="form-control"
+                    id="genderId"
+                    formControlName="gender"
+                    style="width: 300px"
+            >
+              <option value="" disabled selected hidden>Select a method...</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Rather not say">Rather not say</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>
+            <input class="form-control"
+                   id="emailId"
+                   type="text"
+                   placeholder="Email"
+                   formControlName="email"
+                   style="width: 300px;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>
+            <input class="form-control"
+                   id="phoneId"
+                   type="text"
+                   placeholder="Phone"
+                   formControlName="phoneNumber"
+                   style="width: 300px;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Income</td>
+          <td>
+            <input class="form-control"
+                   id="incomeId"
+                   type="text"
+                   placeholder="Income"
+                   formControlName="income"
+                   style="width: 300px;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table class="table table-bordered table-hover" style="width: 500px; border-style : hidden!important;">
+              <tr *ngFor="let moneySource of individual.moneySourcePresenters"  style="border-style : hidden!important;">
+                <td style="border-style : hidden!important; width: 50px">Source: </td>
+                <td>
+                  {{moneySource.name}}
+                </td>
+                <td style="border-style : hidden!important; width: 100px">Credit limit: </td>
+                <td style="border-style : hidden!important;">
+                  {{moneySource.creditLimit}}
+                </td>
+                <td style="border-style : hidden!important; width: 20px">by </td>
+                <td style="border-style : hidden!important;">
+                  {{moneySource.bank.name}}
+                </td>
+                <td>
+                  <button type="button" class="btn btn-link" (click)="onOpenEdit(moneySource)"><span class="glyphicon glyphicon-edit"></span></button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center">
+            <button style="min-width: 20px;" type="button" class="btn btn-primary">
+              <span class="glyphicon glyphicon-save"></span>
+            </button>
+            <button style="min-width: 20px;" type="button" class="btn btn-warning">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+  <modal (modalOutput)="getData($event)">
+  </modal>
+</div>

@@ -1,0 +1,111 @@
+<form class="form-horizontal" novalidate
+      [formGroup]="moneySourceForm">
+  <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:600px;">
+    <table class="table table-bordered table-hover" style="width: 500px; border: none" >
+      <tr>
+        <td class="col-sm-1">Source</td>
+        <td class="col-sm-2">
+          <input class="form-control"
+                 id="nameId"
+                 type="text"
+                 placeholder="Source"
+                 formControlName="name"
+                 style="width: 200px;"
+                 (keyup)="onFormChange()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Start Date</td>
+        <td>
+          <my-date-picker name="startDate" [options]="myOptions" style="width: 300px;"
+                          formControlName="startDate" (dateChanged)="onFormChange()"></my-date-picker>
+        </td>
+      </tr>
+      <tr>
+        <td>Expiry Date</td>
+        <td>
+          <my-date-picker name="expiryDate" [options]="myOptions" style="width: 300px;"
+                          formControlName="expiryDate" (dateChanged)="onFormChange()"></my-date-picker>
+        </td>
+      </tr>
+      <tr>
+        <td>Card Number</td>
+        <td>
+          <input class="form-control"
+                 id="cardNumberId"
+                 type="text"
+                 placeholder="Card Number"
+                 formControlName="cardNumber"
+                 style="width: 200px;"
+                 (keyup)="onFormChange()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Credit Limit</td>
+        <td>
+          <input class="form-control"
+                 id="creditLimitId"
+                 type="text"
+                 placeholder="Credit Limit"
+                 formControlName="creditLimit"
+                 style="width: 200px;"
+                 (keyup)="onFormChange()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Payment method</td>
+        <td>
+          <select class="form-control"
+                  id="paymentMethodId"
+                  formControlName="paymentMethod"
+                  style="width: 200px"
+                  (change)="onFormChange()"
+          >
+            <option value="" disabled selected hidden>Select a method...</option>
+<!--            <option value="{{bank.id}}" *ngFor="let bank of banks">{{bank.name}}</option>-->
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Terminated</td>
+        <td>
+          <input
+                 id="terminatedId"
+                 type="checkbox"
+                 placeholder="Terminated"
+                 formControlName="terminated"
+                 style=""
+                 (change)="onFormChange()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Bank</td>
+        <td>
+          <select class="form-control"
+                  id="bankId"
+                  formControlName="bank"
+                  style="width: 200px"
+                  (change)="onFormChange()"
+          >
+            <option value="" disabled selected hidden>Select a method...</option>
+            <option value="{{bank.id}}" *ngFor="let bank of banks">{{bank.name}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center">
+          <button style="min-width: 20px;" type="button" class="btn btn-primary" *ngIf="isSaveButtonDisplayed" (click)="onSave()">
+            <span class="glyphicon glyphicon-save"></span>
+          </button>
+          <button style="min-width: 20px;" type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-remove" (click)="onReset()"></span>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</form>

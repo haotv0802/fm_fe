@@ -1,8 +1,8 @@
-import {Component, Input, OnChanges, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnChanges, Output, EventEmitter, Directive} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'fm-table',
-  moduleId: module.id,
   templateUrl: 'fm.table.component.html'
 })
 export class FmTableComponent implements OnChanges {

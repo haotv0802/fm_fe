@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
@@ -15,7 +15,7 @@ import {ToasterModule} from 'angular2-toaster';
 import {MessagesService} from './common/messages/messages.service';
 import {ModalComponent} from './common/modal/modal.component';
 import {LoaderModalComponent} from './common/modal/loaderModal/loader.modal.component';
-import {NgxMyDatePickerModule} from "ngx-mydatepicker";
+import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {OpenDirective} from './common/modal/open.component';
 import {MyDatePickerModule} from 'mydatepicker';
 import {ExpenseItem} from './expenses/modals/expenseItem';
@@ -24,6 +24,7 @@ import {IndividualComponent} from './individual/individual.component';
 import {BankService} from './bank/bank.service';
 import {MoneySourceComponent} from './individual/modals/moneySource.component';
 import {PaymentMethodService} from './payment/paymentMethod.service';
+import {FmTableComponent} from './common/fmtags/table/fm.table.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {PaymentMethodService} from './payment/paymentMethod.service';
     LoginModule,
     ToasterModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     HTTPService,
     ExpensesService,

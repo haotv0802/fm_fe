@@ -35,11 +35,13 @@ import {FmTableComponent} from './common/fmtags/table/fm.table.component';
     ModalComponent,
     OpenDirective,
     LoaderModalComponent,
+    FmTableComponent,
     ExpenseItem,
     MoneySourceComponent
   ],
   exports: [
     LoaderModalComponent,
+    FmTableComponent,
     OpenDirective,
     NgxMyDatePickerModule
   ],

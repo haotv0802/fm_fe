@@ -302,6 +302,8 @@ export class ExpensesComponent implements OnInit {
   getPaymentMethods(): void {
     this._expensesService.getPaymentMethods().subscribe(
       (paymentMethods) => {
+        console.log("Payment methods:");
+        console.log((paymentMethods));
         this.paymentMethods = paymentMethods;
       }
     );

@@ -85,7 +85,7 @@ export class ExpensesService {
   }
 
   getPaymentMethods(): Observable<PaymentMethod[]> {
-    return this._httpService.get(this._constants.PAYMENT_METHODS_SERVICE_URL)
+    return this._httpService.get(this._constants.PAYMENT_METHODS_LIST)
       .map((res) => { return <PaymentMethod[]> res.json(); })
       ;
   }

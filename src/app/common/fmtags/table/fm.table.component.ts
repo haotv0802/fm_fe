@@ -1,5 +1,4 @@
-import {Component, Input, OnChanges, Output, EventEmitter, Directive} from '@angular/core';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {Component, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'fm-table',

@@ -8,14 +8,14 @@ export class FmInputTextComponent {
   @Input() id: string;
   @Input() placeHolder: string;
   @Input() styleValue = {
-    'font-style':  'italic',
-    'color': 'black',
-    'font-size':   '12px',
-    'width':   '800px'
+    'width':   '200px'
   };
   // @Input() styleValue = {
   //   'font-style':  'italic',
   //   'color': 'black',
   //   'font-size':   '12px'
   // };
+
+  @Input() handleOnClick: Function;
+
 }

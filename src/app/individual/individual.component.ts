@@ -41,7 +41,7 @@ export class IndividualComponent implements OnInit {
 
     this._bankService.getBanks().subscribe(
       (res) => {
-        console.log("banks:");
+        console.log('banks:');
         console.log(res);
       }, (error) => {
         console.log(error);
@@ -71,15 +71,20 @@ export class IndividualComponent implements OnInit {
     );
   }
 
+  handleOnClick(): void {
+    console.log('Hand onClick in Individual');
+  }
+
   onSave(): void {
-    this.individual.firstName = this.individualForm.get('firstName').value;
-    this.individual.middleName = this.individualForm.get('middleName').value;
-    this.individual.lastName = this.individualForm.get('lastName').value;
-    this.individual.birthday = this.individualForm.get('birthday').value;
-    this.individual.gender = this.individualForm.get('gender').value;
-    this.individual.email = this.individualForm.get('email').value;
-    this.individual.phoneNumber = this.individualForm.get('phoneNumber').value;
-    this.individual.income = this.individualForm.get('income').value;
+    // this.individual.firstName = this.individualForm.get('firstName').value;
+    // this.individual.middleName = this.individualForm.get('middleName').value;
+    // this.individual.lastName = this.individualForm.get('lastName').value;
+    // this.individual.birthday = this.individualForm.get('birthday').value;
+    // this.individual.gender = this.individualForm.get('gender').value;
+    // this.individual.email = this.individualForm.get('email').value;
+    // this.individual.phoneNumber = this.individualForm.get('phoneNumber').value;
+    // this.individual.income = this.individualForm.get('income').value;
+    console.log('on Save');
   }
 
   onOpenEdit(moneySource: MoneySourcePresenter): void {

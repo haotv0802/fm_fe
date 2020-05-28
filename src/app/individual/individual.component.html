@@ -3,11 +3,11 @@
   <div class='panel-heading' style='font-size:large'>
     {{pageTitle}}
   </div>
+  <fm-inputtext id="new_Id" placeHolder="from Individual" [styleValue]="{'width': '100px'}"
+                [handleOnClick]="handleOnClick()"
+  ></fm-inputtext>
   <form class="form-horizontal" novalidate
         [formGroup]="individualForm">
-
-    <fm-inputtext id="new_Id" placeHolder="from Individual" [styleValue]="{'width': '100px'}"></fm-inputtext>
-
     <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:800px;">
       <table class="table table-bordered table-hover" style="width: 700px; border: none" >
         <tr>
@@ -129,7 +129,7 @@
         </tr>
         <tr>
           <td colspan="2" style="text-align: center">
-            <button style="min-width: 20px;" type="button" class="btn btn-primary">
+            <button style="min-width: 20px;" type="button" class="btn btn-primary" (click)="onSave()">
               <span class="glyphicon glyphicon-save"></span>
             </button>
             <button style="min-width: 20px;" type="button" class="btn btn-warning">

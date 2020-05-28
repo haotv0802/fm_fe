@@ -10,6 +10,9 @@ import {CategoryService} from '../category/category.service';
 import {CategoryPresenter} from '../category/categoryPresenter';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {createIMyDateModel} from '../utils';
+import {ToasterService} from 'angular2-toaster';
+import {Constants} from '../common/constant';
+import * as moment from 'moment';
 
 @Component({
   moduleId: module.id,
@@ -39,7 +42,7 @@ export class PromotionComponent implements OnInit {
   loaderOpen = true;
   public myOptions: IMyDpOptions = {
     // other options...
-    dateFormat: 'dd-mm-yyyy',
+    dateFormat: 'yyyy-mm-dd',
     width: '150px'
   };
   constructor(
@@ -47,6 +50,8 @@ export class PromotionComponent implements OnInit {
     private _bankService: BankService,
     private _cateService: CategoryService,
     private _router: Router,
+    private _toasterService: ToasterService,
+    private _constants: Constants,
     private fb: FormBuilder) {
     this.pageTitle = 'Promotion';
   }
@@ -67,29 +72,66 @@ export class PromotionComponent implements OnInit {
     ).subscribe((data) => {
       this.promotionPresenter = data[0];
       this.bankPresenter = data[1];
-      this.catePresenter = data[2];
-      console.log(this.bankPresenter);
-      console.log(this.catePresenter);
+      this.catePresenter = data[2]
+      console.log(this.promotionPresenter);
     });
     this.loaderOpen = false;
     this.promotionFrom = this.fb.group({
-      title: ['', [Validators.required]],
-      content: ['', [Validators.required]],
+      title: [null, [Validators.required]],
+      content: [null, [Validators.required]],
       start_date: [new Date()],
       end_date: [new Date()],
+      bank: [null, [Validators.required]],
+      cate: [null, [Validators.required]],
     })
 
   }
-
-  addExpense(): void {}
 
 
   onDisplaySaveButton() {
     this.isSaveButtonDisplayed = true;
   }
 
-  onSave(): void {}
-  onCancel(): void {}
+  onSearch(): void {
+    let startDateVal: string;
+    let endDateVal: string;
+    let startDateNumb: number;
+    let endDateNumb: number;
+
+
+
+    if (this.promotionFrom.get('start_date').value.jsdate !== undefined) {
+       startDateVal = moment(this.promotionFrom.get('start_date').value.jsdate.toLocaleString()).format('YYYY-MM-DD');
+       startDateNumb = this.promotionFrom.get('start_date').value.jsdate.getFullYear()
+         + this.promotionFrom.get('start_date').value.jsdate.getMonth()
+         +  this.promotionFrom.get('start_date').value.jsdate.getDate();
+    }
+    if (this.promotionFrom.get('end_date').value.jsdate !== undefined) {
+         endDateVal = moment(this.promotionFrom.get('end_date').value.jsdate.toLocaleString()).format('YYYY-MM-DD');
+      endDateNumb = this.promotionFrom.get('end_date').value.jsdate.getFullYear()
+        + this.promotionFrom.get('end_date').value.jsdate.getMonth()
+        + this.promotionFrom.get('end_date').value.jsdate.getDate();
+    }
+    if (startDateNumb > endDateNumb) {
+      this._toasterService.pop(this._constants.TOASTER_ERROR);
+    }else {
+      this.promoTionFilter.title = this.promotionFrom.get('title').value;
+      this.promoTionFilter.content = this.promotionFrom.get('content').value;
+      this.promoTionFilter.start_date = startDateVal;
+      this.promoTionFilter.end_date = endDateVal;
+      this.promoTionFilter.bank_id = this.promotionFrom.get('bank').value;
+      this.promoTionFilter.category_id = this.promotionFrom.get('cate').value;
+      this._promotionService.getPromotion(this.promoTionFilter).subscribe((promotion) => {
+        this.promotionPresenter = promotion ;
+        console.log(this.promotionPresenter);
+      });
+    }
+  }
+  onCancel(): void {
+    this.promotionFrom.reset();
+  }
+
+
 
 
 

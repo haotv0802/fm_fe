@@ -20,7 +20,7 @@ export class PromotionService {
     let end_date: string;
     let bank_id: string;
     let category_id: string;
-    title = '?title=' + promotionpresenter.title;
+    title = promotionpresenter.title != null ? '?title=' + promotionpresenter.title : '?';
     content = promotionpresenter.content != null ? '&content=' + promotionpresenter.content : '';
     start_date = promotionpresenter.start_date != null ? '&start_date=' + promotionpresenter.start_date : '';
     end_date = promotionpresenter.end_date != null ? '&end_date=' + promotionpresenter.end_date : '';

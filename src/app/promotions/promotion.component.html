@@ -1,3 +1,4 @@
+<script src="../expenses/expenses.component.ts"></script>
 <loader-modal [opening]="loaderOpen" (loaderClicked)='onLoaderClicked($event)'></loader-modal>
 <div class='panel panel-primary' *ngIf="!loaderOpen">
   <div class='panel-heading' style='font-size:large'>
@@ -34,9 +35,9 @@
           <input class="form-control"
                  id="title"
                  type="text"
-                 placeholder="Title (required)"
+                 placeholder="Title"
                  formControlName="title"
-                 (keyup.enter)="addExpense()"
+                 (keyup.enter)="onSearch()"
                  (keyup)="onDisplaySaveButton()"
           />
         </td>
@@ -44,9 +45,9 @@
             <input class="form-control"
                    id="content"
                    type="text"
-                   placeholder="Content (required)"
+                   placeholder="Content"
                    formControlName="content"
-                   (keyup.enter)="addExpense()"
+                   (keyup.enter)="onSearch()"
                    (keyup)="onDisplaySaveButton()"
             />
           </td>
@@ -63,9 +64,25 @@
             </div>
           </td>
           <td>
-
+            <select   formControlName="bank">
+              <option value="" disabled>Choose your Bank</option>
+              <option *ngFor="let bank of bankPresenter" [ngValue]="bank.id">{{bank.name}}</option>
+            </select>
           </td>
-          <td></td>
+          <td>
+            <select   formControlName="cate">
+              <option value="" disabled>Choose your Category</option>
+              <option *ngFor="let cate of catePresenter" [ngValue]="cate.id">{{cate.name}}</option>
+            </select>
+          </td>
+          <td>
+            <button  style="min-width: 20px;" (click)="onSearch()" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button  style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          </td>
         </tr>
 
 
@@ -75,7 +92,7 @@
             {{promotion.id}}
           </td>
           <td>
-            <a class="promotion-title" href="{{promotion.url}}" style="={text-decoration: none!important ; color: black}">
+            <a class="promotion-title" [href]="promotion.url" style="={text-decoration: none!important ; color: black}">
               {{promotion.title}}
             </a>
           </td>
@@ -89,21 +106,15 @@
             {{promotion.end_date.dayOfMonth}}-{{promotion.end_date.monthValue}}-{{promotion.end_date.year}}
           </td>
           <td >
-            <div *ngFor="let bank of bankPresenter">
-              <p *ngIf="bank.id == promotion.bank_id ">
-                {{bank.name}}
-              </p>
-            </div>
+            {{bankPresenter[promotion.bank_id-1].name}}
           </td>
           <td>
-            <div *ngFor="let cate of catePresenter">
-              <p *ngIf="cate.id == promotion.category_id ">
-                {{cate.name}}
-              </p>
-            </div>
+            {{catePresenter[promotion.category_id -1].name}}
           </td>
+          <td></td>
         </tr>
         </tbody>
+        <tfoot></tfoot>
       </table>
     </div>
 

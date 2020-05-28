@@ -4,8 +4,8 @@ export class PromotionPresenter {
   content: string;
   provision: string;
   instalment: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
   bank_id: number;
   category_id: number;
   url: string;

@@ -91,7 +91,6 @@ export class IndividualComponent implements OnInit {
 
     this.modal.open(MoneySourceComponent);
   }
-
   getData(data) {
     console.log(data);
   }

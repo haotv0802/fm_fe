@@ -3,7 +3,7 @@ import {ModalComponent} from '../../common/modal/modal.component';
 import {ExpensePresenter, ExpensePresenterFilter} from '../expensePresenter';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
-import {PaymentMethod} from '../paymentMethod';
+import {MoneySource} from '../moneySource';
 import {ExpensesDetailsPresenter} from '../expensesDetailsPresenter';
 import {ExpensesService} from '../expenses.service';
 import {createIMyDateModel} from '../../utils';
@@ -19,7 +19,7 @@ export class ExpenseItem {
   modal: ModalComponent;
   expensesDetails: ExpensesDetailsPresenter;
   expenseForm: FormGroup;
-  paymentMethods: PaymentMethod[];
+  paymentMethods: MoneySource[];
   dateModel: any;
   isSaveButtonDisplayed = false;
   expenseAdd: Expense = new Expense();

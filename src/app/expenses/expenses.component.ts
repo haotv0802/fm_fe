@@ -4,7 +4,7 @@ import {ModalComponent} from '../common/modal/modal.component';
 import {Expense} from './expense';
 import {ExpensesService} from './expenses.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PaymentMethod} from './paymentMethod';
+import {MoneySource} from './moneySource';
 import {Observable} from 'rxjs/Rx';
 import {ExpensesDetailsPresenter} from './expensesDetailsPresenter';
 import {ExpensePresenter, ExpensePresenterFilter} from './expensePresenter';
@@ -24,7 +24,7 @@ export class ExpensesComponent implements OnInit {
 
   allHide = false;
 
-  paymentMethods: PaymentMethod[];
+  paymentMethods: MoneySource[];
   yearsList: number[];
   yearsListHide = new Map();
 
@@ -302,6 +302,8 @@ export class ExpensesComponent implements OnInit {
   getPaymentMethods(): void {
     this._expensesService.getPaymentMethods().subscribe(
       (paymentMethods) => {
+        console.log("Payment methods:");
+        console.log((paymentMethods));
         this.paymentMethods = paymentMethods;
       }
     );

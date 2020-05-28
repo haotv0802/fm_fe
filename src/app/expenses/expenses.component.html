@@ -60,7 +60,7 @@
             >
               <option value="" disabled selected hidden>Select a method...</option>
               <option value="-1">CASH</option>
-              <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
+              <option value="{{method.id}}" *ngFor="let method of paymentMethods">{{method.name}}</option>
             </select>
           </td>
           <td>
@@ -144,7 +144,7 @@
                             (change)="updateExpense(expense)"
                     >
                         <option value="0" [selected]="expense.moneySourceId <= 0">CASH</option>
-                        <option value="{{method.id}}" [selected]="expense.moneySourceId == method.id" *ngFor="let method of paymentMethods">{{method.cardNumber}}</option>
+                        <option value="{{method.id}}" [selected]="expense.moneySourceId == method.id" *ngFor="let method of paymentMethods">{{method.name}}</option>
                     </select>
                 </span>
           </td>

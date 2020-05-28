@@ -32,9 +32,12 @@ export class Constants {
   //  Event Expenses
   public readonly EVENT_EXPENSES_SERVICE_URL: string = this.HOST + '/eventExpenses';
 
-  // Payment methods || Cards information
+  // Payment methods
   public readonly PAYMENT_METHODS_SERVICE_URL: string = this.HOST + '/paymentMethods';
   public readonly PAYMENT_METHODS_LIST: string = this.HOST + '/paymentMethod/list';
+
+  // Money source || Cards information
+  public readonly MONEY_SOURCE_LIST: string = this.HOST + '/moneysource';
 
   // Individual
   public readonly INDIVIDUAL: string = this.HOST + '/individual';

@@ -5,7 +5,7 @@ import {HTTPService} from "../common/HTTP.service";
 import {Expense} from "./expense";
 import {ExpensesDetailsPresenter} from "./expensesDetailsPresenter";
 import 'rxjs/add/operator/catch';
-import {PaymentMethod} from './paymentMethod';
+import {MoneySource} from './moneySource';
 import {ExpensePresenter} from './expensePresenter';
 import {HttpParams} from '@angular/common/http';
 import {RequestOptions, URLSearchParams} from '@angular/http';
@@ -84,9 +84,9 @@ export class ExpensesService {
       ;
   }
 
-  getPaymentMethods(): Observable<PaymentMethod[]> {
-    return this._httpService.get(this._constants.PAYMENT_METHODS_SERVICE_URL)
-      .map((res) => { return <PaymentMethod[]> res.json(); })
+  getPaymentMethods(): Observable<MoneySource[]> {
+    return this._httpService.get(this._constants.MONEY_SOURCE_LIST)
+      .map((res) => { return <MoneySource[]> res.json(); })
       ;
   }
 }

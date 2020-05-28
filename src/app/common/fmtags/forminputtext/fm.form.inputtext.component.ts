@@ -2,10 +2,10 @@ import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'fm-inputtext',
-  templateUrl: 'fm.inputtext.component.html'
+  selector: 'fm-form-inputtext',
+  templateUrl: 'fm.form.inputtext.component.html'
 })
-export class FmInputTextComponent {
+export class FmFormInputtextComponent {
   @Input() id: string;
   @Input() placeHolder: string;
   @Input() styleValue = {
@@ -18,4 +18,5 @@ export class FmInputTextComponent {
   // };
 
   @Input() handleOnClick: Function;
+  @Input() formGroup: FormGroup;
 }

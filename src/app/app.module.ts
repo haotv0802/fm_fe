@@ -26,6 +26,7 @@ import {MoneySourceComponent} from './individual/modals/moneySource.component';
 import {PaymentMethodService} from './payment/paymentMethod.service';
 import {FmTableComponent} from './common/fmtags/table/fm.table.component';
 import {FmInputTextComponent} from './common/fmtags/inputtext/fm.inputtext.component';
+import {FmFormInputtextComponent} from './common/fmtags/forminputtext/fm.form.inputtext.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {FmInputTextComponent} from './common/fmtags/inputtext/fm.inputtext.compo
     LoaderModalComponent,
     FmTableComponent,
     FmInputTextComponent,
+    FmFormInputtextComponent,
     ExpenseItem,
     MoneySourceComponent
   ],
@@ -45,6 +47,7 @@ import {FmInputTextComponent} from './common/fmtags/inputtext/fm.inputtext.compo
     LoaderModalComponent,
     FmTableComponent,
     FmInputTextComponent,
+    FmFormInputtextComponent,
     OpenDirective,
     NgxMyDatePickerModule
   ],

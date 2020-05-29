@@ -1,0 +1,122 @@
+<script src="../expenses/expenses.component.ts"></script>
+<loader-modal [opening]="loaderOpen" (loaderClicked)='onLoaderClicked($event)'></loader-modal>
+<div class='panel panel-primary' *ngIf="!loaderOpen">
+  <div class='panel-heading' style='font-size:large'>
+    {{pageTitle}}
+  </div>
+  <!--<input class="form-control"-->
+         <!--id="keywordId"-->
+         <!--type="text"-->
+         <!--placeholder="Keywords"-->
+         <!--style="width: 200px;"-->
+         <!--[(ngModel)]="expenseFilter.name"-->
+         <!--(keyup)="onFilter()"-->
+  <!--/>-->
+
+  <form class="form-horizontal" novalidate
+        [formGroup]="promotionFrom">
+    <div class="table-responsive" align="center" style="width:100%;overflow:auto; max-height:500px;">
+      <table class="table table-bordered table-hover" style="width: 1145px;">
+        <thead style="color: #337AB7">
+        <th class="col-sm-1">id</th>
+        <th class="col-sm-2">Title</th>
+        <th class="col-sm-4">Content</th>
+        <th class="col-sm-2">Start Date</th>
+        <th class="col-sm-2">End Date</th>
+        <th class="col-sm-1">Bank Name</th>
+        <th class="col-sm-1">Category Name</th>
+        </thead>
+        <tbody *ngIf="promotionPresenter">
+        <tr>
+          <td>
+            <!--//Id Column-->
+          </td>
+          <td>
+          <input class="form-control"
+                 id="title"
+                 type="text"
+                 placeholder="Title"
+                 formControlName="title"
+                 (keyup.enter)="onSearch()"
+                 (keyup)="onDisplaySaveButton()"
+          />
+        </td>
+          <td>
+            <input class="form-control"
+                   id="content"
+                   type="text"
+                   placeholder="Content"
+                   formControlName="content"
+                   (keyup.enter)="onSearch()"
+                   (keyup)="onDisplaySaveButton()"
+            />
+          </td>
+          <td>
+            <div class="input-group">
+              <my-date-picker name="start_date" [options]="myOptions" style="width: 90px;"
+                              formControlName="start_date"></my-date-picker>
+            </div>
+          </td>
+          <td>
+            <div class="input-group">
+              <my-date-picker name="end_date" [options]="myOptions" style="width: 90px;"
+                              formControlName="end_date"></my-date-picker>
+            </div>
+          </td>
+          <td>
+            <select   formControlName="bank">
+              <option value="" disabled>Choose your Bank</option>
+              <option *ngFor="let bank of bankPresenter" [ngValue]="bank.id">{{bank.name}}</option>
+            </select>
+          </td>
+          <td>
+            <select   formControlName="cate">
+              <option value="" disabled>Choose your Category</option>
+              <option *ngFor="let cate of catePresenter" [ngValue]="cate.id">{{cate.name}}</option>
+            </select>
+          </td>
+          <td>
+            <button  style="min-width: 20px;" (click)="onSearch()" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button  style="min-width: 20px;" (click)="onCancel()" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          </td>
+        </tr>
+
+
+
+        <tr *ngFor="let promotion of promotionPresenter">
+          <td>
+            {{promotion.id}}
+          </td>
+          <td>
+            <a class="promotion-title" [href]="promotion.url" style="={text-decoration: none!important ; color: black}">
+              {{promotion.title}}
+            </a>
+          </td>
+          <td>
+            {{promotion.content}}
+          </td>
+          <td>
+            {{promotion.start_date.dayOfMonth}}-{{promotion.start_date.monthValue}}-{{promotion.start_date.year}}
+          </td>
+          <td>
+            {{promotion.end_date.dayOfMonth}}-{{promotion.end_date.monthValue}}-{{promotion.end_date.year}}
+          </td>
+          <td >
+            {{bankPresenter[promotion.bank_id-1].name}}
+          </td>
+          <td>
+            {{catePresenter[promotion.category_id -1].name}}
+          </td>
+          <td></td>
+        </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+
+  </form>
+</div>

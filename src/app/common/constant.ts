@@ -59,4 +59,12 @@ export class Constants {
   // Names of Components
   public readonly WELCOME_URL: string = 'welcome';
 
+  //promotion
+  public readonly BANK_PROMO_CAWL: string = this.HOST + '/promotion/crawler';
+  public readonly BANK_PROMO: string = this.HOST + '/promotions/list';
+
+  //category
+  public readonly ALL_CATES: string = this.HOST + '/category/list/all';
+
+
 }
